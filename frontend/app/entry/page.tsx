@@ -15,21 +15,19 @@ export default function EntryPage() {
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setRevealed(true), 1200);
-    const t2 = setTimeout(() => router.push('/foyer'), 9000);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, [router]);
+    const t = setTimeout(() => setRevealed(true), 2000);
+    return () => clearTimeout(t);
+  }, []);
+  // No auto-advance — visitor controls when to step inside.
+  void router;
 
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-midnight film-grain">
       <CinematicBackdrop
         videoSrc="/videos/nvai_foyer_aerial_approach.mp4"
         fallbackGradient="radial-gradient(ellipse at 50% 35%, rgba(232,200,122,0.18) 0%, transparent 55%), linear-gradient(180deg, #1a1208 0%, #3b1f0f 40%, #1a0e08 100%)"
-        overlay={0.45}
-        playbackRate={0.55}
+        overlay={0.5}
+        playbackRate={0.35}
       />
 
       <div

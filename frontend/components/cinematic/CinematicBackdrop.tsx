@@ -21,12 +21,13 @@ export default function CinematicBackdrop({
 
   useEffect(() => {
     const v = videoRef.current;
-    if (v) {
-      v.muted = true;
-      v.playsInline = true;
-      v.playbackRate = playbackRate;
-      v.play().catch(() => { /* autoplay blocked is fine */ });
-    }
+    if (!v) return;
+    v.muted = true;
+    v.playsInline = true;
+    v.playbackRate = playbackRate;
+    // When src changes, video element keeps the old src cached; force reload.
+    v.load();
+    v.play().catch(() => { /* autoplay blocked is fine */ });
   }, [videoSrc, playbackRate]);
 
   return (
@@ -36,6 +37,7 @@ export default function CinematicBackdrop({
     >
       {videoSrc && (
         <video
+          key={videoSrc}
           ref={videoRef}
           src={videoSrc}
           poster={poster}
@@ -43,7 +45,7 @@ export default function CinematicBackdrop({
           loop
           muted
           playsInline
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
         />
       )}
       <div
