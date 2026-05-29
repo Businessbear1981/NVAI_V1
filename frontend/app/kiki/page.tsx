@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import WingLayout from '@/components/layout/WingLayout';
 import { VIDEOS } from '@/lib/videoMap';
+import AudioBed from '@/components/cinematic/AudioBed';
 
 const KIKI_BACKDROP =
   'radial-gradient(ellipse at 30% 30%, rgba(220,40,80,0.35) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(120,20,60,0.5) 0%, transparent 60%), linear-gradient(180deg, #1a060c 0%, #2a0a14 40%, #0a0205 100%)';
@@ -55,8 +56,11 @@ export default function KikiPage() {
       subtitle="Queen of Montparnasse"
       caption="For over one million super-fans worldwide. The Moulin Rouge wing — exposé, audiobook, the feature film Kickstarter, the 90-second blockbuster teaser, the guest book, ten percent to charity."
       backdrop={KIKI_BACKDROP}
-      videoSrc={VIDEOS.kiki.leadIn}
+      videoSrc={VIDEOS.kiki.danceOneMinute}
+      rotation={VIDEOS.kiki.burlesqueVariants}
     >
+      {/* Edith Piaf-inspired ambient — drop a real MP3 at /kiki/audio/piaf-ambient.mp3 */}
+      <AudioBed src="/kiki/audio/piaf-ambient.mp3" label="Piaf" />
       <section className="space-y-12">
         {/* Short film teaser — Moulin Rouge live, 45 seconds */}
         <div className="text-center space-y-6">
@@ -72,6 +76,103 @@ export default function KikiPage() {
           <p className="text-xs italic text-ivory/60">
             The cabaret cut. Burlesque variants and the full one-minute dance live below.
           </p>
+        </div>
+
+        {/* Audiobook callout */}
+        <div className="marble rounded-lg p-8 text-center space-y-4">
+          <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">The Audiobook</p>
+          <h2 className="font-didot text-3xl uppercase tracking-wider text-ivory">
+            Hear Kiki — French accent, English voice
+          </h2>
+          <div className="mx-auto h-px w-12 bg-gold/40" />
+          <p className="font-body italic text-ivory/80 max-w-2xl mx-auto">
+            The full 220-page Misho exposé read in English with a soft French accent — period-accurate,
+            soothing. Generate any chapter on demand.
+          </p>
+          <a
+            href="/kiki/audiobook"
+            className="inline-block mt-4 rounded-full border border-gold/50 bg-gold/10 px-8 py-3 font-mono text-[0.65rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/20"
+          >
+            Listen →
+          </a>
+        </div>
+
+        {/* Real archival photos uploaded for the wing */}
+        <div className="space-y-4">
+          <h2 className="font-display text-2xl text-center tracking-wider text-gold">From the Archive</h2>
+          <p className="text-center text-sm italic text-ivory/60 max-w-2xl mx-auto">
+            Real photographs uploaded for the Kiki wing. These also seed the Higgsfield prompts
+            for three additional inspiration videos.
+          </p>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {[
+              { src: '/kiki/photos/TheExtraordinaryLife&TimesoftheImmortalyetForgottenKIKI,QueenofMontparnasse-anExpose&GraphicNovel-CoverPage.jpg', cap: 'Cover of the Exposé' },
+              { src: '/kiki/photos/moulin_rouge_night.webp', cap: 'Moulin Rouge at night' },
+              { src: '/kiki/photos/IMG_1253.jpeg', cap: 'Archive plate 01' },
+              { src: '/kiki/photos/IMG_1255.jpeg', cap: 'Archive plate 02' },
+              { src: '/kiki/photos/IMG_1305.jpeg', cap: 'Archive plate 03' },
+              { src: '/kiki/photos/IMG_1333.jpeg', cap: 'Archive plate 04' },
+              { src: '/kiki/photos/c44e6877-a9b7-4932-9401-cb257331ff3d.JPG', cap: 'Archive plate 05' },
+              { src: '/kiki/photos/AE0tW1IsNcBI.webp', cap: 'Archive plate 06' },
+            ].map((p) => (
+              <figure key={p.src} className="overflow-hidden rounded-lg border border-gold/15 bg-midnight">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.src} alt={p.cap} className="aspect-square w-full object-cover" />
+                <figcaption className="px-2 py-1 font-mono text-[0.5rem] uppercase tracking-[0.22em] text-gold/65">
+                  {p.cap}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        {/* Three Higgsfield video prompts seeded from the archive */}
+        <div className="space-y-6">
+          <h2 className="font-display text-2xl text-center tracking-wider text-gold">
+            Three Additional Videos · Higgsfield prompts
+          </h2>
+          <p className="text-center text-sm italic text-ivory/60 max-w-2xl mx-auto">
+            Seeded by the archival photos above. Feed each prompt to Higgsfield, then drop the
+            resulting MP4 into <code className="font-mono text-[0.8em]">/public/videos/</code> and
+            swap it in via the video curator.
+          </p>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                title: 'I · The Moulin Rouge entrance',
+                prompt:
+                  'Cinematic dolly-in toward the red windmill of the Moulin Rouge, 1924, dusk, gas-lit lanterns, period-dress crowd gathering at the entrance, ostrich-feather boas, top hats, the can-can poster on the wall. Style: warm 1970s film stock, slight grain, Brassaï night-photography reference. Aspect 21:9. 12 second loop, no people in focus, soft golden light spilling from the doorway.',
+              },
+              {
+                title: 'II · The atelier portrait',
+                prompt:
+                  "Modigliani's Montparnasse studio, 1916, late afternoon, oblique sun through tall windows. Pencil drawings pinned on the wall, a single brass oil lamp, paint tubes and a glass of absinthe on the side table. An empty velvet chaise longue waiting for the muse. Smoke drifting. No figure. Camera slow dolly-in. Aspect 16:9, 8 second loop, warm Pernod-amber tone, EXIF: Kodak Portra 400 reference.",
+              },
+              {
+                title: 'III · La Rotonde after closing',
+                prompt:
+                  "La Rotonde café in Montparnasse, 3 a.m., empty marble-topped tables, overturned chairs, a single phonograph playing in the corner. Cigarette smoke still hanging, half-finished Pernod glasses, a discarded ostrich feather on the floor. The bar light low. Camera slow pan across the room. Atmosphere: the morning after a Lost Generation evening. 10 second loop, aspect 21:9, warm desaturated film stock.",
+              },
+              {
+                title: 'IV · Kiki & Modigliani dancing',
+                prompt:
+                  "1920s Montparnasse cabaret, late evening. Kiki de Montparnasse — dark bob, kohl-lined eyes, slip dress — slow-dancing close with Amedeo Modigliani in a worn brown velvet jacket and loose silk tie. The room is red velvet curtains, smoke, a small jazz quintet in the corner. The two move like the song is the only thing in the room. Camera medium close, slow orbit. Style: warm 1970s film stock, Brassaï night reference, light leak across his shoulder. Aspect 21:9, 15 second loop, tasteful, no explicit content. Reference: A Star Is Born cabaret scene, La La Land planetarium tone.",
+              },
+              {
+                title: 'V · The painting · tasteful',
+                prompt:
+                  "Modigliani's studio, single candle and gas-sconce light. The painter at his easel mid-stroke — brush poised, eyes locked. Kiki seated on a worn velvet chaise longue in classical pose, draped from the waist in a single length of cream linen so the composition implies a nude without showing nudity. Camera composes around the gesture of his hand and the line of her shoulder, never below. Warm Pernod-amber tone, painterly. 12 second loop, aspect 16:9. Reference: Phantom Thread interior restraint, Rembrandt candlelight. No explicit content.",
+              },
+            ].map((card) => (
+              <article key={card.title} className="marble rounded-lg p-5 space-y-3 text-left">
+                <h3 className="font-display text-base tracking-wider text-gold">{card.title}</h3>
+                <div className="h-px w-8 bg-gold/30" />
+                <p className="font-body text-xs italic text-ivory/80 leading-relaxed">
+                  {card.prompt}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
 
         {/* The burlesque performance gallery */}

@@ -273,6 +273,89 @@ class BernardSpeakRequest(BaseModel):
     voiceId: str | None = None
 
 
+# Kiki audiobook — English narration spoken with a soft French accent.
+# The Misho manuscript is English; we want a French-accented female voice.
+# Swap KIKI_VOICE_ID in backend/.env to any voice id from the ElevenLabs library
+# (https://elevenlabs.io/voice-library — filter "French" or "French accent").
+# Default is Charlotte (calm, soothing) — replace once a native French speaker
+# is chosen.
+KIKI_AUDIOBOOK_VOICE_ID = os.getenv("KIKI_VOICE_ID", "XB0fDUnXU5powFXDhCwa")  # Charlotte — soft, soothing
+KIKI_AUDIOBOOK_FILE = DATA_DIR / "kiki-audiobook.json"
+KIKI_AUDIO_DIR = BACKEND_DIR.parent / "frontend" / "public" / "kiki" / "audiobook"
+
+
+def _load_kiki_manifest() -> dict:
+    if not KIKI_AUDIOBOOK_FILE.exists():
+        return {"chapters": []}
+    return json.loads(KIKI_AUDIOBOOK_FILE.read_text(encoding="utf-8"))
+
+
+@app.get("/api/kiki/audiobook")
+def kiki_audiobook_manifest() -> dict:
+    """Return chapter list with preview text and whether audio exists for each."""
+    manifest = _load_kiki_manifest()
+    chapters_out = []
+    for ch in manifest.get("chapters", []):
+        audio_path = KIKI_AUDIO_DIR / f"chapter-{ch['id']:03d}.mp3"
+        chapters_out.append({
+            "id": ch["id"],
+            "chars": ch["chars"],
+            "preview": ch["preview"],
+            "audioUrl": f"/kiki/audiobook/chapter-{ch['id']:03d}.mp3" if audio_path.exists() else None,
+            "audioBytes": audio_path.stat().st_size if audio_path.exists() else 0,
+        })
+    return {
+        "title": manifest.get("title"),
+        "author": manifest.get("author"),
+        "totalChapters": manifest.get("totalChapters"),
+        "totalChars": manifest.get("totalChars"),
+        "voiceId": KIKI_AUDIOBOOK_VOICE_ID,
+        "chapters": chapters_out,
+    }
+
+
+class KikiGenerateRequest(BaseModel):
+    chapterId: int
+
+
+@app.post("/api/kiki/audiobook/generate")
+async def kiki_generate_chapter(payload: KikiGenerateRequest):
+    """Generate a single chapter MP3 via ElevenLabs and save it to public/kiki/audiobook."""
+    api_key = os.getenv("ELEVENLABS_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=503, detail="ELEVENLABS_API_KEY not configured.")
+    manifest = _load_kiki_manifest()
+    chapter = next((c for c in manifest.get("chapters", []) if c["id"] == payload.chapterId), None)
+    if not chapter:
+        raise HTTPException(status_code=404, detail=f"Chapter {payload.chapterId} not found.")
+    voice = KIKI_AUDIOBOOK_VOICE_ID
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice}"
+    body = {
+        "text": chapter["text"],
+        "model_id": "eleven_multilingual_v2",
+        "voice_settings": {
+            "stability": 0.6,         # soothing, measured
+            "similarity_boost": 0.8,
+            "style": 0.35,            # gentle French intonation
+            "use_speaker_boost": True,
+        },
+    }
+    headers = {"xi-api-key": api_key, "Content-Type": "application/json", "Accept": "audio/mpeg"}
+    async with httpx.AsyncClient(timeout=120.0) as client:
+        r = await client.post(url, json=body, headers=headers)
+        if r.status_code != 200:
+            raise HTTPException(status_code=r.status_code, detail=f"ElevenLabs: {r.text[:300]}")
+    KIKI_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+    out = KIKI_AUDIO_DIR / f"chapter-{payload.chapterId:03d}.mp3"
+    out.write_bytes(r.content)
+    return {
+        "ok": True,
+        "chapterId": payload.chapterId,
+        "audioUrl": f"/kiki/audiobook/chapter-{payload.chapterId:03d}.mp3",
+        "bytes": len(r.content),
+    }
+
+
 @app.post("/api/bernard/speak")
 async def bernard_speak(payload: BernardSpeakRequest):
     """
