@@ -356,6 +356,54 @@ async def kiki_generate_chapter(payload: KikiGenerateRequest):
     }
 
 
+# ---------------------------------------------------------------------------
+# Ambient music — generate via ElevenLabs Music API or accept direct upload
+# ---------------------------------------------------------------------------
+
+PUBLIC_AUDIO_ROOT = BACKEND_DIR.parent / "frontend" / "public"
+
+
+class MusicGenerateRequest(BaseModel):
+    prompt: str = Field(min_length=1, max_length=2000)
+    targetPath: str = Field(min_length=1, max_length=300)
+    lengthMs: int = Field(default=120000, ge=10000, le=300000)
+
+
+@app.post("/api/music/generate")
+async def music_generate(payload: MusicGenerateRequest):
+    """Call ElevenLabs Music API, save MP3 to public/{targetPath}."""
+    api_key = os.getenv("ELEVENLABS_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=503, detail="ELEVENLABS_API_KEY not configured.")
+    if ".." in payload.targetPath or not payload.targetPath.endswith(".mp3"):
+        raise HTTPException(status_code=400, detail="targetPath must end in .mp3 and contain no '..'")
+    url = "https://api.elevenlabs.io/v1/music"
+    body = {"prompt": payload.prompt, "music_length_ms": payload.lengthMs}
+    headers = {"xi-api-key": api_key, "Content-Type": "application/json", "Accept": "audio/mpeg"}
+    async with httpx.AsyncClient(timeout=300.0) as client:
+        r = await client.post(url, json=body, headers=headers)
+        if r.status_code != 200:
+            raise HTTPException(status_code=r.status_code, detail=f"ElevenLabs Music: {r.text[:300]}")
+    target = PUBLIC_AUDIO_ROOT / payload.targetPath.lstrip("/")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(r.content)
+    return {"ok": True, "url": f"/{payload.targetPath.lstrip('/')}", "bytes": len(r.content)}
+
+
+@app.post("/api/music/upload")
+async def music_upload(targetPath: str, file: UploadFile = File(...)) -> dict:
+    """Accept a direct MP3 upload and place it at public/{targetPath}."""
+    if not file.filename or not file.filename.lower().endswith(".mp3"):
+        raise HTTPException(status_code=400, detail="Only .mp3 files are accepted.")
+    if ".." in targetPath or not targetPath.endswith(".mp3"):
+        raise HTTPException(status_code=400, detail="targetPath must end in .mp3 and contain no '..'")
+    target = PUBLIC_AUDIO_ROOT / targetPath.lstrip("/")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with target.open("wb") as out:
+        shutil.copyfileobj(file.file, out)
+    return {"ok": True, "url": f"/{targetPath.lstrip('/')}", "bytes": target.stat().st_size}
+
+
 @app.post("/api/bernard/speak")
 async def bernard_speak(payload: BernardSpeakRequest):
     """
