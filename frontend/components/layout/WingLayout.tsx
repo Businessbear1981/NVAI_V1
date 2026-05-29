@@ -11,7 +11,7 @@ interface WingLayoutProps {
   back?: { href: string; label?: string };
   backdrop?: string;
   videoSrc?: string;
-  rotation?: string[]; // optional rotation set; if provided, RotatingBackdrop is used
+  rotation?: readonly string[];
   overlay?: number;
   children?: ReactNode;
 }

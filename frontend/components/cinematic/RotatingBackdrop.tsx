@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 interface RotatingBackdropProps {
   leadIn: string;
-  rotation?: string[];
+  rotation?: readonly string[];
   overlay?: number;
 }
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import EssentialsBar from '@/components/essentials/EssentialsBar';
 import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
@@ -13,16 +14,19 @@ export default function HomePage() {
         overlay={0.4}
       />
 
-      {/* Institute mark */}
-      <div className="absolute left-0 right-0 top-10 z-20 flex items-center justify-center pointer-events-none">
-        <div className="text-center">
-          <p className="font-mono text-[0.55rem] uppercase tracking-[0.35em] text-gold/80">
-            Napa Valley
-          </p>
-          <p className="font-display text-2xl tracking-[0.18em] text-ivory drop-shadow-lg">
-            Art Institute
-          </p>
-          <div className="mx-auto mt-2 h-px w-12 bg-gold/40" />
+      {/* Institute logo — top left */}
+      <div className="absolute left-8 top-8 z-30 flex items-center gap-4 pointer-events-none">
+        <Image
+          src="/brand/nvai-logo.png"
+          alt="Napa Valley Art Institut"
+          width={210}
+          height={163}
+          priority
+          className="h-24 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] md:h-32"
+        />
+        <div className="hidden border-l border-gold/30 pl-4 md:block">
+          <p className="font-mono text-[0.5rem] uppercase tracking-[0.35em] text-gold/70">Napa Valley</p>
+          <p className="font-didot text-lg tracking-[0.16em] text-ivory drop-shadow">Art Institut</p>
         </div>
       </div>
 
