@@ -154,9 +154,9 @@ export default function KikiPage() {
                   "La Rotonde café in Montparnasse, 3 a.m., empty marble-topped tables, overturned chairs, a single phonograph playing in the corner. Cigarette smoke still hanging, half-finished Pernod glasses, a discarded ostrich feather on the floor. The bar light low. Camera slow pan across the room. Atmosphere: the morning after a Lost Generation evening. 10 second loop, aspect 21:9, warm desaturated film stock.",
               },
               {
-                title: 'IV · Kiki & Modigliani dancing',
+                title: 'IV · Kiki dancing · Modigliani mesmerized in the audience',
                 prompt:
-                  "1920s Montparnasse cabaret, late evening. Kiki de Montparnasse — dark bob, kohl-lined eyes, slip dress — slow-dancing close with Amedeo Modigliani in a worn brown velvet jacket and loose silk tie. The room is red velvet curtains, smoke, a small jazz quintet in the corner. The two move like the song is the only thing in the room. Camera medium close, slow orbit. Style: warm 1970s film stock, Brassaï night reference, light leak across his shoulder. Aspect 21:9, 15 second loop, tasteful, no explicit content. Reference: A Star Is Born cabaret scene, La La Land planetarium tone.",
+                  "60-second sequence. 1920s Montparnasse cabaret. Kiki de Montparnasse mid-performance on a small intimate stage under a single warm spotlight — slim slip dress, dark bob, kohl-lined eyes, scarlet lips. The dance is slow, locked into the music, deliberate. Hold the camera on her face for several beats. Cut to the front row of small round café tables: Amedeo Modigliani in a worn brown velvet jacket and loose silk tie, glass of red wine forgotten in his hand, the entire room fading around him — completely mesmerized, his eyes locked. The rest of the period-dressed patrons soft-blur behind him. Cut back to Kiki — she sees him see her. The recognition. Reference: A Star Is Born (2018) 'Shallow' cabaret stage moment, Cooper in the audience locked in on Gaga; same gravity, same gaze. Style: warm 1970s film stock, slight grain, intimate cabaret lighting, painterly Brassaï night reference. Aspect 21:9, 60 second loop, tasteful, no explicit content.",
               },
               {
                 title: 'V · The painting · tasteful',
