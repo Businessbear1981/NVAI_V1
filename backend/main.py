@@ -508,6 +508,62 @@ async def higgsfield_refresh(job_id: str):
     return jobs[job_id]
 
 
+# ---------------------------------------------------------------------------
+# Kickstarter — status + project stats proxy
+# ---------------------------------------------------------------------------
+
+@app.get("/api/kickstarter/status")
+async def kickstarter_status() -> dict:
+    """Proxy Kickstarter's Statuspage summary (kickstarter.com is up / partial / down)."""
+    url = "https://status.kickstarter.com/api/v2/summary.json"
+    async with httpx.AsyncClient(timeout=20.0) as client:
+        try:
+            r = await client.get(url)
+            r.raise_for_status()
+            data = r.json()
+            return {
+                "indicator": data.get("status", {}).get("indicator", "unknown"),
+                "description": data.get("status", {}).get("description", ""),
+                "components": [
+                    {"name": c.get("name"), "status": c.get("status")}
+                    for c in data.get("components", [])
+                ][:8],
+                "raw_url": "https://status.kickstarter.com",
+            }
+        except Exception as e:
+            return {"indicator": "unknown", "description": f"{e}"[:200], "components": []}
+
+
+@app.get("/api/kickstarter/project")
+async def kickstarter_project(slug: str) -> dict:
+    """
+    Pull public stats for a Kickstarter project. Slug is the path after kickstarter.com/projects/
+    e.g. slug='someuser/the-kiki-film' returns pledge data if available.
+    """
+    url = f"https://www.kickstarter.com/projects/{slug}/stats.json?v=1"
+    headers = {"User-Agent": "Mozilla/5.0 (NVAI)"}
+    async with httpx.AsyncClient(timeout=20.0, follow_redirects=True) as client:
+        try:
+            r = await client.get(url, headers=headers)
+            if r.status_code != 200:
+                return {"ok": False, "status": r.status_code, "note": "project not found or not public yet"}
+            data = r.json()
+            project = data.get("project", {})
+            return {
+                "ok": True,
+                "name": project.get("name"),
+                "state": project.get("state"),
+                "pledged": project.get("pledged"),
+                "goal": project.get("goal"),
+                "backers_count": project.get("backers_count"),
+                "currency": project.get("currency"),
+                "deadline": project.get("deadline"),
+                "url": project.get("urls", {}).get("web", {}).get("project"),
+            }
+        except Exception as e:
+            return {"ok": False, "note": f"{e}"[:200]}
+
+
 @app.post("/api/bernard/speak")
 async def bernard_speak(payload: BernardSpeakRequest):
     """
