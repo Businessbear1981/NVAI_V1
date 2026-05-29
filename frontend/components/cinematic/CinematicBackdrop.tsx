@@ -7,6 +7,7 @@ interface CinematicBackdropProps {
   poster?: string;
   fallbackGradient?: string;
   overlay?: number; // 0-1
+  playbackRate?: number; // 1 = normal, 0.5 = half speed for slower cinematic feel
 }
 
 export default function CinematicBackdrop({
@@ -14,6 +15,7 @@ export default function CinematicBackdrop({
   poster,
   fallbackGradient,
   overlay = 0.35,
+  playbackRate = 1,
 }: CinematicBackdropProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -22,9 +24,10 @@ export default function CinematicBackdrop({
     if (v) {
       v.muted = true;
       v.playsInline = true;
+      v.playbackRate = playbackRate;
       v.play().catch(() => { /* autoplay blocked is fine */ });
     }
-  }, [videoSrc]);
+  }, [videoSrc, playbackRate]);
 
   return (
     <div

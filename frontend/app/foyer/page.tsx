@@ -1,69 +1,88 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
 
 export default function FoyerPage() {
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setRevealed(true), 900);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <main className="relative min-h-screen overflow-hidden film-grain">
-      <video
-        src="/videos/nvai_grand_foyer_5k.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover"
+    <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
+      <CinematicBackdrop
+        videoSrc="/videos/nvai_grand_foyer_5k.mp4"
+        overlay={0.55}
+        playbackRate={0.6}
       />
-      <div className="absolute inset-0 bg-midnight/60 pointer-events-none" />
 
-      <div className="relative z-10 px-8 py-16">
-      <Link
-        href="/"
-        className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/60 transition-colors hover:text-gold"
-      >
-        ← Return
-      </Link>
+      <div className={`relative z-10 px-8 py-12 transition-opacity duration-[1800ms] ${revealed ? 'opacity-100' : 'opacity-0'}`}>
+        <Link
+          href="/"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/60 hover:text-gold"
+        >
+          ← Return to the drone shot
+        </Link>
 
-      <div className="mx-auto mt-16 max-w-7xl text-center">
-        <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
-          The Foyer
+        <header className="mx-auto mt-16 max-w-4xl text-center">
+          <p className="font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/80">Scene II · the foyer</p>
+          <h1 className="mt-6 font-didot text-6xl uppercase tracking-[0.15em] text-ivory drop-shadow-lg md:text-7xl">
+            Villa Monticello
+          </h1>
+          <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
+            Marble floor. Three thresholds.
+          </p>
+          <div className="mx-auto mt-8 h-px w-24 bg-gold/40" />
+          <p className="mx-auto mt-8 max-w-xl font-body italic text-ivory/80 leading-relaxed">
+            Honey-coloured stone and ironwork. Beyond the foyer the chateau opens
+            three ways — up the staircase to the upstairs rooms, through to the
+            grand hall, or out the garden door to the patio.
+          </p>
+        </header>
+
+        <section className="mx-auto mt-20 max-w-6xl">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <Link href="/foyer/staircase" aria-label="Up the staircase">
+              <MarbleTombstone
+                eyebrow="The Staircase"
+                title="Upstairs"
+                subtitle="Bernard · Kandinsky · Raphael"
+                caption="Three doors at the landing — chapel left, the strange room centre, the studiolo right."
+              />
+            </Link>
+
+            <Link href="/grand-hall" aria-label="Through to the grand hall">
+              <MarbleTombstone
+                eyebrow="Straight Ahead"
+                title="La Grande Salle"
+                subtitle="Ballroom · Cabinet · Auction"
+                caption="The chateau dissolves into a modern art party, then into the auction floor."
+                featured
+              />
+            </Link>
+
+            <Link href="/garden" aria-label="Out to the garden">
+              <MarbleTombstone
+                eyebrow="Garden Door"
+                title="The Patio"
+                subtitle="Vineyard · Parlor · Matisse · Grounds"
+                caption="Out into the Tuscan light. The artist wings lie along the path."
+              />
+            </Link>
+          </div>
+        </section>
+
+        <p className="mx-auto mt-16 max-w-xl text-center font-body text-xs italic text-ivory/55">
+          The Document Distribution & Non-Disclosure Agreement is available for any
+          visitor who wishes to receive the dossier — it is not a gate.{' '}
+          <Link href="/ddnda" className="text-gold/80 underline-offset-4 hover:underline">
+            Sign at your leisure.
+          </Link>
         </p>
-        <h1 className="mt-4 font-didot text-5xl uppercase tracking-[0.12em] text-ivory drop-shadow-lg">
-          Villa Monticello
-        </h1>
-        <div className="mx-auto mt-6 h-px w-24 bg-gold/40" />
-        <p className="mt-8 font-body italic tracking-wider text-ivory/70">
-          Three doors.
-        </p>
-
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-          <Link href="/foyer/welcome" aria-label="Welcome, About, Merch">
-            <MarbleTombstone
-              eyebrow="Welcome"
-              title="Guestbook"
-              subtitle="About · Merch"
-              caption="Sign in. Learn the Institute. Take something home."
-            />
-          </Link>
-
-          <Link href="/foyer/staircase" aria-label="Upstairs">
-            <MarbleTombstone
-              eyebrow="The Staircase"
-              title="Upstairs"
-              subtitle="Bernard · Kandinsky · Raphael"
-              caption="Three doors at the landing."
-              featured
-            />
-          </Link>
-
-          <Link href="/gallery" aria-label="Full Gallery">
-            <MarbleTombstone
-              eyebrow="Direct"
-              title="Full Gallery"
-              subtitle="The Catalog"
-              caption="All twenty-five works. Skip the tour."
-            />
-          </Link>
-        </div>
-      </div>
       </div>
     </main>
   );

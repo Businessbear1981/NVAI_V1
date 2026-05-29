@@ -1,72 +1,72 @@
-import Link from 'next/link';
-import WingLayout from '@/components/layout/WingLayout';
-import { VIDEOS } from '@/lib/videoMap';
+'use client';
 
-const PARLOR_BACKDROP =
-  'radial-gradient(ellipse at 30% 40%, rgba(60,120,90,0.35) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(140,60,40,0.30) 0%, transparent 55%), linear-gradient(180deg, #0a1408 0%, #14180a 50%, #050a05 100%)';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
+import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
 
 export default function ParlorPage() {
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setRevealed(true), 900);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <WingLayout
-      back={{ href: '/garden', label: 'Back to the garden party' }}
-      eyebrow="Patio Left"
-      title="The Parlor"
-      subtitle="La Ruche · the bohemian bar"
-      caption="Bohemian gathering space. Green patina copper. Samovar steaming in the corner. Chagall's pieces hang quietly along the walls. The Chagall room is through the back."
-      backdrop={PARLOR_BACKDROP}
-    >
-      <div className="mx-auto max-w-4xl space-y-10">
-        <p className="text-center font-body text-ivory/80 leading-relaxed max-w-3xl mx-auto">
-          Worn velvet banquettes and mismatched Thonet chairs. Yiddish posters peel on
-          the walls. A phonograph plays Vertinsky low under conversation. The bar is
-          oxidized copper, gone green with time. The room itself is the scene — guests
-          drinking, laughing, moving between the patio and the chateau interior.
-        </p>
+    <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
+      <CinematicBackdrop
+        videoSrc="/videos/nvai_courtyard_5k.mp4"
+        overlay={0.6}
+        playbackRate={0.55}
+      />
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <Link href="/parlor/chagall" className="block">
-            <article className="marble rounded-lg p-8 space-y-3 transition-all hover:scale-[1.02]">
-              <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
-                Through the back
-              </p>
-              <h3 className="font-didot text-3xl uppercase tracking-wider text-ivory">
-                The Chagall Room
-              </h3>
-              <div className="h-px w-12 bg-gold/30" />
-              <p className="font-body text-sm italic text-ivory/75">
-                Six floating-lovers and Vitebsk dreamscapes. Each piece with its own
-                period interior video. Stained-glass light. The bar fades.
-              </p>
-              <p className="mt-3 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/80">
-                Enter →
-              </p>
-            </article>
-          </Link>
+      <div className={`relative z-10 px-8 py-12 transition-opacity duration-[1800ms] ${revealed ? 'opacity-100' : 'opacity-0'}`}>
+        <Link
+          href="/garden"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/60 hover:text-gold"
+        >
+          ← Back to the patio
+        </Link>
 
-          <Link href="/grand-hall" className="block">
-            <article className="marble rounded-lg p-8 space-y-3 transition-all hover:scale-[1.02]">
-              <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
-                Through to the interior
-              </p>
-              <h3 className="font-didot text-3xl uppercase tracking-wider text-ivory">
-                The Grand Hall
-              </h3>
-              <div className="h-px w-12 bg-gold/30" />
-              <p className="font-body text-sm italic text-ivory/75">
-                The chateau&rsquo;s 1920s ballroom — gallery opening, auction reception,
-                the Modigliani cabinet, the catalog circle.
-              </p>
-              <p className="mt-3 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/80">
-                Continue inside →
-              </p>
-            </article>
-          </Link>
-        </div>
+        <header className="mx-auto mt-16 max-w-4xl text-center">
+          <p className="font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/80">Scene V · the parlor</p>
+          <h1 className="mt-6 font-didot text-6xl uppercase tracking-[0.15em] text-ivory drop-shadow-lg md:text-7xl">
+            The Parlor
+          </h1>
+          <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
+            La Ruche · the bohemian bar
+          </p>
+          <div className="mx-auto mt-8 h-px w-24 bg-gold/40" />
+          <p className="mx-auto mt-8 max-w-2xl font-body italic text-ivory/80 leading-relaxed">
+            Worn velvet banquettes and mismatched Thonet chairs. Yiddish posters
+            peel on the walls. A phonograph plays Vertinsky low under conversation.
+            The bar is oxidized copper, gone green with time. Chagalls hang quietly
+            along the walls — the dedicated Chagall sub-room is through the back.
+          </p>
+        </header>
 
-        <p className="text-center text-xs italic text-ivory/50">
-          Bar fittings, samovar, period-correct La Ruche audio bed in production.
-        </p>
+        <section className="mx-auto mt-20 max-w-5xl">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <Link href="/parlor/chagall">
+              <MarbleTombstone
+                eyebrow="Through the back"
+                title="Chagall"
+                subtitle="Six floating dreamscapes"
+                caption="The dedicated sub-room. Stained-glass light. Each piece its own period interior."
+                featured
+              />
+            </Link>
+            <Link href="/grand-hall">
+              <MarbleTombstone
+                eyebrow="Through to the interior"
+                title="The Grand Hall"
+                subtitle="Chateau · art party · auction"
+                caption="The 1920s ballroom dissolving into the auction floor."
+              />
+            </Link>
+          </div>
+        </section>
       </div>
-    </WingLayout>
+    </main>
   );
 }
