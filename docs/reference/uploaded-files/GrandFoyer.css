@@ -1,0 +1,450 @@
+/* Grand Foyer - 5K Cinematic Experience */
+
+:root {
+  --foyer-gold: #d4af37;
+  --foyer-cream: #f5f1e8;
+  --foyer-dark: #1a1a1a;
+  --foyer-accent: #8b7355;
+  --transition-duration: 1000ms;
+}
+
+.grand-foyer-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--foyer-dark);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.foyer-scene {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 5K Video Background */
+.scene-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Scene Overlay for Text Readability */
+.scene-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.foyer-overlay {
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* Fade Animations */
+.fade-in {
+  animation: fadeIn var(--transition-duration) ease-out forwards;
+}
+
+.fade-out {
+  animation: fadeOut var(--transition-duration) ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ===== SCENE 1: COURTYARD ===== */
+
+.courtyard-scene {
+  z-index: 100;
+}
+
+.courtyard-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 900px;
+  animation: slideUp 1.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.courtyard-text {
+  margin-bottom: 80px;
+}
+
+.courtyard-title {
+  font-size: 5rem;
+  font-weight: 300;
+  letter-spacing: 4px;
+  color: var(--foyer-cream);
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+  margin: 0 0 30px 0;
+  font-family: 'Georgia', serif;
+  line-height: 1.2;
+}
+
+.courtyard-subtitle {
+  font-size: 1.6rem;
+  color: var(--foyer-cream);
+  font-style: italic;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  margin: 0;
+  font-family: 'Georgia', serif;
+  font-weight: 300;
+}
+
+.courtyard-button {
+  background: linear-gradient(135deg, var(--foyer-gold) 0%, #c9a961 100%);
+  border: 2px solid var(--foyer-cream);
+  color: var(--foyer-dark);
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.courtyard-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 50px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, #e8c547 0%, #d4af37 100%);
+}
+
+.courtyard-button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.button-arrow {
+  font-size: 1.4rem;
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.courtyard-button:hover .button-arrow {
+  transform: translateX(6px);
+}
+
+/* ===== SCENE 2: GARDEN PASSAGE ===== */
+
+.garden-scene {
+  z-index: 99;
+}
+
+.garden-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  animation: slideUp 1.4s ease-out;
+}
+
+.garden-text {
+  margin-bottom: 60px;
+}
+
+.garden-text h2 {
+  font-size: 4rem;
+  color: var(--foyer-cream);
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+  margin: 0 0 20px 0;
+  font-family: 'Georgia', serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+.garden-text p {
+  font-size: 1.4rem;
+  color: var(--foyer-cream);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  font-style: italic;
+  margin: 0;
+  font-family: 'Georgia', serif;
+  font-weight: 300;
+}
+
+.garden-button {
+  background: linear-gradient(135deg, var(--foyer-gold) 0%, #c9a961 100%);
+  border: 2px solid var(--foyer-cream);
+  color: var(--foyer-dark);
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 40px auto 0;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.garden-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 50px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, #e8c547 0%, #d4af37 100%);
+}
+
+.garden-button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* ===== SCENE 3: GRAND FOYER ===== */
+
+.grand-foyer-scene {
+  z-index: 98;
+}
+
+.foyer-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  animation: slideUp 1.4s ease-out;
+}
+
+.foyer-text {
+  margin-bottom: 60px;
+}
+
+.foyer-title {
+  font-size: 4.5rem;
+  font-weight: 300;
+  letter-spacing: 4px;
+  color: var(--foyer-gold);
+  text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+  margin: 0 0 25px 0;
+  font-family: 'Georgia', serif;
+  line-height: 1.2;
+}
+
+.foyer-subtitle {
+  font-size: 1.5rem;
+  color: var(--foyer-cream);
+  font-style: italic;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0 0 30px 0;
+  font-family: 'Georgia', serif;
+  font-weight: 300;
+}
+
+.foyer-description {
+  font-size: 1.1rem;
+  color: var(--foyer-cream);
+  line-height: 1.9;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  font-family: 'Georgia', serif;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+}
+
+.gallery-navigation {
+  margin-top: 50px;
+}
+
+.explore-button {
+  background: linear-gradient(135deg, var(--foyer-gold) 0%, #c9a961 100%);
+  border: 2px solid var(--foyer-cream);
+  color: var(--foyer-dark);
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.explore-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 50px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, #e8c547 0%, #d4af37 100%);
+}
+
+.explore-button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .courtyard-title {
+    font-size: 3.5rem;
+  }
+
+  .courtyard-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .foyer-title {
+    font-size: 3.5rem;
+  }
+
+  .foyer-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .foyer-description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .courtyard-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  .courtyard-subtitle {
+    font-size: 1rem;
+  }
+
+  .foyer-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  .foyer-subtitle {
+    font-size: 1rem;
+  }
+
+  .foyer-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .courtyard-button,
+  .garden-button,
+  .explore-button {
+    padding: 14px 35px;
+    font-size: 1rem;
+  }
+
+  .courtyard-content,
+  .garden-content,
+  .foyer-content {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .courtyard-title {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+
+  .courtyard-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .foyer-title {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+
+  .foyer-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .foyer-description {
+    font-size: 0.85rem;
+  }
+
+  .courtyard-button,
+  .garden-button,
+  .explore-button {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+
+  .courtyard-content,
+  .garden-content,
+  .foyer-content {
+    padding: 0 15px;
+  }
+}
+
+/* 5K Display Optimization */
+@media (min-width: 2560px) {
+  .courtyard-title,
+  .foyer-title {
+    font-size: 6rem;
+  }
+
+  .courtyard-subtitle,
+  .foyer-subtitle {
+    font-size: 2rem;
+  }
+
+  .foyer-description {
+    font-size: 1.3rem;
+  }
+
+  .courtyard-button,
+  .garden-button,
+  .explore-button {
+    padding: 24px 60px;
+    font-size: 1.4rem;
+  }
+}

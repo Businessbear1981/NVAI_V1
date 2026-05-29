@@ -1,0 +1,712 @@
+{
+  "repository": {
+    "name": "NVAI Artist Video Library",
+    "version": "1.0.0",
+    "description": "Dynamic video repository for artist rooms - landing screens, lead-in videos, inspiration sources, and location backdrops",
+    "lastUpdated": "2026-05-26"
+  },
+  "artists": {
+    "da-vinci": {
+      "id": "da-vinci",
+      "name": "Leonardo da Vinci",
+      "tagline": "The Universal Man",
+      "period": "Renaissance (1452-1519)",
+      "landing": {
+        "image": "/manus-storage/landing-da-vinci.png",
+        "description": "Renaissance workshop entrance with flying machines and anatomical studies"
+      },
+      "lead-in": {
+        "video": "lead-in/workshop-awakening.mp4",
+        "duration": 45,
+        "description": "A workshop awakens with golden light streaming through arched windows, revealing flying machines, anatomical drawings, and scientific instruments"
+      },
+      "inspirations": [
+        {
+          "id": "anatomy",
+          "title": "Human Anatomy",
+          "video": "inspirations/human-anatomy.mp4",
+          "duration": 15,
+          "description": "Dissection, observation, understanding the body - Leonardo's obsessive study of human form"
+        },
+        {
+          "id": "flight",
+          "title": "Flight & Birds",
+          "video": "inspirations/flight-machines.mp4",
+          "duration": 20,
+          "description": "Ornithological observations and mechanical flying machines - centuries ahead of aviation"
+        },
+        {
+          "id": "water",
+          "title": "Water & Hydraulics",
+          "video": "inspirations/water-hydraulics.mp4",
+          "duration": 18,
+          "description": "Flowing patterns, swirling dynamics, and hydraulic systems - nature's engineering"
+        },
+        {
+          "id": "geometry",
+          "title": "Nature's Geometry",
+          "video": "inspirations/nature-geometry.mp4",
+          "duration": 22,
+          "description": "Spirals, fractals, and mathematical proportions - the underlying harmony of creation"
+        }
+      ],
+      "locations": [
+        {
+          "id": "florence",
+          "title": "Florence Workshop",
+          "video": "locations/florence-workshop.mp4",
+          "duration": 30,
+          "description": "Leonardo's main studio in Florence - where he developed his revolutionary techniques"
+        },
+        {
+          "id": "milan",
+          "title": "Milan Court",
+          "video": "locations/milan-court.mp4",
+          "duration": 35,
+          "description": "Ludovico Sforza's palace - where Leonardo served as court artist and engineer"
+        },
+        {
+          "id": "rome",
+          "title": "Rome & Vatican",
+          "video": "locations/rome-vatican.mp4",
+          "duration": 28,
+          "description": "Later years in Rome - connections to Vatican and papal patronage"
+        },
+        {
+          "id": "amboise",
+          "title": "Amboise, France",
+          "video": "locations/amboise-france.mp4",
+          "duration": 40,
+          "description": "Final refuge in Loire Valley - Leonardo's last sanctuary and legacy"
+        }
+      ]
+    },
+    "frida-kahlo": {
+      "id": "frida-kahlo",
+      "name": "Frida Kahlo",
+      "tagline": "Pain & Passion",
+      "period": "Modern (1907-1954)",
+      "landing": {
+        "image": "/manus-storage/landing-frida.png",
+        "description": "La Casa Azul entrance with deep blue walls, tropical plants, and intimate sanctuary"
+      },
+      "lead-in": {
+        "video": "lead-in/casa-azul-awakening.mp4",
+        "duration": 50,
+        "description": "La Casa Azul comes alive - deep blue walls, tropical light, pre-Columbian artifacts, and Frida's presence"
+      },
+      "inspirations": [
+        {
+          "id": "pain",
+          "title": "Pain & Suffering",
+          "video": "inspirations/pain-suffering.mp4",
+          "duration": 18,
+          "description": "Physical and emotional pain transformed into art - Frida's unflinching self-examination"
+        },
+        {
+          "id": "mexican-folk",
+          "title": "Mexican Folk Art",
+          "video": "inspirations/mexican-folk.mp4",
+          "duration": 20,
+          "description": "Indigenous textiles, traditional crafts, and cultural heritage - roots of identity"
+        },
+        {
+          "id": "diego",
+          "title": "Diego Rivera & Love",
+          "video": "inspirations/diego-love.mp4",
+          "duration": 22,
+          "description": "Passionate relationship with Diego - muse, rival, betrayer, inspiration"
+        },
+        {
+          "id": "nature",
+          "title": "Jungle & Nature",
+          "video": "inspirations/nature-jungle.mp4",
+          "duration": 19,
+          "description": "Tropical abundance, organic forms, and natural sensuality"
+        }
+      ],
+      "locations": [
+        {
+          "id": "casa-azul",
+          "title": "La Casa Azul",
+          "video": "locations/casa-azul.mp4",
+          "duration": 32,
+          "description": "Frida's sanctuary and studio - the blue house in Coyoacán"
+        },
+        {
+          "id": "coyoacan",
+          "title": "Coyoacán Neighborhood",
+          "video": "locations/coyoacan.mp4",
+          "duration": 28,
+          "description": "Bohemian streets of Mexico City's artistic quarter"
+        },
+        {
+          "id": "hospital",
+          "title": "Hospital Rooms",
+          "video": "locations/hospital-rooms.mp4",
+          "duration": 25,
+          "description": "Rooms of recovery and resilience - where pain became art"
+        },
+        {
+          "id": "xochimilco",
+          "title": "Xochimilco Gardens",
+          "video": "locations/xochimilco.mp4",
+          "duration": 35,
+          "description": "Ancient floating gardens - Mexican heritage and natural beauty"
+        }
+      ]
+    },
+    "picasso": {
+      "id": "picasso",
+      "name": "Pablo Picasso",
+      "tagline": "Master of Reinvention",
+      "period": "Modern (1881-1973)",
+      "landing": {
+        "image": "/manus-storage/landing-picasso.png",
+        "description": "Montmartre studio with cubist fragments and African mask silhouettes"
+      },
+      "lead-in": {
+        "video": "lead-in/studio-revolution.mp4",
+        "duration": 48,
+        "description": "Picasso's studio pulses with creative energy - cubist chaos, artistic revolution, constant transformation"
+      },
+      "inspirations": [
+        {
+          "id": "african-masks",
+          "title": "African Masks & Tribal Art",
+          "video": "inspirations/african-masks.mp4",
+          "duration": 17,
+          "description": "Primitive forms that shattered European perspective - the birth of Cubism"
+        },
+        {
+          "id": "bullfighting",
+          "title": "Bullfighting",
+          "video": "inspirations/bullfighting.mp4",
+          "duration": 21,
+          "description": "Spanish passion, violence, and ritual - the matador and the bull"
+        },
+        {
+          "id": "muses",
+          "title": "Muses & Lovers",
+          "video": "inspirations/muses-lovers.mp4",
+          "duration": 23,
+          "description": "Constantly changing women - each muse a new artistic direction"
+        },
+        {
+          "id": "war",
+          "title": "War & Violence",
+          "video": "inspirations/war-violence.mp4",
+          "duration": 20,
+          "description": "Guernica and the horrors of conflict - art as political statement"
+        }
+      ],
+      "locations": [
+        {
+          "id": "barcelona",
+          "title": "Barcelona Studio",
+          "video": "locations/barcelona.mp4",
+          "duration": 29,
+          "description": "Early years in Barcelona - where Picasso found his voice"
+        },
+        {
+          "id": "montmartre",
+          "title": "Montmartre, Paris",
+          "video": "locations/montmartre.mp4",
+          "duration": 33,
+          "description": "The Bateau-Lavoir and bohemian Paris - where Cubism was born"
+        },
+        {
+          "id": "cote-azur",
+          "title": "Côte d'Azur",
+          "video": "locations/cote-azur.mp4",
+          "duration": 31,
+          "description": "Mediterranean light and later-life creativity"
+        },
+        {
+          "id": "antibes",
+          "title": "Antibes Studio",
+          "video": "locations/antibes.mp4",
+          "duration": 36,
+          "description": "Ceramics period and artistic evolution"
+        }
+      ]
+    },
+    "kandinsky": {
+      "id": "kandinsky",
+      "name": "Wassily Kandinsky",
+      "tagline": "Spiritual Abstraction",
+      "period": "Modern (1866-1944)",
+      "landing": {
+        "image": "/manus-storage/landing-kandinsky.png",
+        "description": "Abstract studio with geometric shapes, primary colors, and spiritual light"
+      },
+      "lead-in": {
+        "video": "lead-in/abstract-harmony.mp4",
+        "duration": 52,
+        "description": "Kandinsky's studio transcends reality - geometric forms float in spiritual light, colors sing as music"
+      },
+      "inspirations": [
+        {
+          "id": "music",
+          "title": "Music & Synesthesia",
+          "video": "inspirations/music-synesthesia.mp4",
+          "duration": 19,
+          "description": "Colors as sound, shapes as melody - the spiritual language of abstraction"
+        },
+        {
+          "id": "theosophy",
+          "title": "Spiritual Theosophy",
+          "video": "inspirations/theosophy.mp4",
+          "duration": 21,
+          "description": "Mystical philosophy and the search for spiritual truth through art"
+        },
+        {
+          "id": "russian-folk",
+          "title": "Russian Folk Art",
+          "video": "inspirations/russian-folk.mp4",
+          "duration": 18,
+          "description": "Icons and traditional patterns - spiritual roots of Russian culture"
+        },
+        {
+          "id": "geometry",
+          "title": "Geometry & Harmony",
+          "video": "inspirations/geometry-harmony.mp4",
+          "duration": 22,
+          "description": "Mathematical relationships and universal harmony"
+        }
+      ],
+      "locations": [
+        {
+          "id": "munich",
+          "title": "Munich Studio",
+          "video": "locations/munich.mp4",
+          "duration": 30,
+          "description": "Bauhaus era and the birth of abstract art"
+        },
+        {
+          "id": "moscow",
+          "title": "Moscow",
+          "video": "locations/moscow.mp4",
+          "duration": 32,
+          "description": "Russian avant-garde and revolutionary spirit"
+        },
+        {
+          "id": "paris",
+          "title": "Paris Exile",
+          "video": "locations/paris.mp4",
+          "duration": 28,
+          "description": "Years of artistic refinement in France"
+        },
+        {
+          "id": "neuilly",
+          "title": "Neuilly-sur-Seine",
+          "video": "locations/neuilly.mp4",
+          "duration": 38,
+          "description": "Final studio and artistic legacy"
+        }
+      ]
+    },
+    "monet": {
+      "id": "monet",
+      "name": "Claude Monet",
+      "tagline": "Master of Light",
+      "period": "Impressionist (1840-1926)",
+      "landing": {
+        "image": "/manus-storage/landing-monet.png",
+        "description": "Water lily pond with Japanese bridge and soft, luminous light"
+      },
+      "lead-in": {
+        "video": "lead-in/giverny-awakening.mp4",
+        "duration": 55,
+        "description": "Giverny gardens bloom - water lilies shimmer, light dances on water, Japanese bridge reflects eternal beauty"
+      },
+      "inspirations": [
+        {
+          "id": "light",
+          "title": "Light & Atmosphere",
+          "video": "inspirations/light-atmosphere.mp4",
+          "duration": 20,
+          "description": "The obsession with capturing fleeting light - morning, noon, sunset, twilight"
+        },
+        {
+          "id": "water",
+          "title": "Water & Reflections",
+          "video": "inspirations/water-reflections.mp4",
+          "duration": 22,
+          "description": "Water surfaces as mirrors of sky and light - the essence of Impressionism"
+        },
+        {
+          "id": "japanese",
+          "title": "Japanese Prints",
+          "video": "inspirations/japanese-prints.mp4",
+          "duration": 18,
+          "description": "Eastern composition and perspective - influence on Western art"
+        },
+        {
+          "id": "seasons",
+          "title": "Seasons & Time",
+          "video": "inspirations/seasons-time.mp4",
+          "duration": 24,
+          "description": "Series paintings capturing temporal change and atmospheric variation"
+        }
+      ],
+      "locations": [
+        {
+          "id": "giverny",
+          "title": "Giverny Gardens",
+          "video": "locations/giverny.mp4",
+          "duration": 40,
+          "description": "Monet's obsession - the water lily pond across all seasons"
+        },
+        {
+          "id": "rouen",
+          "title": "Rouen Cathedral",
+          "video": "locations/rouen.mp4",
+          "duration": 32,
+          "description": "Series paintings of the cathedral facade - light and time"
+        },
+        {
+          "id": "thames",
+          "title": "Thames, London",
+          "video": "locations/thames.mp4",
+          "duration": 29,
+          "description": "Fog studies and atmospheric effects on the river"
+        },
+        {
+          "id": "bridge",
+          "title": "Japanese Bridge",
+          "video": "locations/japanese-bridge.mp4",
+          "duration": 35,
+          "description": "The iconic bridge - symbol of Monet's artistic vision"
+        }
+      ]
+    },
+    "matisse": {
+      "id": "matisse",
+      "name": "Henri Matisse",
+      "tagline": "Joy of Color",
+      "period": "Modern (1869-1954)",
+      "landing": {
+        "image": "/manus-storage/landing-matisse.png",
+        "description": "Côte d'Azur studio with vibrant cut-outs and Mediterranean light"
+      },
+      "lead-in": {
+        "video": "lead-in/studio-joy.mp4",
+        "duration": 46,
+        "description": "Matisse's studio radiates joy - vibrant colors, cut-outs dance on walls, Mediterranean light floods through windows"
+      },
+      "inspirations": [
+        {
+          "id": "jazz",
+          "title": "Jazz & Rhythm",
+          "video": "inspirations/jazz-rhythm.mp4",
+          "duration": 19,
+          "description": "Paper cut-outs as visual jazz - color and form in perfect harmony"
+        },
+        {
+          "id": "islamic",
+          "title": "Islamic Patterns",
+          "video": "inspirations/islamic-patterns.mp4",
+          "duration": 20,
+          "description": "Decorative arts and geometric beauty - Eastern influence"
+        },
+        {
+          "id": "mediterranean",
+          "title": "Mediterranean Light",
+          "video": "inspirations/mediterranean-light.mp4",
+          "duration": 21,
+          "description": "Southern sun and color intensity - pure joy in visual form"
+        },
+        {
+          "id": "sensuality",
+          "title": "Human Form & Sensuality",
+          "video": "inspirations/sensuality.mp4",
+          "duration": 18,
+          "description": "Graceful curves and the beauty of the human body"
+        }
+      ],
+      "locations": [
+        {
+          "id": "nice",
+          "title": "Nice Studio",
+          "video": "locations/nice.mp4",
+          "duration": 31,
+          "description": "Côte d'Azur light and Mediterranean inspiration"
+        },
+        {
+          "id": "vence",
+          "title": "Vence Chapel",
+          "video": "locations/vence.mp4",
+          "duration": 33,
+          "description": "Spiritual work - the chapel as artistic sanctuary"
+        },
+        {
+          "id": "tahiti",
+          "title": "Tahiti",
+          "video": "locations/tahiti.mp4",
+          "duration": 29,
+          "description": "Tropical inspiration and exotic beauty"
+        },
+        {
+          "id": "collioure",
+          "title": "Collioure",
+          "video": "locations/collioure.mp4",
+          "duration": 32,
+          "description": "Fauvist breakthrough - where color was liberated"
+        }
+      ]
+    },
+    "chagall": {
+      "id": "chagall",
+      "name": "Marc Chagall",
+      "tagline": "Dream & Memory",
+      "period": "Modern (1887-1985)",
+      "landing": {
+        "image": "/manus-storage/landing-chagall.png",
+        "description": "Vitebsk studio with floating figures, Russian folk art, and mystical light"
+      },
+      "lead-in": {
+        "video": "lead-in/vitebsk-dreams.mp4",
+        "duration": 50,
+        "description": "Chagall's Vitebsk comes alive - figures float in dreamlike space, Russian folk art surrounds, memory and imagination merge"
+      },
+      "inspirations": [
+        {
+          "id": "childhood",
+          "title": "Childhood & Memory",
+          "video": "inspirations/childhood-memory.mp4",
+          "duration": 19,
+          "description": "Vitebsk memories - the village that shaped his vision"
+        },
+        {
+          "id": "folk-art",
+          "title": "Russian Folk Art",
+          "video": "inspirations/folk-art.mp4",
+          "duration": 21,
+          "description": "Traditional patterns and cultural heritage"
+        },
+        {
+          "id": "jewish",
+          "title": "Jewish Spirituality",
+          "video": "inspirations/jewish-spirituality.mp4",
+          "duration": 20,
+          "description": "Religious themes and spiritual symbolism"
+        },
+        {
+          "id": "love",
+          "title": "Love & Romance",
+          "video": "inspirations/love-romance.mp4",
+          "duration": 22,
+          "description": "Bella and romantic passion - floating lovers in dreamscapes"
+        }
+      ],
+      "locations": [
+        {
+          "id": "vitebsk",
+          "title": "Vitebsk, Belarus",
+          "video": "locations/vitebsk.mp4",
+          "duration": 34,
+          "description": "Birthplace and spiritual home - the village of memory"
+        },
+        {
+          "id": "paris-montmartre",
+          "title": "Paris Montmartre",
+          "video": "locations/paris-montmartre.mp4",
+          "duration": 30,
+          "description": "Artistic awakening in bohemian Paris"
+        },
+        {
+          "id": "provence",
+          "title": "Provence",
+          "video": "locations/provence.mp4",
+          "duration": 28,
+          "description": "Southern light and color inspiration"
+        },
+        {
+          "id": "israel",
+          "title": "Israel",
+          "video": "locations/israel.mp4",
+          "duration": 36,
+          "description": "Spiritual pilgrimage and artistic renewal"
+        }
+      ]
+    },
+    "raphael": {
+      "id": "raphael",
+      "name": "Raphael",
+      "tagline": "Divine Harmony",
+      "period": "Renaissance (1483-1520)",
+      "landing": {
+        "image": "/manus-storage/landing-raphael.png",
+        "description": "Renaissance chapel with frescoes, divine light, and spiritual architecture"
+      },
+      "lead-in": {
+        "video": "lead-in/chapel-divinity.mp4",
+        "duration": 48,
+        "description": "Renaissance chapel glows with divine light - frescoes shimmer, spiritual harmony fills the sacred space"
+      },
+      "inspirations": [
+        {
+          "id": "religion",
+          "title": "Religious Devotion",
+          "video": "inspirations/religious-devotion.mp4",
+          "duration": 18,
+          "description": "Faith and spiritual truth - the sacred in visual form"
+        },
+        {
+          "id": "classical",
+          "title": "Classical Harmony",
+          "video": "inspirations/classical-harmony.mp4",
+          "duration": 20,
+          "description": "Perfect proportion and balance - Renaissance ideals"
+        },
+        {
+          "id": "madonna",
+          "title": "Madonna & Child",
+          "video": "inspirations/madonna-child.mp4",
+          "duration": 19,
+          "description": "Tender devotion and maternal grace - recurring theme"
+        },
+        {
+          "id": "patronage",
+          "title": "Papal Patronage",
+          "video": "inspirations/papal-patronage.mp4",
+          "duration": 21,
+          "description": "Power, faith, and artistic commission"
+        }
+      ],
+      "locations": [
+        {
+          "id": "urbino",
+          "title": "Urbino",
+          "video": "locations/urbino.mp4",
+          "duration": 29,
+          "description": "Birthplace - Renaissance center of learning"
+        },
+        {
+          "id": "florence",
+          "title": "Florence",
+          "video": "locations/florence.mp4",
+          "duration": 31,
+          "description": "Perugino's workshop and artistic training"
+        },
+        {
+          "id": "rome-vatican",
+          "title": "Rome & Vatican",
+          "video": "locations/rome-vatican.mp4",
+          "duration": 33,
+          "description": "Vatican commissions and papal court"
+        },
+        {
+          "id": "papal-court",
+          "title": "Papal Court",
+          "video": "locations/papal-court.mp4",
+          "duration": 35,
+          "description": "Power, prestige, and artistic authority"
+        }
+      ]
+    },
+    "modigliani": {
+      "id": "modigliani",
+      "name": "Amedeo Modigliani",
+      "tagline": "Soul & Form",
+      "period": "Modern (1884-1920)",
+      "landing": {
+        "image": "/manus-storage/landing-modigliani.png",
+        "description": "Montparnasse café with bohemian atmosphere and dim golden light"
+      },
+      "lead-in": {
+        "video": "lead-in/montparnasse-nights.mp4",
+        "duration": 47,
+        "description": "Montparnasse café pulses with bohemian energy - dim golden light, artistic souls gather, passion and melancholy intertwine"
+      },
+      "inspirations": [
+        {
+          "id": "african",
+          "title": "African Sculpture",
+          "video": "inspirations/african-sculpture.mp4",
+          "duration": 17,
+          "description": "Elongated forms and spiritual essence"
+        },
+        {
+          "id": "italian",
+          "title": "Italian Heritage",
+          "video": "inspirations/italian-heritage.mp4",
+          "duration": 19,
+          "description": "Renaissance roots and classical beauty"
+        },
+        {
+          "id": "bohemia",
+          "title": "Bohemian Life",
+          "video": "inspirations/bohemian-life.mp4",
+          "duration": 21,
+          "description": "Artistic struggle, passion, and poverty"
+        },
+        {
+          "id": "muses",
+          "title": "Muses & Models",
+          "video": "inspirations/muses-models.mp4",
+          "duration": 20,
+          "description": "Beautiful women and tragic romance"
+        }
+      ],
+      "locations": [
+        {
+          "id": "montparnasse",
+          "title": "Montparnasse",
+          "video": "locations/montparnasse.mp4",
+          "duration": 32,
+          "description": "The artistic heart of bohemian Paris"
+        },
+        {
+          "id": "montmartre",
+          "title": "Montmartre",
+          "video": "locations/montmartre.mp4",
+          "duration": 28,
+          "description": "Early years of struggle and artistic growth"
+        },
+        {
+          "id": "livorno",
+          "title": "Livorno, Italy",
+          "video": "locations/livorno.mp4",
+          "duration": 30,
+          "description": "Birthplace and Italian roots"
+        },
+        {
+          "id": "provence",
+          "title": "Provence",
+          "video": "locations/provence.mp4",
+          "duration": 33,
+          "description": "Final refuge attempts and artistic renewal"
+        }
+      ]
+    }
+  },
+  "videoTypes": {
+    "landing": {
+      "format": "PNG image",
+      "duration": "static",
+      "purpose": "Entry screen for each artist room"
+    },
+    "lead-in": {
+      "format": "MP4 video",
+      "duration": "40-55 seconds",
+      "purpose": "Cinematic introduction to artist's world"
+    },
+    "inspirations": {
+      "format": "MP4 video",
+      "duration": "15-24 seconds",
+      "purpose": "Visual exploration of artistic influences"
+    },
+    "locations": {
+      "format": "MP4 video",
+      "duration": "28-40 seconds",
+      "purpose": "Immersive backdrop of places artist visited/worked"
+    }
+  },
+  "rotationLogic": {
+    "strategy": "On each visit, randomly select one lead-in video and rotate through inspirations/locations",
+    "caching": "Cache selected videos for session to prevent jarring switches",
+    "fallback": "If video fails to load, display landing screen"
+  }
+}

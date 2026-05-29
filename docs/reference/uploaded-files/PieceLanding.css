@@ -1,0 +1,237 @@
+.piece-landing {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #f5f5f5;
+}
+
+.piece-header {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(212, 175, 55, 0.1) 100%);
+  border-bottom: 2px solid #d4af37;
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.back-btn {
+  padding: 0.5rem 1.5rem;
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.back-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.piece-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d4af37;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+.piece-main {
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3rem 2rem;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+
+.artwork-hero {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  border: 12px solid;
+  border-image: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%) 1;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #1a1a1a;
+}
+
+.hero-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  color: #d4af37;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-placeholder p {
+  font-size: 1.5rem;
+  font-family: "Playfair Display", serif;
+  margin: 0;
+}
+
+.quick-info {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-title {
+  font-size: 1.3rem;
+  color: #d4af37;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  border-bottom: 2px solid #d4af37;
+  padding-bottom: 0.75rem;
+}
+
+.quick-info p {
+  margin: 0;
+  color: #f5f5f5;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.quick-info strong {
+  color: #d4af37;
+}
+
+.financial-modules {
+  margin-top: 2rem;
+}
+
+.piece-footer {
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 2px solid #d4af37;
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.piece-footer p {
+  margin: 0;
+  color: #d4af37;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.piece-loading,
+.piece-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  gap: 1rem;
+}
+
+.piece-error {
+  color: #ff6b6b;
+}
+
+.piece-error button {
+  padding: 0.5rem 1.5rem;
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.piece-error button:hover {
+  background: rgba(212, 175, 55, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .piece-main {
+    padding: 2rem 1.5rem;
+  }
+
+  .piece-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .piece-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .piece-title {
+    font-size: 1.3rem;
+  }
+
+  .piece-main {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-section {
+    gap: 1rem;
+  }
+
+  .artwork-hero {
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+
+  .quick-info {
+    padding: 1rem;
+  }
+
+  .info-title {
+    font-size: 1.1rem;
+  }
+}

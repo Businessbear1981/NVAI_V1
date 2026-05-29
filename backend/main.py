@@ -1,0 +1,315 @@
+"""
+NVAI backend — FastAPI minimal.
+Runs on port 8200. Frontend proxies /api/* → here.
+"""
+from __future__ import annotations
+
+import json
+import os
+import shutil
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, EmailStr, Field
+
+load_dotenv()
+
+# Repo paths
+BACKEND_DIR = Path(__file__).parent
+DATA_DIR = BACKEND_DIR / "data"
+VIDEOS_CONFIG = DATA_DIR / "videos.json"
+PUBLIC_VIDEOS_DIR = BACKEND_DIR.parent / "frontend" / "public" / "videos"
+
+app = FastAPI(
+    title="NVAI",
+    description="Napa Valley Art Institute — backend API.",
+    version="0.1.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3100", "http://127.0.0.1:3100"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ---------------------------------------------------------------------------
+# Health
+# ---------------------------------------------------------------------------
+
+@app.get("/api/health")
+def health() -> dict:
+    return {
+        "status": "ok",
+        "service": "nvai-backend",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+# ---------------------------------------------------------------------------
+# DDNDA — front-door signature
+# ---------------------------------------------------------------------------
+
+class DDNDASignRequest(BaseModel):
+    fullName: str = Field(min_length=1, max_length=200)
+    email: str = Field(min_length=3, max_length=320)
+    documentVersion: str = Field(default="1.0", max_length=20)
+
+
+class DDNDASignResponse(BaseModel):
+    id: str
+    signedAt: str
+    documentVersion: str
+
+
+# In-memory signatures until Supabase is wired
+_signatures: dict[str, dict] = {}
+
+
+@app.post("/api/ddnda/sign", response_model=DDNDASignResponse)
+def sign_ddnda(payload: DDNDASignRequest) -> DDNDASignResponse:
+    signature_id = str(uuid.uuid4())
+    record = {
+        "id": signature_id,
+        "fullName": payload.fullName,
+        "email": payload.email,
+        "documentVersion": payload.documentVersion,
+        "signedAt": datetime.now(timezone.utc).isoformat(),
+    }
+    _signatures[signature_id] = record
+    return DDNDASignResponse(
+        id=signature_id,
+        signedAt=record["signedAt"],
+        documentVersion=payload.documentVersion,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Collection — the 25 paintings (stub; will move to Supabase)
+# ---------------------------------------------------------------------------
+
+@app.get("/api/collection")
+def collection() -> dict:
+    return {
+        "count": 25,
+        "artists": [
+            {"name": "Picasso", "pieces": 8, "wing": "Picasso compound (Grounds)"},
+            {"name": "Chagall", "pieces": 6, "wing": "The Parlor — La Ruche"},
+            {"name": "Modigliani", "pieces": 3, "wing": "Cabinet de Curiosités — Grand Hall"},
+            {"name": "Da Vinci", "pieces": 1, "wing": "Da Vinci Workshop (Grounds)"},
+            {"name": "Raphael", "pieces": 1, "wing": "Renaissance Studiolo (upstairs)"},
+            {"name": "Monet", "pieces": 1, "wing": "Giverny (Grounds)"},
+            {"name": "Matisse", "pieces": 1, "wing": "Mediterranean Pavilion (Patio)"},
+            {"name": "Kandinsky", "pieces": 2, "wing": "Bauhaus salon (upstairs)"},
+            {"name": "Kahlo", "pieces": 1, "wing": "Casa Azul (Grounds)"},
+            {"name": "Bernard", "pieces": 1, "wing": "Russian Enchantment chapel (upstairs)"},
+        ],
+    }
+
+
+# ---------------------------------------------------------------------------
+# Bernard concierge (Claude API stub — wire ANTHROPIC_API_KEY in .env)
+# ---------------------------------------------------------------------------
+
+class BernardAskRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=2000)
+    context: dict | None = None
+
+
+class BernardAskResponse(BaseModel):
+    response: str
+    routed_to_human: bool
+
+
+@app.post("/api/bernard/ask", response_model=BernardAskResponse)
+def bernard_ask(payload: BernardAskRequest) -> BernardAskResponse:
+    # Stub. Replace with Claude API call once ANTHROPIC_API_KEY is set.
+    material_keywords = ("price", "offer", "buy", "purchase", "commit", "bid", "negotiate", "discount")
+    is_material = any(k in payload.message.lower() for k in material_keywords)
+    if is_material:
+        return BernardAskResponse(
+            response=(
+                "Thank you for the inquiry. A material question of this nature routes to "
+                "Sean or Richard directly. I will draft the response and queue it for their "
+                "approval. Expect a response within one business day."
+            ),
+            routed_to_human=True,
+        )
+    return BernardAskResponse(
+        response=(
+            "I can answer that from the curatorial layer. The full provenance, "
+            "conservation history, and any prior exhibition details for the piece you are "
+            "asking about live in the dossier — accessible after your DDNDA is on file."
+        ),
+        routed_to_human=False,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Kiki commerce
+# ---------------------------------------------------------------------------
+
+class KikiOrderRequest(BaseModel):
+    product: str
+    email: str
+    fullName: str
+
+
+@app.post("/api/kiki/order")
+def kiki_order(payload: KikiOrderRequest) -> dict:
+    return {
+        "ok": True,
+        "product": payload.product,
+        "message": "Order queued. Stripe checkout flow wires in next.",
+    }
+
+
+# ---------------------------------------------------------------------------
+# Inquiry intake
+# ---------------------------------------------------------------------------
+
+class InquiryRequest(BaseModel):
+    fullName: str
+    email: str
+    message: str
+    artworkId: str | None = None
+
+
+@app.post("/api/inquiry")
+def inquiry(payload: InquiryRequest) -> dict:
+    return {
+        "ok": True,
+        "id": str(uuid.uuid4()),
+        "queuedAt": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Video curator — backend store + admin endpoints
+# ---------------------------------------------------------------------------
+
+def _load_videos_config() -> dict:
+    if not VIDEOS_CONFIG.exists():
+        return {}
+    return json.loads(VIDEOS_CONFIG.read_text(encoding="utf-8"))
+
+
+def _save_videos_config(config: dict) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    VIDEOS_CONFIG.write_text(json.dumps(config, indent=2), encoding="utf-8")
+
+
+@app.get("/api/videos")
+def get_all_videos() -> dict:
+    """Return the full video config (lead-in + rotation per wing)."""
+    return _load_videos_config()
+
+
+@app.get("/api/videos/files")
+def list_video_files() -> dict:
+    """List every .mp4 file in the public videos directory."""
+    if not PUBLIC_VIDEOS_DIR.exists():
+        return {"files": []}
+    files = sorted([f"/videos/{p.name}" for p in PUBLIC_VIDEOS_DIR.glob("*.mp4")])
+    return {"files": files}
+
+
+class WingVideosUpdate(BaseModel):
+    leadIn: str = Field(min_length=1)
+    rotation: list[str] = Field(default_factory=list)
+
+
+@app.patch("/api/videos/wing/{wing}")
+def update_wing_videos(wing: str, payload: WingVideosUpdate) -> dict:
+    """Replace the lead-in and rotation for a single wing."""
+    config = _load_videos_config()
+    config[wing] = {"leadIn": payload.leadIn, "rotation": payload.rotation}
+    _save_videos_config(config)
+    return {"ok": True, "wing": wing, "config": config[wing]}
+
+
+@app.post("/api/videos/upload")
+async def upload_video(file: UploadFile = File(...)) -> dict:
+    """Upload a new .mp4 to public/videos. Returns the public URL."""
+    if not file.filename or not file.filename.lower().endswith(".mp4"):
+        raise HTTPException(status_code=400, detail="Only .mp4 files are accepted.")
+    PUBLIC_VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
+    target = PUBLIC_VIDEOS_DIR / file.filename
+    with target.open("wb") as out:
+        shutil.copyfileobj(file.file, out)
+    return {"ok": True, "url": f"/videos/{file.filename}", "bytes": target.stat().st_size}
+
+
+@app.delete("/api/videos/file/{filename}")
+def delete_video_file(filename: str) -> dict:
+    """Remove a video file from public/videos. Use carefully."""
+    if "/" in filename or ".." in filename:
+        raise HTTPException(status_code=400, detail="Invalid filename.")
+    target = PUBLIC_VIDEOS_DIR / filename
+    if not target.exists():
+        raise HTTPException(status_code=404, detail="File not found.")
+    target.unlink()
+    return {"ok": True, "deleted": filename}
+
+
+# ---------------------------------------------------------------------------
+# Bernard voice — ElevenLabs proxy
+# British elegant male voice. Default: "George" (deep, soothing).
+# ---------------------------------------------------------------------------
+
+import httpx
+
+BERNARD_DEFAULT_VOICE_ID = os.getenv("BERNARD_VOICE_ID", "JBFqnCBsd6RMkjVDRZzb")  # George
+
+
+class BernardSpeakRequest(BaseModel):
+    text: str = Field(min_length=1, max_length=5000)
+    voiceId: str | None = None
+
+
+@app.post("/api/bernard/speak")
+async def bernard_speak(payload: BernardSpeakRequest):
+    """
+    Generate British elegant male narration via ElevenLabs and stream the MP3.
+    Requires ELEVENLABS_API_KEY in env. Falls back to 503 with helpful message if not configured.
+    """
+    api_key = os.getenv("ELEVENLABS_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=503,
+            detail="ELEVENLABS_API_KEY not configured. Set it in backend/.env to enable Bernard's voice.",
+        )
+    voice = payload.voiceId or BERNARD_DEFAULT_VOICE_ID
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice}"
+    body = {
+        "text": payload.text,
+        "model_id": "eleven_multilingual_v2",
+        "voice_settings": {
+            "stability": 0.55,         # restrained, measured
+            "similarity_boost": 0.75,
+            "style": 0.30,             # slight elegance
+            "use_speaker_boost": True,
+        },
+    }
+    headers = {
+        "xi-api-key": api_key,
+        "Content-Type": "application/json",
+        "Accept": "audio/mpeg",
+    }
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        r = await client.post(url, json=body, headers=headers)
+        if r.status_code != 200:
+            raise HTTPException(status_code=r.status_code, detail=f"ElevenLabs error: {r.text[:200]}")
+        from fastapi.responses import Response
+        return Response(content=r.content, media_type="audio/mpeg")
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8200, reload=True)

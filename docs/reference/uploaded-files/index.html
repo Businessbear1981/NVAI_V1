@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NVAI Video Selection Gallery</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        h1 { font-size: 32px; margin-bottom: 10px; }
+        .instructions { color: #aaa; font-size: 16px; max-width: 800px; margin: 0 auto; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .item { background: #2a2a2a; border: 2px solid #444; border-radius: 8px; overflow: hidden; transition: all 0.3s; }
+        .item:hover { border-color: #ffcc00; transform: scale(1.02); }
+        .item-content { padding: 15px; }
+        .number { font-size: 32px; font-weight: bold; color: #ffcc00; margin-bottom: 8px; }
+        .name { font-size: 12px; color: #999; margin-bottom: 12px; font-family: monospace; word-break: break-word; }
+        img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎬 NVAI VIDEO SELECTION GALLERY</h1>
+        <div class="instructions">
+            <p>Review all 25 videos below. Tell me which ones to keep using format:</p>
+            <p style="margin-top: 10px;"><strong>"Keep #12 as homepage, #7 Kiki, #22 Picasso"</strong> or <strong>"Discard #1, #2, #3"</strong></p>
+        </div>
+    </div>
+    <div class="gallery">
+        <div class="item">
+            <img src="kiki_burlesque_performance_5k_thumb.jpg" alt="Video 1">
+            <div class="item-content">
+                <div class="number">#1</div>
+                <div class="name">kiki_burlesque_performance_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="kiki_burlesque_performance_5k_v2_thumb.jpg" alt="Video 2">
+            <div class="item-content">
+                <div class="number">#2</div>
+                <div class="name">kiki_burlesque_performance_5k_v2</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="kiki_burlesque_performance_5k_v3_thumb.jpg" alt="Video 3">
+            <div class="item-content">
+                <div class="number">#3</div>
+                <div class="name">kiki_burlesque_performance_5k_v3</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="kiki_burlesque_performance_5k_v4_thumb.jpg" alt="Video 4">
+            <div class="item-content">
+                <div class="number">#4</div>
+                <div class="name">kiki_burlesque_performance_5k_v4</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="kiki_burlesque_performance_final_thumb.jpg" alt="Video 5">
+            <div class="item-content">
+                <div class="number">#5</div>
+                <div class="name">kiki_burlesque_performance_final ⭐</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="kiki_dance_performance_1min_thumb.jpg" alt="Video 6">
+            <div class="item-content">
+                <div class="number">#6</div>
+                <div class="name">kiki_dance_performance_1min</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="moulin_rouge_live_45sec_thumb.jpg" alt="Video 7">
+            <div class="item-content">
+                <div class="number">#7</div>
+                <div class="name">moulin_rouge_live_45sec ⭐</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_chagall_studio_5k_thumb.jpg" alt="Video 8">
+            <div class="item-content">
+                <div class="number">#8</div>
+                <div class="name">nvai_chagall_studio_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_chagall_vitebsk_5k_thumb.jpg" alt="Video 9">
+            <div class="item-content">
+                <div class="number">#9</div>
+                <div class="name">nvai_chagall_vitebsk_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_courtyard_5k_thumb.jpg" alt="Video 10">
+            <div class="item-content">
+                <div class="number">#10</div>
+                <div class="name">nvai_courtyard_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_foyer_aerial_approach_thumb.jpg" alt="Video 11">
+            <div class="item-content">
+                <div class="number">#11</div>
+                <div class="name">nvai_foyer_aerial_approach</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_foyer_aerial_static_thumb.jpg" alt="Video 12">
+            <div class="item-content">
+                <div class="number">#12</div>
+                <div class="name">nvai_foyer_aerial_static ⭐</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_garden_party_5k_thumb.jpg" alt="Video 13">
+            <div class="item-content">
+                <div class="number">#13</div>
+                <div class="name">nvai_garden_party_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_garden_passage_5k_thumb.jpg" alt="Video 14">
+            <div class="item-content">
+                <div class="number">#14</div>
+                <div class="name">nvai_garden_passage_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_grand_foyer_5k_thumb.jpg" alt="Video 15">
+            <div class="item-content">
+                <div class="number">#15</div>
+                <div class="name">nvai_grand_foyer_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_kandinsky_studio_5k_thumb.jpg" alt="Video 16">
+            <div class="item-content">
+                <div class="number">#16</div>
+                <div class="name">nvai_kandinsky_studio_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_kiki_moulin_rouge_5k_thumb.jpg" alt="Video 17">
+            <div class="item-content">
+                <div class="number">#17</div>
+                <div class="name">nvai_kiki_moulin_rouge_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_leonardo_workshop_5k_thumb.jpg" alt="Video 18">
+            <div class="item-content">
+                <div class="number">#18</div>
+                <div class="name">nvai_leonardo_workshop_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_modigliani_cafe_5k_thumb.jpg" alt="Video 19">
+            <div class="item-content">
+                <div class="number">#19</div>
+                <div class="name">nvai_modigliani_cafe_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_monet_secret_garden_5k_thumb.jpg" alt="Video 20">
+            <div class="item-content">
+                <div class="number">#20</div>
+                <div class="name">nvai_monet_secret_garden_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_picasso_blue_period_5k_thumb.jpg" alt="Video 21">
+            <div class="item-content">
+                <div class="number">#21</div>
+                <div class="name">nvai_picasso_blue_period_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_picasso_cubist_workshop_5k_thumb.jpg" alt="Video 22">
+            <div class="item-content">
+                <div class="number">#22</div>
+                <div class="name">nvai_picasso_cubist_workshop_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_picasso_later_atelier_5k_thumb.jpg" alt="Video 23">
+            <div class="item-content">
+                <div class="number">#23</div>
+                <div class="name">nvai_picasso_later_atelier_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_picasso_studio_5k_thumb.jpg" alt="Video 24">
+            <div class="item-content">
+                <div class="number">#24</div>
+                <div class="name">nvai_picasso_studio_5k</div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="nvai_raphael_chapel_5k_thumb.jpg" alt="Video 25">
+            <div class="item-content">
+                <div class="number">#25</div>
+                <div class="name">nvai_raphael_chapel_5k</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

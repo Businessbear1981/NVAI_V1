@@ -1,0 +1,58 @@
+{
+  "upstairs": {
+    "picasso_cubist": {
+      "name": "Picasso's Cubist Workshop",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/picasso_cubist_backdrop-DtLnNeaHXtQe6fY6sSYDYc.webp"
+    },
+    "picasso_later": {
+      "name": "Picasso's Later Atelier",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/picasso_later_backdrop-YAnYai8upXzz8FhQWdgcai.webp"
+    },
+    "chagall": {
+      "name": "Chagall's Russian Folk Studio",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/chagall_backdrop-2BaTrXqQLiTRaT9JzQG2uJ.webp"
+    },
+    "modigliani": {
+      "name": "Modigliani's Montparnasse Café",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/modigliani_backdrop-NLYFdXRZ68CnHkRB2wExyE.webp"
+    },
+    "raphael": {
+      "name": "Raphael's Renaissance Chapel",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/raphael_backdrop-dSsbm9HHxwxvLZCwSQrkpE.webp"
+    },
+    "kandinsky": {
+      "name": "Kandinsky's Abstract Studio",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/kandinsky_backdrop-8CHq62hL5EESifNJ4vG9Nc.webp"
+    },
+    "leonardo": {
+      "name": "Leonardo's Renaissance Workshop",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/leonardo_backdrop-8CvuQS9iKFWi8egwuh5rAh.webp"
+    },
+    "stairs": {
+      "name": "Stairs Landing",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/stairs_backdrop-mwMwuoANKQzYnzNJuowvUg.webp"
+    }
+  },
+  "outdoor": {
+    "monet": {
+      "name": "Monet's Water Lily Garden",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/monet_backdrop-b68k6g5thwoysMH8w39iRP.webp"
+    },
+    "frida": {
+      "name": "Frida Kahlo's Blue House",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/frida_backdrop-Kb8MXXoTmXKobLgWRQoEvN.webp"
+    },
+    "davinci": {
+      "name": "Da Vinci's Workshop",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/davinci_backdrop-ii75SAty2SQjYAhSm8yJGg.webp"
+    },
+    "matisse": {
+      "name": "Matisse's Côte d'Azur Studio",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/matisse_backdrop-3UT9rCBTvihKT4cNvF29Tp.webp"
+    },
+    "bernard": {
+      "name": "Bernard's Art Nouveau Atelier",
+      "backdrop": "https://d2xsxph8kpxj0f.cloudfront.net/310519663623353486/kF6DD7P35iYXRL3pMQFYLw/bernard_backdrop-DeVhhCjXZAvkahSeeqHXmu.webp"
+    }
+  }
+}

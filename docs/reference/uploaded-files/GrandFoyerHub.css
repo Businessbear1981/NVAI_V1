@@ -1,0 +1,315 @@
+.grand-foyer-hub {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Georgia', serif;
+  background: #1a1a1a;
+}
+
+/* 5K Video Background */
+.foyer-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Foyer Overlay */
+.foyer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.3) 0%, rgba(218, 165, 32, 0.2) 50%, rgba(184, 134, 11, 0.3) 100%);
+  z-index: 2;
+  mix-blend-mode: overlay;
+}
+
+/* Content Layer */
+.foyer-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.foyer-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: slideDown 1.2s ease-out 0.3s both;
+}
+
+.foyer-title {
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: #daa520;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.4);
+  letter-spacing: 2px;
+}
+
+.foyer-subtitle {
+  font-size: 1.5rem;
+  color: #f0e68c;
+  margin: 0 0 1.5rem 0;
+  font-style: italic;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  font-weight: 300;
+}
+
+.foyer-description {
+  font-size: 1.1rem;
+  color: #fff8dc;
+  margin: 0;
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  max-width: 700px;
+  font-weight: 300;
+}
+
+/* Artist Rooms Grid */
+.artist-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  margin-bottom: 3rem;
+  animation: slideUp 1.2s ease-out 0.6s both;
+}
+
+.artist-room-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.artist-room-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.artist-room-card:hover {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: #ffd700;
+  box-shadow: 0 8px 32px rgba(218, 165, 32, 0.3);
+  transform: translateY(-4px);
+}
+
+.artist-room-card:hover::before {
+  opacity: 1;
+}
+
+.room-header {
+  margin-bottom: 1rem;
+}
+
+.room-name {
+  font-size: 1.3rem;
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+.room-period {
+  font-size: 0.9rem;
+  color: #b8860b;
+  margin: 0;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.room-description {
+  font-size: 0.95rem;
+  color: #fff8dc;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.enter-room-btn {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background: rgba(218, 165, 32, 0.1);
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.enter-room-btn:hover {
+  background: rgba(218, 165, 32, 0.2);
+  box-shadow: 0 4px 12px rgba(218, 165, 32, 0.3);
+}
+
+/* Navigation */
+.foyer-navigation {
+  display: flex;
+  justify-content: center;
+  animation: slideUp 1.2s ease-out 0.9s both;
+}
+
+.nav-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-family: 'Georgia', serif;
+  border: 2px solid #daa520;
+  background: rgba(218, 165, 32, 0.1);
+  color: #daa520;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  border-radius: 50px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nav-button:hover {
+  background: rgba(218, 165, 32, 0.25);
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
+  transform: translateY(-2px);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+/* Decorative Chandelier */
+.chandelier {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.chandelier-light {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(218, 165, 32, 0.8) 0%, rgba(218, 165, 32, 0.4) 50%, transparent 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(218, 165, 32, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 40px rgba(218, 165, 32, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(218, 165, 32, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .foyer-title {
+    font-size: 2.5rem;
+  }
+
+  .foyer-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .foyer-description {
+    font-size: 1rem;
+  }
+
+  .artist-rooms-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .nav-button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+
+  .foyer-content {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .foyer-title {
+    font-size: 2rem;
+  }
+
+  .foyer-subtitle {
+    font-size: 1rem;
+  }
+
+  .nav-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .foyer-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .chandelier {
+    top: 1rem;
+  }
+
+  .chandelier-light {
+    width: 40px;
+    height: 40px;
+  }
+}

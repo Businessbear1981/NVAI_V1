@@ -1,0 +1,189 @@
+{
+  "home": {
+    "leadIn": "/videos/nvai_aerial_drone_approach_5k.mp4",
+    "rotation": []
+  },
+  "foyer": {
+    "leadIn": "/videos/nvai_grand_foyer_5k.mp4",
+    "rotation": []
+  },
+  "foyerWelcome": {
+    "leadIn": "/videos/nvai_foyer_landing_handshot_5k.mp4",
+    "rotation": []
+  },
+  "foyerStaircase": {
+    "leadIn": "/videos/nvai_foyer_aerial_static.mp4",
+    "rotation": []
+  },
+  "garden": {
+    "leadIn": "/videos/nvai_garden_path_to_patio_5k.mp4",
+    "rotation": [
+      "/videos/nvai_garden_party_5k.mp4"
+    ]
+  },
+  "grounds": {
+    "leadIn": "/videos/nvai_courtyard_5k.mp4",
+    "rotation": [
+      "/videos/nvai_garden_path_continuous_5k.mp4",
+      "/videos/nvai_aerial_drone_approach_5k.mp4"
+    ]
+  },
+  "grandHall": {
+    "leadIn": "/videos/nvai_foyer_aerial_approach.mp4",
+    "rotation": [
+      "/videos/foyer_aerial_pan_final.mp4",
+      "/videos/nvai_garden_passage_5k.mp4"
+    ]
+  },
+  "auctionHouse": {
+    "leadIn": "/videos/foyer_aerial_pan_final.mp4",
+    "rotation": []
+  },
+  "parlor": {
+    "leadIn": "/videos/nvai_courtyard_5k.mp4",
+    "rotation": []
+  },
+  "chagall": {
+    "leadIn": "/videos/nvai_chagall_studio_5k.mp4",
+    "rotation": [
+      "/videos/nvai_chagall_vitebsk_5k.mp4",
+      "/videos/moscow.mp4",
+      "/videos/russian-folk.mp4",
+      "/videos/paris.mp4",
+      "/videos/muses-lovers.mp4",
+      "/videos/montmartre.mp4",
+      "/videos/cote-azur.mp4"
+    ]
+  },
+  "picasso": {
+    "leadIn": "/videos/nvai_picasso_studio_5k.mp4",
+    "rotation": [
+      "/videos/nvai_picasso_blue_period_5k.mp4",
+      "/videos/nvai_picasso_cubist_workshop_5k.mp4",
+      "/videos/nvai_picasso_later_atelier_5k.mp4",
+      "/videos/montmartre.mp4",
+      "/videos/barcelona.mp4",
+      "/videos/paris.mp4",
+      "/videos/bullfighting.mp4",
+      "/videos/studio-revolution.mp4",
+      "/videos/antibes.mp4",
+      "/videos/war-violence.mp4",
+      "/videos/african-masks.mp4",
+      "/videos/cote-azur.mp4"
+    ]
+  },
+  "picassoBateauLavoir": {
+    "leadIn": "/videos/nvai_picasso_blue_period_5k.mp4",
+    "rotation": [
+      "/videos/montmartre.mp4",
+      "/videos/barcelona.mp4",
+      "/videos/paris.mp4"
+    ]
+  },
+  "picassoBoisgeloup": {
+    "leadIn": "/videos/nvai_picasso_cubist_workshop_5k.mp4",
+    "rotation": [
+      "/videos/paris.mp4",
+      "/videos/studio-revolution.mp4",
+      "/videos/bullfighting.mp4"
+    ]
+  },
+  "picassoMougins": {
+    "leadIn": "/videos/nvai_picasso_later_atelier_5k.mp4",
+    "rotation": [
+      "/videos/antibes.mp4",
+      "/videos/war-violence.mp4",
+      "/videos/cote-azur.mp4"
+    ]
+  },
+  "modigliani": {
+    "leadIn": "/videos/nvai_modigliani_cafe_5k.mp4",
+    "rotation": [
+      "/videos/african-masks.mp4",
+      "/videos/muses-lovers.mp4",
+      "/videos/montmartre.mp4",
+      "/videos/paris.mp4"
+    ]
+  },
+  "kandinsky": {
+    "leadIn": "/videos/nvai_kandinsky_studio_5k.mp4",
+    "rotation": [
+      "/videos/abstract-harmony.mp4",
+      "/videos/geometry-harmony.mp4",
+      "/videos/music-synesthesia.mp4",
+      "/videos/theosophy.mp4",
+      "/videos/munich.mp4",
+      "/videos/moscow.mp4",
+      "/videos/nature-geometry.mp4"
+    ]
+  },
+  "raphael": {
+    "leadIn": "/videos/florence-workshop.mp4",
+    "rotation": [
+      "/videos/rome-vatican.mp4",
+      "/videos/milan-court.mp4"
+    ]
+  },
+  "davinci": {
+    "leadIn": "/videos/nvai_leonardo_workshop_5k.mp4",
+    "rotation": [
+      "/videos/workshop-awakening.mp4",
+      "/videos/human-anatomy.mp4",
+      "/videos/flight-machines.mp4",
+      "/videos/water-hydraulics.mp4",
+      "/videos/nature-geometry.mp4",
+      "/videos/amboise-france.mp4",
+      "/videos/milan-court.mp4",
+      "/videos/florence-workshop.mp4",
+      "/videos/rome-vatican.mp4"
+    ]
+  },
+  "monet": {
+    "leadIn": "/videos/nvai_monet_secret_garden_5k.mp4",
+    "rotation": [
+      "/videos/nvai_garden_passage_5k.mp4"
+    ]
+  },
+  "matisse": {
+    "leadIn": "/videos/cote-azur.mp4",
+    "rotation": [
+      "/videos/antibes.mp4"
+    ]
+  },
+  "frida": {
+    "leadIn": "/videos/casa-azul.mp4",
+    "rotation": [
+      "/videos/casa-azul-awakening.mp4",
+      "/videos/coyoacan.mp4",
+      "/videos/diego-love.mp4",
+      "/videos/mexican-folk.mp4",
+      "/videos/xochimilco.mp4",
+      "/videos/pain-suffering.mp4",
+      "/videos/hospital-rooms.mp4",
+      "/videos/nature-jungle.mp4"
+    ]
+  },
+  "bernard": {
+    "leadIn": "/videos/nvai_raphael_chapel_5k.mp4",
+    "rotation": []
+  },
+  "pollock": {
+    "leadIn": "/videos/studio-revolution.mp4",
+    "rotation": [
+      "/videos/abstract-harmony.mp4",
+      "/videos/nature-geometry.mp4"
+    ]
+  },
+  "kikiLeadIn": {
+    "leadIn": "/videos/nvai_kiki_moulin_rouge_5k.mp4",
+    "rotation": []
+  },
+  "vineyards": {
+    "leadIn": "/videos/nvai_aerial_drone_approach_5k.mp4",
+    "rotation": ["/videos/nvai_garden_path_continuous_5k.mp4", "/videos/nvai_courtyard_5k.mp4"]
+  },
+  "wineCave": {
+    "leadIn": "/videos/nvai_courtyard_5k.mp4",
+    "rotation": ["/videos/foyer_aerial_pan_final.mp4"]
+  }
+}

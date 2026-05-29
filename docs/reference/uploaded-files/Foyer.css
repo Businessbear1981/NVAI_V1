@@ -1,0 +1,298 @@
+.foyer-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.foyer-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.vineyard-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 200, 100, 0.3) 0%,
+    rgba(200, 150, 80, 0.2) 50%,
+    rgba(100, 80, 60, 0.1) 100%
+  );
+  opacity: 0.8;
+}
+
+.rolling-hills {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(80, 120, 60, 0.4), transparent);
+  clip-path: polygon(0 30%, 100% 20%, 100% 100%, 0 100%);
+}
+
+.chateau-entrance {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.ornate-doors {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  margin-bottom: 2rem;
+}
+
+.door {
+  position: absolute;
+  width: 150px;
+  height: 400px;
+  background: linear-gradient(90deg, #8b7355 0%, #a0826d 50%, #8b7355 100%);
+  border: 2px solid #d4af37;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.left-door {
+  left: 0;
+  transform: rotateY(0deg);
+}
+
+.right-door {
+  right: 0;
+  transform: rotateY(0deg);
+}
+
+.ornate-doors.open .left-door {
+  transform: rotateY(-75deg);
+}
+
+.ornate-doors.open .right-door {
+  transform: rotateY(75deg);
+}
+
+.door-panel {
+  width: 80%;
+  height: 80%;
+  border: 2px solid #d4af37;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #9b8b7e 0%, #7a6a5d 100%);
+  position: relative;
+}
+
+.door-panel::before,
+.door-panel::after {
+  content: "";
+  position: absolute;
+  background: #d4af37;
+  border-radius: 50%;
+}
+
+.door-panel::before {
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.door-panel::after {
+  width: 8px;
+  height: 8px;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.door-ornament {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 30px;
+  border: 2px solid #d4af37;
+  border-bottom: none;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+}
+
+.foyer-content {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.foyer-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #d4af37;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  letter-spacing: 2px;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+}
+
+.foyer-subtitle {
+  font-size: 1.5rem;
+  color: #f5f5f5;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  font-style: italic;
+  font-family: "Montserrat", sans-serif;
+}
+
+.foyer-description {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 3px solid #d4af37;
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+}
+
+.foyer-description p {
+  color: #f5f5f5;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.foyer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.welcome-text {
+  color: #d4af37;
+  font-size: 1.1rem;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.enter-gallery-btn,
+.login-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+  color: #1a1a1a;
+  border: 2px solid #d4af37;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.enter-gallery-btn:hover,
+.login-btn:hover {
+  background: linear-gradient(135deg, #aa8c2c 0%, #d4af37 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+.ambient-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #d4af37;
+  border-radius: 50%;
+  opacity: 0;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) translateX(20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .foyer-title {
+    font-size: 2.5rem;
+  }
+
+  .foyer-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .ornate-doors {
+    width: 250px;
+    height: 350px;
+  }
+
+  .door {
+    width: 125px;
+    height: 350px;
+  }
+
+  .foyer-description {
+    font-size: 0.95rem;
+  }
+}

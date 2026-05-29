@@ -1,0 +1,220 @@
+/* Artist Room Base Styles */
+.artist-room {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.room-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.room-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+  z-index: 1;
+}
+
+.room-content {
+  position: relative;
+  z-index: 2;
+  padding: 60px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Room Header */
+.room-header-section {
+  text-align: center;
+  margin-bottom: 80px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.room-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--room-accent, #d4af37);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.room-period {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.room-description {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Carousel Section */
+.carousel-section {
+  margin-bottom: 80px;
+}
+
+.carousel-toggle {
+  display: block;
+  margin: 0 auto 40px;
+  padding: 15px 40px;
+  background: var(--room-accent, #d4af37);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.carousel-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.carousel-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Room Narrative */
+.room-narrative {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--room-accent, #d4af37);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 60px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.room-narrative h2 {
+  font-size: 2rem;
+  color: var(--room-accent, #d4af37);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.room-narrative p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+.room-narrative p:last-child {
+  margin-bottom: 0;
+}
+
+/* Navigation */
+.room-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.nav-button {
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--room-accent, #d4af37);
+  color: var(--room-accent, #d4af37);
+  transform: translateY(-2px);
+}
+
+.back-button {
+  margin: 0 auto;
+  display: block;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .room-content {
+    padding: 40px 20px;
+  }
+
+  .room-title {
+    font-size: 2.5rem;
+  }
+
+  .room-period {
+    font-size: 1.2rem;
+  }
+
+  .room-description {
+    font-size: 1rem;
+  }
+
+  .room-narrative {
+    padding: 25px;
+  }
+
+  .room-narrative h2 {
+    font-size: 1.5rem;
+  }
+
+  .room-narrative p {
+    font-size: 0.95rem;
+  }
+}

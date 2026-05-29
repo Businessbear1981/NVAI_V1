@@ -1,0 +1,330 @@
+.garden-party-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Georgia', serif;
+  background: #0a0a0a;
+}
+
+.garden-party-container.fade-out {
+  animation: fadeOut 1s ease-in-out forwards;
+}
+
+.garden-party-container.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+/* 5K Video Background */
+.party-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Overlay for text readability */
+.party-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 2;
+}
+
+/* Content Layer */
+.party-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.party-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: slideUp 1.2s ease-out 0.3s both;
+}
+
+.party-title {
+  font-size: 4rem;
+  font-weight: 400;
+  color: #d4af37;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+}
+
+.party-subtitle {
+  font-size: 1.6rem;
+  color: #f5f1e8;
+  margin: 0 0 1.5rem 0;
+  font-style: italic;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  font-weight: 300;
+}
+
+.party-description {
+  font-size: 1.1rem;
+  color: #e8e4d8;
+  margin: 0;
+  line-height: 1.8;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  max-width: 700px;
+  font-weight: 300;
+}
+
+/* Artists Grid */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  margin-bottom: 3rem;
+  animation: slideUp 1.2s ease-out 0.6s both;
+}
+
+.artist-card {
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-top: 4px solid #d4af37;
+  padding: 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.artist-card:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
+  transform: translateY(-4px);
+}
+
+.artist-card.selected {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.3);
+}
+
+.artist-header {
+  margin-bottom: 1rem;
+}
+
+.artist-name {
+  font-size: 1.5rem;
+  color: #d4af37;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+.artist-period {
+  font-size: 0.95rem;
+  color: #b8b8b8;
+  margin: 0;
+  font-style: italic;
+}
+
+.artist-description {
+  font-size: 1rem;
+  color: #e8e4d8;
+  margin: 1rem 0;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.artist-explore-btn {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #d4af37;
+  font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.artist-explore-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Navigation */
+.party-navigation {
+  display: flex;
+  justify-content: center;
+  animation: slideUp 1.2s ease-out 0.9s both;
+}
+
+.nav-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-family: 'Georgia', serif;
+  border: 2px solid #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+  color: #d4af37;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  border-radius: 50px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nav-button:hover {
+  background: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+/* Decorative Floating Petals */
+.party-decorations {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.floating-petal {
+  position: absolute;
+  opacity: 0.2;
+  font-size: 2.5rem;
+  animation: float 10s ease-in-out infinite;
+}
+
+.petal-1 {
+  top: 15%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.petal-2 {
+  top: 70%;
+  right: 10%;
+  animation-delay: 3s;
+}
+
+.petal-3 {
+  top: 50%;
+  right: 3%;
+  animation-delay: 6s;
+}
+
+.floating-petal::before {
+  content: '🌸';
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-30px) translateX(15px);
+    opacity: 0.4;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .party-title {
+    font-size: 2.5rem;
+  }
+
+  .party-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .party-description {
+    font-size: 1rem;
+  }
+
+  .artists-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .nav-button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+
+  .party-content {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .party-title {
+    font-size: 2rem;
+  }
+
+  .party-subtitle {
+    font-size: 1rem;
+  }
+
+  .nav-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .party-content {
+    padding: 1.5rem 1rem;
+  }
+}
