@@ -1,0 +1,39 @@
+{
+  "menus": [
+    {
+      "id": "french-picnic",
+      "name": "The French Picnic",
+      "price": 495,
+      "currency": "USD",
+      "summary": "Two bottles of French wine, three cheeses, jamón ibérico, accompaniments. Delivered cold, set up by the concierge.",
+      "courseType": "picnic",
+      "deliveryWindow": "Day-of, 2 hours before the auction begins",
+      "items": [
+        { "category": "Wine", "name": "Excellent French Chardonnay", "detail": "Selected by the cellar · 750 ml", "note": "Cellar-curated each season" },
+        { "category": "Wine", "name": "Beaujolais", "detail": "Selected by the cellar · 750 ml", "note": "Bright, light, gamay-grape French red" },
+        { "category": "Cheese", "name": "Brie de Meaux PDO", "detail": "Raw cow's milk · aged 6 weeks · Île-de-France", "note": "Soft, buttery, mushroomy" },
+        { "category": "Cheese", "name": "Comté 18 Mois", "detail": "Raw cow's milk · Jura · Marcel Petite", "note": "Mild, nutty, brown-butter" },
+        { "category": "Cheese", "name": "Ossau-Iraty PDO", "detail": "Raw sheep's milk · French Basque · aged 5 months", "note": "Mid-soft, mild, hazelnut" },
+        { "category": "Salumi", "name": "Jamón Ibérico de Bellota 36 Mois", "detail": "Cinco Jotas · acorn-finished · hand-sliced", "note": "Spanish acorn-fed ham" },
+        { "category": "Sweet", "name": "Jordan Almonds", "detail": "Pastel, sugared, lavender and rosé varietals" },
+        { "category": "Accompaniment", "name": "Accompaniments", "detail": "Demi-baguette, fig jam, cornichons, marcona almonds, dark chocolate" }
+      ]
+    },
+    {
+      "id": "three-course-dinner",
+      "name": "The Three-Course Dinner",
+      "price": 795,
+      "currency": "USD",
+      "summary": "Choice of two dinner entrées (or lunch). Paired wines included. Served plated by the concierge in your viewing room.",
+      "courseType": "three-course",
+      "deliveryWindow": "Plated 30 minutes before the auction opens",
+      "items": [
+        { "category": "First", "name": "Choice of First", "detail": "Endive & Roquefort salad · Lobster bisque · Tartare de boeuf" },
+        { "category": "Main · option A", "name": "Côte de boeuf for two", "detail": "Sliced tableside · bordelaise · roasted bone marrow", "note": "Paired with Saint-Estèphe" },
+        { "category": "Main · option B", "name": "Bouillabaisse Marseillaise", "detail": "Rascasse, monkfish, prawns · rouille · grilled bread", "note": "Paired with Bandol blanc" },
+        { "category": "Dessert", "name": "Soufflé Grand Marnier", "detail": "Set warm in the oven on delivery", "note": "Coupes of Sauternes" },
+        { "category": "Lunch alt", "name": "Lunch substitution", "detail": "Same structure, lighter portions, served at noon", "note": "Same price · pick at checkout" }
+      ]
+    }
+  ]
+}

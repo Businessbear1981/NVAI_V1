@@ -710,7 +710,52 @@ def auction_event_bids(event_id: str, lotId: str = "") -> dict:
     key = f"{event_id}::{lotId or 'main'}"
     arr = data.get("bids", {}).get(key, [])
     arr_sorted = sorted(arr, key=lambda b: b["amount"], reverse=True)
-    return {"count": len(arr_sorted), "currentHigh": arr_sorted[0] if arr_sorted else None, "bids": arr_sorted[:50]}
+    # Surface auctioneer state + reserve for the live floor
+    asks = data.get("asks", {}).get(key, {})
+    reserves = data.get("reserves", {}).get(key, None)
+    current_high_amount = arr_sorted[0]["amount"] if arr_sorted else 0
+    reserve_met = bool(reserves and current_high_amount >= reserves)
+    return {
+        "count": len(arr_sorted),
+        "currentHigh": arr_sorted[0] if arr_sorted else None,
+        "bids": arr_sorted[:50],
+        "currentAsk": asks.get("amount"),
+        "askedAt": asks.get("at"),
+        "reserve": reserves,
+        "reserveMet": reserve_met,
+    }
+
+
+class AuctioneerAsk(BaseModel):
+    eventId: str
+    lotId: str = ""
+    amount: float = Field(gt=0)
+
+
+@app.post("/api/auction/ask")
+def auctioneer_set_ask(payload: AuctioneerAsk) -> dict:
+    data = _load_auctions()
+    key = f"{payload.eventId}::{payload.lotId or 'main'}"
+    asks = data.setdefault("asks", {})
+    asks[key] = {"amount": payload.amount, "at": datetime.now(timezone.utc).isoformat()}
+    _save_auctions(data)
+    return {"ok": True, "currentAsk": asks[key]}
+
+
+class LotReserve(BaseModel):
+    eventId: str
+    lotId: str = ""
+    reserve: float = Field(gt=0)
+
+
+@app.post("/api/auction/reserve")
+def lot_set_reserve(payload: LotReserve) -> dict:
+    data = _load_auctions()
+    key = f"{payload.eventId}::{payload.lotId or 'main'}"
+    reserves = data.setdefault("reserves", {})
+    reserves[key] = payload.reserve
+    _save_auctions(data)
+    return {"ok": True, "reserve": payload.reserve}
 
 
 @app.post("/api/bernard/speak")
