@@ -24,7 +24,12 @@ export default function DdndaPage() {
     try {
       await recordDDNDA({ fullName, email, documentVersion: '1.0' });
       sessionStorage.setItem('nvai_ddnda_signed', '1');
-      router.push('/foyer');
+      // Persist as cookie for middleware enforcement
+      document.cookie = 'nvai_ddnda_signed=1; path=/; max-age=2592000; SameSite=Lax';
+      // Return to wherever the visitor was trying to reach, default to /foyer
+      const params = new URLSearchParams(window.location.search);
+      const ret = params.get('return') || '/foyer';
+      router.push(ret);
     } catch {
       setError('We were unable to record your signature. Please try again, or contact concierge.');
       setSubmitting(false);

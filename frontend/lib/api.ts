@@ -32,3 +32,18 @@ export async function recordDDNDA(payload: {
 }): Promise<DDNDARecordedSignature> {
   return apiPost<DDNDARecordedSignature>('/ddnda/sign', payload);
 }
+
+export interface StripeCheckoutItem {
+  name: string;
+  price_cents: number;
+  quantity: number;
+}
+
+export async function createStripeCheckout(payload: {
+  items: StripeCheckoutItem[];
+  successUrl?: string;
+  cancelUrl?: string;
+  mode?: 'payment' | 'subscription';
+}): Promise<{ ok: true; url: string; id: string }> {
+  return apiPost('/checkout/session', payload);
+}

@@ -726,6 +726,112 @@ def auction_event_bids(event_id: str, lotId: str = "") -> dict:
     }
 
 
+# --- Curated auction meals (menu data lives in backend/data/auction-meals.json) ---
+AUCTION_MEALS_FILE = DATA_DIR / "auction-meals.json"
+AUCTION_ORDERS_FILE = DATA_DIR / "auction-meal-orders.json"
+
+
+@app.get("/api/auction/meals")
+def auction_meals_get() -> dict:
+    if not AUCTION_MEALS_FILE.exists():
+        return {"menus": []}
+    return json.loads(AUCTION_MEALS_FILE.read_text(encoding="utf-8"))
+
+
+class MealOrderRequest(BaseModel):
+    eventId: str
+    menuId: str
+    fullName: str
+    email: str
+    address: str
+    party: int = Field(default=1, ge=1, le=20)
+    notes: str = ""
+    mainChoice: str = ""
+
+
+@app.post("/api/auction/meal-order")
+def auction_meal_order_create(payload: MealOrderRequest) -> dict:
+    menus = auction_meals_get().get("menus", [])
+    menu = next((m for m in menus if m["id"] == payload.menuId), None)
+    if not menu:
+        raise HTTPException(status_code=404, detail=f"Menu {payload.menuId} not found.")
+    orders: list[dict] = []
+    if AUCTION_ORDERS_FILE.exists():
+        orders = json.loads(AUCTION_ORDERS_FILE.read_text(encoding="utf-8"))
+    record = {
+        "id": str(uuid.uuid4()),
+        "eventId": payload.eventId,
+        "menuId": payload.menuId,
+        "menuName": menu["name"],
+        "unitPrice": menu["price"],
+        "party": payload.party,
+        "subtotal": menu["price"] * payload.party,
+        "fullName": payload.fullName,
+        "email": payload.email,
+        "address": payload.address,
+        "mainChoice": payload.mainChoice,
+        "notes": payload.notes,
+        "status": "received",
+        "createdAt": datetime.now(timezone.utc).isoformat(),
+    }
+    orders.append(record)
+    AUCTION_ORDERS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    AUCTION_ORDERS_FILE.write_text(json.dumps(orders, indent=2), encoding="utf-8")
+    return {"ok": True, "order": record}
+
+
+@app.get("/api/auction/meal-orders")
+def auction_meal_orders_list() -> dict:
+    if not AUCTION_ORDERS_FILE.exists():
+        return {"orders": []}
+    return {"orders": json.loads(AUCTION_ORDERS_FILE.read_text(encoding="utf-8"))}
+
+
+# --- Stripe Checkout ---
+@app.post("/api/checkout/session")
+async def stripe_checkout_session(payload: dict):
+    """
+    Create a Stripe Checkout session for one-time purchases.
+    Body: {items: [{name, price_cents, quantity}], successUrl, cancelUrl, mode='payment'}
+    Returns {url} for redirect.
+    """
+    api_key = os.getenv("STRIPE_SECRET_KEY")
+    if not api_key:
+        raise HTTPException(status_code=503, detail="STRIPE_SECRET_KEY not configured.")
+    items = payload.get("items", [])
+    if not items:
+        raise HTTPException(status_code=400, detail="items required.")
+    line_items = []
+    for it in items:
+        line_items.append({
+            "price_data[currency]": "usd",
+            "price_data[product_data][name]": it.get("name", "NVAI item"),
+            "price_data[unit_amount]": str(it.get("price_cents", 0)),
+            "quantity": str(it.get("quantity", 1)),
+        })
+    # Stripe accepts form-encoded; flatten line_items
+    form_parts: list[tuple[str, str]] = [
+        ("mode", payload.get("mode", "payment")),
+        ("success_url", payload.get("successUrl") or "https://napavalleyartinstitut.com/cart?status=ok"),
+        ("cancel_url", payload.get("cancelUrl") or "https://napavalleyartinstitut.com/cart?status=cancelled"),
+    ]
+    for i, it in enumerate(items):
+        form_parts.append((f"line_items[{i}][price_data][currency]", "usd"))
+        form_parts.append((f"line_items[{i}][price_data][product_data][name]", it.get("name", "NVAI item")))
+        form_parts.append((f"line_items[{i}][price_data][unit_amount]", str(int(it.get("price_cents", 0)))))
+        form_parts.append((f"line_items[{i}][quantity]", str(int(it.get("quantity", 1)))))
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        r = await client.post(
+            "https://api.stripe.com/v1/checkout/sessions",
+            data=form_parts,
+            auth=(api_key, ""),
+        )
+        if r.status_code != 200:
+            raise HTTPException(status_code=r.status_code, detail=f"Stripe: {r.text[:400]}")
+    session = r.json()
+    return {"ok": True, "url": session.get("url"), "id": session.get("id")}
+
+
 class AuctioneerAsk(BaseModel):
     eventId: str
     lotId: str = ""
