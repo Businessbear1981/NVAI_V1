@@ -404,6 +404,110 @@ async def music_upload(targetPath: str, file: UploadFile = File(...)) -> dict:
     return {"ok": True, "url": f"/{targetPath.lstrip('/')}", "bytes": target.stat().st_size}
 
 
+# ---------------------------------------------------------------------------
+# Higgsfield image-to-video — Soul model proxy with job tracking
+# Schema confirmed via probe:
+#   POST /v1/image2video {"params":{"prompt":"...","input_images":[{"type":"image_url","image_url":"https://..."}]}}
+#   Auth headers: hf-api-key (key id) + hf-secret (secret)
+# ---------------------------------------------------------------------------
+
+HIGGS_BASE = os.getenv("HIGGSFIELD_API_BASE", "https://platform.higgsfield.ai/v1")
+HIGGS_JOBS_FILE = DATA_DIR / "higgsfield-jobs.json"
+
+
+def _higgs_jobs() -> dict:
+    if not HIGGS_JOBS_FILE.exists():
+        return {}
+    return json.loads(HIGGS_JOBS_FILE.read_text(encoding="utf-8"))
+
+
+def _save_higgs_jobs(jobs: dict) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    HIGGS_JOBS_FILE.write_text(json.dumps(jobs, indent=2), encoding="utf-8")
+
+
+def _higgs_headers() -> dict:
+    kid = os.getenv("HIGGSFIELD_API_KEY_ID")
+    sec = os.getenv("HIGGSFIELD_API_SECRET")
+    if not kid or not sec:
+        raise HTTPException(status_code=503, detail="HIGGSFIELD_API_KEY_ID / HIGGSFIELD_API_SECRET not configured.")
+    return {"hf-api-key": kid, "hf-secret": sec, "Content-Type": "application/json"}
+
+
+class HiggsfieldGenerateRequest(BaseModel):
+    prompt: str = Field(min_length=1, max_length=4000)
+    inputImageUrls: list[str] = Field(min_length=1)
+    targetFilename: str = Field(default="")
+    label: str = Field(default="", description="Human-readable label saved with the job")
+
+
+@app.post("/api/higgsfield/generate")
+async def higgsfield_generate(payload: HiggsfieldGenerateRequest):
+    body = {
+        "params": {
+            "prompt": payload.prompt,
+            "input_images": [{"type": "image_url", "image_url": u} for u in payload.inputImageUrls],
+        }
+    }
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        r = await client.post(f"{HIGGS_BASE}/image2video", json=body, headers=_higgs_headers())
+    try:
+        data = r.json()
+    except Exception:
+        data = {"raw": r.text[:500]}
+    if r.status_code not in (200, 201, 202):
+        raise HTTPException(status_code=r.status_code, detail=data)
+    job_id = data.get("id") or data.get("job_id") or data.get("task_id") or f"local_{uuid.uuid4()}"
+    jobs = _higgs_jobs()
+    jobs[job_id] = {
+        "id": job_id,
+        "prompt": payload.prompt,
+        "label": payload.label or payload.prompt[:60],
+        "inputImageUrls": payload.inputImageUrls,
+        "targetFilename": payload.targetFilename or f"higgs_{job_id}.mp4",
+        "submittedAt": datetime.now(timezone.utc).isoformat(),
+        "status": data.get("status", "pending"),
+        "raw": data,
+    }
+    _save_higgs_jobs(jobs)
+    return {"ok": True, "jobId": job_id, "status": jobs[job_id]["status"]}
+
+
+@app.get("/api/higgsfield/jobs")
+def higgsfield_jobs() -> dict:
+    return {"jobs": list(_higgs_jobs().values())}
+
+
+@app.get("/api/higgsfield/jobs/{job_id}/refresh")
+async def higgsfield_refresh(job_id: str):
+    jobs = _higgs_jobs()
+    if job_id not in jobs:
+        raise HTTPException(status_code=404, detail="Job not tracked locally.")
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        # Try common status paths until one returns 200
+        for path in (f"/jobs/{job_id}", f"/tasks/{job_id}", f"/image2video/{job_id}"):
+            r = await client.get(f"{HIGGS_BASE}{path}", headers={k: v for k, v in _higgs_headers().items() if k != "Content-Type"})
+            if r.status_code == 200:
+                data = r.json()
+                jobs[job_id]["status"] = data.get("status", jobs[job_id]["status"])
+                jobs[job_id]["raw"] = data
+                vu = data.get("video_url") or data.get("output_url") or data.get("url")
+                if vu and jobs[job_id]["status"] in ("complete", "completed", "ready", "succeeded", "success"):
+                    PUBLIC_VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
+                    target = PUBLIC_VIDEOS_DIR / jobs[job_id]["targetFilename"]
+                    async with httpx.AsyncClient(timeout=300.0, follow_redirects=True) as dl:
+                        v = await dl.get(vu)
+                        if v.status_code == 200:
+                            target.write_bytes(v.content)
+                            jobs[job_id]["savedTo"] = f"/videos/{jobs[job_id]['targetFilename']}"
+                            jobs[job_id]["savedBytes"] = len(v.content)
+                break
+        else:
+            jobs[job_id]["lastRefreshError"] = "no status endpoint responded 200"
+    _save_higgs_jobs(jobs)
+    return jobs[job_id]
+
+
 @app.post("/api/bernard/speak")
 async def bernard_speak(payload: BernardSpeakRequest):
     """
