@@ -15,12 +15,15 @@ const TIERS = [
   { name: 'The Producer Tier', price: '$10,000', perk: 'Producer credit on the film, table at the Napa premiere, founding-patron inscription in the Kiki room.' },
 ];
 
-// To activate the live Kickstarter widget + stats:
-// 1. Create the campaign on kickstarter.com
+// Campaign: "Help bring Kiki to the big screen" · goal $1,000,000
+// To activate live pledge data once the campaign is published:
+// 1. Create the campaign on kickstarter.com under the title above
 // 2. Copy the project slug — the path after kickstarter.com/projects/
-//    e.g. for kickstarter.com/projects/ardanedge/kiki-feature-film → slug = "ardanedge/kiki-feature-film"
-// 3. Replace KICKSTARTER_PROJECT_SLUG below, redeploy.
-const KICKSTARTER_PROJECT_SLUG = ''; // set me
+//    e.g. for kickstarter.com/projects/ardanedge/kiki → slug = "ardanedge/kiki"
+// 3. Replace KICKSTARTER_PROJECT_SLUG below.
+const KICKSTARTER_PROJECT_SLUG = ''; // set after campaign is published
+const CAMPAIGN_TITLE = 'Help bring Kiki to the big screen';
+const CAMPAIGN_GOAL = 1_000_000;
 
 interface Status { indicator: string; description: string; components: { name: string; status: string }[] }
 interface Project { ok: boolean; name?: string; state?: string; pledged?: number; goal?: number; backers_count?: number; currency?: string; deadline?: number; url?: string; note?: string }
@@ -47,10 +50,10 @@ export default function KikiKickstarterPage() {
   return (
     <WingLayout
       back={{ href: '/kiki', label: 'Back to the Kiki wing' }}
-      eyebrow="Help bring this feature film to life"
-      title="The Kickstarter"
-      subtitle="A 1920s Montparnasse love story"
-      caption="Kiki dancing. Modigliani watching. A century later their story finally told. Pledge to bring the feature to screen."
+      eyebrow="The Kickstarter"
+      title={CAMPAIGN_TITLE}
+      subtitle="Goal · one million dollars"
+      caption="Kiki dancing. Modigliani watching. A century later their story finally told. Pledge to bring the feature to the big screen."
       backdrop={BACKDROP}
       videoSrc={VIDEOS.kiki.leadIn}
     >
@@ -87,11 +90,18 @@ export default function KikiKickstarterPage() {
             </>
           ) : (
             <>
-              <p className="font-body italic text-ivory/70 max-w-2xl mx-auto">
-                The Kickstarter campaign is not yet live. Once the project is published on
-                kickstarter.com, set <code className="font-mono text-[0.85em]">KICKSTARTER_PROJECT_SLUG</code> in
-                <code className="font-mono text-[0.85em]"> app/kiki/kickstarter/page.tsx </code>
-                and live pledge data + the Pledge button appear here automatically.
+              <h2 className="font-didot text-3xl tracking-wider text-ivory">{CAMPAIGN_TITLE}</h2>
+              <p className="font-display italic text-gold/80">
+                Goal · {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(CAMPAIGN_GOAL)}
+              </p>
+              <div className="mx-auto h-2 max-w-2xl overflow-hidden rounded-full bg-midnight/80">
+                <div className="h-full w-0 bg-gradient-to-r from-gold-dim via-gold to-gold-warm" />
+              </div>
+              <p className="font-body italic text-ivory/65 max-w-2xl mx-auto">
+                Campaign launches soon on Kickstarter. The page will auto-update with the live pledge
+                bar, backer count, and Pledge button the moment the campaign is published and
+                <code className="font-mono text-[0.8em]"> KICKSTARTER_PROJECT_SLUG </code>
+                is set.
               </p>
               {status && (
                 <p className="mt-4 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/60">
