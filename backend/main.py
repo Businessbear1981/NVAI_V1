@@ -564,6 +564,155 @@ async def kickstarter_project(slug: str) -> dict:
             return {"ok": False, "note": f"{e}"[:200]}
 
 
+# ---------------------------------------------------------------------------
+# Auction House — event registry + Zoom meeting management + live bidding
+# ---------------------------------------------------------------------------
+
+AUCTION_FILE = DATA_DIR / "auction-events.json"
+
+def _load_auctions() -> dict:
+    if not AUCTION_FILE.exists():
+        return {"events": [], "bids": {}}
+    return json.loads(AUCTION_FILE.read_text(encoding="utf-8"))
+
+def _save_auctions(data: dict) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    AUCTION_FILE.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+
+class AuctionEventCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    format: str = Field(default="private", description="'private' or 'public'")
+    scheduledFor: str = Field(default="", description="ISO datetime string")
+    lots: list[dict] = Field(default_factory=list)
+
+
+@app.post("/api/auction/events")
+def auction_event_create(payload: AuctionEventCreate) -> dict:
+    data = _load_auctions()
+    event_id = str(uuid.uuid4())
+    event = {
+        "id": event_id,
+        "title": payload.title,
+        "format": payload.format,
+        "scheduledFor": payload.scheduledFor,
+        "lots": payload.lots,
+        "zoomMeetingId": None,
+        "zoomJoinUrl": None,
+        "status": "scheduled",
+        "createdAt": datetime.now(timezone.utc).isoformat(),
+    }
+    data["events"].append(event)
+    _save_auctions(data)
+    return {"ok": True, "event": event}
+
+
+@app.get("/api/auction/events")
+def auction_events_list() -> dict:
+    return _load_auctions()
+
+
+@app.get("/api/auction/events/{event_id}")
+def auction_event_get(event_id: str) -> dict:
+    data = _load_auctions()
+    event = next((e for e in data["events"] if e["id"] == event_id), None)
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found.")
+    return event
+
+
+async def _zoom_oauth_token() -> str:
+    """Server-to-Server OAuth token exchange."""
+    account = os.getenv("ZOOM_ACCOUNT_ID")
+    client_id = os.getenv("ZOOM_CLIENT_ID")
+    client_secret = os.getenv("ZOOM_CLIENT_SECRET")
+    if not all([account, client_id, client_secret]):
+        raise HTTPException(status_code=503, detail="Zoom credentials not configured.")
+    import base64
+    basic = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        r = await client.post(
+            "https://zoom.us/oauth/token",
+            params={"grant_type": "account_credentials", "account_id": account},
+            headers={"Authorization": f"Basic {basic}"},
+        )
+        if r.status_code != 200:
+            raise HTTPException(status_code=r.status_code, detail=f"Zoom OAuth: {r.text[:300]}")
+        return r.json()["access_token"]
+
+
+@app.post("/api/auction/events/{event_id}/zoom")
+async def auction_event_zoom_create(event_id: str) -> dict:
+    """Create a Zoom meeting for an auction event and persist its join URL."""
+    data = _load_auctions()
+    event = next((e for e in data["events"] if e["id"] == event_id), None)
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found.")
+    token = await _zoom_oauth_token()
+    body = {
+        "topic": event["title"],
+        "type": 2,
+        "start_time": event.get("scheduledFor") or None,
+        "settings": {
+            "host_video": True,
+            "participant_video": True,
+            "waiting_room": True,
+            "join_before_host": False,
+        },
+    }
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        r = await client.post(
+            "https://api.zoom.us/v2/users/me/meetings",
+            json=body,
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        )
+        if r.status_code not in (200, 201):
+            raise HTTPException(status_code=r.status_code, detail=f"Zoom create meeting: {r.text[:300]}")
+        meeting = r.json()
+    event["zoomMeetingId"] = str(meeting.get("id"))
+    event["zoomJoinUrl"] = meeting.get("join_url")
+    event["zoomStartUrl"] = meeting.get("start_url")
+    event["zoomPasscode"] = meeting.get("password")
+    _save_auctions(data)
+    return {"ok": True, "event": event}
+
+
+class AuctionBid(BaseModel):
+    eventId: str
+    lotId: str = ""
+    amount: float = Field(gt=0)
+    bidderName: str
+    bidderEmail: str
+    paddle: str = ""
+
+
+@app.post("/api/auction/bid")
+def auction_bid_place(payload: AuctionBid) -> dict:
+    data = _load_auctions()
+    bids = data.setdefault("bids", {})
+    key = f"{payload.eventId}::{payload.lotId or 'main'}"
+    arr = bids.setdefault(key, [])
+    arr.append({
+        "id": str(uuid.uuid4()),
+        "amount": payload.amount,
+        "bidderName": payload.bidderName,
+        "bidderEmail": payload.bidderEmail,
+        "paddle": payload.paddle,
+        "at": datetime.now(timezone.utc).isoformat(),
+    })
+    _save_auctions(data)
+    return {"ok": True, "bidCount": len(arr), "currentHigh": max(b["amount"] for b in arr)}
+
+
+@app.get("/api/auction/events/{event_id}/bids")
+def auction_event_bids(event_id: str, lotId: str = "") -> dict:
+    data = _load_auctions()
+    key = f"{event_id}::{lotId or 'main'}"
+    arr = data.get("bids", {}).get(key, [])
+    arr_sorted = sorted(arr, key=lambda b: b["amount"], reverse=True)
+    return {"count": len(arr_sorted), "currentHigh": arr_sorted[0] if arr_sorted else None, "bids": arr_sorted[:50]}
+
+
 @app.post("/api/bernard/speak")
 async def bernard_speak(payload: BernardSpeakRequest):
     """
