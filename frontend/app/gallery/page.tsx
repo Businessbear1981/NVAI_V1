@@ -53,79 +53,151 @@ export default function GalleryPage() {
           </p>
         </header>
 
-        {/* The rotating featured display — Met-museum cadence */}
+        {/* The rotating featured display — suspended hanging-painting display under
+            museum picture lighting. Champagne-in-hand, stop-and-admire-for-5-seconds
+            cadence. The painting hangs at centre on a dark gallery wall, lit by a
+            picture-light cone from above, with a brass museum placard below. */}
         <section className="mx-auto mt-16 max-w-6xl">
           <Link href={`/piece/${active.slug}`} className="block">
             <article
-              className="relative overflow-hidden rounded-lg border border-gold/30"
-              style={{ aspectRatio: '16 / 9' }}
+              className="relative overflow-hidden rounded-lg"
+              style={{
+                aspectRatio: '16 / 9',
+                // Dark gallery wall — warm walnut over deep midnight, with a vertical
+                // edge gradient to suggest depth and reflected wood
+                background:
+                  'radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.18) 0%, transparent 55%), radial-gradient(ellipse at 50% 100%, rgba(60,40,20,0.5) 0%, transparent 65%), linear-gradient(180deg, #0a0805 0%, #1a120a 40%, #0a0805 100%)',
+                boxShadow: 'inset 0 0 120px rgba(0,0,0,0.7)',
+              }}
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
-              {/* Backdrop — the inspiration video of the active piece */}
-              <video
-                key={active.slug}
-                src={active.inspirationVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
+              {/* Wall texture — subtle warm wood-grain panelling effect */}
+              <div
+                className="absolute inset-0 opacity-30 mix-blend-soft-light pointer-events-none"
+                style={{
+                  background:
+                    'repeating-linear-gradient(90deg, rgba(212,175,55,0.04) 0px, transparent 4px, rgba(0,0,0,0.04) 8px)',
+                }}
               />
-              <div className="absolute inset-0 bg-midnight/55" />
 
-              {/* If the painting has its own image, float it on the right */}
-              {active.imageUrl && (
-                <div className="absolute right-8 top-1/2 hidden -translate-y-1/2 lg:block">
+              {/* The picture-light cone from above — warm tungsten spill */}
+              <div
+                className="absolute left-1/2 top-0 -translate-x-1/2 h-1/2 w-2/3 pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(ellipse at 50% 0%, rgba(255,210,140,0.45) 0%, rgba(232,200,122,0.18) 30%, transparent 60%)',
+                  filter: 'blur(2px)',
+                }}
+              />
+
+              {/* The brass picture light fixture at the top */}
+              <div className="absolute left-1/2 top-4 -translate-x-1/2 z-20">
+                <div className="relative">
+                  {/* The lamp head */}
                   <div
-                    className="rounded-sm bg-midnight p-3"
+                    className="h-3 w-28 rounded-full"
                     style={{
                       background:
-                        'linear-gradient(145deg, rgba(212,175,55,0.12) 0%, rgba(120,80,30,0.20) 50%, rgba(60,30,10,0.30) 100%)',
+                        'linear-gradient(180deg, #d4a64a 0%, #8a6020 60%, #4a3008 100%)',
                       boxShadow:
-                        '0 20px 60px -10px rgba(0,0,0,0.85), inset 0 0 20px rgba(0,0,0,0.4)',
+                        '0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,220,150,0.7)',
                     }}
-                  >
-                    <div
-                      style={{ boxShadow: 'inset 0 0 0 1px rgba(232,200,122,0.5)' }}
-                      className="overflow-hidden rounded-sm"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={active.imageUrl}
-                        alt={`${active.artist} — ${active.title}`}
-                        className="max-h-[28rem] w-auto"
-                      />
-                    </div>
-                  </div>
+                  />
+                  {/* The bulb glow underneath */}
+                  <div
+                    className="absolute left-1/2 top-2 -translate-x-1/2 h-1.5 w-20 rounded-full"
+                    style={{
+                      background: 'rgba(255,210,140,0.95)',
+                      boxShadow: '0 0 24px rgba(255,210,140,0.9)',
+                    }}
+                  />
                 </div>
-              )}
-
-              {/* Overlay text */}
-              <div className="absolute inset-0 flex flex-col items-start justify-end p-8 lg:p-12">
-                <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/80">
-                  Now on view · {activeIdx + 1} of {PAINTINGS.length}
-                </p>
-                <h2 className="mt-3 font-didot text-3xl tracking-wider text-ivory drop-shadow-lg md:text-5xl">
-                  {active.title}
-                </h2>
-                <p className="mt-2 font-display text-xl italic tracking-wider text-gold/90">
-                  {active.artist} · {active.year}
-                </p>
-                <p className="mt-1 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/70">
-                  {active.dimensions} · {active.medium}
-                </p>
-                <p className="mt-6 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/80 underline-offset-4 group-hover:underline">
-                  Enter the piece →
-                </p>
               </div>
 
-              {/* Progress bar at the bottom */}
+              {/* The hanging painting — centred under the light, in a gilt frame */}
+              <div className="absolute left-1/2 top-[16%] -translate-x-1/2 z-10">
+                <div
+                  className="relative"
+                  style={{
+                    // The gilt frame
+                    padding: '1.2rem',
+                    background:
+                      'linear-gradient(135deg, #d4a64a 0%, #8a6020 35%, #b08832 65%, #6a4815 100%)',
+                    boxShadow:
+                      '0 30px 60px -10px rgba(0,0,0,0.95), 0 0 80px -10px rgba(255,210,140,0.35), inset 0 1px 0 rgba(255,220,150,0.5), inset 0 -1px 0 rgba(40,20,5,0.6)',
+                  }}
+                >
+                  {/* Inner mat / liner */}
+                  <div
+                    className="overflow-hidden"
+                    style={{
+                      boxShadow: 'inset 0 0 0 2px rgba(40,25,10,0.9), inset 0 0 12px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    {active.imageUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={active.slug}
+                        src={active.imageUrl}
+                        alt={`${active.artist} — ${active.title}`}
+                        className="block transition-opacity duration-700"
+                        style={{ maxHeight: '22rem', maxWidth: '32rem', height: 'auto', width: 'auto' }}
+                      />
+                    ) : (
+                      // Placeholder canvas — same gallery hang but no image yet
+                      <div
+                        className="flex flex-col items-center justify-center text-center"
+                        style={{
+                          width: '24rem',
+                          height: '20rem',
+                          background:
+                            'linear-gradient(160deg, #2a1c12 0%, #1a1208 60%, #0a0605 100%)',
+                        }}
+                      >
+                        <p className="font-mono text-[0.5rem] uppercase tracking-[0.4em] text-gold/55 px-6">
+                          Image available
+                        </p>
+                        <p className="font-mono text-[0.5rem] uppercase tracking-[0.4em] text-gold/55">
+                          upon signed agreement
+                        </p>
+                        <div className="my-6 h-px w-16 bg-gold/30" />
+                        <p className="font-didot text-lg tracking-wider text-ivory px-6">{active.title}</p>
+                        <p className="mt-1 font-display italic text-xs text-gold/70">{active.artist}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* The brass museum placard underneath */}
+              <div className="absolute left-1/2 bottom-6 -translate-x-1/2 z-10 text-center">
+                <div
+                  className="inline-block px-6 py-2 rounded-sm"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(212,175,55,0.18) 0%, rgba(40,30,15,0.7) 100%)',
+                    border: '1px solid rgba(232,200,122,0.45)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,220,150,0.3)',
+                  }}
+                >
+                  <p className="font-mono text-[0.5rem] uppercase tracking-[0.4em] text-gold/85">
+                    {activeIdx + 1} of {PAINTINGS.length} · Now on view
+                  </p>
+                  <h2 className="mt-1 font-didot text-lg tracking-wider text-ivory md:text-2xl">
+                    {active.title}
+                  </h2>
+                  <p className="mt-1 font-display italic text-sm text-gold/90">
+                    {active.artist} · {active.year} · {active.dimensions}
+                  </p>
+                </div>
+              </div>
+
+              {/* Progress bar at the bottom edge of the wall */}
               {!paused && (
-                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gold/30">
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gold/15">
                   <div
                     key={active.slug}
-                    className="h-full bg-gold"
+                    className="h-full bg-gold/70"
                     style={{ animation: `gallery-progress ${ROTATION_INTERVAL_MS}ms linear forwards` }}
                   />
                 </div>
