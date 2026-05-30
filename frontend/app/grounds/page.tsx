@@ -15,12 +15,20 @@ import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
  * The artist-wing destinations live at the bottom of the page as a small,
  * unobtrusive index for visitors who already know where they want to land.
  */
+// Longer compiled rotation — the grounds tour covers four artists plus vineyards
+// and the wine cave, so the loop is wider. Wine-cave-specific video is pending
+// Higgsfield generation; meanwhile the courtyard + garden_party clips carry the segment.
 const GROUNDS_LEAD_IN = '/videos/nvai_aerial_drone_approach_5k.mp4';
 const GROUNDS_ROTATION = [
   '/videos/nvai_garden_path_to_patio_5k.mp4',
   '/videos/nvai_garden_path_continuous_5k.mp4',
+  '/videos/nvai_garden_party_5k.mp4',
   '/videos/nvai_garden_passage_5k.mp4',
   '/videos/nvai_courtyard_5k.mp4',
+  '/videos/nvai_monet_secret_garden_5k.mp4',
+  '/videos/nvai_picasso_studio_5k.mp4',
+  '/videos/nvai_leonardo_workshop_5k.mp4',
+  '/videos/casa-azul.mp4',
 ];
 
 const DESTINATIONS = [

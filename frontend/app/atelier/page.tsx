@@ -63,15 +63,56 @@ export default function AtelierPage() {
             </p>
           </article>
 
-          <div className="mt-16 inline-block rounded-lg border border-gold/30 bg-midnight/40 px-8 py-6 backdrop-blur">
-            <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">First chapter</p>
-            <p className="mt-3 font-didot text-2xl tracking-wider text-ivory">For Richard — Find Her</p>
-            <p className="mt-2 font-body italic text-sm text-ivory/70">
-              Available to subscribers on publication.
+          {/* Chapters in progress */}
+          <section className="mt-16 text-left">
+            <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-8">
+              Chapters · in progress
             </p>
+            <div className="space-y-3">
+              {[
+                { num: 'Prologue', title: 'A Girl Too Big for the Tree', note: 'Châtillon-sur-Seine, 1908–1913. Alice from seven to twelve. The tin of letters under the mattress.', status: 'Drafted' },
+                { num: 'I',         title: 'Bill',                       note: 'The March 2022 phone call. The eleven minutes of silence after the painting comes out of the crate.', status: 'Drafted' },
+                { num: 'II',        title: 'The Red Pillow',             note: 'A Tate postcard for one pound forty. The 110-year-old shared-studio discovery.', status: 'Drafted' },
+                { num: 'III',       title: 'The Sketch Newspaper',       note: 'Camille in Geneva finds the original Nevinson composition under the altered one.', status: 'Next' },
+                { num: 'IV',        title: 'For Richard — Find Her',     note: 'Bill dies. The package. Three words in his handwriting.', status: 'Next' },
+                { num: 'V',         title: 'Bratislava',                 note: 'The Slovak owners. Their English is imperfect. What they care about is not.', status: 'Pending' },
+                { num: 'VI',        title: 'The Wildenstein Letter, 2012', note: 'Marc was the curator the first time the painting passed through Paris.', status: 'Pending' },
+                { num: 'VII',       title: 'The Kitchen',                note: 'Tuesday night, November 1925. Five Lost Boys at the green door. The beef cheek. The yes.', status: 'Drafted' },
+                { num: 'VIII',      title: 'Marc',                       note: 'The face-to-face. The seventh-volume catalogue raisonné conversation.', status: 'Pending' },
+                { num: 'IX',        title: 'March 18, 2026 — The Private Jet', note: 'Prague to Le Bourget to Geneva. The longest conversation in the book.', status: 'Pending' },
+                { num: 'X',         title: 'The Geneva Freeport',        note: 'The painting under particle physics. Camille’s home court.', status: 'Pending' },
+                { num: 'XI',        title: 'Four Days in Montparnasse',  note: 'Richard walks the streets in March 2026. The Sélect, the Rotonde, the Dôme, the cabarets.', status: 'Pending' },
+                { num: 'XII',       title: 'The Certificate',            note: 'Marc decides. Camille calls. Foujita comes from Tokyo for the funeral.', status: 'Pending' },
+              ].map((c) => (
+                <article key={c.num} className="rounded border border-gold/15 bg-midnight/40 p-4 backdrop-blur">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <div className="flex items-baseline gap-3 min-w-0">
+                      <p className="font-didot text-sm tracking-widest text-gold/70 w-10 shrink-0">{c.num}</p>
+                      <p className="font-didot text-base tracking-wider text-ivory truncate">{c.title}</p>
+                    </div>
+                    <p className={`font-mono text-[0.5rem] uppercase tracking-[0.32em] shrink-0 ${
+                      c.status === 'Drafted' ? 'text-gold' :
+                      c.status === 'Next' ? 'text-ivory/85' :
+                      'text-ivory/40'
+                    }`}>
+                      {c.status === 'Drafted' ? '✓ Drafted' : c.status}
+                    </p>
+                  </div>
+                  <p className="mt-1.5 ml-13 font-body italic text-xs text-ivory/65 pl-13" style={{paddingLeft: '52px'}}>
+                    {c.note}
+                  </p>
+                </article>
+              ))}
+            </div>
+            <p className="mt-6 text-center font-body italic text-xs text-ivory/55">
+              Subscribers receive each chapter on publication.
+            </p>
+          </section>
+
+          <div className="mt-12 text-center">
             <Link
-              href="/inquire"
-              className="mt-6 inline-block rounded-full border border-gold/50 bg-gold/10 px-8 py-3 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold hover:border-gold hover:bg-gold/20 transition-all"
+              href="/inquire?action=atelier-subscribe"
+              className="inline-block rounded-full border border-gold/50 bg-gold/10 px-8 py-3 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold hover:border-gold hover:bg-gold/20 transition-all"
             >
               Reserve your place
             </Link>
