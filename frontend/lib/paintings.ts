@@ -451,6 +451,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'pollock-number-2-1950',
+    imageUrl: '/paintings/pollock-number-2-1950.jpg',
     artist: 'Jackson Pollock',
     title: 'Number 2 (heavy drip)',
     year: '1950',
@@ -465,6 +466,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Bernard (1) ----------------
   {
     slug: 'bernard-passion',
+    imageUrl: '/paintings/bernard-passion.jpg',
     artist: 'Émile Bernard',
     title: 'La Passion de Jésus-Christ ou Le Calvaire',
     year: 'c. 1926-1940',
