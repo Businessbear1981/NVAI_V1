@@ -14,8 +14,12 @@ export default function StaircaseLandingPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
+      {/* Upstairs interior backdrop — using the foyer-landing handshot as a stand-in for
+          an actual upstairs gathering space (a French-chateau salon or billiards room).
+          The aerial-of-outside that was here before was incorrect for an interior landing.
+          Higgsfield generation for a true upstairs salon video is queued. */}
       <CinematicBackdrop
-        videoSrc="/videos/nvai_foyer_aerial_static.mp4"
+        videoSrc="/videos/nvai_foyer_landing_handshot_5k.mp4"
         overlay={0.55}
         playbackRate={0.55}
       />
