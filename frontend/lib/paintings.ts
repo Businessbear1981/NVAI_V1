@@ -25,6 +25,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Picasso (8 active) ----------------
   {
     slug: 'picasso-buste-de-femme-souriante',
+    imageUrl: '/paintings/picasso-buste-de-femme-souriante.jpeg',
     artist: 'Pablo Picasso',
     title: 'Buste de femme souriante',
     year: '1901',
@@ -38,6 +39,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-femme-assise-1949',
+    imageUrl: '/paintings/picasso-femme-assise-1949.jpg',
     artist: 'Pablo Picasso',
     title: 'Femme assise',
     year: '1949',
@@ -51,6 +53,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-homme-pipe-nu',
+    imageUrl: '/paintings/picasso-homme-pipe-nu.jpg',
     artist: 'Pablo Picasso',
     title: 'HOMME À LA PIPE ET NU COUCHÉ',
     year: '1967',
@@ -64,6 +67,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-femme-en-bleu',
+    imageUrl: '/paintings/picasso-femme-en-bleu.jpg',
     artist: 'Pablo Picasso',
     title: 'Femme en bleu assise dans un fauteuil',
     year: '1949',
@@ -76,6 +80,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-personnages',
+    imageUrl: '/paintings/picasso-personnages.jpg',
     artist: 'Pablo Picasso',
     title: 'Personnages',
     year: '1965',
@@ -88,6 +93,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-enfant-orange',
+    imageUrl: '/paintings/picasso-enfant-orange.jpg',
     artist: 'Pablo Picasso',
     title: "L'enfant à l'orange",
     year: '1951',
@@ -100,6 +106,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-enterrement-casagemas',
+    imageUrl: '/paintings/picasso-enterrement-casagemas.jpg',
     artist: 'Pablo Picasso',
     title: "L'enterrement de Casagemas / La veillée funèbre",
     year: '1901',
@@ -112,6 +119,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-maternite',
+    imageUrl: '/paintings/picasso-maternite.png',
     artist: 'Pablo Picasso',
     title: 'Maternité',
     year: '1901',
@@ -168,6 +176,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'chagall-amoureux-vence',
+    imageUrl: '/paintings/chagall-amoureux-vence.jpeg',
     artist: 'Marc Chagall',
     title: 'Les Amoureux de Saint-Paul de Vence',
     year: '1958',
@@ -181,6 +190,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'chagall-female-nude-flowers',
+    imageUrl: '/paintings/chagall-female-nude-flowers.jpg',
     artist: 'Marc Chagall',
     title: 'Female Nude with Flowers and Animals',
     year: '1940-44',
@@ -194,6 +204,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'chagall-three-jews-talmud',
+    imageUrl: '/paintings/chagall-three-jews-talmud.jpg',
     artist: 'Marc Chagall',
     title: 'Three Jews Reading the Talmud',
     year: '1918',
@@ -310,6 +321,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Da Vinci (1) ----------------
   {
     slug: 'davinci-lady-with-fur',
+    imageUrl: '/paintings/davinci-lady-with-fur.png',
     artist: 'Leonardo da Vinci',
     title: 'Lady with a Fur',
     year: '1495-1499',
@@ -324,6 +336,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Raphael (1 active) ----------------
   {
     slug: 'raphael-madonna-child',
+    imageUrl: '/paintings/raphael-madonna-child.jpg',
     artist: 'Raphael',
     title: 'Madonna with Child',
     year: '1500-1510',
@@ -365,6 +378,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Matisse (1) ----------------
   {
     slug: 'matisse-woman-child',
+    imageUrl: '/paintings/matisse-woman-child.jpg',
     artist: 'Henri Matisse',
     title: 'Woman with Child',
     year: 'undated',
@@ -393,6 +407,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'kandinsky-composition-1910',
+    imageUrl: '/paintings/kandinsky-composition-1910.jpg',
     artist: 'Wassily Kandinsky',
     title: 'Composition (1910)',
     year: '1910',
@@ -408,6 +423,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Kahlo (1) ----------------
   {
     slug: 'kahlo-la-mesa-herida',
+    imageUrl: '/paintings/kahlo-la-mesa-herida.jpg',
     artist: 'Frida Kahlo',
     title: 'La Mesa Herida',
     year: '1939-40',
