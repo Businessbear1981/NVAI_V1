@@ -106,6 +106,91 @@ export default function GrandHallPage() {
           <DecoBorder flipped />
         </div>
 
+        {/* The Modi-Kiki nude — featured LARGE as the centrepiece of the room */}
+        <section className="mx-auto mt-16 max-w-6xl">
+          <div className="text-center mb-6">
+            <p className="font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/80">
+              The piece on the wall tonight
+            </p>
+          </div>
+          <Link href="/piece/modigliani-sitting-nude-with-crossed-hands" className="block group">
+            <article
+              className="relative mx-auto"
+              style={{
+                maxWidth: '52rem',
+                background:
+                  'radial-gradient(ellipse at 50% 0%, rgba(255,210,140,0.45) 0%, rgba(232,200,122,0.18) 30%, transparent 60%)',
+                padding: '6rem 2rem 3rem',
+              }}
+            >
+              {/* Brass picture light fixture */}
+              <div className="absolute left-1/2 top-6 -translate-x-1/2 z-20">
+                <div
+                  className="h-3 w-40 rounded-full"
+                  style={{
+                    background: 'linear-gradient(180deg, #d4a64a 0%, #8a6020 60%, #4a3008 100%)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,220,150,0.7)',
+                  }}
+                />
+                <div
+                  className="absolute left-1/2 top-2 -translate-x-1/2 h-1.5 w-32 rounded-full"
+                  style={{ background: 'rgba(255,210,140,0.95)', boxShadow: '0 0 36px rgba(255,210,140,0.9)' }}
+                />
+              </div>
+
+              {/* The painting in its gilt frame */}
+              <div
+                className="relative mx-auto"
+                style={{
+                  maxWidth: '40rem',
+                  padding: '1.4rem',
+                  background:
+                    'linear-gradient(135deg, #d4a64a 0%, #8a6020 35%, #b08832 65%, #6a4815 100%)',
+                  boxShadow:
+                    '0 40px 80px -10px rgba(0,0,0,0.95), 0 0 100px -10px rgba(255,210,140,0.4), inset 0 1px 0 rgba(255,220,150,0.5), inset 0 -1px 0 rgba(40,20,5,0.6)',
+                }}
+              >
+                <div
+                  className="overflow-hidden"
+                  style={{ boxShadow: 'inset 0 0 0 2px rgba(40,25,10,0.9), inset 0 0 12px rgba(0,0,0,0.4)' }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/paintings/modigliani-sitting-nude-with-crossed-hands.jpg"
+                    alt="Modigliani — Sitting Nude with Crossed Hands"
+                    className="block w-full"
+                  />
+                </div>
+              </div>
+
+              {/* Brass placard */}
+              <div className="mt-8 text-center">
+                <div
+                  className="inline-block px-8 py-3 rounded-sm"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(212,175,55,0.22) 0%, rgba(40,30,15,0.7) 100%)',
+                    border: '1px solid rgba(232,200,122,0.5)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,220,150,0.3)',
+                  }}
+                >
+                  <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/85">
+                    Centrepiece · Cabinet de Curiosités
+                  </p>
+                  <h2 className="mt-2 font-didot text-2xl tracking-wider text-ivory md:text-3xl">
+                    Amedeo Modigliani · <em>Sitting Nude with Crossed Hands</em>
+                  </h2>
+                  <p className="mt-1 font-display italic text-gold/90">
+                    c. 1917 · 40.5 × 33 cm · oil on canvas · Alice Prin (Kiki) at sixteen
+                  </p>
+                  <p className="mt-3 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/80 group-hover:underline underline-offset-4">
+                    Enter the dossier →
+                  </p>
+                </div>
+              </div>
+            </article>
+          </Link>
+        </section>
+
         {/* Programme */}
         <section className="mx-auto mt-16 max-w-7xl">
           <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/70 mb-2">
