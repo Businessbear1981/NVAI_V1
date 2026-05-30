@@ -1,90 +1,98 @@
-import Link from 'next/link';
-import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
-import WingLayout from '@/components/layout/WingLayout';
+'use client';
 
-const GROUNDS_BACKDROP =
-  'radial-gradient(ellipse at 50% 25%, rgba(230,180,80,0.20) 0%, transparent 60%), radial-gradient(ellipse at 50% 85%, rgba(40,80,40,0.45) 0%, transparent 70%), linear-gradient(180deg, #0c1208 0%, #1c2210 50%, #0a0a05 100%)';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
+
+/**
+ * The Grounds — a compiled video tour, not a tab grid.
+ *
+ * Per Sean's direction: the user arrives at /grounds after choosing "The Grounds"
+ * from the patio. They see a single continuous flow of compiled grounds videos —
+ * aerial drone approach, the path to the patio, the continuous garden path,
+ * the courtyard — rotating one into the next at a slow cinematic cadence.
+ *
+ * The artist-wing destinations live at the bottom of the page as a small,
+ * unobtrusive index for visitors who already know where they want to land.
+ */
+const GROUNDS_LEAD_IN = '/videos/nvai_aerial_drone_approach_5k.mp4';
+const GROUNDS_ROTATION = [
+  '/videos/nvai_garden_path_to_patio_5k.mp4',
+  '/videos/nvai_garden_path_continuous_5k.mp4',
+  '/videos/nvai_garden_passage_5k.mp4',
+  '/videos/nvai_courtyard_5k.mp4',
+];
+
+const DESTINATIONS = [
+  { label: 'Monet', subtitle: 'Giverny garden', href: '/grounds/monet' },
+  { label: 'Picasso', subtitle: 'Three studio periods', href: '/grounds/picasso' },
+  { label: 'Da Vinci', subtitle: 'Renaissance workshop', href: '/grounds/davinci' },
+  { label: 'Frida', subtitle: 'Casa Azul', href: '/grounds/frida' },
+  { label: 'Vineyards', subtitle: 'Thirty acres', href: '/grounds/vineyards' },
+  { label: 'Wine cave', subtitle: 'Under the chateau', href: '/grounds/wine-cave' },
+];
 
 export default function GroundsPage() {
-  return (
-    <WingLayout
-      back={{ href: '/garden', label: 'Back to the patio' }}
-      eyebrow="Out to the property"
-      title="The Grounds"
-      subtitle="Expansive · outbuildings · gardens"
-      caption="Four destinations on the estate."
-      backdrop={GROUNDS_BACKDROP}
-      videoSrc="/videos/nvai_courtyard_5k.mp4"
-      rotation={['/videos/nvai_garden_path_continuous_5k.mp4', '/videos/nvai_aerial_drone_approach_5k.mp4']}
-    >
-      <div className="space-y-12">
-        {/* Artist destinations */}
-        <div>
-          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-6">
-            Artists on the property
-          </p>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <Link href="/grounds/monet">
-              <MarbleTombstone
-                eyebrow="Garden"
-                title="Monet"
-                subtitle="Giverny"
-                caption="Lily pond. Japanese bridge. Wisteria."
-                featured
-              />
-            </Link>
-            <Link href="/grounds/picasso">
-              <MarbleTombstone
-                eyebrow="Compound"
-                title="Picasso"
-                subtitle="Three periods"
-                caption="Bateau-Lavoir → Boisgeloup → Mougins."
-              />
-            </Link>
-            <Link href="/grounds/davinci">
-              <MarbleTombstone
-                eyebrow="Workshop"
-                title="Da Vinci"
-                subtitle="Lady with a Fur"
-                caption="Renaissance polymath studio."
-              />
-            </Link>
-            <Link href="/grounds/frida">
-              <MarbleTombstone
-                eyebrow="Guest house"
-                title="Frida"
-                subtitle="Casa Azul"
-                caption="La Mesa Herida. Cobalt walls."
-              />
-            </Link>
-          </div>
-        </div>
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setRevealed(true), 1400);
+    return () => clearTimeout(t);
+  }, []);
 
-        {/* Estate amenities */}
-        <div>
-          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-6">
-            Estate amenities
+  return (
+    <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
+      <RotatingBackdrop leadIn={GROUNDS_LEAD_IN} rotation={GROUNDS_ROTATION} overlay={0.45} />
+
+      <div
+        className={`relative z-10 flex min-h-screen flex-col px-8 py-12 transition-opacity duration-[2400ms] ${
+          revealed ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <Link
+          href="/garden"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/60 hover:text-gold"
+        >
+          ← Back to the patio
+        </Link>
+
+        <header className="mx-auto mt-20 max-w-4xl text-center">
+          <p className="font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/80">
+            Out to the property
           </p>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <Link href="/grounds/vineyards">
-              <MarbleTombstone
-                eyebrow="The vines"
-                title="Vineyards"
-                subtitle="Thirty acres · cabernet"
-                caption="A slow walk through the vine rows at golden hour."
-              />
-            </Link>
-            <Link href="/grounds/wine-cave">
-              <MarbleTombstone
-                eyebrow="Under the chateau"
-                title="Wine Cave"
-                subtitle="Dug into the hillside"
-                caption="Two hundred barrels. Candle sconces. Private tastings."
-              />
-            </Link>
+          <h1 className="mt-6 font-didot text-7xl uppercase tracking-[0.12em] text-ivory drop-shadow-lg md:text-8xl">
+            The Grounds
+          </h1>
+          <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
+            Thirty acres of estate, six destinations, one continuous walk
+          </p>
+          <div className="mx-auto mt-8 h-px w-32 bg-gold/40" />
+          <p className="mx-auto mt-8 max-w-xl font-body italic text-ivory/80 leading-relaxed">
+            The aerial gives way to the vineyard path. The vineyard path gives way to
+            the orchard. The orchard gives way to the courtyard at the back of the
+            chateau. Each artist&rsquo;s wing lives somewhere along the walk.
+          </p>
+        </header>
+
+        <div className="mx-auto mt-auto mb-12 max-w-5xl pt-20">
+          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-6">
+            Six destinations along the walk
+          </p>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            {DESTINATIONS.map((d) => (
+              <Link
+                key={d.href}
+                href={d.href}
+                className="rounded border border-gold/20 bg-midnight/50 px-4 py-3 text-center backdrop-blur transition-all hover:border-gold/60 hover:bg-gold/10"
+              >
+                <p className="font-didot text-base tracking-wider text-ivory">{d.label}</p>
+                <p className="mt-1 font-mono text-[0.5rem] uppercase tracking-[0.28em] text-gold/65">
+                  {d.subtitle}
+                </p>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
-    </WingLayout>
+    </main>
   );
 }

@@ -7,12 +7,12 @@ import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 export default function HomePage() {
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-midnight film-grain">
-      {/* Aerial drone approach — slow still, the platform's opening shot */}
+      {/* Aerial hero — STATIC. The slow still opening shot. Zoom only begins after the click. */}
       <CinematicBackdrop
-        videoSrc="/videos/nvai_aerial_drone_approach_5k.mp4"
+        videoSrc="/videos/nvai_foyer_aerial_static.mp4"
         fallbackGradient="radial-gradient(ellipse at 50% 35%, rgba(232,200,122,0.18) 0%, transparent 55%), radial-gradient(ellipse at 50% 80%, rgba(91,43,18,0.55) 0%, transparent 65%), linear-gradient(180deg, #1a1208 0%, #3b1f0f 40%, #1a0e08 100%)"
         overlay={0.4}
-        playbackRate={0.5}
+        playbackRate={0.6}
       />
 
       {/* Institute logo — top left */}

@@ -23,8 +23,9 @@ export default function EntryPage() {
 
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-midnight film-grain">
+      {/* The ZOOM-IN — drone approach, slowed. This is the movement, after the click. */}
       <CinematicBackdrop
-        videoSrc="/videos/nvai_foyer_aerial_approach.mp4"
+        videoSrc="/videos/nvai_aerial_drone_approach_5k.mp4"
         fallbackGradient="radial-gradient(ellipse at 50% 35%, rgba(232,200,122,0.18) 0%, transparent 55%), linear-gradient(180deg, #1a1208 0%, #3b1f0f 40%, #1a0e08 100%)"
         overlay={0.5}
         playbackRate={0.35}
