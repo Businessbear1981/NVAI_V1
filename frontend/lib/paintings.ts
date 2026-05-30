@@ -136,6 +136,7 @@ export const PAINTINGS: Painting[] = [
     inspirationVideo: '/videos/paris.mp4',
     inspirationNote: 'Postwar Paris. Sand texture. Notre Dame as motif.',
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
+    imageUrl: '/paintings/chagall-hommage-paris.jpg',
   },
   {
     slug: 'chagall-loiseau-rouge',
@@ -149,6 +150,7 @@ export const PAINTINGS: Painting[] = [
     inspirationVideo: '/videos/muses-lovers.mp4',
     inspirationNote: 'Late Vence years with Vava. The red bird recurring across the late canvases.',
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
+    imageUrl: '/paintings/chagall-loiseau-rouge.jpg',
   },
   {
     slug: 'chagall-lopera',
@@ -160,6 +162,7 @@ export const PAINTINGS: Painting[] = [
     signed: 'Signed & dated lower left',
     viewingLocation: 'Switzerland',
     inspirationVideo: '/videos/paris.mp4',
+    imageUrl: '/paintings/chagall-lopera.jpg',
     inspirationNote: 'Studies related to the Paris Opéra ceiling.',
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
   },
