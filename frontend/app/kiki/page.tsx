@@ -65,53 +65,52 @@ export default function KikiPage() {
           onComplete={() => setIntroDone(true)}
         />
       )}
-      {/* Scrapbook background — scattered archival photos with champagne glass + cigarette overlay */}
+      {/* Scrapbook background — scattered archival photos at low opacity behind a dark scrim
+          so the foreground text reads clearly. Subtle, not competing for attention. */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         {[
-          { src: '/kiki/photos/IMG_1253.jpeg', x: '8%',  y: '12%', rot: -8,  w: '16rem', z: 1 },
-          { src: '/kiki/photos/IMG_1255.jpeg', x: '72%', y: '9%',  rot: 6,   w: '14rem', z: 1 },
-          { src: '/kiki/photos/IMG_1305.jpeg', x: '60%', y: '55%', rot: -4,  w: '15rem', z: 1 },
-          { src: '/kiki/photos/IMG_1333.jpeg', x: '5%',  y: '62%', rot: 10,  w: '13rem', z: 1 },
-          { src: '/kiki/photos/moulin_rouge_night.webp', x: '82%', y: '70%', rot: -7, w: '14rem', z: 1 },
-          { src: '/kiki/photos/c44e6877-a9b7-4932-9401-cb257331ff3d.JPG', x: '25%', y: '40%', rot: 5, w: '12rem', z: 1 },
+          { src: '/kiki/photos/IMG_1253.jpeg', x: '4%',  y: '8%',  rot: -8,  w: '13rem' },
+          { src: '/kiki/photos/IMG_1255.jpeg', x: '80%', y: '6%',  rot: 6,   w: '11rem' },
+          { src: '/kiki/photos/IMG_1305.jpeg', x: '70%', y: '60%', rot: -4,  w: '12rem' },
+          { src: '/kiki/photos/IMG_1333.jpeg', x: '3%',  y: '68%', rot: 10,  w: '11rem' },
+          { src: '/kiki/photos/moulin_rouge_night.webp', x: '85%', y: '78%', rot: -7, w: '12rem' },
+          { src: '/kiki/photos/c44e6877-a9b7-4932-9401-cb257331ff3d.JPG', x: '12%', y: '38%', rot: 5, w: '10rem' },
         ].map((p, i) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             key={i}
             src={p.src}
             alt=""
-            className="absolute opacity-25"
+            className="absolute opacity-[0.12]"
             style={{
               left: p.x, top: p.y, width: p.w,
               transform: `rotate(${p.rot}deg)`,
               boxShadow: '0 8px 24px rgba(0,0,0,0.7)',
-              filter: 'sepia(0.15) contrast(0.9)',
+              filter: 'sepia(0.2) contrast(0.85)',
             }}
           />
         ))}
-        {/* Champagne glass — top right, hint */}
-        <div className="absolute right-12 top-1/2 -translate-y-1/2 opacity-30">
-          <svg width="72" height="180" viewBox="0 0 72 180" fill="none">
+        {/* Heavy dark scrim ensures foreground text always reads */}
+        <div className="absolute inset-0 bg-midnight/55" />
+        {/* Champagne glass — top right, decorative hint */}
+        <div className="absolute right-8 top-1/3 opacity-25">
+          <svg width="56" height="140" viewBox="0 0 72 180" fill="none">
             <path d="M14 8 L58 8 L52 60 Q36 80 20 60 Z" stroke="rgba(255,250,235,0.85)" strokeWidth="1.2" fill="rgba(255,235,180,0.25)" />
             <path d="M36 80 L36 150 M22 170 L50 170" stroke="rgba(255,250,235,0.7)" strokeWidth="1.2" />
-            {/* Bubbles */}
             {[20, 35, 52, 28, 44].map((y, i) => (
               <circle key={i} cx={28 + (i * 4)} cy={y} r="1.2" fill="rgba(255,250,235,0.9)" />
             ))}
           </svg>
         </div>
         {/* Lit cigarette — burning ember, smoke wisp */}
-        <div className="absolute left-12 bottom-12 opacity-40">
-          <svg width="140" height="80" viewBox="0 0 140 80" fill="none">
-            {/* cigarette body */}
+        <div className="absolute left-8 bottom-8 opacity-30">
+          <svg width="110" height="64" viewBox="0 0 140 80" fill="none">
             <rect x="20" y="48" width="80" height="6" fill="rgba(245,235,210,0.9)" rx="1" />
             <rect x="100" y="48" width="8" height="6" fill="rgba(220,180,90,0.95)" rx="1" />
-            {/* burning ember */}
             <circle cx="20" cy="51" r="3.5" fill="rgba(255,90,30,0.95)">
               <animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite" />
               <animate attributeName="fill" values="rgba(255,90,30,0.95);rgba(255,160,60,0.95);rgba(255,90,30,0.95)" dur="2s" repeatCount="indefinite" />
             </circle>
-            {/* smoke wisp */}
             <path d="M18 48 Q14 32 22 20 Q14 8 18 0" stroke="rgba(255,245,225,0.35)" strokeWidth="1.5" fill="none">
               <animate attributeName="opacity" values="0.35;0.15;0.35" dur="3s" repeatCount="indefinite" />
             </path>
@@ -143,7 +142,7 @@ export default function KikiPage() {
               className="h-full w-full object-cover"
             />
           </div>
-          <p className="text-xs italic text-ivory/60">
+          <p className="text-xs italic text-ivory/85">
             The cabaret cut. Burlesque variants and the full one-minute dance live below.
           </p>
         </div>
@@ -155,7 +154,7 @@ export default function KikiPage() {
             Hear Kiki — French accent, English voice
           </h2>
           <div className="mx-auto h-px w-12 bg-gold/40" />
-          <p className="font-body italic text-ivory/80 max-w-2xl mx-auto">
+          <p className="font-body italic text-ivory/95 max-w-2xl mx-auto">
             The full 220-page Misho exposé read in English with a soft French accent — period-accurate,
             soothing. Generate any chapter on demand.
           </p>
@@ -170,7 +169,7 @@ export default function KikiPage() {
         {/* Real archival photos uploaded for the wing */}
         <div className="space-y-4">
           <h2 className="font-display text-2xl text-center tracking-wider text-gold">From the Archive</h2>
-          <p className="text-center text-sm italic text-ivory/60 max-w-2xl mx-auto">
+          <p className="text-center text-sm italic text-ivory/85 max-w-2xl mx-auto">
             Real photographs uploaded for the Kiki wing. These also seed the Higgsfield prompts
             for three additional inspiration videos.
           </p>
@@ -201,7 +200,7 @@ export default function KikiPage() {
           <h2 className="font-display text-2xl text-center tracking-wider text-gold">
             Three Additional Videos · Higgsfield prompts
           </h2>
-          <p className="text-center text-sm italic text-ivory/60 max-w-2xl mx-auto">
+          <p className="text-center text-sm italic text-ivory/85 max-w-2xl mx-auto">
             Seeded by the archival photos above. Feed each prompt to Higgsfield, then drop the
             resulting MP4 into <code className="font-mono text-[0.8em]">/public/videos/</code> and
             swap it in via the video curator.
@@ -237,7 +236,7 @@ export default function KikiPage() {
               <article key={card.title} className="marble rounded-lg p-5 space-y-3 text-left">
                 <h3 className="font-display text-base tracking-wider text-gold">{card.title}</h3>
                 <div className="h-px w-8 bg-gold/30" />
-                <p className="font-body text-xs italic text-ivory/80 leading-relaxed">
+                <p className="font-body text-xs italic text-ivory/95 leading-relaxed">
                   {card.prompt}
                 </p>
               </article>
@@ -277,7 +276,7 @@ export default function KikiPage() {
             {offerings.map((o) => (
               <article key={o.label} className="marble rounded-lg p-6 space-y-3 text-left">
                 <h3 className="font-display text-lg leading-tight text-ivory">{o.label}</h3>
-                <p className="font-body text-sm italic text-ivory/70 leading-relaxed">{o.detail}</p>
+                <p className="font-body text-sm italic text-ivory/95 leading-relaxed">{o.detail}</p>
                 <div className="h-px w-8 bg-gold/30" />
                 <div className="flex items-center justify-between pt-2">
                   <p className="font-mono text-[0.7rem] tracking-wider text-gold">{o.price}</p>
@@ -299,7 +298,7 @@ export default function KikiPage() {
             Help bring this feature film to life
           </h2>
           <div className="mx-auto h-px w-16 bg-gold/40" />
-          <p className="font-body text-ivory/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-body text-ivory/95 max-w-2xl mx-auto leading-relaxed">
             We are raising the development fund for the Kiki feature — Montparnasse 1920s,
             the lost love story, the painting. Pledge levels open. Donor wall lives here.
           </p>
@@ -312,14 +311,14 @@ export default function KikiPage() {
             </Link>
             <Link
               href="/kiki/guestbook"
-              className="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-ivory/70 hover:text-gold"
+              className="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-ivory/95 hover:text-gold"
             >
               Sign the guest book →
             </Link>
           </div>
         </div>
 
-        <p className="text-center font-body text-xs italic text-ivory/50">
+        <p className="text-center font-body text-xs italic text-ivory/80">
           Ten percent of every sale donated in Kiki's honour. Donor wall in production.
         </p>
       </section>
