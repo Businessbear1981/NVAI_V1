@@ -1,12 +1,14 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import WingLayout from '@/components/layout/WingLayout';
 import { VIDEOS } from '@/lib/videoMap';
 import AudioBed from '@/components/cinematic/AudioBed';
+import MarqueeLeadIn from '@/components/cinematic/MarqueeLeadIn';
 
 const KIKI_BACKDROP =
   'radial-gradient(ellipse at 30% 30%, rgba(220,40,80,0.35) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(120,20,60,0.5) 0%, transparent 60%), linear-gradient(180deg, #1a060c 0%, #2a0a14 40%, #0a0205 100%)';
-
-const KIKI_VIDEO = '/videos/nvai_kiki_moulin_rouge_5k.mp4';
 
 const offerings = [
   {
@@ -48,8 +50,22 @@ const offerings = [
 ];
 
 export default function KikiPage() {
+  const [introDone, setIntroDone] = useState(false);
+
   return (
-    <WingLayout
+    <>
+      {!introDone && (
+        <MarqueeLeadIn
+          videoSrc="/videos/nvai_kiki_moulin_rouge_5k.mp4"
+          videoSeconds={6}
+          marqueeSeconds={4}
+          eyebrow="The Marquee"
+          title="TONIGHT ONLY"
+          subtitle="The Queen of Montparnasse"
+          onComplete={() => setIntroDone(true)}
+        />
+      )}
+      <WingLayout
       back={{ href: '/', label: 'Return to the chateau' }}
       eyebrow="The Marquee"
       title="Kiki"
@@ -254,5 +270,6 @@ export default function KikiPage() {
         </p>
       </section>
     </WingLayout>
+    </>
   );
 }
