@@ -26,6 +26,50 @@ html, body {
   color: #F4EFE3;
 }
 
+/* Text legibility helper — auto-applied inside every cinematic page (film-grain).
+   Subtle gold halo + dark drop shadow so headings and body text remain readable
+   over any video, photo, or scrapbook background without needing per-component
+   work. Tombstones override this with their own letterpress treatment. */
+.film-grain h1,
+.film-grain h2,
+.film-grain h3 {
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.85),
+    0 2px 8px rgba(0, 0, 0, 0.7),
+    0 0 24px rgba(232, 200, 122, 0.25);
+}
+.film-grain p,
+.film-grain li,
+.film-grain a,
+.film-grain span,
+.film-grain button {
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.85),
+    0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Opt-in stronger glow for hero text */
+.glow-gold {
+  text-shadow:
+    0 0 1px rgba(255, 250, 235, 0.4),
+    0 1px 0 rgba(0, 0, 0, 0.95),
+    0 2px 8px rgba(0, 0, 0, 0.85),
+    0 0 24px rgba(232, 200, 122, 0.5),
+    0 0 48px rgba(232, 200, 122, 0.25);
+}
+
+/* Tombstones use their own letterpress treatment and should NOT inherit the
+   page-level glow — neutralise it inside .marble. */
+.marble h1,
+.marble h2,
+.marble h3,
+.marble p,
+.marble li,
+.marble a,
+.marble span {
+  text-shadow: 0 1px 0 rgba(255, 245, 220, 0.5);
+}
+
 /* Cinematic film grain overlay */
 .film-grain::after {
   content: '';
