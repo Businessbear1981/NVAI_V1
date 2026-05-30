@@ -26,39 +26,60 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
       videoSrc={painting.inspirationVideo}
     >
       <div className="mx-auto max-w-5xl space-y-12">
-        {/* Hero painting — framed and lit */}
-        {painting.imageUrl && (
-          <figure className="mx-auto max-w-3xl">
+        {/* Hero painting — framed and lit. Renders the image if present, otherwise an intentional 'available upon NDA' frame. */}
+        <figure className="mx-auto max-w-3xl">
+          <div
+            className="relative overflow-hidden rounded-sm bg-midnight"
+            style={{
+              padding: '1.5rem',
+              background:
+                'linear-gradient(145deg, rgba(212,175,55,0.10) 0%, rgba(120,80,30,0.20) 50%, rgba(60,30,10,0.30) 100%)',
+              boxShadow:
+                '0 30px 80px -20px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.4)',
+            }}
+          >
             <div
-              className="relative overflow-hidden rounded-sm bg-midnight"
+              className="overflow-hidden rounded-sm"
               style={{
-                padding: '1.5rem',
-                background:
-                  'linear-gradient(145deg, rgba(212,175,55,0.10) 0%, rgba(120,80,30,0.20) 50%, rgba(60,30,10,0.30) 100%)',
-                boxShadow:
-                  '0 30px 80px -20px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.4)',
+                boxShadow: 'inset 0 0 0 1px rgba(232,200,122,0.4), 0 0 60px -10px rgba(212,175,55,0.18)',
               }}
             >
-              {/* Period-frame look: a subtle inner gold rule */}
-              <div
-                className="overflow-hidden rounded-sm"
-                style={{
-                  boxShadow: 'inset 0 0 0 1px rgba(232,200,122,0.4), 0 0 60px -10px rgba(212,175,55,0.18)',
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+              {painting.imageUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={painting.imageUrl}
                   alt={`${painting.artist} — ${painting.title}`}
                   className="w-full"
                 />
-              </div>
+              ) : (
+                <div className="aspect-[4/5] flex flex-col items-center justify-center bg-gradient-to-br from-midnight to-[#1a1208] px-8 py-12 text-center">
+                  <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/60">
+                    Image available
+                  </p>
+                  <p className="mt-2 font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/60">
+                    upon signed agreement
+                  </p>
+                  <div className="my-8 h-px w-24 bg-gold/40" />
+                  <p className="font-didot text-3xl tracking-wider text-ivory">{painting.title}</p>
+                  <p className="mt-3 font-display italic text-base text-gold/85">{painting.artist}</p>
+                  <p className="mt-2 font-body italic text-sm text-ivory/65">{painting.year}</p>
+                  <p className="mt-1 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/55">
+                    {painting.dimensions}
+                  </p>
+                  <Link
+                    href={`/inquire?action=docs&piece=${painting.slug}`}
+                    className="mt-10 inline-block rounded-full border border-gold/50 bg-gold/10 px-6 py-3 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/20"
+                  >
+                    Request the dossier
+                  </Link>
+                </div>
+              )}
             </div>
-            <figcaption className="mt-4 text-center font-body italic text-sm text-ivory/65">
-              {painting.title} · {painting.year} · {painting.dimensions}
-            </figcaption>
-          </figure>
-        )}
+          </div>
+          <figcaption className="mt-4 text-center font-body italic text-sm text-ivory/65">
+            {painting.title} · {painting.year} · {painting.dimensions}
+          </figcaption>
+        </figure>
 
         {/* Bernard walkthrough */}
         <section className="space-y-3 text-center">

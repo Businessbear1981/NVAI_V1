@@ -74,18 +74,16 @@ export default function KikiAudiobookPage() {
           </h1>
           <div className="mx-auto mt-6 h-px w-24 bg-gold/40" />
           <p className="mt-6 font-body italic text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Spoken English with a soft French accent. The full 220-page Misho manuscript
-            split into chapters. Generate the audio you want to hear — each chapter is
-            roughly four minutes of listening.
+            Richard Triberg&rsquo;s 228-page Exposé — <em>The Extraordinary Life &amp; Times of the
+            Immortal yet Forgotten KIKI, Queen of Montparnasse</em> — narrated in English with a
+            soft French accent. Produced in ElevenLabs by Sean Gilmore. Each chapter is roughly
+            four minutes of listening.
           </p>
           {manifest && (
             <p className="mt-4 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/60">
               {manifest.totalChapters} chapters · {Math.round(manifest.totalChars / 1000)}k characters · voice {manifest.voiceId}
             </p>
           )}
-          <p className="mt-2 font-mono text-[0.5rem] uppercase tracking-[0.28em] text-ivory/45">
-            Browse the ElevenLabs voice library and set KIKI_VOICE_ID in backend/.env to swap to a different French-accent voice.
-          </p>
         </header>
 
         {status && (
