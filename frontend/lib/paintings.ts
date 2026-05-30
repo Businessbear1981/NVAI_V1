@@ -225,7 +225,45 @@ export const PAINTINGS: Painting[] = [
       "The piece carries certification from the Marc Chagall Committee dated twenty twenty.",
   },
 
-  // ---------------- Modigliani (3 active) ----------------
+  // ---------------- Modigliani (4 active — the Pacific Arts canvas is the centrepiece) ----------------
+  {
+    slug: 'modigliani-sitting-nude-with-crossed-hands',
+    artist: 'Amedeo Modigliani',
+    title: 'Sitting Nude with Crossed Hands',
+    year: 'c. 1917',
+    dimensions: '40.5 × 33 cm',
+    medium: 'Oil on canvas',
+    signed: 'Signed lower right in black paint: modigliani',
+    viewingLocation: 'Institut Restellini Analyses Scientifiques, Geneva Freeport, Switzerland (under authentication, Mission Order signed 4 March 2026)',
+    inspirationVideo: '/videos/nvai_modigliani_cafe_5k.mp4',
+    inspirationNote:
+      'The Pacific Arts Collection canvas. Sixteen-year-old Alice Prin — Kiki — folded hands below the left knee on a red velvet pillow with a greenish tassel. Painted in the studio on the rue de la Grande Chaumière that Modigliani shared with the British painter C. R. W. Nevinson — a studio art history misplaced for 110 years. The painting at the centre of the entire NVAI project.',
+    wing: { label: 'Cabinet de Curiosités', href: '/grand-hall/modigliani' },
+    literature: [
+      'Brokerage Agreement — Robert (Bratislava) + Alexander (Bratislava) + Richard Triberg (Pacific Arts Collection) — 4 March 2026',
+      'Mission Order — Institut Restellini Analyses Scientifiques, signed by Xavier Pellaud, Geneva Freeport — March 2026',
+      'NVAI Update #4 — Institut Restellini Paris: Unveiling Amedeo Modigliani\'s Sitting Nude w/ Crossed Hand (c.) 1917 — March 2026',
+      'Authentication & Analysis Report — Prof. Otto M. Urban (DOX Centre for Contemporary Art, Prague) — 90-day evaluation, 2025',
+      'Forensic Report — InsightART (Jiri Lauterkranc) — CERN-derived dual-robotic X-ray microradiography (RToo) — 2022',
+      'ARSMensurae forensic analysis — Rome, 2011',
+      'ART-Test s.a.s. pigment analysis — Florence, 2014',
+      'Prague Municipal Court Appraisal — Modigliani expert, $70M USD, pre-Restellini — 2013',
+      'Wildenstein Institute examination — Marc Restellini as curator, two-month review, 2012',
+      'Berthe Weill — December 1917 Modigliani Nudes exhibition (closed opening day by Paris police for indecency) — exhibition catalogue entry "Sitting Nude with Crossed Hands"',
+      'C. R. W. Nevinson — *An Artist Studio in Montparnasse* — Tate Gallery N04231, presented by H. G. Wells 1927 — Sisley Huddleston letter to New York *Herald Tribune* 24 February 1927 — the documentary trail of the shared studio',
+    ],
+    provenanceDoc: '/provenance/modigliani-sitting-nude-with-crossed-hands-dossier.pdf',
+    imageUrl: '/paintings/modigliani-sitting-nude-with-crossed-hands.jpg',
+    bernardStory:
+      'This is Amedeo Modigliani\'s "Sitting Nude with Crossed Hands," painted around the autumn of nineteen seventeen. ' +
+      'The sitter is Alice Ernestine Prin, sixteen years old, who within the decade would be known to the entire avant-garde of Paris as Kiki de Montparnasse. ' +
+      'She had been working at a small restaurant on the rue Campagne-Première called Chez Rosalie\'s when Modigliani first began sketching her — obsessively, in pencil and chalk, on the back of menus and across the inside of cigarette boxes — over the two years between when they met in nineteen fifteen and when this canvas was painted. ' +
+      'She is seated on a red velvet pillow with a greenish tassel. Her hands are folded below her left knee. The signature white shawl that appears in over two dozen of Modigliani\'s nineteen seventeen nudes is draped over the chair behind her. ' +
+      'The painting was made in a studio on the rue de la Grande Chaumière that Modigliani shared with the British war painter Christopher Richard Wynne Nevinson — a fact art history misplaced for one hundred and ten years until the painter and historian Richard Triberg recognised the same red pillow in Nevinson\'s nineteen twenty-six Tate canvas, *An Artist Studio in Montparnasse.* ' +
+      'The painting was exhibited at the Berthe Weill gallery in the December nineteen seventeen Modigliani nudes show — the show the Paris police closed on opening day for indecency. ' +
+      'It passed quietly into private hands in the years that followed and surfaced in Bratislava in twenty-thirteen, when a Modigliani specialist filed a seventy-million-dollar appraisal with the Prague Municipal Court. ' +
+      'In two thousand twelve the painting was examined at the Wildenstein Institute in Paris under Marc Restellini\'s own curatorship. Fourteen years later, on the eighteenth of March, two thousand twenty-six, the same Marc Restellini received the painting at his own Institut for full scientific authentication and catalogue raisonné review. The signature in the lower right reads modigliani in black paint. The verdict is pending.',
+  },
   {
     slug: 'modigliani-nu-couche',
     artist: 'Amedeo Modigliani',

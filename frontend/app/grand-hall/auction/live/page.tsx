@@ -27,6 +27,23 @@ interface FloorState {
   reserveMet: boolean;
 }
 
+interface MenuItem {
+  category: string;
+  name: string;
+  detail?: string;
+  note?: string;
+}
+interface Menu {
+  id: string;
+  name: string;
+  price: number;
+  currency?: string;
+  summary: string;
+  courseType?: string;
+  deliveryWindow?: string;
+  items: MenuItem[];
+}
+
 function fmt(n?: number | null) {
   if (n == null) return '—';
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
@@ -51,6 +68,72 @@ export default function AuctionLivePage() {
   const [auctioneerAsk, setAuctioneerAsk] = useState('');
   const [auctioneerMode, setAuctioneerMode] = useState(false);
 
+  // Curated meal service — bidder reserves a pre-curated meal placed 7 days ahead via concierge
+  const [menus, setMenus] = useState<Menu[]>([]);
+  const [mealOpen, setMealOpen] = useState(false);
+  const [mealMenuId, setMealMenuId] = useState('');
+  const [mealParty, setMealParty] = useState(1);
+  const [mealFullName, setMealFullName] = useState('');
+  const [mealEmail, setMealEmail] = useState('');
+  const [mealAddress, setMealAddress] = useState('');
+  const [mealMainChoice, setMealMainChoice] = useState('');
+  const [mealNotes, setMealNotes] = useState('');
+  const [mealSubmitting, setMealSubmitting] = useState(false);
+
+  async function loadMenus() {
+    try {
+      const r = await fetch('/api/auction/meals');
+      const j = await r.json();
+      setMenus(j.menus ?? []);
+    } catch { /* silent — menus optional */ }
+  }
+
+  async function submitMealOrder() {
+    if (!active) { showAck('Select an active event first.'); return; }
+    if (!mealMenuId || !mealFullName || !mealEmail || !mealAddress) {
+      showAck('Menu, name, email, and address are required.');
+      return;
+    }
+    const menu = menus.find((m) => m.id === mealMenuId);
+    const mainOpts = menu ? menu.items.filter((i) => i.category.toLowerCase().startsWith('main')) : [];
+    if (mainOpts.length > 1 && !mealMainChoice) {
+      showAck('Please choose a main course.');
+      return;
+    }
+    setMealSubmitting(true);
+    try {
+      const r = await fetch('/api/auction/meal-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventId: active.id,
+          menuId: mealMenuId,
+          fullName: mealFullName,
+          email: mealEmail,
+          address: mealAddress,
+          party: mealParty,
+          mainChoice: mealMainChoice,
+          notes: mealNotes,
+        }),
+      });
+      if (!r.ok) throw new Error(await r.text());
+      const j = await r.json();
+      showAck(`✓ Meal reserved · ${fmt(j.order?.subtotal)} · concierge confirms within 24h.`);
+      setMealMenuId('');
+      setMealFullName('');
+      setMealEmail('');
+      setMealAddress('');
+      setMealMainChoice('');
+      setMealNotes('');
+      setMealParty(1);
+      setMealOpen(false);
+    } catch (e) {
+      showAck(`Meal reservation failed: ${e instanceof Error ? e.message : 'unknown'}`);
+    } finally {
+      setMealSubmitting(false);
+    }
+  }
+
   async function loadEvents() {
     const r = await fetch('/api/auction/events');
     const j = await r.json();
@@ -64,7 +147,7 @@ export default function AuctionLivePage() {
     setFloor(j);
   }
 
-  useEffect(() => { loadEvents(); }, []);
+  useEffect(() => { loadEvents(); loadMenus(); }, []);
 
   useEffect(() => {
     if (!activeId) return;
@@ -290,6 +373,184 @@ export default function AuctionLivePage() {
               </div>
             )}
           </aside>
+        </section>
+      )}
+
+      {/* Curated meal service — pre-event reservation */}
+      {active && menus.length > 0 && (
+        <section className="mx-auto mt-12 max-w-5xl">
+          <div className="rounded-lg border border-gold/25 bg-midnight/40 p-6 backdrop-blur">
+            <button
+              onClick={() => setMealOpen((v) => !v)}
+              className="flex w-full items-center justify-between text-left"
+            >
+              <div>
+                <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+                  The Curated Meal Service
+                </p>
+                <h3 className="mt-1 font-didot text-2xl tracking-wider text-ivory">
+                  Reserve your table — placed seven days ahead by NVAI concierge
+                </h3>
+                <p className="mt-2 font-body italic text-sm text-ivory/70">
+                  Two pre-curated French menus. Wines, cheeses, accompaniments. Delivered to your seat on auction night.
+                </p>
+              </div>
+              <span className="ml-4 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold">
+                {mealOpen ? 'Close' : 'View menus'}
+              </span>
+            </button>
+
+            {mealOpen && (
+              <div className="mt-6 space-y-6">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  {menus.map((m) => (
+                    <button
+                      key={m.id}
+                      onClick={() => {
+                        setMealMenuId(m.id);
+                        setMealMainChoice('');
+                      }}
+                      className={`text-left rounded-lg border p-5 transition-all ${
+                        mealMenuId === m.id
+                          ? 'border-gold bg-gold/10'
+                          : 'border-ivory/15 bg-midnight/50 hover:border-gold/40'
+                      }`}
+                    >
+                      <div className="flex items-baseline justify-between">
+                        <h4 className="font-didot text-xl tracking-wider text-ivory">{m.name}</h4>
+                        <p className="font-mono text-sm text-gold">{fmt(m.price)}</p>
+                      </div>
+                      <p className="mt-2 font-body text-xs italic text-ivory/70 leading-relaxed">
+                        {m.summary}
+                      </p>
+                      {m.deliveryWindow && (
+                        <p className="mt-2 font-mono text-[0.5rem] uppercase tracking-[0.28em] text-gold/55">
+                          {m.deliveryWindow}
+                        </p>
+                      )}
+                      {m.items?.length > 0 && (
+                        <ul className="mt-3 space-y-1 font-body text-xs text-ivory/80">
+                          {m.items.map((it, i) => (
+                            <li key={i} className="flex gap-2">
+                              <span className="text-gold/60 font-mono text-[0.5rem] tracking-wider uppercase mt-0.5 shrink-0">
+                                {it.category}
+                              </span>
+                              <span>
+                                <strong className="text-ivory/95">{it.name}</strong>
+                                {it.detail && <span className="text-ivory/65"> · {it.detail}</span>}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                {mealMenuId && (
+                  <div className="rounded-lg border border-gold/20 bg-midnight/50 p-5 space-y-3">
+                    {(() => {
+                      const menu = menus.find((m) => m.id === mealMenuId);
+                      const mainOpts = menu
+                        ? menu.items.filter((it) => it.category.toLowerCase().startsWith('main'))
+                        : [];
+                      return mainOpts.length > 1 ? (
+                        <div className="space-y-2">
+                          <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
+                            Choose your main
+                          </p>
+                          <div className="space-y-2">
+                            {mainOpts.map((opt) => (
+                              <label key={opt.name} className="flex items-start gap-3 cursor-pointer">
+                                <input
+                                  type="radio"
+                                  name="mainChoice"
+                                  value={opt.name}
+                                  checked={mealMainChoice === opt.name}
+                                  onChange={() => setMealMainChoice(opt.name)}
+                                  className="mt-1"
+                                />
+                                <span className="font-body text-sm text-ivory/90">
+                                  <strong className="text-ivory">{opt.name}</strong>
+                                  {opt.detail && (
+                                    <span className="block text-xs italic text-ivory/65 mt-0.5">{opt.detail}</span>
+                                  )}
+                                  {opt.note && (
+                                    <span className="block text-[0.65rem] tracking-wider text-gold/70 mt-0.5">{opt.note}</span>
+                                  )}
+                                </span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null;
+                    })()}
+
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                      <input
+                        value={mealFullName}
+                        onChange={(e) => setMealFullName(e.target.value)}
+                        placeholder="Full name"
+                        className="rounded border border-gold/15 bg-midnight/60 px-3 py-2 font-body text-sm text-ivory"
+                      />
+                      <input
+                        value={mealEmail}
+                        onChange={(e) => setMealEmail(e.target.value)}
+                        placeholder="Email"
+                        type="email"
+                        className="rounded border border-gold/15 bg-midnight/60 px-3 py-2 font-body text-sm text-ivory"
+                      />
+                      <input
+                        value={mealAddress}
+                        onChange={(e) => setMealAddress(e.target.value)}
+                        placeholder="Delivery address"
+                        className="rounded border border-gold/15 bg-midnight/60 px-3 py-2 font-body text-sm text-ivory md:col-span-2"
+                      />
+                      <input
+                        value={mealParty}
+                        onChange={(e) => setMealParty(Math.max(1, parseInt(e.target.value) || 1))}
+                        type="number"
+                        min={1}
+                        max={20}
+                        placeholder="Party size"
+                        className="rounded border border-gold/15 bg-midnight/60 px-3 py-2 font-body text-sm text-ivory"
+                      />
+                      <input
+                        value={mealNotes}
+                        onChange={(e) => setMealNotes(e.target.value)}
+                        placeholder="Notes (allergies, preferences)"
+                        className="rounded border border-gold/15 bg-midnight/60 px-3 py-2 font-body text-sm text-ivory"
+                      />
+                    </div>
+
+                    {(() => {
+                      const menu = menus.find((m) => m.id === mealMenuId);
+                      const subtotal = menu ? menu.price * mealParty : 0;
+                      return (
+                        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-gold/15">
+                          <p className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/70">
+                            Subtotal · {mealParty} {mealParty === 1 ? 'guest' : 'guests'}
+                          </p>
+                          <p className="font-didot text-xl text-gold">{fmt(subtotal)}</p>
+                        </div>
+                      );
+                    })()}
+
+                    <button
+                      onClick={submitMealOrder}
+                      disabled={mealSubmitting}
+                      className="w-full rounded-full border border-gold/50 bg-gold/15 px-4 py-3 font-mono text-[0.65rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/30 disabled:opacity-50"
+                    >
+                      {mealSubmitting ? 'Reserving…' : 'Reserve & request concierge confirmation'}
+                    </button>
+                    <p className="text-center font-body text-xs italic text-ivory/55">
+                      Payment is taken when the concierge confirms availability — usually within 24 hours.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </section>
       )}
 
