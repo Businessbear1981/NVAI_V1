@@ -22,24 +22,24 @@ export default function MarbleTombstone({
     >
       <div className="flex h-full flex-col items-center justify-between">
         <div>
-          <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
+          <p className="font-mono text-[0.65rem] uppercase tracking-[0.36em] text-[#3a2a0a] drop-shadow-[0_1px_0_rgba(255,245,220,0.7)]">
             {eyebrow}
           </p>
-          <div className="mx-auto mt-3 h-px w-8 bg-gold/40 transition-all duration-700 group-hover:w-16" />
+          <div className="mx-auto mt-3 h-px w-10 bg-[#5a3a1a] transition-all duration-700 group-hover:w-20" />
         </div>
 
         <div className="space-y-3">
-          <h2 className="font-didot text-4xl uppercase tracking-[0.12em] text-ivory md:text-5xl">
+          <h2 className="font-didot text-[2.6rem] uppercase tracking-[0.12em] text-[#1a0e05] drop-shadow-[0_1px_0_rgba(255,250,235,0.4)] md:text-[3.4rem]">
             {title}
           </h2>
-          <p className="font-display text-lg italic tracking-wider text-gold/80">
+          <p className="font-display text-xl italic tracking-wider text-[#4a2c08] drop-shadow-[0_1px_0_rgba(255,245,220,0.5)]">
             {subtitle}
           </p>
         </div>
 
         <div>
-          <div className="mx-auto mb-4 h-px w-8 bg-gold/40" />
-          <p className="font-body text-xs tracking-wider text-ivory/70">
+          <div className="mx-auto mb-4 h-px w-10 bg-[#5a3a1a]" />
+          <p className="font-body text-sm tracking-wider text-[#2a1a05] drop-shadow-[0_1px_0_rgba(255,250,235,0.4)]">
             {caption}
           </p>
         </div>
