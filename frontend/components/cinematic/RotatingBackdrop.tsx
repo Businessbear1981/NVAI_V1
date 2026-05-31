@@ -75,6 +75,7 @@ export default function RotatingBackdrop({
     <div className="absolute inset-0">
       <video
         ref={aRef}
+        preload="metadata"
         src={srcA}
         muted
         playsInline
@@ -87,6 +88,7 @@ export default function RotatingBackdrop({
       {srcB && (
         <video
           ref={bRef}
+          preload="metadata"
           src={srcB}
           muted
           playsInline
