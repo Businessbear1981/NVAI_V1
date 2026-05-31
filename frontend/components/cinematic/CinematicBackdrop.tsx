@@ -3,15 +3,17 @@
 import { useEffect, useRef } from 'react';
 
 interface CinematicBackdropProps {
+  imageSrc?: string; // when set, renders a still <img> and bypasses the video element entirely
   videoSrc?: string;
   poster?: string;
   fallbackGradient?: string;
   overlay?: number; // 0-1
   playbackRate?: number; // 1 = normal, 0.5 = half speed for slower cinematic feel
-  frozenAtEnd?: boolean; // skip autoplay; seek to last frame so the shot reads as a still image
+  frozenAtEnd?: boolean; // legacy: seek video to last frame (unreliable; prefer imageSrc)
 }
 
 export default function CinematicBackdrop({
+  imageSrc,
   videoSrc,
   poster,
   fallbackGradient,
@@ -22,6 +24,7 @@ export default function CinematicBackdrop({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    if (imageSrc) return; // image mode: no video element, nothing to wire up
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
@@ -40,14 +43,23 @@ export default function CinematicBackdrop({
     }
 
     v.play().catch(() => { /* autoplay blocked is fine */ });
-  }, [videoSrc, playbackRate, frozenAtEnd]);
+  }, [imageSrc, videoSrc, playbackRate, frozenAtEnd]);
 
   return (
     <div
       className="absolute inset-0"
       style={fallbackGradient ? { background: fallbackGradient } : undefined}
     >
-      {videoSrc && (
+      {imageSrc ? (
+        <img
+          src={imageSrc}
+          alt=""
+          aria-hidden
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : videoSrc ? (
         <video
           key={videoSrc}
           ref={videoRef}
@@ -60,7 +72,7 @@ export default function CinematicBackdrop({
           playsInline
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
         />
-      )}
+      ) : null}
       <div
         className="absolute inset-0 bg-midnight"
         style={{ opacity: overlay }}
