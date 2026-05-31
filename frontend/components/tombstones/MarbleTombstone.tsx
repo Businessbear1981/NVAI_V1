@@ -15,7 +15,7 @@ export default function MarbleTombstone({
 }: MarbleTombstoneProps) {
   return (
     <div
-      className={`marble group cursor-pointer rounded-md px-4 py-3 text-center transition-all duration-500 ${
+      className={`marble group flex h-full cursor-pointer flex-col justify-center rounded-md px-4 py-3 text-center transition-all duration-500 ${
         featured ? 'scale-105' : ''
       }`}
     >

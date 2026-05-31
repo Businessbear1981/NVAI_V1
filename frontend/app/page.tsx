@@ -39,7 +39,7 @@ export default function HomePage() {
       {/* Three marble plaques — small markers anchored to the bottom; the video dominates */}
       <div className="absolute inset-x-0 bottom-16 z-20 flex justify-center px-8">
         <div className="grid w-full max-w-2xl grid-cols-3 gap-4">
-          <Link href="/kiki" aria-label="Kiki de Montparnasse">
+          <Link href="/kiki" aria-label="Kiki de Montparnasse" className="block h-full">
             <MarbleTombstone
               eyebrow="The Marquee"
               title="Kiki"
@@ -48,7 +48,7 @@ export default function HomePage() {
             />
           </Link>
 
-          <Link href="/foyer" aria-label="Enter the Chateau">
+          <Link href="/foyer" aria-label="Enter the Chateau" className="block h-full">
             <MarbleTombstone
               eyebrow="The Chateau"
               title="Enter Foyer"
@@ -57,7 +57,7 @@ export default function HomePage() {
             />
           </Link>
 
-          <Link href="/garden" aria-label="Secret Garden">
+          <Link href="/garden" aria-label="Secret Garden" className="block h-full">
             <MarbleTombstone
               eyebrow="The Grounds"
               title="Secret Garden"
