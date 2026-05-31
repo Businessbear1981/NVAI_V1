@@ -12,8 +12,8 @@ export default function VineyardsPage() {
       subtitle="A walk through the vines"
       caption="Thirty acres of cabernet sauvignon, cabernet franc, and a small block of petit verdot. A slow walk along the gravel drive at golden hour. Villa Monticello wines available throughout."
       backdrop={VINEYARDS_BACKDROP}
-      videoSrc="/videos/nvai_aerial_drone_approach_5k.mp4"
-      rotation={['/videos/nvai_garden_path_continuous_5k.mp4', '/videos/nvai_courtyard_5k.mp4']}
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_aerial_drone_approach_5k.mp4"
+      rotation={['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4']}
     >
       <div className="mx-auto max-w-3xl space-y-6 text-center font-body text-ivory/80 leading-relaxed">
         <p>

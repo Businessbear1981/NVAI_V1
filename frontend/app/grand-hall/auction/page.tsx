@@ -30,7 +30,7 @@ export default function AuctionHousePage() {
       subtitle="Bidding room · video conferencing · VIP concierge"
       caption="Live and private. Christie's scale or intimate. Phase 2 capability — designed-into the architecture now."
       backdrop={AUCTION_BACKDROP}
-      videoSrc="/videos/foyer_aerial_pan_final.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4"
     >
       <section className="space-y-6">
         <h2 className="font-display text-2xl text-center text-gold tracking-wider">Upcoming Events</h2>

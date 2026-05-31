@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: 'Giverny · 1883–1926',
     body:
       'Forty-three years in one house. The lily pond he dug himself, the Japanese bridge under the wisteria, the iris paths in May, the Clos Normand flower beds with their riot of colour. He painted his own garden into his own paintings until the boundary disappeared.',
-    video: '/videos/nvai_monet_secret_garden_5k.mp4',
-    rotation: ['/videos/nvai_garden_passage_5k.mp4', '/videos/nvai_garden_path_continuous_5k.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_monet_secret_garden_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4'],
   },
   {
     key: 'twilight',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: 'Nymphéas at night',
     body:
       'The water lilies under the last colour of the day, then the first stars. He worked on the Nymphéas for thirty years. The series ends in dusk and reflection — the painted water indistinguishable from the painted sky overhead.',
-    video: '/videos/nvai_monet_secret_garden_5k.mp4',
-    rotation: ['/videos/nvai_garden_passage_5k.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_monet_secret_garden_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4'],
   },
   {
     key: 'hills',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: 'Vétheuil · Argenteuil · the Seine',
     body:
       'Before Giverny, the river years. The barges on the Seine. The poppies of Argenteuil. The winter of Lavacourt under snow — 1879, the year Camille died there, the grief paintings he made that month outside her window.',
-    video: '/videos/nvai_garden_path_continuous_5k.mp4',
-    rotation: ['/videos/nvai_garden_passage_5k.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4'],
   },
   {
     key: 'failing',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: 'Cataracts · 1908–1923',
     body:
       'In 1908 he writes to a friend that the colours have begun to lie to him. By 1912 he can no longer distinguish blue from green. He paints anyway — the late Nymphéas grow muddy, red, swimming. He has his cataracts removed in 1923 at age 82 and weeps when the blue comes back. He paints for three more years.',
-    video: '/videos/nvai_garden_passage_5k.mp4',
-    rotation: ['/videos/nature-jungle.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-jungle.mp4'],
   },
 ];
 

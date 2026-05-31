@@ -127,7 +127,7 @@ export default function HiggsfieldPage() {
         <p className="mt-6 font-body italic text-ivory/75 max-w-2xl mx-auto leading-relaxed">
           The five Kiki cinematic prompts, paired with archival images. Generate via Higgsfield Soul
           (image-to-video). When the job completes, the MP4 is downloaded into
-          <code className="font-mono text-[0.85em]"> /public/videos/</code> ready for the curator to swap into a wing.
+          <code className="font-mono text-[0.85em]"> /publichttps://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/</code> ready for the curator to swap into a wing.
         </p>
         {status && (
           <p className="mt-6 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/80">{status}</p>

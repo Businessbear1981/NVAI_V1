@@ -21,7 +21,7 @@ export default function VideoCuratorPage() {
   const refresh = useCallback(async () => {
     const [cfgRes, filesRes] = await Promise.all([
       fetch('/api/videos').then((r) => r.json()),
-      fetch('/api/videos/files').then((r) => r.json()),
+      fetch('/apihttps://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/files').then((r) => r.json()),
     ]);
     setConfig(cfgRes as Config);
     setFiles((filesRes as { files: string[] }).files);
@@ -35,7 +35,7 @@ export default function VideoCuratorPage() {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await fetch('/api/videos/upload', { method: 'POST', body: formData });
+      const res = await fetch('/apihttps://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/upload', { method: 'POST', body: formData });
       if (!res.ok) throw new Error(await res.text());
       const json = await res.json();
       setStatus(`Uploaded ${json.url} (${Math.round(json.bytes / 1024 / 1024)} MB).`);
@@ -51,7 +51,7 @@ export default function VideoCuratorPage() {
     setSavingWing(wing);
     setStatus(null);
     try {
-      const res = await fetch(`/api/videos/wing/${wing}`, {
+      const res = await fetch(`/apihttps://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/wing/${wing}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ leadIn, rotation }),
@@ -141,7 +141,7 @@ export default function VideoCuratorPage() {
         <div className="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6">
           {files.map((f) => (
             <div key={f} className="rounded border border-ivory/10 bg-midnight/40 px-2 py-1.5 font-mono text-[0.55rem] text-ivory/60 truncate">
-              {f.replace('/videos/', '')}
+              {f.replace('https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/', '')}
             </div>
           ))}
         </div>
@@ -218,7 +218,7 @@ function WingEditor({
           className="w-full rounded border border-gold/20 bg-midnight/60 px-3 py-2 font-mono text-[0.75rem] text-ivory focus:border-gold/60 focus:outline-none"
         >
           {files.map((f) => (
-            <option key={f} value={f}>{f.replace('/videos/', '')}</option>
+            <option key={f} value={f}>{f.replace('https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/', '')}</option>
           ))}
         </select>
         <video src={leadIn} muted controls className="mt-3 aspect-video w-full rounded border border-ivory/10" />
@@ -239,7 +239,7 @@ function WingEditor({
                 className="flex-1 rounded border border-ivory/15 bg-midnight/60 px-3 py-1.5 font-mono text-[0.7rem] text-ivory/85 focus:border-gold/60 focus:outline-none"
               >
                 {files.map((f) => (
-                  <option key={f} value={f}>{f.replace('/videos/', '')}</option>
+                  <option key={f} value={f}>{f.replace('https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/', '')}</option>
                 ))}
               </select>
               <button

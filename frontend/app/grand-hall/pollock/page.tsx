@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: '1912 – 1930 · the West',
     body:
       "Born in Cody, Wyoming, the youngest of five brothers. Family moves through Arizona, California, the rural West. His father drinks and disappears. His mother takes the boys with her. The first images that stay with him are the Native American sand paintings of the Navajo and Hopi — circular, performed on the ground, made and unmade as ritual. The drip floor work is already taking shape forty years before it appears on canvas.",
-    video: '/videos/nature-geometry.mp4',
-    rotation: ['/videos/studio-revolution.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-geometry.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/studio-revolution.mp4'],
   },
   {
     key: 'new-york',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: '1930 – 1945 · the Art Students League · WPA · Jung',
     body:
       "Moves to New York at eighteen to study with Thomas Hart Benton. The regionalist murals he paints under Roosevelt's WPA pay the rent. Severe alcoholic episodes through the 1930s. Begins Jungian analysis in 1939 — the unconscious as compositional material, the archetypes as form. Marries Lee Krasner in 1945. They move to a wood-frame house in Springs on the far end of Long Island.",
-    video: '/videos/studio-revolution.mp4',
-    rotation: ['/videos/abstract-harmony.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/studio-revolution.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/abstract-harmony.mp4'],
   },
   {
     key: 'springs',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: '1945 – 1950 · the drip-paint apex',
     body:
       "Converts the barn at Springs into a studio. Lays the canvas flat on the floor — the way the Navajo sand painters had — and drips and pours enamel directly. Lavender Mist, Autumn Rhythm, One: Number 31 — three years of canvases the size of city walls. Hans Namuth films him at work. The two pieces on offer here are from this period — the heavy-drip floor work he was on when Time magazine called him the greatest living painter.",
-    video: '/videos/abstract-harmony.mp4',
-    rotation: ['/videos/studio-revolution.mp4', '/videos/nature-geometry.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/abstract-harmony.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/studio-revolution.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-geometry.mp4'],
   },
   {
     key: 'the-end',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1951 – 1956 · the black paintings · the car',
     body:
       "By 1951 he is drinking again, painfully. The black-and-white enamel paintings of 1951–52 are darker and figurative, as though the unconscious is closing back up. Less work, more drinking, an affair with Ruth Kligman. On the eleventh of August 1956 he drives his Oldsmobile drunk on a country road near Springs and crashes it into a tree. Forty-four years old. Lee Krasner spends the next thirty years guarding the work.",
-    video: '/videos/nature-geometry.mp4',
-    rotation: ['/videos/abstract-harmony.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-geometry.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/abstract-harmony.mp4'],
   },
 ];
 

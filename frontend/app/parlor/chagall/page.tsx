@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: 'The shtetl · 1887–1910',
     body:
       'Born in Liozno near Vitebsk, eldest of nine. His father a herring merchant, his mother running a small grocery. The Hasidic-folk world that would become the floating violinists and rooftop lovers of every subsequent painting. Yiddish was his first language. The synagogue was around the corner.',
-    video: '/videos/nvai_chagall_vitebsk_5k.mp4',
-    rotation: ['/videos/russian-folk.mp4', '/videos/moscow.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_chagall_vitebsk_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/russian-folk.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/moscow.mp4'],
   },
   {
     key: 'ruche',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: 'Paris · 1910–1914 · the bohemian colony',
     body:
       'The Beehive in Montparnasse — a polygonal wooden building, cheap rooms for poor artists. Modigliani, Soutine, Léger, Brancusi, Cendrars, Apollinaire. He worked through the nights and slept through the days. Cubism in the air, but he never quite joined — he kept the floating lovers, the violin, the cow.',
-    video: '/videos/paris.mp4',
-    rotation: ['/videos/montmartre.mp4', '/videos/nvai_chagall_studio_5k.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/montmartre.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_chagall_studio_5k.mp4'],
   },
   {
     key: 'exile',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: 'Russia · America · 1914–1948',
     body:
       'Trapped in Russia by the war. Married Bella in 1915 — his eternal muse. The Revolution, his brief commissar appointment, the disillusionment, escape back to Paris 1923. Then 1941, fleeing the Nazis to New York. Bella dies suddenly in 1944. He cannot pick up a brush for nine months. The exile gallery is full of crying brides.',
-    video: '/videos/moscow.mp4',
-    rotation: ['/videos/muses-lovers.mp4', '/videos/russian-folk.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/moscow.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/russian-folk.mp4'],
   },
   {
     key: 'vence',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: 'The hills above Nice · 1948–1985',
     body:
       'Returns to France 1948. Vence first, then Saint-Paul de Vence from 1966. Vava as his second wife and gentle keeper. The stained-glass commissions begin — Metz, Reims, Jerusalem, the United Nations, the Paris Opéra ceiling. He paints into his nineties. He dies at ninety-seven in 1985, the longest career in modern art.',
-    video: '/videos/cote-azur.mp4',
-    rotation: ['/videos/muses-lovers.mp4', '/videos/paris.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4'],
   },
 ];
 

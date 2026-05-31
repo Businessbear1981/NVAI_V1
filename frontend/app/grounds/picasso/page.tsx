@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: 'Málaga · Barcelona · 1881–1900',
     body:
       'Born in Málaga to a drawing teacher. First word reportedly "piz" — for lápiz, pencil. By twelve he could draw better than his father. Barcelona at fifteen, Els Quatre Gats by nineteen, a brief Madrid academic education he refused to finish. The Spanish ground that the rest of his life was built on.',
-    video: '/videos/barcelona.mp4',
-    rotation: ['/videos/bullfighting.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/barcelona.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/bullfighting.mp4'],
     leadsTo: null as null | { href: string; label: string },
   },
   {
@@ -24,8 +24,8 @@ const CHAPTERS = [
     subtitle: 'Montmartre · 1901–1909 · Blue Period · Rose Period',
     body:
       'First arrival Paris 1900. Casagemas shoots himself in a Montmartre café February 1901. The Blue Period begins. Years at the Bateau-Lavoir tenement on the rue Ravignan, freezing winters, communal water tap. Then the Rose Period, the saltimbanques, the move toward Cubism.',
-    video: '/videos/nvai_picasso_blue_period_5k.mp4',
-    rotation: ['/videos/montmartre.mp4', '/videos/paris.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_picasso_blue_period_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/montmartre.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4'],
     leadsTo: { href: '/grounds/picasso/bateau-lavoir', label: 'Enter the Bateau-Lavoir room' },
   },
   {
@@ -35,8 +35,8 @@ const CHAPTERS = [
     subtitle: 'Demoiselles · Braque · the African masks',
     body:
       'Les Demoiselles d&rsquo;Avignon in 1907. The Trocadéro masks. The collaboration with Braque he would later describe as being "roped together like mountaineers." Analytical Cubism dissolving the figure. Synthetic Cubism reassembling it. The most important conceptual move in twentieth-century painting.',
-    video: '/videos/african-masks.mp4',
-    rotation: ['/videos/studio-revolution.mp4', '/videos/nvai_picasso_cubist_workshop_5k.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/african-masks.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/studio-revolution.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_picasso_cubist_workshop_5k.mp4'],
     leadsTo: { href: '/grounds/picasso/boisgeloup', label: 'Enter the Boisgeloup room' },
   },
   {
@@ -46,8 +46,8 @@ const CHAPTERS = [
     subtitle: 'Boisgeloup · Vallauris · Mougins · 1930–1973',
     body:
       'The Boisgeloup chateau (he owned it 1930–55, Marie-Thérèse, the white plaster sculptures). The Vallauris pottery years 1948–55 (Françoise, the Madoura kiln). Mougins from 1961 (Jacqueline, David Douglas Duncan photographing the chaos, painting at 86 like a man with all the time in the world).',
-    video: '/videos/cote-azur.mp4',
-    rotation: ['/videos/antibes.mp4', '/videos/nvai_picasso_later_atelier_5k.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/antibes.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_picasso_later_atelier_5k.mp4'],
     leadsTo: { href: '/grounds/picasso/mougins', label: 'Enter the Mougins room' },
   },
 ];

@@ -12,8 +12,8 @@ export default function WineCavePage() {
       subtitle="Dug into the hillside"
       caption="A barrel cave carved into the Napa hillside under the chateau. Cool stone, oak barrels, candlelight, the smell of old wood and slow tannin. Private tastings for serious buyers, vintage cellar for VIP collectors."
       backdrop={CAVE_BACKDROP}
-      videoSrc="/videos/nvai_courtyard_5k.mp4"
-      rotation={['/videos/foyer_aerial_pan_final.mp4']}
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4"
+      rotation={['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4']}
     >
       <div className="mx-auto max-w-3xl space-y-6 text-center font-body text-ivory/85 leading-relaxed">
         <p>

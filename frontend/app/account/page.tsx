@@ -12,7 +12,7 @@ export default function AccountPage() {
       subtitle="Profile · DDNDA · saved pieces · history"
       caption="Everything you have signed, saved, asked, or purchased."
       backdrop={ACCOUNT_BACKDROP}
-      videoSrc="/videos/nvai_foyer_aerial_static.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4"
     >
       <div className="mx-auto max-w-2xl space-y-6">
         <button className="w-full rounded border border-gold/40 px-6 py-4 font-mono text-[0.65rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/10">

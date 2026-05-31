@@ -19,7 +19,7 @@ export default function StaircaseLandingPage() {
           The aerial-of-outside that was here before was incorrect for an interior landing.
           Higgsfield generation for a true upstairs salon video is queued. */}
       <CinematicBackdrop
-        videoSrc="/videos/nvai_foyer_landing_handshot_5k.mp4"
+        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_landing_handshot_5k.mp4"
         overlay={0.55}
         playbackRate={0.55}
       />

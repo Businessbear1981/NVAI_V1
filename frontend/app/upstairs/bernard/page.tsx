@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: '1888 – 1891 · Brittany with Gauguin',
     body:
       "Twenty years old, in Brittany. Co-invents Cloisonnism with Émile Schuffenecker — flat areas of bold colour enclosed by dark contour lines, derived from medieval stained glass and Japanese prints. Paul Gauguin arrives that summer. They paint together. By autumn Bernard has shown Gauguin the Cloisonnist way of seeing, and Gauguin will spend the rest of his career being credited with it.",
-    video: '/videos/florence-workshop.mp4',
-    rotation: ['/videos/workshop-awakening.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/workshop-awakening.mp4'],
   },
   {
     key: 'falling-out',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: '1891 – 1893 · Van Gogh dies · Gauguin departs',
     body:
       "Van Gogh — Bernard's close friend, who painted his portrait — shoots himself in 1890. Bernard organises the first Van Gogh memorial exhibition. Then 1891: Gauguin leaves for Tahiti, and lets it be known to the dealers that the Cloisonnist innovations were his. Bernard, twenty-three, watches his reputation transferred to the older man. He never quite recovers his standing in the avant-garde.",
-    video: '/videos/paris.mp4',
-    rotation: ['/videos/montmartre.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/montmartre.mp4'],
   },
   {
     key: 'egypt-italy',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: '1893 – 1904 · the religious turn',
     body:
       "Travels to Egypt, marries a young Lebanese woman, lives in Cairo a decade. Reads the Italian Renaissance masters, the Venetians, Tintoretto and Veronese above all. Turns sharply away from modernism toward classical religious painting. The avant-garde calls this a betrayal. He is unbothered — he is a deeply Catholic painter rediscovering Catholic painting.",
-    video: '/videos/rome-vatican.mp4',
-    rotation: ['/videos/florence-workshop.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4'],
   },
   {
     key: 'late-religious',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1904 – 1941 · classical Catholic painting',
     body:
       "Returns to France. Spends the rest of his career on large-scale religious cycles — Passion paintings, Stations of the Cross, monumental altarpieces. The Passion of Christ on offer here is from this period: roughly three by two metres, oil on canvas, painted in the manner of the Venetian masters he had spent twenty years studying. He dies in Paris in 1941, still arguing for the timeless against the modern.",
-    video: '/videos/nvai_raphael_chapel_5k.mp4',
-    rotation: ['/videos/rome-vatican.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_raphael_chapel_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4'],
   },
 ];
 

@@ -8,8 +8,8 @@ const GALLERY_BACKDROP =
   'radial-gradient(ellipse at 50% 30%, rgba(232,200,122,0.18) 0%, transparent 55%), linear-gradient(180deg, #0a0807 0%, #14100a 50%, #0a0605 100%)';
 
 // The 60-90 second walkaround video — Higgsfield production pending
-const WALKAROUND_VIDEO = '/videos/nvai_gallery_walkaround_90s.mp4';
-const WALKAROUND_FALLBACK = '/videos/nvai_garden_path_continuous_5k.mp4';
+const WALKAROUND_VIDEO = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_gallery_walkaround_90s.mp4';
+const WALKAROUND_FALLBACK = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4';
 
 const ROTATION_INTERVAL_MS = 6500; // ~6.5 seconds per piece, Met-display cadence
 

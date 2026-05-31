@@ -39,7 +39,7 @@ export default function DdndaPage() {
   return (
     <main className="relative min-h-screen overflow-hidden film-grain">
       <video preload="metadata"
-        src="/videos/nvai_foyer_aerial_static.mp4"
+        src="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4"
         autoPlay
         loop
         muted

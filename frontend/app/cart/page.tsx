@@ -12,7 +12,7 @@ export default function CartPage() {
       subtitle="Kiki products · merch · Kickstarter pledges"
       caption="Stripe checkout. Direct sale of paintings is Bernard-routed, not cart-based."
       backdrop={CART_BACKDROP}
-      videoSrc="/videos/nvai_foyer_aerial_static.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4"
     >
       <div className="mx-auto max-w-2xl text-center space-y-6">
         <p className="font-body italic text-ivory/60">Your cart is empty.</p>

@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: '1866 – 1896 · the law years',
     body:
       'Born in Moscow to a tea merchant. Trained as a lawyer, accepted a professorship at thirty. In 1895 he saw a Monet Haystacks at a Moscow exhibition and could not name the subject — the colour alone struck him. He resigned the chair and moved to Munich to study painting. He was thirty years old and starting over.',
-    video: '/videos/moscow.mp4',
-    rotation: ['/videos/russian-folk.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/moscow.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/russian-folk.mp4'],
   },
   {
     key: 'munich',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: '1896 – 1914 · Murnau and the Blue Rider',
     body:
       "Studied at the Munich Academy. By 1908, summers in Murnau with Gabriele Münter — the threshold of abstraction. 1910: he writes On the Spiritual in Art and produces what is often called the first purely abstract watercolour. 1911: co-founds Der Blaue Reiter with Franz Marc. The Composition (1910) on offer here is from this exact moment — the painted music starts.",
-    video: '/videos/munich.mp4',
-    rotation: ['/videos/music-synesthesia.mp4', '/videos/theosophy.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/munich.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/music-synesthesia.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/theosophy.mp4'],
   },
   {
     key: 'russia',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: '1914 – 1921 · the Revolution',
     body:
       'Trapped in Russia by the outbreak of war in 1914. Marries Nina Andreyevskaya. The Revolution. Brief Commissar of Fine Arts appointment under Lunacharsky. Reorganises Russian museums. Becomes disillusioned with the materialist turn in Constructivism, and in 1921 escapes back to Germany.',
-    video: '/videos/russian-folk.mp4',
-    rotation: ['/videos/moscow.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/russian-folk.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/moscow.mp4'],
   },
   {
     key: 'bauhaus',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1922 – 1933 · Weimar · Dessau',
     body:
       "Teaches at the Bauhaus for eleven years. Geometric period sharpens: circle, triangle, line. Writes Point and Line to Plane. Friendships with Klee, Schoenberg, Albers. The Nazis close the Bauhaus in 1933 and label his work 'degenerate.'",
-    video: '/videos/geometry-harmony.mp4',
-    rotation: ['/videos/abstract-harmony.mp4', '/videos/nature-geometry.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/geometry-harmony.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/abstract-harmony.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-geometry.mp4'],
   },
   {
     key: 'paris',
@@ -53,8 +53,8 @@ const CHAPTERS = [
     subtitle: '1933 – 1944 · Neuilly-sur-Seine',
     body:
       'Flees to Paris. Biomorphic forms creep into the late paintings — softer, embryonic, alive. Dies in Neuilly in 1944. His Composition VII at the Tretyakov is now considered one of the founding documents of twentieth-century abstraction.',
-    video: '/videos/abstract-harmony.mp4',
-    rotation: ['/videos/music-synesthesia.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/abstract-harmony.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/music-synesthesia.mp4'],
   },
 ];
 

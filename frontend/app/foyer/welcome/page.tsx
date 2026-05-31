@@ -18,7 +18,7 @@ export default function WelcomePage() {
       title="Guestbook · About · Merch"
       subtitle="Sign in. Learn the Institute. Take something home."
       backdrop={WELCOME_BACKDROP}
-      videoSrc="/videos/nvai_foyer_landing_handshot_5k.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_landing_handshot_5k.mp4"
     >
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <section className="space-y-6">

@@ -113,7 +113,7 @@ export default function KikiPage() {
       subtitle="Queen of Montparnasse"
       caption="For over one million super-fans worldwide. The Moulin Rouge wing — exposé, audiobook, the feature film Kickstarter, the 90-second blockbuster teaser, the guest book, ten percent to charity."
       backdrop={KIKI_BACKDROP}
-      videoSrc="/videos/nvai_kiki_moulin_rouge_5k.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_kiki_moulin_rouge_5k.mp4"
     >
       {/* Edith Piaf-inspired ambient — drop a real MP3 at /kiki/audio/piaf-ambient.mp3 */}
       <AudioBed src="/kiki/audio/piaf-ambient.mp3" label="Piaf" />
@@ -189,7 +189,7 @@ export default function KikiPage() {
           </h2>
           <p className="text-center text-sm italic text-ivory/85 max-w-2xl mx-auto">
             Seeded by the archival photos above. Feed each prompt to Higgsfield, then drop the
-            resulting MP4 into <code className="font-mono text-[0.8em]">/public/videos/</code> and
+            resulting MP4 into <code className="font-mono text-[0.8em]">/publichttps://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/</code> and
             swap it in via the video curator.
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

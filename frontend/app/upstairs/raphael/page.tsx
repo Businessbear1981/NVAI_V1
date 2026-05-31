@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: '1483 – 1494 · the court of Federico da Montefeltro',
     body:
       "Born Raffaello Sanzio in Urbino — at the time one of the most cultivated small courts in Italy. His father Giovanni Santi was a painter and a poet, friendly with Mantegna. Raphael loses both parents by eleven. He grows up in his father's workshop, his uncle as guardian. The Madonna formula is half-learnt before he has facial hair.",
-    video: '/videos/florence-workshop.mp4',
-    rotation: ['/videos/milan-court.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/milan-court.mp4'],
   },
   {
     key: 'perugia',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: '1499 – 1504 · apprenticeship with Perugino',
     body:
       "Enters Pietro Perugino's workshop in Perugia at sixteen. Vasari notes that within a year Raphael's hand was indistinguishable from his master's. He absorbs the soft sfumato, the balanced compositions, the gentle Umbrian palette. The Madonna with Child on offer here likely begins in this period — the Peruginesque base under the early Florentine refinement.",
-    video: '/videos/milan-court.mp4',
-    rotation: ['/videos/florence-workshop.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/milan-court.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4'],
   },
   {
     key: 'florence',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: '1504 – 1508 · the Madonna years',
     body:
       "Moves to Florence at twenty-one. Studies Leonardo's cartoons, Michelangelo's nudes, Fra Bartolomeo's compositions. Produces over a dozen Madonnas in four years — the body of work that defines the Renaissance image of the Virgin and Child forever. Our piece carries that signature: pyramidal composition, downward-cast gaze, the child slightly turning.",
-    video: '/videos/florence-workshop.mp4',
-    rotation: ['/videos/rome-vatican.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4'],
   },
   {
     key: 'rome',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1508 – 1520 · the Vatican',
     body:
       "Julius II calls him to Rome at twenty-five. The Stanze frescoes. The School of Athens. The Sistine Madonna. The unfinished Transfiguration carried at his funeral. He dies on his thirty-seventh birthday in 1520 — Good Friday — and is buried in the Pantheon. Rome shuts for the day.",
-    video: '/videos/rome-vatican.mp4',
-    rotation: ['/videos/florence-workshop.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4'],
   },
 ];
 

@@ -12,7 +12,7 @@ export default function AuctionTabPage() {
       subtitle="Events calendar · register · past results"
       caption="The utility layer for the Auction House. Cinematic experience lives in the Grand Hall."
       backdrop={AUCTION_TAB_BACKDROP}
-      videoSrc="/videos/foyer_aerial_pan_final.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4"
     >
       <div className="mx-auto max-w-2xl space-y-6 text-center font-body italic text-ivory/70">
         <p>

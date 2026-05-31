@@ -11,7 +11,7 @@ export default function HomePage() {
           the movement reads as a slow hovering hold, not a zoom. The zoom transition is
           removed entirely per Sean — home links straight to /foyer. */}
       <CinematicBackdrop
-        videoSrc="/videos/nvai_aerial_drone_approach_5k.mp4"
+        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_aerial_drone_approach_5k.mp4"
         fallbackGradient="radial-gradient(ellipse at 50% 35%, rgba(232,200,122,0.18) 0%, transparent 55%), radial-gradient(ellipse at 50% 80%, rgba(91,43,18,0.55) 0%, transparent 65%), linear-gradient(180deg, #1a1208 0%, #3b1f0f 40%, #1a0e08 100%)"
         overlay={0.4}
         playbackRate={0.25}

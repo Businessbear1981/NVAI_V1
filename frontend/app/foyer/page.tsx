@@ -15,7 +15,7 @@ export default function FoyerPage() {
   return (
     <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
       <CinematicBackdrop
-        videoSrc="/videos/nvai_grand_foyer_5k.mp4"
+        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_grand_foyer_5k.mp4"
         overlay={0.55}
         playbackRate={0.6}
       />

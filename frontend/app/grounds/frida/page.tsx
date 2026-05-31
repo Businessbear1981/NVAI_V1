@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: 'Coyoacán · 1907 · the cobalt house',
     body:
       'Born July 1907 in the blue house her father built on the corner of Allende and Londres, in the Coyoacán neighbourhood of Mexico City. Polio at six left her right leg thinner. She climbed trees with the boys. Studied at the elite Escuela Nacional Preparatoria, one of thirty-five girls in a school of two thousand.',
-    video: '/videos/casa-azul-awakening.mp4',
-    rotation: ['/videos/coyoacan.mp4', '/videos/casa-azul.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/casa-azul-awakening.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/coyoacan.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/casa-azul.mp4'],
   },
   {
     key: 'accident',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: '17 September 1925 · the bus and the streetcar',
     body:
       'Eighteen years old. A wooden bus collides with a streetcar. A handrail spears her body from hip through pelvis. Three months in hospital. A year in a body cast. She starts painting flat on her back in bed, using a mirror suspended over her face. She paints herself because she is the subject she knows best.',
-    video: '/videos/hospital-rooms.mp4',
-    rotation: ['/videos/pain-suffering.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/hospital-rooms.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/pain-suffering.mp4'],
   },
   {
     key: 'diego',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: 'Married 1929 · divorced 1939 · remarried 1940',
     body:
       'Diego Rivera was twenty-one years older, three hundred pounds heavier, and the most famous painter in Mexico. Married 21 August 1929. Lived in two houses connected by a bridge. He was constantly unfaithful. She slept with men and women. They divorced in 1939 — La Mesa Herida was painted in the divorce year, full of the wounded animals and the empty chair. They remarried in 1940 on her terms: separate bedrooms, separate finances.',
-    video: '/videos/diego-love.mp4',
-    rotation: ['/videos/mexican-folk.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/diego-love.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/mexican-folk.mp4'],
   },
   {
     key: 'late',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1940–1954 · her amputation · her death',
     body:
       'Right leg amputated below the knee 1953. She paints from her bed, surrounded by the Indigenous textiles, votives, milagros, and parrots she had collected all her life. Her last diary entry, July 1954: "I hope the exit is joyful — and I hope never to return." She is forty-seven.',
-    video: '/videos/xochimilco.mp4',
-    rotation: ['/videos/nature-jungle.mp4', '/videos/pain-suffering.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/xochimilco.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-jungle.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/pain-suffering.mp4'],
   },
 ];
 

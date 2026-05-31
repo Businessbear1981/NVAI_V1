@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: '1869 – 1898 · law clerk to painter',
     body:
       "Born in Le Cateau-Cambrésis in northern France. Studies law in Paris. At twenty-one, recovering from appendicitis, his mother gives him a box of paints. He drops the legal career. Enters the École des Beaux-Arts at twenty-five, where his teacher Gustave Moreau lets him copy in the Louvre and tells him: 'You were born to simplify painting.' He has been late to every important door of his life.",
-    video: '/videos/paris.mp4',
-    rotation: ['/videos/cote-azur.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4'],
   },
   {
     key: 'fauvism',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: '1905 · Collioure · the wild beasts',
     body:
       "The summer of 1905 in Collioure on the Mediterranean coast with André Derain. Side by side they paint with colours straight from the tube — vermilion, cobalt, chrome yellow, no mixing on the palette. At the Salon d'Automne that autumn the critic Louis Vauxcelles points at a classical sculpture surrounded by their canvases and says 'Donatello parmi les fauves' — Donatello among the wild beasts. The name sticks. Fauvism is born and lasts two years.",
-    video: '/videos/cote-azur.mp4',
-    rotation: ['/videos/antibes.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/antibes.mp4'],
   },
   {
     key: 'nice',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: '1917 – 1943 · the Riviera years',
     body:
       "Moves to Nice in 1917. Will stay on the Côte d'Azur the rest of his life. Paints odalisques, open windows, patterned interiors — the painted equivalent of opening a shutter at noon and standing in the light. The pictogram signature on our Woman with Child sits squarely in this period — he had stopped writing his name and begun drawing a small ideogram of himself on the right side of the canvas.",
-    video: '/videos/antibes.mp4',
-    rotation: ['/videos/cote-azur.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/antibes.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4'],
   },
   {
     key: 'cutouts',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1941 – 1954 · &ldquo;drawing with scissors&rdquo;',
     body:
       "1941: stomach cancer. The surgery leaves him bedridden. He cannot stand at an easel any more. So he asks an assistant to paint sheets of paper in pure gouache colours, then cuts shapes from them with large scissors directly into the air. He calls it &ldquo;drawing with scissors.&rdquo; The Vence chapel — the Chapelle du Rosaire he designs entire from stained glass to chasubles — opens in 1951. He dies in Nice in 1954, eighty-four years old, having simplified painting exactly as Moreau predicted.",
-    video: '/videos/cote-azur.mp4',
-    rotation: ['/videos/antibes.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/antibes.mp4'],
   },
 ];
 

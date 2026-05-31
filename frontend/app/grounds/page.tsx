@@ -18,17 +18,17 @@ import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
 // Longer compiled rotation — the grounds tour covers four artists plus vineyards
 // and the wine cave, so the loop is wider. Wine-cave-specific video is pending
 // Higgsfield generation; meanwhile the courtyard + garden_party clips carry the segment.
-const GROUNDS_LEAD_IN = '/videos/nvai_aerial_drone_approach_5k.mp4';
+const GROUNDS_LEAD_IN = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_aerial_drone_approach_5k.mp4';
 const GROUNDS_ROTATION = [
-  '/videos/nvai_garden_path_to_patio_5k.mp4',
-  '/videos/nvai_garden_path_continuous_5k.mp4',
-  '/videos/nvai_garden_party_5k.mp4',
-  '/videos/nvai_garden_passage_5k.mp4',
-  '/videos/nvai_courtyard_5k.mp4',
-  '/videos/nvai_monet_secret_garden_5k.mp4',
-  '/videos/nvai_picasso_studio_5k.mp4',
-  '/videos/nvai_leonardo_workshop_5k.mp4',
-  '/videos/casa-azul.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_to_patio_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_party_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_monet_secret_garden_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_picasso_studio_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_leonardo_workshop_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/casa-azul.mp4',
 ];
 
 const DESTINATIONS = [

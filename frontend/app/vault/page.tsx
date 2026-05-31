@@ -19,7 +19,7 @@ export default function VaultPage() {
       subtitle="Escrow · Lending · Verification"
       caption="The transactional layer. Bernard surfaces what you need when you need it."
       backdrop={VAULT_BACKDROP}
-      videoSrc="/videos/nvai_foyer_aerial_static.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4"
     >
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {services.map((s) => (

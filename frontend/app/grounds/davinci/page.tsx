@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: 'Apprenticeship · 1466–1482 · Verrocchio',
     body:
       'Illegitimate son of a Vinci notary, raised by his grandmother. Apprenticed at fourteen to Andrea del Verrocchio in Florence. Painted an angel into his master&rsquo;s Baptism of Christ so finely that Verrocchio is said to have put down his brushes forever. Joined the painters&rsquo; guild at twenty.',
-    video: '/videos/nvai_leonardo_workshop_5k.mp4',
-    rotation: ['/videos/workshop-awakening.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_leonardo_workshop_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/workshop-awakening.mp4'],
   },
   {
     key: 'milan',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: 'The Sforza court · 1482–1499 · Last Supper · Lady with a Fur',
     body:
       'Wrote Ludovico Sforza a letter listing himself as a military engineer, then added "in painting I can do whatever can be done." Took the job. Stayed seventeen years. The Last Supper. The fortifications. The flying machines, the anatomical studies, the water hydraulics, the codex sheets that survive today. The Lady with a Fur is painted in this period.',
-    video: '/videos/nvai_leonardo_workshop_5k.mp4',
-    rotation: ['/videos/flight-machines.mp4', '/videos/water-hydraulics.mp4', '/videos/human-anatomy.mp4', '/videos/workshop-awakening.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_leonardo_workshop_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/flight-machines.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/water-hydraulics.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/human-anatomy.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/workshop-awakening.mp4'],
   },
   {
     key: 'return',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: '1500–1506 · the Mona Lisa begins',
     body:
       'Sforza falls to the French. Leonardo wanders. Mantua, Venice, then Florence again. Begins the Mona Lisa (he will carry it with him the rest of his life, never finishing). Competes with the young Michelangelo on a battle scene. Studies birds for the flight treatise. Dissects, sketches, writes.',
-    video: '/videos/nvai_leonardo_workshop_5k.mp4',
-    rotation: ['/videos/workshop-awakening.mp4', '/videos/human-anatomy.mp4', '/videos/nature-geometry.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_leonardo_workshop_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/workshop-awakening.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/human-anatomy.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-geometry.mp4'],
   },
   {
     key: 'rome',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1513–1516 · the Medici · the Vatican',
     body:
       'Giuliano de&rsquo; Medici brings him to Rome to work in the Belvedere at the Vatican. Raphael is already there, Michelangelo finishing the Sistine. Leonardo experiments — distillations, hydraulic toys, automata. Paints little. He is sixty-one. The grand commissions go to younger men.',
-    video: '/videos/nvai_leonardo_workshop_5k.mp4',
-    rotation: ['/videos/human-anatomy.mp4', '/videos/workshop-awakening.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_leonardo_workshop_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/human-anatomy.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/workshop-awakening.mp4'],
   },
   {
     key: 'amboise',
@@ -53,8 +53,8 @@ const CHAPTERS = [
     subtitle: 'The last years · 1516–1519 · the King of France',
     body:
       'Francis I invites him to the Château du Clos Lucé. Pension, dignity, a house with a tunnel to the royal chateau. Leonardo brings three paintings with him — the Mona Lisa among them. His right hand has gone palsied. He writes and draws with his left. Dies May 1519, age sixty-seven. Some accounts have Francis cradling his head at the end.',
-    video: '/videos/nvai_leonardo_workshop_5k.mp4',
-    rotation: ['/videos/workshop-awakening.mp4', '/videos/nature-geometry.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_leonardo_workshop_5k.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/workshop-awakening.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-geometry.mp4'],
   },
 ];
 

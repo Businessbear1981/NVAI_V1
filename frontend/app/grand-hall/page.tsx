@@ -11,11 +11,11 @@ const HALL_BACKDROP =
 // to evoke a chateau ballroom. Higgsfield generation for the true ballroom
 // (period-French chateau, chandeliers, parquet de Versailles, candlelight)
 // is queued.
-const HALL_LEAD_IN = '/videos/nvai_grand_foyer_5k.mp4';
+const HALL_LEAD_IN = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_grand_foyer_5k.mp4';
 const HALL_ROTATION = [
-  '/videos/rome-vatican.mp4',
-  '/videos/nvai_courtyard_5k.mp4',
-  '/videos/foyer_aerial_pan_final.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4',
 ];
 
 const DESTINATIONS = [

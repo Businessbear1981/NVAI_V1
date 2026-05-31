@@ -12,7 +12,7 @@ export default function InquirePage() {
       subtitle="Through Bernard"
       caption="Tell us what you are looking for. Bernard routes to Sean or Richard for material questions."
       backdrop={INQUIRE_BACKDROP}
-      videoSrc="/videos/nvai_foyer_aerial_static.mp4"
+      videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4"
     >
       <div className="mx-auto max-w-2xl space-y-6">
         <input

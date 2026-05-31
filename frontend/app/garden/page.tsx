@@ -15,7 +15,7 @@ export default function GardenPage() {
   return (
     <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
       <CinematicBackdrop
-        videoSrc="/videos/nvai_garden_path_to_patio_5k.mp4"
+        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_to_patio_5k.mp4"
         overlay={0.5}
         playbackRate={0.55}
       />

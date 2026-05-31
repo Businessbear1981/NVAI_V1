@@ -19,7 +19,7 @@ export default function ParlorPage() {
           dedicated parlor video has not been generated yet. Higgsfield generation
           for a true 'La Ruche bohemian bar' video is queued. */}
       <CinematicBackdrop
-        videoSrc="/videos/nvai_chagall_studio_5k.mp4"
+        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_chagall_studio_5k.mp4"
         overlay={0.65}
         playbackRate={0.5}
       />

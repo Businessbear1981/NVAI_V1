@@ -13,8 +13,8 @@ const CHAPTERS = [
     subtitle: '1884 – 1906 · the Sephardic family',
     body:
       "Born Amedeo Modigliani in Livorno, into an old Sephardic Jewish family whose business was failing the year he arrived. His mother teaches him Spinoza, Bergson, the entire Italian Renaissance from her own library. By fourteen he has had typhoid; by sixteen tuberculosis. His mother spends savings on Italy tours — Florence, Rome, Venice — and he sees the Renaissance directly. He arrives in Paris in 1906 with five hundred francs sewn into his coat.",
-    video: '/videos/milan-court.mp4',
-    rotation: ['/videos/florence-workshop.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/milan-court.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4'],
   },
   {
     key: 'paris',
@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: '1906 – 1909 · Montmartre · Cézanne · failure',
     body:
       "Bateau-Lavoir tenement in Montmartre, next door to Picasso. Sees the 1907 Cézanne retrospective and is dismantled by it. Drinks too much; takes too much hashish. By 1909 he is broke, ill, painting almost nothing. He moves to Montparnasse and decides he will sculpt — not paint — for the next four years.",
-    video: '/videos/montmartre.mp4',
-    rotation: ['/videos/paris.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/montmartre.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4'],
   },
   {
     key: 'masks',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: '1909 – 1914 · sculpture and the elongated face',
     body:
       "Discovers the African and Oceanic masks Picasso had pulled from the Trocadéro, plus the Cycladic heads at the Louvre. Carves limestone heads — about thirty of them — until the war makes stone too expensive and his tuberculosis can no longer take the dust. Returns to painting in 1914 with the elongated face locked in. Every portrait afterwards is a Cycladic head turned into oil.",
-    video: '/videos/african-masks.mp4',
-    rotation: ['/videos/muses-lovers.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/african-masks.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4'],
   },
   {
     key: 'portraits',
@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1914 – 1919 · Beatrice · Jeanne · Kiki',
     body:
       "Beatrice Hastings, the English poet, his lover 1914–1916. Jeanne Hébuterne, art student, becomes his common-law wife 1917 — they have a daughter. The first solo exhibition in 1917 is closed by the police on the opening day for indecency. He paints Kiki de Montparnasse — Alice Prin — in 1916; the Nu couché aux bras levés in our Cabinet is the one she sat for. Hers was the only nude he ever painted that he did not sell.",
-    video: '/videos/muses-lovers.mp4',
-    rotation: ['/videos/african-masks.mp4', '/videos/montmartre.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/african-masks.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/montmartre.mp4'],
   },
   {
     key: 'death',
@@ -53,8 +53,8 @@ const CHAPTERS = [
     subtitle: 'January 1920',
     body:
       "Tubercular meningitis. He dies on the twenty-fourth of January, 1920, in the Charité hospital. Jeanne Hébuterne is nine months pregnant. She throws herself from a fifth-floor window the next morning. They are buried weeks apart in Père Lachaise. Their orphaned daughter is raised by his sister and will write the definitive biography sixty years later.",
-    video: '/videos/muses-lovers.mp4',
-    rotation: ['/videos/paris.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4'],
   },
 ];
 
