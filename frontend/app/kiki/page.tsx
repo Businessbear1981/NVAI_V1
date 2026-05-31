@@ -50,21 +50,9 @@ const offerings = [
 ];
 
 export default function KikiPage() {
-  const [introDone, setIntroDone] = useState(false);
-
+  // Videos disabled in Kiki room per direction — no MarqueeLeadIn, no WingLayout backdrop video.
   return (
     <>
-      {!introDone && (
-        <MarqueeLeadIn
-          videoSrc="/videos/nvai_kiki_moulin_rouge_5k.mp4"
-          videoSeconds={6}
-          marqueeSeconds={4}
-          eyebrow="The Marquee"
-          title="TONIGHT ONLY"
-          subtitle="The Queen of Montparnasse"
-          onComplete={() => setIntroDone(true)}
-        />
-      )}
       {/* Scrapbook background — scattered archival photos at low opacity behind a dark scrim
           so the foreground text reads clearly. Subtle, not competing for attention. */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
@@ -125,8 +113,6 @@ export default function KikiPage() {
       subtitle="Queen of Montparnasse"
       caption="For over one million super-fans worldwide. The Moulin Rouge wing — exposé, audiobook, the feature film Kickstarter, the 90-second blockbuster teaser, the guest book, ten percent to charity."
       backdrop={KIKI_BACKDROP}
-      videoSrc={VIDEOS.kiki.danceOneMinute}
-      rotation={VIDEOS.kiki.burlesqueVariants}
     >
       {/* Edith Piaf-inspired ambient — drop a real MP3 at /kiki/audio/piaf-ambient.mp3 */}
       <AudioBed src="/kiki/audio/piaf-ambient.mp3" label="Piaf" />
