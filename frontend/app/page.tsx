@@ -20,20 +20,38 @@ export default function HomePage() {
         overlay={0.4}
       />
 
-      {/* Institute logo — top left */}
-      <div className="absolute left-8 top-8 z-30 flex items-center gap-4 pointer-events-none">
-        <Image
-          src="/brand/nvai-logo.png"
-          alt="Napa Valley Art Institut"
-          width={210}
-          height={163}
-          priority
-          className="h-24 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] md:h-32"
-        />
-        <div className="hidden border-l border-gold/30 pl-4 md:block">
-          <p className="font-mono text-[0.5rem] uppercase tracking-[0.35em] text-gold/70">Napa Valley</p>
-          <p className="font-didot text-lg tracking-[0.16em] text-ivory drop-shadow">Art Institut</p>
+      {/* Institute logo — top left, with Open Letter link beneath */}
+      <div className="absolute left-8 top-8 z-30 flex flex-col items-start gap-3">
+        <div className="flex items-center gap-4 pointer-events-none">
+          <Image
+            src="/brand/nvai-logo.png"
+            alt="Napa Valley Art Institut"
+            width={210}
+            height={163}
+            priority
+            className="h-24 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] md:h-32"
+          />
+          <div className="hidden border-l border-gold/30 pl-4 md:block">
+            <p className="font-mono text-[0.5rem] uppercase tracking-[0.35em] text-gold/70">Napa Valley</p>
+            <p className="font-didot text-lg tracking-[0.16em] text-ivory drop-shadow">Art Institut</p>
+          </div>
         </div>
+        <a
+          href="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_open_letter.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
+        >
+          Open Letter →
+        </a>
+        <a
+          href="/about"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
+        >
+          About the Institut →
+        </a>
       </div>
 
       {/* Three marble plaques — small markers anchored to the bottom; the video dominates */}
