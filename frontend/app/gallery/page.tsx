@@ -243,7 +243,7 @@ export default function GalleryPage() {
           </div>
           {walkaroundOn && (
             <div className="mt-6 overflow-hidden rounded-lg border border-gold/30 bg-midnight">
-              <video
+              <video preload="metadata"
                 src={WALKAROUND_VIDEO}
                 onError={(e) => {
                   const t = e.currentTarget;

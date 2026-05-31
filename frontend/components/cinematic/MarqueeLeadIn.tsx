@@ -55,7 +55,7 @@ export default function MarqueeLeadIn({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
       {/* Video phase */}
       {phase === 'video' && (
-        <video
+        <video preload="metadata"
           ref={videoRef}
           src={videoSrc}
           autoPlay
@@ -68,7 +68,7 @@ export default function MarqueeLeadIn({
       {/* Marquee phase — freeze frame still showing + title card overlay */}
       {phase === 'marquee' && (
         <>
-          <video
+          <video preload="metadata"
             src={videoSrc}
             autoPlay={false}
             muted

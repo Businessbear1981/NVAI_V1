@@ -23,11 +23,11 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
       subtitle={painting.year}
       caption={painting.inspirationNote}
       backdrop="radial-gradient(ellipse at 50% 30%, rgba(232,200,122,0.15) 0%, transparent 55%), linear-gradient(180deg, #0a0807 0%, #14100a 50%, #0a0605 100%)"
-      videoSrc={painting.inspirationVideo}
     >
-      <div className="mx-auto max-w-5xl space-y-12">
+      <div className="mx-auto max-w-6xl space-y-12">
         {/* Hero painting — framed and lit. Renders the image if present, otherwise an intentional 'available upon NDA' frame. */}
-        <figure className="mx-auto max-w-3xl">
+        {/* Painting is the focal point on the piece page — no video backdrop, larger frame. */}
+        <figure className="mx-auto max-w-5xl">
           <div
             className="relative overflow-hidden rounded-sm bg-midnight"
             style={{

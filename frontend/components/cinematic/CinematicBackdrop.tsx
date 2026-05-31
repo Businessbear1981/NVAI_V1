@@ -36,7 +36,7 @@ export default function CinematicBackdrop({
       style={fallbackGradient ? { background: fallbackGradient } : undefined}
     >
       {videoSrc && (
-        <video
+        <video preload="metadata"
           key={videoSrc}
           ref={videoRef}
           src={videoSrc}

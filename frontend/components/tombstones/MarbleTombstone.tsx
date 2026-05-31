@@ -29,10 +29,10 @@ export default function MarbleTombstone({
         </div>
 
         <div className="space-y-3">
-          <h2 className="font-didot text-4xl uppercase tracking-[0.12em] text-[#1a0e05] md:text-5xl">
+          <h2 className="font-didot text-2xl uppercase tracking-[0.12em] text-[#1a0e05] md:text-3xl">
             {title}
           </h2>
-          <p className="font-display text-lg italic tracking-wider text-[#4a2c08]">
+          <p className="font-display text-base italic tracking-wider text-[#4a2c08]">
             {subtitle}
           </p>
         </div>
