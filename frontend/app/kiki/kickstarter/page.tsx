@@ -60,7 +60,7 @@ export default function KikiKickstarterPage() {
       <div className="space-y-12">
         {/* Live cabaret cut */}
         <div className="mx-auto max-w-3xl overflow-hidden rounded-lg border border-gold/30 bg-midnight">
-          <video src={VIDEOS.kiki.moulinRougeLive} controls className="aspect-video w-full object-cover" />
+          <video preload="none" src={VIDEOS.kiki.moulinRougeLive} controls className="aspect-video w-full object-cover" />
           <p className="px-3 py-2 font-mono text-[0.55rem] uppercase tracking-[0.28em] text-gold/70">
             The 45-second cabaret cut · presented to potential backers
           </p>
