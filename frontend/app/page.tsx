@@ -7,13 +7,12 @@ import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 export default function HomePage() {
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-midnight film-grain">
-      {/* Aerial pan of the chateau — lateral motion, no zoom. Cinema establishing shot.
-          Slowed to 0.5x for the Aman/Loro Piana luxury cadence. Home links to /foyer. */}
+      {/* Static aerial hold — no zoom, no pan, no motion. Painting-still with film-grain
+          overlay providing the only sense of life. Most-luxury baseline. */}
       <CinematicBackdrop
-        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4"
+        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4"
         fallbackGradient="radial-gradient(ellipse at 50% 35%, rgba(232,200,122,0.18) 0%, transparent 55%), radial-gradient(ellipse at 50% 80%, rgba(91,43,18,0.55) 0%, transparent 65%), linear-gradient(180deg, #1a1208 0%, #3b1f0f 40%, #1a0e08 100%)"
         overlay={0.4}
-        playbackRate={0.5}
       />
 
       {/* Institute logo — top left */}
