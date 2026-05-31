@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface CinematicBackdropProps {
   videoSrc?: string;
@@ -18,28 +18,8 @@ export default function CinematicBackdrop({
   playbackRate = 1,
 }: CinematicBackdropProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-
-  // Lazy-load video only when in viewport — page renders instantly with gradient/poster.
-  useEffect(() => {
-    if (!containerRef.current || !videoSrc) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Delay video load by a beat so first paint and core content settle first
-          setTimeout(() => setShouldLoadVideo(true), 400);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '0px', threshold: 0.1 }
-    );
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [videoSrc]);
 
   useEffect(() => {
-    if (!shouldLoadVideo) return;
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
@@ -47,15 +27,14 @@ export default function CinematicBackdrop({
     v.playbackRate = playbackRate;
     v.load();
     v.play().catch(() => { /* autoplay blocked is fine */ });
-  }, [shouldLoadVideo, playbackRate]);
+  }, [videoSrc, playbackRate]);
 
   return (
     <div
-      ref={containerRef}
       className="absolute inset-0"
       style={fallbackGradient ? { background: fallbackGradient } : undefined}
     >
-      {videoSrc && shouldLoadVideo && (
+      {videoSrc && (
         <video
           key={videoSrc}
           ref={videoRef}
