@@ -15,20 +15,29 @@ import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
  * The artist-wing destinations live at the bottom of the page as a small,
  * unobtrusive index for visitors who already know where they want to land.
  */
-// Longer compiled rotation — the grounds tour covers four artists plus vineyards
-// and the wine cave, so the loop is wider. Wine-cave-specific video is pending
-// Higgsfield generation; meanwhile the courtyard + garden_party clips carry the segment.
+// Grounds tour rotation — follows the visitor's walk in narrative order.
+// Artist-studio videos are NOT included here; they live on their own pages.
+// Vineyards and wine-cave are not separate routes anymore — they will be
+// videos in this rotation once Higgsfield generates them.
+//
+// Pending Higgsfield generations (queued):
+//   - the orchard (sun-dappled walk between rows of fruit trees)
+//   - the vines (vineyard close-up — heavy clusters of cabernet at golden hour)
+//   - the caves (interior of the wine cave — vaulted stone, barrels, candlelight)
 const GROUNDS_LEAD_IN = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_aerial_drone_approach_5k.mp4';
 const GROUNDS_ROTATION = [
+  // 1. Path to the secret garden
   'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_to_patio_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_party_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
+  // 2. The secret garden itself
   'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_monet_secret_garden_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_picasso_studio_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_leonardo_workshop_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/casa-azul.mp4',
+  // 3. Walk along the vineyard
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4',
+  // 4. Through the passage (closest fit to "orchard" until that's generated)
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4',
+  // 5. Garden party — the patio scene
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_party_5k.mp4',
+  // 6. Courtyard — at the back of the chateau, completing the loop
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
 ];
 
 const DESTINATIONS = [
@@ -36,8 +45,6 @@ const DESTINATIONS = [
   { label: 'Picasso', subtitle: 'Three studio periods', href: '/grounds/picasso' },
   { label: 'Da Vinci', subtitle: 'Renaissance workshop', href: '/grounds/davinci' },
   { label: 'Frida', subtitle: 'Casa Azul', href: '/grounds/frida' },
-  { label: 'Vineyards', subtitle: 'Thirty acres', href: '/grounds/vineyards' },
-  { label: 'Wine cave', subtitle: 'Under the chateau', href: '/grounds/wine-cave' },
 ];
 
 export default function GroundsPage() {
@@ -71,7 +78,7 @@ export default function GroundsPage() {
             The Grounds
           </h1>
           <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
-            Thirty acres of estate, six destinations, one continuous walk
+            Thirty acres of estate, four destinations, one continuous walk
           </p>
           <div className="mx-auto mt-8 h-px w-32 bg-gold/40" />
           <p className="mx-auto mt-8 max-w-xl font-body italic text-ivory/80 leading-relaxed">
@@ -83,9 +90,9 @@ export default function GroundsPage() {
 
         <div className="mx-auto mt-auto mb-12 max-w-5xl pt-20">
           <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-6">
-            Six destinations along the walk
+            Four destinations along the walk
           </p>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {DESTINATIONS.map((d) => (
               <Link
                 key={d.href}
