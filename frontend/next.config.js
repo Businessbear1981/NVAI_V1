@@ -13,7 +13,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://127.0.0.1:8200/api/:path*',
+        destination: 'https://nvaiv1-production.up.railway.app/api/:path*',
       },
     ];
   },
