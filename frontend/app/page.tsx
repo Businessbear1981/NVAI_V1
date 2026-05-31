@@ -54,7 +54,6 @@ export default function HomePage() {
               title="Enter Foyer"
               subtitle="Villa Monticello"
               caption="The collection awaits inside."
-              featured
             />
           </Link>
 
