@@ -8,6 +8,7 @@ interface CinematicBackdropProps {
   fallbackGradient?: string;
   overlay?: number; // 0-1
   playbackRate?: number; // 1 = normal, 0.5 = half speed for slower cinematic feel
+  frozenAtEnd?: boolean; // skip autoplay; seek to last frame so the shot reads as a still image
 }
 
 export default function CinematicBackdrop({
@@ -16,6 +17,7 @@ export default function CinematicBackdrop({
   fallbackGradient,
   overlay = 0.35,
   playbackRate = 1,
+  frozenAtEnd = false,
 }: CinematicBackdropProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -26,8 +28,19 @@ export default function CinematicBackdrop({
     v.playsInline = true;
     v.playbackRate = playbackRate;
     v.load();
+
+    if (frozenAtEnd) {
+      const seekToEnd = () => {
+        if (!v.duration || !isFinite(v.duration)) return;
+        v.currentTime = Math.max(0, v.duration - 0.05);
+        v.pause();
+      };
+      v.addEventListener('loadedmetadata', seekToEnd);
+      return () => v.removeEventListener('loadedmetadata', seekToEnd);
+    }
+
     v.play().catch(() => { /* autoplay blocked is fine */ });
-  }, [videoSrc, playbackRate]);
+  }, [videoSrc, playbackRate, frozenAtEnd]);
 
   return (
     <div
@@ -41,8 +54,8 @@ export default function CinematicBackdrop({
           src={videoSrc}
           poster={poster}
           preload="metadata"
-          autoPlay
-          loop
+          autoPlay={!frozenAtEnd}
+          loop={!frozenAtEnd}
           muted
           playsInline
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
