@@ -1,13 +1,19 @@
-import { NextResponse, type NextRequest } from 'next/server';
+import { type NextRequest } from 'next/server'
+import { updateSession } from '@/utils/supabase/middleware'
 
-/**
- * Pass-through middleware. The DDNDA is NOT a gate to entry — it's an optional
- * document a visitor may sign once they're inside. No route is blocked.
- */
-export function middleware(_req: NextRequest) {
-  return NextResponse.next();
+export async function middleware(request: NextRequest) {
+  return await updateSession(request)
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
-};
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico
+     * - common image extensions
+     */
+    '/((?!_next/static|_next/image|favicon.ico|.*\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$).*)',
+  ],
+}
