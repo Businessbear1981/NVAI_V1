@@ -23,8 +23,8 @@ const CHAPTERS = [
     subtitle: 'Nymphéas at night',
     body:
       'The water lilies under the last colour of the day, then the first stars. He worked on the Nymphéas for thirty years. The series ends in dusk and reflection — the painted water indistinguishable from the painted sky overhead.',
-    video: '/videos/nvai_courtyard_5k.mp4',
-    rotation: ['/videos/foyer_aerial_pan_final.mp4'],
+    video: '/videos/nvai_monet_secret_garden_5k.mp4',
+    rotation: ['/videos/nvai_garden_passage_5k.mp4'],
   },
   {
     key: 'hills',
@@ -33,8 +33,8 @@ const CHAPTERS = [
     subtitle: 'Vétheuil · Argenteuil · the Seine',
     body:
       'Before Giverny, the river years. The barges on the Seine. The poppies of Argenteuil. The winter of Lavacourt under snow — 1879, the year Camille died there, the grief paintings he made that month outside her window.',
-    video: '/videos/nvai_aerial_drone_approach_5k.mp4',
-    rotation: ['/videos/nvai_garden_path_to_patio_5k.mp4'],
+    video: '/videos/nvai_garden_path_continuous_5k.mp4',
+    rotation: ['/videos/nvai_garden_passage_5k.mp4'],
   },
   {
     key: 'failing',
