@@ -81,7 +81,7 @@ export default function AboutPage() {
             </p>
           </section>
 
-          <section>
+          <section id="leadership">
             <p className="mb-4 font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
               IV &mdash; Leadership
             </p>

@@ -24,7 +24,7 @@ export default function HomePage() {
       <div className="absolute left-8 top-8 z-30 flex flex-col items-start gap-3">
         <div className="flex items-center gap-4 pointer-events-none">
           <Image
-            src="/brand/nvai-logo.png"
+            src="/brand/nvai-logo-transparent.png"
             alt="Napa Valley Art Institut"
             width={210}
             height={163}
@@ -51,6 +51,22 @@ export default function HomePage() {
           className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
         >
           About the Institut →
+        </a>
+        <a
+          href="/consign"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
+        >
+          Consignment Services →
+        </a>
+        <a
+          href="/about#leadership"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
+        >
+          Meet the Curators →
         </a>
       </div>
 
