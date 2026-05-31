@@ -18,7 +18,7 @@ export default function MarbleTombstone({
       className={`marble group cursor-pointer rounded-t-[120px] px-8 py-10 text-center transition-all duration-700 ${
         featured ? 'scale-105 md:py-14' : ''
       }`}
-      style={{ aspectRatio: '3 / 4' }}
+      style={{ aspectRatio: '2 / 3' }}
     >
       <div className="flex h-full flex-col items-center justify-between">
         <div>

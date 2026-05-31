@@ -35,7 +35,7 @@ export default function HomePage() {
 
       {/* Three marble tombstones */}
       <div className="absolute inset-x-0 bottom-40 z-20 flex justify-center px-8">
-        <div className="grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid w-full max-w-3xl grid-cols-1 gap-6 md:grid-cols-3">
           <Link href="/kiki" aria-label="Kiki de Montparnasse">
             <MarbleTombstone
               eyebrow="The Marquee"
