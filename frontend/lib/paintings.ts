@@ -119,7 +119,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'picasso-maternite',
-    imageUrl: '/paintings/picasso-maternite.png',
+    imageUrl: '/paintings/picasso-maternite.jpg',
     artist: 'Pablo Picasso',
     title: 'Maternité',
     year: '1901',
@@ -321,7 +321,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Da Vinci (1) ----------------
   {
     slug: 'davinci-lady-with-fur',
-    imageUrl: '/paintings/davinci-lady-with-fur.png',
+    imageUrl: '/paintings/davinci-lady-with-fur.jpg',
     artist: 'Leonardo da Vinci',
     title: 'Lady with a Fur',
     year: '1495-1499',
