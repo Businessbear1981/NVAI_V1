@@ -42,3 +42,7 @@ tmp/
 *.local
 
 .vercel
+
+# Local tools (large binaries)
+tools/
+frontend/public/videos-original-backup/
