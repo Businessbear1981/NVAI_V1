@@ -1,11 +1,62 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
-
-export const metadata = {
-  title: 'Consignment Services',
-};
+import { recordConsignment } from '@/lib/api';
 
 export default function ConsignPage() {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    organization: '',
+    artist: '',
+    title: '',
+    year: '',
+    medium: '',
+    dimensions: '',
+    current_location: '',
+    description: '',
+    estimated_value: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [receiptId, setReceiptId] = useState<string | null>(null);
+
+  function update(field: keyof typeof form, value: string) {
+    setForm((f) => ({ ...f, [field]: value }));
+  }
+
+  async function handleSubmit() {
+    if (!form.name.trim() || !form.email.trim() || !form.artist.trim() || !form.title.trim()) {
+      setErrorMessage('Please enter your name, email, the artist, and the title of the work.');
+      setStatus('error');
+      return;
+    }
+    setStatus('submitting');
+    setErrorMessage('');
+    try {
+      const r = await recordConsignment({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        organization: form.organization.trim() || undefined,
+        artist: form.artist.trim(),
+        title: form.title.trim(),
+        year: form.year.trim() || undefined,
+        medium: form.medium.trim() || undefined,
+        dimensions: form.dimensions.trim() || undefined,
+        current_location: form.current_location.trim() || undefined,
+        description: form.description.trim() || undefined,
+        estimated_value: form.estimated_value.trim() || undefined,
+      });
+      setReceiptId(r.id);
+      setStatus('success');
+    } catch {
+      setErrorMessage('We were unable to record your submission. Please try again, or email inquires@NVAI.org directly.');
+      setStatus('error');
+    }
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-midnight text-ivory film-grain">
       <CinematicBackdrop
@@ -115,31 +166,167 @@ export default function ConsignPage() {
 
           <section>
             <p className="mb-4 font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
-              IV &mdash; To Consign
+              IV &mdash; Submit a Work
             </p>
             <h2 className="mb-8 font-didot text-3xl uppercase tracking-[0.1em] text-ivory">
-              Submit a Work
+              Begin the Conversation
             </h2>
-            <p className="mb-8">
-              Contact Richard Triberg directly. A brief written description, an image where available, and the work&rsquo;s current location are enough to begin a conversation. All inquiries are received under the same Document Distribution &amp; Non-Disclosure framework that governs our gallery.
-            </p>
-            <div className="space-y-3 font-mono text-[0.75rem] uppercase tracking-[0.28em] text-gold/85">
-              <p>
-                <span className="text-gold/50">Email &middot; </span>
-                <a href="mailto:inquires@NVAI.org" className="transition-colors hover:text-ivory">
-                  inquires@NVAI.org
-                </a>
-              </p>
-              <p>
-                <span className="text-gold/50">Direct &middot; </span>
-                <a href="tel:+14152333131" className="transition-colors hover:text-ivory">
-                  +1 415&middot;233&middot;3131
-                </a>
-              </p>
-            </div>
-            <div className="mt-12 flex flex-wrap gap-8">
+
+            {status === 'success' ? (
+              <div className="rounded-lg border border-gold/30 bg-midnight/40 px-8 py-12 text-center">
+                <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+                  Submission received
+                </p>
+                <h3 className="mt-4 font-didot text-2xl tracking-wider text-ivory">
+                  Thank you, {form.name.split(' ')[0]}
+                </h3>
+                <div className="mx-auto my-4 h-px w-16 bg-gold/40" />
+                <p className="mt-4 font-body italic text-ivory/85 max-w-xl mx-auto">
+                  Richard Triberg and the Institut will review your submission for{' '}
+                  <span className="text-ivory not-italic">{form.artist}</span> &mdash;{' '}
+                  <em>{form.title}</em>. A response will arrive within one business day at{' '}
+                  <span className="text-gold not-italic">{form.email}</span>.
+                </p>
+                {receiptId && (
+                  <p className="mt-6 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/55">
+                    Confirmation · {receiptId.slice(0, 8)}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <>
+                <p className="mb-8">
+                  A brief written description, an image where available, and the work&rsquo;s current location are enough to begin a conversation. All submissions are received under the same Document Distribution &amp; Non-Disclosure framework that governs the gallery.
+                </p>
+
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <input
+                    type="text"
+                    value={form.name}
+                    onChange={(e) => update('name', e.target.value)}
+                    placeholder="Your full name *"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => update('email', e.target.value)}
+                    placeholder="Email *"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="text"
+                    value={form.organization}
+                    onChange={(e) => update('organization', e.target.value)}
+                    placeholder="Organization / estate / family office (optional)"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50 md:col-span-2"
+                  />
+                  <input
+                    type="text"
+                    value={form.artist}
+                    onChange={(e) => update('artist', e.target.value)}
+                    placeholder="Artist *"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="text"
+                    value={form.title}
+                    onChange={(e) => update('title', e.target.value)}
+                    placeholder="Title of the work *"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="text"
+                    value={form.year}
+                    onChange={(e) => update('year', e.target.value)}
+                    placeholder="Year (e.g. 1917 or c. 1900)"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="text"
+                    value={form.medium}
+                    onChange={(e) => update('medium', e.target.value)}
+                    placeholder="Medium (e.g. oil on canvas)"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="text"
+                    value={form.dimensions}
+                    onChange={(e) => update('dimensions', e.target.value)}
+                    placeholder="Dimensions"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="text"
+                    value={form.estimated_value}
+                    onChange={(e) => update('estimated_value', e.target.value)}
+                    placeholder="Estimated value (USD)"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50"
+                  />
+                  <input
+                    type="text"
+                    value={form.current_location}
+                    onChange={(e) => update('current_location', e.target.value)}
+                    placeholder="Current location (country / city)"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50 md:col-span-2"
+                  />
+                  <textarea
+                    rows={5}
+                    value={form.description}
+                    onChange={(e) => update('description', e.target.value)}
+                    placeholder="Brief description, provenance notes, prior authentication, any links"
+                    disabled={status === 'submitting'}
+                    className="rounded border border-gold/20 bg-midnight/40 px-4 py-3 font-body text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none disabled:opacity-50 md:col-span-2"
+                  />
+                </div>
+
+                {errorMessage && (
+                  <p className="mt-6 text-center font-body italic text-sm text-oxblood/80" role="status" aria-live="polite">
+                    {errorMessage}
+                  </p>
+                )}
+
+                <div className="mt-10 text-center space-y-4">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={status === 'submitting'}
+                    className="rounded-full border border-gold/50 bg-gold/10 px-10 py-4 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/20 disabled:opacity-50"
+                  >
+                    {status === 'submitting' ? 'Submitting…' : 'Submit for Review'}
+                  </button>
+                  <p className="font-body text-xs italic text-ivory/55">
+                    Your submission is received under the gallery&rsquo;s Document Distribution &amp; Non-Disclosure framework.
+                  </p>
+                </div>
+
+                <div className="mt-12 space-y-3 font-mono text-[0.75rem] uppercase tracking-[0.28em] text-gold/85 text-center">
+                  <p>Or contact Richard Triberg directly</p>
+                  <p>
+                    <a href="mailto:inquires@NVAI.org" className="transition-colors hover:text-ivory">
+                      inquires@NVAI.org
+                    </a>
+                    {' · '}
+                    <a href="tel:+14152333131" className="transition-colors hover:text-ivory">
+                      +1 415&middot;233&middot;3131
+                    </a>
+                  </p>
+                </div>
+              </>
+            )}
+
+            <div className="mt-12 flex flex-wrap justify-center gap-8">
               <Link href="/inquire" className="font-mono text-[0.7rem] uppercase tracking-[0.32em] text-gold transition-colors hover:text-ivory">
-                Submit an Inquiry &rarr;
+                Submit a General Inquiry &rarr;
               </Link>
               <Link href="/about" className="font-mono text-[0.7rem] uppercase tracking-[0.32em] text-gold transition-colors hover:text-ivory">
                 About the Institut &rarr;

@@ -47,3 +47,41 @@ export async function createStripeCheckout(payload: {
 }): Promise<{ ok: true; url: string; id: string }> {
   return apiPost('/checkout/session', payload);
 }
+
+export interface InquiryReceipt {
+  success: boolean;
+  id: string;
+  message?: string;
+}
+
+export async function recordInquiry(payload: {
+  name: string;
+  email: string;
+  painting_slug?: string;
+  message: string;
+  contact_preference?: 'email' | 'phone' | 'either';
+}): Promise<InquiryReceipt> {
+  return apiPost<InquiryReceipt>('/inquire/send', payload);
+}
+
+export interface ConsignmentReceipt {
+  success: boolean;
+  id: string;
+  message?: string;
+}
+
+export async function recordConsignment(payload: {
+  name: string;
+  email: string;
+  organization?: string;
+  artist: string;
+  title: string;
+  year?: string;
+  medium?: string;
+  dimensions?: string;
+  current_location?: string;
+  description?: string;
+  estimated_value?: string;
+}): Promise<ConsignmentReceipt> {
+  return apiPost<ConsignmentReceipt>('/consign/submit', payload);
+}

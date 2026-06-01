@@ -5,14 +5,18 @@ Runs on port 8200. Frontend proxies /api/* → here.
 from __future__ import annotations
 
 import json
+import logging
 import os
+import re
 import shutil
+import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
+import httpx
 from dotenv import load_dotenv
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, Field
 
@@ -23,6 +27,18 @@ BACKEND_DIR = Path(__file__).parent
 DATA_DIR = BACKEND_DIR / "data"
 VIDEOS_CONFIG = DATA_DIR / "videos.json"
 PUBLIC_VIDEOS_DIR = BACKEND_DIR.parent / "frontend" / "public" / "videos"
+
+# Submission fallback files — guarantee we never lose a signature/inquiry/consignment
+DDNDA_FALLBACK_FILE = DATA_DIR / "ddnda-signatures.jsonl"
+INQUIRIES_FALLBACK_FILE = DATA_DIR / "inquiries.jsonl"
+CONSIGN_FALLBACK_FILE = DATA_DIR / "consignment-submissions.jsonl"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] %(levelname)s %(name)s — %(message)s",
+    stream=sys.stdout,
+)
+logger = logging.getLogger("nvai.submissions")
 
 app = FastAPI(
     title="NVAI",
@@ -37,6 +53,98 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# ---------------------------------------------------------------------------
+# Submission helpers — Supabase via PostgREST, JSONL fallback
+# ---------------------------------------------------------------------------
+
+_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
+
+def _is_email(value: str) -> bool:
+    return bool(_EMAIL_RE.match((value or "").strip()))
+
+
+def _supabase_config() -> tuple[str, str] | None:
+    """Return (url, key) if Supabase is configured, else None."""
+    url = os.getenv("SUPABASE_URL")
+    key = (
+        os.getenv("SUPABASE_SECRET_KEY")
+        or os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    )
+    if not url or not key:
+        return None
+    return url.rstrip("/"), key
+
+
+def _append_jsonl(path: Path, record: dict) -> None:
+    """Append one JSON object to a JSONL file. Never raises — we always log."""
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except Exception as exc:  # pragma: no cover — last-resort logging
+        logger.error("JSONL fallback write failed for %s: %s", path, exc)
+
+
+def _persist_submission(
+    table: str,
+    fallback_path: Path,
+    record: dict,
+    request: Request | None = None,
+) -> tuple[str, str]:
+    """
+    Persist a submission to Supabase, falling back to JSONL on any failure.
+    Returns (id, sink) where sink is 'supabase' or 'jsonl'.
+    """
+    submission_id = record.get("id") or str(uuid.uuid4())
+    record["id"] = submission_id
+    record.setdefault("created_at", datetime.now(timezone.utc).isoformat())
+
+    # Capture request metadata if available (best-effort, never blocks)
+    if request is not None:
+        try:
+            record.setdefault("ip", request.client.host if request.client else None)
+            record.setdefault("user_agent", request.headers.get("user-agent"))
+        except Exception:
+            pass
+
+    # Always write to JSONL first so we never lose it, even if Supabase succeeds.
+    # (Tiny duplication; insurance for a $1B catalog.)
+    _append_jsonl(fallback_path, record)
+
+    config = _supabase_config()
+    if config is None:
+        logger.warning(
+            "Supabase not configured — wrote %s submission %s to JSONL only.",
+            table, submission_id,
+        )
+        return submission_id, "jsonl"
+
+    url, key = config
+    endpoint = f"{url}/rest/v1/{table}"
+    headers = {
+        "apikey": key,
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json",
+        "Prefer": "return=representation",
+    }
+    try:
+        with httpx.Client(timeout=10.0) as client:
+            r = client.post(endpoint, json=record, headers=headers)
+        if r.status_code in (200, 201):
+            logger.info("Persisted %s %s to Supabase.", table, submission_id)
+            return submission_id, "supabase"
+        logger.error(
+            "Supabase insert into %s failed (%s): %s",
+            table, r.status_code, r.text[:300],
+        )
+    except Exception as exc:
+        logger.error("Supabase insert into %s raised: %s", table, exc)
+
+    # JSONL already written above — submission is safe.
+    return submission_id, "jsonl"
 
 
 # ---------------------------------------------------------------------------
@@ -57,36 +165,60 @@ def health() -> dict:
 # ---------------------------------------------------------------------------
 
 class DDNDASignRequest(BaseModel):
-    fullName: str = Field(min_length=1, max_length=200)
+    # Frontend variants: legacy fullName, new name. Accept either.
+    name: str | None = Field(default=None, max_length=200)
+    fullName: str | None = Field(default=None, max_length=200)
     email: str = Field(min_length=3, max_length=320)
+    role: str | None = Field(default=None, max_length=200)
+    organization: str | None = Field(default=None, max_length=200)
+    signature: str | None = Field(default=None, max_length=200)
     documentVersion: str = Field(default="1.0", max_length=20)
+    document_version: str | None = Field(default=None, max_length=20)
+    painting_slug: str | None = Field(default=None, max_length=200)
 
 
 class DDNDASignResponse(BaseModel):
+    success: bool
     id: str
     signedAt: str
     documentVersion: str
-
-
-# In-memory signatures until Supabase is wired
-_signatures: dict[str, dict] = {}
+    message: str
 
 
 @app.post("/api/ddnda/sign", response_model=DDNDASignResponse)
-def sign_ddnda(payload: DDNDASignRequest) -> DDNDASignResponse:
-    signature_id = str(uuid.uuid4())
+def sign_ddnda(payload: DDNDASignRequest, request: Request) -> DDNDASignResponse:
+    name = (payload.name or payload.fullName or "").strip()
+    email = (payload.email or "").strip()
+    signature = (payload.signature or name).strip()
+    if not name:
+        raise HTTPException(status_code=400, detail="Name is required.")
+    if not _is_email(email):
+        raise HTTPException(status_code=400, detail="A valid email is required.")
+    if not signature:
+        raise HTTPException(status_code=400, detail="Signature is required.")
+
+    document_version = payload.document_version or payload.documentVersion or "1.0"
     record = {
-        "id": signature_id,
-        "fullName": payload.fullName,
-        "email": payload.email,
-        "documentVersion": payload.documentVersion,
-        "signedAt": datetime.now(timezone.utc).isoformat(),
+        "name": name,
+        "email": email,
+        "role": (payload.role or "").strip() or None,
+        "organization": (payload.organization or "").strip() or None,
+        "signature": signature,
+        "document_version": document_version,
+        "painting_slug": (payload.painting_slug or "").strip() or None,
     }
-    _signatures[signature_id] = record
+    submission_id, sink = _persist_submission(
+        "ddnda_signatures", DDNDA_FALLBACK_FILE, record, request
+    )
     return DDNDASignResponse(
-        id=signature_id,
-        signedAt=record["signedAt"],
-        documentVersion=payload.documentVersion,
+        success=True,
+        id=submission_id,
+        signedAt=record["created_at"],
+        documentVersion=document_version,
+        message=(
+            "Signature received. The gate is open." if sink == "supabase"
+            else "Signature received and queued for the registry."
+        ),
     )
 
 
@@ -171,22 +303,120 @@ def kiki_order(payload: KikiOrderRequest) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Inquiry intake
+# Inquiry intake — buyer inquiries on a specific painting (or general)
 # ---------------------------------------------------------------------------
 
-class InquiryRequest(BaseModel):
-    fullName: str
-    email: str
-    message: str
-    artworkId: str | None = None
+class InquireRequest(BaseModel):
+    name: str | None = Field(default=None, max_length=200)
+    fullName: str | None = Field(default=None, max_length=200)
+    email: str = Field(min_length=3, max_length=320)
+    painting_slug: str | None = Field(default=None, max_length=200)
+    artworkId: str | None = Field(default=None, max_length=200)
+    message: str = Field(min_length=1, max_length=5000)
+    contact_preference: str = Field(default="email", max_length=20)
 
 
-@app.post("/api/inquiry")
-def inquiry(payload: InquiryRequest) -> dict:
+@app.post("/api/inquire/send")
+def inquire_send(payload: InquireRequest, request: Request) -> dict:
+    name = (payload.name or payload.fullName or "").strip()
+    email = (payload.email or "").strip()
+    message = (payload.message or "").strip()
+    if not name:
+        raise HTTPException(status_code=400, detail="Name is required.")
+    if not _is_email(email):
+        raise HTTPException(status_code=400, detail="A valid email is required.")
+    if not message:
+        raise HTTPException(status_code=400, detail="Message is required.")
+
+    contact = (payload.contact_preference or "email").strip().lower()
+    if contact not in ("email", "phone", "either"):
+        contact = "email"
+
+    painting_slug = (payload.painting_slug or payload.artworkId or "").strip() or None
+    record = {
+        "name": name,
+        "email": email,
+        "painting_slug": painting_slug,
+        "message": message,
+        "contact_preference": contact,
+        "status": "received",
+    }
+    submission_id, sink = _persist_submission(
+        "inquiries", INQUIRIES_FALLBACK_FILE, record, request
+    )
     return {
-        "ok": True,
-        "id": str(uuid.uuid4()),
-        "queuedAt": datetime.now(timezone.utc).isoformat(),
+        "success": True,
+        "id": submission_id,
+        "message": (
+            "Inquiry received. Bernard will route it to Sean or Richard."
+        ),
+        "sink": sink,
+    }
+
+
+# Backward-compat alias — older clients post to /api/inquiry
+@app.post("/api/inquiry")
+def inquiry_legacy(payload: InquireRequest, request: Request) -> dict:
+    return inquire_send(payload, request)
+
+
+# ---------------------------------------------------------------------------
+# Consignment intake — works submitted for NVAI representation
+# ---------------------------------------------------------------------------
+
+class ConsignRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=200)
+    email: str = Field(min_length=3, max_length=320)
+    organization: str | None = Field(default=None, max_length=200)
+    artist: str = Field(min_length=1, max_length=200)
+    title: str = Field(min_length=1, max_length=300)
+    year: str | None = Field(default=None, max_length=40)
+    medium: str | None = Field(default=None, max_length=200)
+    dimensions: str | None = Field(default=None, max_length=200)
+    current_location: str | None = Field(default=None, max_length=300)
+    description: str | None = Field(default=None, max_length=5000)
+    estimated_value: str | None = Field(default=None, max_length=100)
+
+
+@app.post("/api/consign/submit")
+def consign_submit(payload: ConsignRequest, request: Request) -> dict:
+    name = payload.name.strip()
+    email = payload.email.strip()
+    artist = payload.artist.strip()
+    title = payload.title.strip()
+    if not name:
+        raise HTTPException(status_code=400, detail="Name is required.")
+    if not _is_email(email):
+        raise HTTPException(status_code=400, detail="A valid email is required.")
+    if not artist:
+        raise HTTPException(status_code=400, detail="Artist is required.")
+    if not title:
+        raise HTTPException(status_code=400, detail="Title is required.")
+
+    record = {
+        "name": name,
+        "email": email,
+        "organization": (payload.organization or "").strip() or None,
+        "artist": artist,
+        "title": title,
+        "year": (payload.year or "").strip() or None,
+        "medium": (payload.medium or "").strip() or None,
+        "dimensions": (payload.dimensions or "").strip() or None,
+        "current_location": (payload.current_location or "").strip() or None,
+        "description": (payload.description or "").strip() or None,
+        "estimated_value": (payload.estimated_value or "").strip() or None,
+        "status": "received",
+    }
+    submission_id, sink = _persist_submission(
+        "consignment_submissions", CONSIGN_FALLBACK_FILE, record, request
+    )
+    return {
+        "success": True,
+        "id": submission_id,
+        "message": (
+            "Consignment submission received. Richard will review and respond."
+        ),
+        "sink": sink,
     }
 
 
@@ -262,8 +492,6 @@ def delete_video_file(filename: str) -> dict:
 # Bernard voice — ElevenLabs proxy
 # British elegant male voice. Default: "George" (deep, soothing).
 # ---------------------------------------------------------------------------
-
-import httpx
 
 BERNARD_DEFAULT_VOICE_ID = os.getenv("BERNARD_VOICE_ID", "JBFqnCBsd6RMkjVDRZzb")  # George
 
