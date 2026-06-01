@@ -22,7 +22,7 @@ export default function EntryPage() {
   void router;
 
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-midnight film-grain">
+    <main className="relative min-h-screen w-screen overflow-x-hidden bg-midnight film-grain md:h-screen md:overflow-hidden">
       {/* The ZOOM-IN — drone approach, slowed. This is the movement, after the click. */}
       <CinematicBackdrop
         videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_aerial_drone_approach_5k.mp4"

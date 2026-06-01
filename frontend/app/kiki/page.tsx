@@ -141,6 +141,7 @@ export default function KikiPage() {
             <video preload="none"
               src={VIDEOS.kiki.moulinRougeLive}
               controls
+              playsInline
               poster=""
               className="h-full w-full object-cover"
             />
@@ -253,7 +254,7 @@ export default function KikiPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {VIDEOS.kiki.burlesqueVariants.slice(0, 3).map((src, i) => (
               <div key={src} className="overflow-hidden rounded-lg border border-gold/20 bg-midnight/60">
-                <video preload="none" src={src} controls muted className="aspect-video w-full object-cover" />
+                <video preload="none" src={src} controls muted playsInline className="aspect-video w-full object-cover" />
                 <p className="px-3 py-2 font-mono text-[0.55rem] uppercase tracking-[0.28em] text-gold/70">
                   Take {String(i + 1).padStart(2, '0')}
                 </p>
@@ -264,6 +265,7 @@ export default function KikiPage() {
             <video preload="none"
               src={VIDEOS.kiki.danceOneMinute}
               controls
+              playsInline
               className="aspect-video w-full object-cover"
             />
             <p className="px-3 py-2 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/70">
@@ -284,6 +286,7 @@ export default function KikiPage() {
             <video preload="none"
               src={VIDEOS.kiki.theSitting}
               controls
+              playsInline
               className="aspect-video w-full object-cover"
             />
             <p className="px-3 py-2 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/70">
