@@ -242,10 +242,17 @@ export const VIDEOS = {
   },
 
   // ---------------------------------------------------------------------------
-  // Pollock — generation in progress (3 shots: studio, action, canvas)
+  // POLLOCK — Springs, East Hampton, 1950. The drip-paint apex.
+  // leadIn = the barn studio at Springs (where the floor became the canvas)
+  // rotation = action painting in progress + Autumn Rhythm canvas detail
   // ---------------------------------------------------------------------------
   pollock: {
-    // Filled in once generations complete:
+    leadIn: `${R2}/nvai_pollock_springs_studio_5k.mp4`,
+    rotation: [
+      `${R2}/nvai_pollock_action_5k.mp4`,
+      `${R2}/nvai_pollock_autumn_rhythm_canvas_5k.mp4`,
+    ],
+    // Legacy keys retained for any callers still referencing them directly:
     studio: `${R2}/nvai_pollock_springs_studio_5k.mp4`,
     action: `${R2}/nvai_pollock_action_5k.mp4`,
     canvas: `${R2}/nvai_pollock_autumn_rhythm_canvas_5k.mp4`,
