@@ -217,6 +217,28 @@ export const PAINTINGS: Painting[] = [
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
   },
   {
+    slug: 'chagall-sur-la-table-1975',
+    imageUrl: '/paintings/chagall-sur-la-table.jpg',
+    artist: 'Marc Chagall',
+    title: 'Sur la table (On the Table)',
+    year: 'c. 1975',
+    dimensions: '45.09 × 32.39 cm',
+    medium: 'Oil on board',
+    signed: 'Stamped lower left, "Marc Chagall"',
+    viewingLocation: 'To follow',
+    inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
+    inspirationNote:
+      'Late Vence years. Still life with flowers, the recurring lineage of floral and symbolic compositions that define Chagall’s mature work. The painting remained in Chagall’s own collection and estate until after his death in 1985.',
+    wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
+    literature: ['Authentication — Comité Marc Chagall'],
+    provenanceDoc: '/provenance/chagall-sur-la-table-1975.pdf',
+    bernardStory:
+      "This is Marc Chagall's *Sur la Table*, painted around 1975 in Vence. " +
+      "What you see is a still life in the classical Dutch tradition — a vase of flowers, a fruit bowl, the painter's table — rendered through Chagall's late, joyful palette of cerulean blues, vermillion, and warm gold. " +
+      "The painting remained in Chagall's own collection until after his death in 1985, underscoring its personal significance to him. It belongs to a lineage of floral and symbolic compositions that define his mature work. " +
+      "Authenticated by the Comité Marc Chagall.",
+  },
+  {
     slug: 'chagall-wolf-becomes-shepherd',
     artist: 'Marc Chagall',
     title: '"The Wolf becomes a Shepherd" — La Fontaine\'s Fable',
