@@ -70,18 +70,10 @@ export default function HomePage() {
         </a>
       </div>
 
-      {/* Three marble plaques — small markers anchored to the bottom; the video dominates */}
+      {/* Marquee trio — KIKI featured center (the front door, the WOW). MODI is the
+          DESTINATION at the end of Kiki's immersive, not a separate marquee tab. */}
       <div className="absolute inset-x-0 bottom-16 z-20 flex justify-center px-8">
-        <div className="grid w-full max-w-2xl grid-cols-3 gap-4">
-          <Link href="/kiki" aria-label="Kiki de Montparnasse" className="block h-full">
-            <MarbleTombstone
-              eyebrow="The Marquee"
-              title="Kiki"
-              subtitle="Queen of Montparnasse"
-              caption="Cabaret. Modigliani. The 107-year story."
-            />
-          </Link>
-
+        <div className="grid w-full max-w-3xl grid-cols-[1fr_1.5fr_1fr] items-stretch gap-4">
           <Link href="/foyer" aria-label="Enter the Chateau" className="block h-full">
             <MarbleTombstone
               eyebrow="The Chateau"
@@ -89,6 +81,41 @@ export default function HomePage() {
               subtitle="Villa Monticello"
               caption="The collection awaits inside."
             />
+          </Link>
+
+          {/* KIKI — featured center marquee. The WOW. The front door of the immersive. */}
+          <Link href="/kiki" aria-label="Kiki de Montparnasse — the immersive" className="block h-full">
+            <div className="marble group relative flex h-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md px-4 py-5 text-center transition-all duration-500 hover:scale-[1.02]">
+              <p className="font-mono text-[0.5rem] uppercase tracking-[0.5em] text-[#3a2a0a]/70">
+                The Marquee
+              </p>
+              <h2 className="mt-2 font-didot text-4xl uppercase tracking-[0.22em] text-[#1a0e05] drop-shadow-sm md:text-5xl">
+                Kiki
+              </h2>
+              <p className="mt-1 font-display text-sm italic tracking-[0.18em] text-[#5a3a1a]">
+                Queen of Montparnasse
+              </p>
+              <div className="mx-auto my-3 h-px w-12 bg-[#5a3a1a]/70" />
+              {/* Handwritten "Kiki" — thick quill ink, diagonal */}
+              <div className="relative h-10 w-full">
+                <span
+                  className="absolute left-1/2 top-1/2 italic text-[#7c0a0a]"
+                  style={{
+                    fontFamily: 'Georgia, "Cormorant Garamond", "Times New Roman", serif',
+                    fontWeight: 700,
+                    fontSize: '1.5rem',
+                    transform: 'translate(-50%, -50%) rotate(-14deg)',
+                    letterSpacing: '0.04em',
+                  }}
+                  aria-hidden
+                >
+                  Kiki
+                </span>
+              </div>
+              <p className="mt-2 font-body text-[0.65rem] uppercase tracking-[0.32em] text-[#2a1a05]/85">
+                The 107-year story
+              </p>
+            </div>
           </Link>
 
           <Link href="/garden" aria-label="Secret Garden" className="block h-full">
