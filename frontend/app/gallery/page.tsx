@@ -66,12 +66,16 @@ export default function GalleryPage() {
           </p>
           <div
             className="relative mx-auto"
-            style={{ width: '100%', maxWidth: '680px', aspectRatio: '1 / 1' }}
+            style={{
+              // Mobile: fill viewport. Desktop: cap at 880px so it stays elegant on huge screens.
+              width: 'min(92vw, 92vh, 880px)',
+              aspectRatio: '1 / 1',
+            }}
           >
             <div className="absolute inset-0">
               {PAINTINGS.map((p, idx) => {
                 const angle = (360 / PAINTINGS.length) * idx;
-                const radius = 46;
+                const radius = 44; // pulled in slightly so the bigger thumbs don't clip the edge
                 return (
                   <button
                     key={p.slug}
@@ -86,7 +90,9 @@ export default function GalleryPage() {
                       transform: `translate(-50%, -50%) rotate(${angle}deg) translate(${radius}%) rotate(${-angle}deg) ${
                         activeIdx === idx ? 'scale(1.25)' : ''
                       }`,
-                      width: '13%',
+                      // Thumbs are bigger now — 18% on mobile up to 16% on desktop
+                      // (paintings are easier to recognise + tappable on a touch target)
+                      width: '17%',
                       aspectRatio: '3 / 4',
                     }}
                     aria-label={`${p.artist} — ${p.title}`}
@@ -127,21 +133,21 @@ export default function GalleryPage() {
               <div
                 className="rounded-full"
                 style={{
-                  width: '18%',
+                  width: '22%',
                   aspectRatio: '1',
-                  background: 'radial-gradient(circle, rgba(232,200,122,0.25) 0%, transparent 70%)',
-                  filter: 'blur(8px)',
+                  background: 'radial-gradient(circle, rgba(232,200,122,0.30) 0%, transparent 70%)',
+                  filter: 'blur(10px)',
                 }}
               />
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
-              <p className="font-mono text-[0.45rem] uppercase tracking-[0.4em] text-gold/55">
+              <p className="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-gold/70">
                 The Catalog
               </p>
-              <p className="mt-1 font-didot text-2xl uppercase tracking-[0.18em] text-ivory/85">
+              <p className="mt-2 font-didot text-4xl uppercase tracking-[0.18em] text-ivory">
                 {PAINTINGS.length}
               </p>
-              <p className="font-mono text-[0.4rem] uppercase tracking-[0.32em] text-gold/45">
+              <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/55">
                 works
               </p>
             </div>
