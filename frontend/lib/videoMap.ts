@@ -177,9 +177,13 @@ export const VIDEOS = {
     ],
   } as WingVideos,
 
+  // MATISSE — dedicated Nice/Vence cutout-era studio video (was using generic cote-azur)
   matisse: {
-    leadIn: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4',
-    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/antibes.mp4'],
+    leadIn: `${R2}/nvai_matisse_studio_5k.mp4`,
+    rotation: [
+      `${R2}/cote-azur.mp4`,
+      `${R2}/antibes.mp4`,
+    ],
   } as WingVideos,
 
   frida: {

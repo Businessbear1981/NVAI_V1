@@ -256,6 +256,47 @@ export default function KikiPage() {
           </div>
         </div>
 
+        {/* The Private Scrapbook — hero offering from Richard's PDF */}
+        <div className="space-y-6">
+          <Link
+            href="/kiki/scrapbook"
+            className="group relative block overflow-hidden rounded-lg ring-1 ring-gold/30 transition-all hover:ring-gold/60"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="relative aspect-[4/5] md:aspect-auto md:min-h-[400px] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/kiki-scrapbook/kiki_p10_i01.jpg"
+                  alt="Kiki by Man Ray, Noire et Blanche, 1926"
+                  className="absolute inset-0 h-full w-full object-cover sepia-[0.15] transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-midnight/80" />
+              </div>
+              <div className="flex flex-col justify-center bg-midnight/60 p-10 space-y-4">
+                <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+                  New · The Private Scrapbook
+                </p>
+                <h3 className="font-didot text-3xl uppercase tracking-[0.12em] text-ivory md:text-4xl">
+                  Kiki — Queen of Montparnasse
+                </h3>
+                <p className="font-display italic text-gold/80">
+                  Sixty-three plates · Hand-bound · From the Triberg archive
+                </p>
+                <div className="h-px w-12 bg-gold/40" />
+                <p className="font-body italic leading-relaxed text-ivory/85">
+                  Published here for the first time — the muse, the painter, the memoirist.
+                  The complete story of the woman the cafés of Paris crowned Queen.
+                </p>
+                <div className="pt-2">
+                  <span className="inline-block rounded-full border border-gold/50 bg-gold/10 px-6 py-2 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold transition-all group-hover:border-gold group-hover:bg-gold/20">
+                    Enter the Scrapbook →
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+
         {/* The offerings */}
         <div className="space-y-6">
           <h2 className="font-display text-2xl text-center tracking-wider text-gold">The Offerings</h2>
