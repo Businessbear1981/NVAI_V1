@@ -43,8 +43,8 @@ const CHAPTERS = [
     subtitle: '1904 – 1941 · classical Catholic painting',
     body:
       "Returns to France. Spends the rest of his career on large-scale religious cycles — Passion paintings, Stations of the Cross, monumental altarpieces. The Passion of Christ on offer here is from this period: roughly three by two metres, oil on canvas, painted in the manner of the Venetian masters he had spent twenty years studying. He dies in Paris in 1941, still arguing for the timeless against the modern.",
-    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_raphael_chapel_5k.mp4',
-    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4'],
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4',
+    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4'],
   },
 ];
 
