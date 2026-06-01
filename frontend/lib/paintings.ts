@@ -579,6 +579,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Pollock (2 — newly added) ----------------
   {
     slug: 'pollock-number-1-1950',
+    imageUrl: '/paintings/pollock-number-2-1950-alt.jpg',
     artist: 'Jackson Pollock',
     title: 'Number 1 (Lavender Mist)',
     year: '1950',
