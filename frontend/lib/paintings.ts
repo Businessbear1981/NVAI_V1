@@ -326,7 +326,7 @@ export const PAINTINGS: Painting[] = [
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
     literature: ['Certification — Marc Chagall Committee — 2020'],
     provenanceDoc: '/provenance/chagall-wolf-shepherd-1927.pdf',
-    imageUrl: '/paintings/chagall-wolf-becomes-shepherd.jpg',
+    // imageUrl intentionally omitted — the file currently named chagall-wolf-becomes-shepherd.jpg is mislabeled (it actually shows "Sur la table" 1975). Authentic image source: C:\Users\sgill\Downloads\Marc Chagall - Wolf becomes a Shepherd - (c.) 1927 - Gouache on Paper - Signed Lower Right - Partial Provenance_Page_1.jpg — needs manual copy into public/paintings/ as chagall-wolf-becomes-shepherd.jpg (after deleting the wrong file).
     bernardStory:
       "This is one of Marc Chagall's gouache illustrations for the Fables of Jean de La Fontaine, painted around nineteen twenty-seven. " +
       "The dealer Ambroise Vollard had commissioned one hundred gouaches from him in nineteen twenty-five. Chagall — a Russian-Jewish painter who had never spent serious time in the French countryside — moved to a village in the Auvergne for two years to absorb the pastoral world his childhood in Vitebsk had primed him for. " +
@@ -580,7 +580,7 @@ export const PAINTINGS: Painting[] = [
   // ---------------- Pollock (2 — newly added) ----------------
   {
     slug: 'pollock-number-1-1950',
-    imageUrl: '/paintings/pollock-number-2-1950-alt.jpg',
+    // imageUrl intentionally omitted — there is no genuine source image of Number 1 (Lavender Mist) in the dossier. The previous placeholder (pollock-number-2-1950-alt.jpg) was a duplicate photo of Number 2 and is misleading. Placeholder card will render until a real source is provided.
     artist: 'Jackson Pollock',
     title: 'Number 1 (Lavender Mist)',
     year: '1950',

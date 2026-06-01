@@ -56,7 +56,9 @@ export const VIDEOS = {
     soaring: `${R2}/nvai_davinci_flight_b2_soaring_5k.mp4`,
     banking: `${R2}/nvai_davinci_flight_b3_banking_5k.mp4`,
     descent: `${R2}/nvai_davinci_flight_b4_descent_5k.mp4`,
-    alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`, // bonus general flight - alternate take
+    // Alternate takeoff — Sean-curated bonus take. Used by /flight on the
+    // second viewing (Fly again) so the loop is not literally identical.
+    alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`,
   },
 
   // ---------------------------------------------------------------------------

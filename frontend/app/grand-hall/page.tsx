@@ -25,28 +25,35 @@ const DESTINATIONS = [
   },
   {
     eyebrow: 'II',
+    title: 'The Grand Ballroom',
+    subtitle: 'Renaissance · or Gatsby',
+    description: 'Two evenings folded into one room. Period dance, then jazz.',
+    href: '/grand-ballroom',
+  },
+  {
+    eyebrow: 'III',
     title: "Auction Room",
     subtitle: 'Christie\'s-scale · or intimate',
     description: 'Live bidding. Video conference. Concierge dinners.',
     href: '/grand-hall/auction',
   },
   {
-    eyebrow: 'III',
+    eyebrow: 'IV',
     title: 'Cabinet de Curiosités',
     subtitle: 'Modigliani · the Kiki feature',
-    description: 'African masks under glass. Three portraits. The lost story.',
+    description: 'African masks under glass. Four portraits. The lost story.',
     href: '/grand-hall/modigliani',
     feature: true,
   },
   {
-    eyebrow: 'IV',
+    eyebrow: 'V',
     title: "The Pollock Studio",
     subtitle: 'East Hampton · 1950',
     description: 'Two new pieces. Drip-paint apex on raw plank floor.',
     href: '/grand-hall/pollock',
   },
   {
-    eyebrow: 'V',
+    eyebrow: 'VI',
     title: 'Departure',
     subtitle: 'Return to the Foyer',
     description: 'The loop closes. Departures are also entrances.',
@@ -196,7 +203,7 @@ export default function GrandHallPage() {
           <p className="text-center font-display text-base italic tracking-wider text-gold/80 mb-8">
             chateau · art party · digital auction house
           </p>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {DESTINATIONS.map((d) => (
               <Link key={d.href} href={d.href} className="group">
                 <article

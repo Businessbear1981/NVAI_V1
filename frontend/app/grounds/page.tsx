@@ -1,112 +1,404 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
-import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
+import { VIDEOS } from '@/lib/videoMap';
 
 /**
- * The Grounds — a compiled video tour, not a tab grid.
+ * /grounds — "Walk the Grounds"
  *
- * Per Sean's direction: the user arrives at /grounds after choosing "The Grounds"
- * from the patio. They see a single continuous flow of compiled grounds videos —
- * aerial drone approach, the path to the patio, the continuous garden path,
- * the courtyard — rotating one into the next at a slow cinematic cadence.
+ * Two modes:
+ *   1. Guided Tour — Bernard leads a sequenced narrative, chapter by chapter,
+ *      garden party -> vineyard aerial -> orchard -> wine caves -> courtyard ->
+ *      garden path -> back to the patio. Auto-advances with crossfade. Voiceover
+ *      captions surface as each chapter plays.
+ *   2. Self-Guided — tile grid of every outdoor location. Click any tile to dive
+ *      into that single video as a focused vignette.
  *
- * The artist-wing destinations live at the bottom of the page as a small,
- * unobtrusive index for visitors who already know where they want to land.
+ * Artist wings (Monet, Da Vinci, Picasso, Frida) remain as sub-routes and are
+ * surfaced at the bottom as a quiet, secondary index.
  */
-// Grounds tour rotation — visitor's walk through the estate in narrative order.
-// Now includes the three custom Higgsfield generations: vines (aerial vineyard),
-// orchard (apple + olive walk), and wine caves (period stone interior).
-const R2 = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev';
-const GROUNDS_LEAD_IN = `${R2}/nvai_aerial_drone_approach_5k.mp4`;
-const GROUNDS_ROTATION = [
-  // 1. Path to the secret garden
-  `${R2}/nvai_garden_path_to_patio_5k.mp4`,
-  // 2. The secret garden itself
-  `${R2}/nvai_monet_secret_garden_5k.mp4`,
-  // 3. THE VINES — aerial over the vineyard at golden hour
-  `${R2}/nvai_vineyard_aerial_5k.mp4`,
-  // 4. THE ORCHARD — ground-level walk through apple + olive trees
-  `${R2}/nvai_orchard_walk_5k.mp4`,
-  // 5. THE WINE CAVES — period stone interior with oak barrels
-  `${R2}/nvai_wine_caves_5k.mp4`,
-  // 6. Walk along the lower path
-  `${R2}/nvai_garden_path_continuous_5k.mp4`,
-  // 7. Garden party — the patio scene
-  `${R2}/nvai_garden_party_5k.mp4`,
-  // 8. Courtyard — at the back of the chateau, completing the loop
-  `${R2}/nvai_courtyard_5k.mp4`,
+
+interface Chapter {
+  key: string;
+  eyebrow: string;
+  title: string;
+  caption: string;
+  video: string;
+}
+
+const CHAPTERS: Chapter[] = [
+  {
+    key: 'garden-party',
+    eyebrow: 'I',
+    title: 'The Patio',
+    caption:
+      'We begin where everyone gathers — the garden party at the edge of the chateau. Linen, candlelight, the murmur of conversation under the lindens.',
+    video: VIDEOS.garden,
+  },
+  {
+    key: 'vineyard',
+    eyebrow: 'II',
+    title: 'The Vines',
+    caption:
+      'Up over the slope, the vineyard at golden hour — thirty acres of cabernet rolling toward the western hills.',
+    video: VIDEOS.vineyardAerial,
+  },
+  {
+    key: 'orchard',
+    eyebrow: 'III',
+    title: 'The Orchard',
+    caption:
+      'Down through the apple and olive walk. The trees were planted in the 1890s. In June the air here is sweet enough to drink.',
+    video: VIDEOS.orchardWalk,
+  },
+  {
+    key: 'caves',
+    eyebrow: 'IV',
+    title: 'The Wine Caves',
+    caption:
+      'Through the stone door, into the caves. Oak barrels, the cool of the earth, the smell of fermentation older than anyone living.',
+    video: VIDEOS.wineCaves,
+  },
+  {
+    key: 'courtyard',
+    eyebrow: 'V',
+    title: 'The Courtyard',
+    caption:
+      'Back to the chateau by the courtyard at the rear — the stable doors, the climbing roses, the bell that once called workers in from the fields.',
+    video: VIDEOS.courtyard,
+  },
+  {
+    key: 'garden-path',
+    eyebrow: 'VI',
+    title: 'The Garden Path',
+    caption:
+      'The lower path that threads the formal gardens. Boxwood, lavender, the long view down the allée.',
+    video: VIDEOS.gardenPath,
+  },
+  {
+    key: 'passage',
+    eyebrow: 'VII',
+    title: 'The Passage',
+    caption:
+      'Through the secret garden passage — Monet&rsquo;s wing branches off here, but the path keeps going.',
+    video: VIDEOS.gardenPassage,
+  },
+  {
+    key: 'return',
+    eyebrow: 'VIII',
+    title: 'Return to the Patio',
+    caption:
+      'Back to where we began. The candles are still lit. Bernard will be waiting with a glass of something cold.',
+    video: VIDEOS.gardenPathToPatio,
+  },
 ];
 
-const DESTINATIONS = [
+interface Tile {
+  key: string;
+  label: string;
+  subtitle: string;
+  video: string;
+}
+
+const TILES: Tile[] = [
+  { key: 'garden', label: 'The Patio', subtitle: 'Garden party', video: VIDEOS.garden },
+  { key: 'vineyard', label: 'The Vines', subtitle: 'Aerial at golden hour', video: VIDEOS.vineyardAerial },
+  { key: 'orchard', label: 'The Orchard', subtitle: 'Apple & olive walk', video: VIDEOS.orchardWalk },
+  { key: 'caves', label: 'Wine Caves', subtitle: 'Oak & stone', video: VIDEOS.wineCaves },
+  { key: 'courtyard', label: 'Courtyard', subtitle: 'Behind the chateau', video: VIDEOS.courtyard },
+  { key: 'path', label: 'Garden Path', subtitle: 'The lower allée', video: VIDEOS.gardenPath },
+  { key: 'passage', label: 'Garden Passage', subtitle: 'Through the hedgerow', video: VIDEOS.gardenPassage },
+  { key: 'topatio', label: 'Path to the Patio', subtitle: 'The return', video: VIDEOS.gardenPathToPatio },
+];
+
+const ARTIST_WINGS = [
   { label: 'Monet', subtitle: 'Giverny garden', href: '/grounds/monet' },
   { label: 'Picasso', subtitle: 'Three studio periods', href: '/grounds/picasso' },
   { label: 'Da Vinci', subtitle: 'Renaissance workshop', href: '/grounds/davinci' },
   { label: 'Frida', subtitle: 'Casa Azul', href: '/grounds/frida' },
 ];
 
+const CHAPTER_DURATION_MS = 10_000;
+const CROSSFADE_MS = 1_200;
+
+type Mode = 'guided' | 'self';
+
 export default function GroundsPage() {
+  const [mode, setMode] = useState<Mode>('guided');
   const [revealed, setRevealed] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const [activeTile, setActiveTile] = useState<Tile | null>(null);
+  const [captionVisible, setCaptionVisible] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   useEffect(() => {
-    const t = setTimeout(() => setRevealed(true), 1400);
+    const t = setTimeout(() => setRevealed(true), 800);
     return () => clearTimeout(t);
   }, []);
 
+  // Guided-tour auto-advance
+  const goNext = useCallback(() => {
+    setCaptionVisible(false);
+    setTimeout(() => {
+      setActiveIdx((i) => (i + 1) % CHAPTERS.length);
+      setCaptionVisible(true);
+    }, CROSSFADE_MS / 2);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setCaptionVisible(false);
+    setTimeout(() => {
+      setActiveIdx((i) => (i - 1 + CHAPTERS.length) % CHAPTERS.length);
+      setCaptionVisible(true);
+    }, CROSSFADE_MS / 2);
+  }, []);
+
+  useEffect(() => {
+    if (mode !== 'guided' || !playing) {
+      if (advanceTimer.current) clearTimeout(advanceTimer.current);
+      return;
+    }
+    advanceTimer.current = setTimeout(goNext, CHAPTER_DURATION_MS);
+    return () => {
+      if (advanceTimer.current) clearTimeout(advanceTimer.current);
+    };
+  }, [activeIdx, playing, mode, goNext]);
+
+  const active = CHAPTERS[activeIdx];
+
   return (
     <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
-      <RotatingBackdrop leadIn={GROUNDS_LEAD_IN} rotation={GROUNDS_ROTATION} overlay={0.45} />
+      {/* Background — guided mode shows current chapter; self mode shows the tour opener */}
+      <div className="fixed inset-0 z-0">
+        <video
+          ref={videoRef}
+          key={mode === 'guided' ? active.video : VIDEOS.garden}
+          src={mode === 'guided' ? active.video : VIDEOS.garden}
+          autoPlay
+          muted
+          playsInline
+          loop={mode !== 'guided'}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ transition: `opacity ${CROSSFADE_MS}ms ease` }}
+        />
+        <div className="absolute inset-0 bg-midnight/55" />
+      </div>
 
       <div
-        className={`relative z-10 flex min-h-screen flex-col px-8 py-12 transition-opacity duration-[2400ms] ${
+        className={`relative z-10 flex min-h-screen flex-col px-6 py-10 transition-opacity duration-[1800ms] md:px-8 ${
           revealed ? 'opacity-100' : 'opacity-0'
         }`}
       >
+        {/* Back link */}
         <Link
-          href="/garden"
+          href="/foyer"
           className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/60 hover:text-gold"
         >
-          ← Back to the patio
+          &larr; Back to the foyer
         </Link>
 
-        <header className="mx-auto mt-20 max-w-4xl text-center">
+        {/* Header */}
+        <header className="mx-auto mt-12 max-w-4xl text-center">
           <p className="font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/80">
-            Out to the property
+            Beyond the foyer
           </p>
-          <h1 className="mt-6 font-didot text-7xl uppercase tracking-[0.12em] text-ivory drop-shadow-lg md:text-8xl">
-            The Grounds
+          <h1 className="mt-6 font-didot text-6xl uppercase tracking-[0.12em] text-ivory drop-shadow-lg md:text-8xl">
+            Walk the Grounds
           </h1>
-          <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
-            Thirty acres of estate, four destinations, one continuous walk
+          <p className="mt-4 font-display text-lg italic tracking-wider text-gold/85 md:text-xl">
+            French chateau gardens above a Napa vineyard — thirty acres, your way through them
           </p>
           <div className="mx-auto mt-8 h-px w-32 bg-gold/40" />
-          <p className="mx-auto mt-8 max-w-xl font-body italic text-ivory/80 leading-relaxed">
-            The aerial gives way to the vineyard path. The vineyard path gives way to
-            the orchard. The orchard gives way to the courtyard at the back of the
-            chateau. Each artist&rsquo;s wing lives somewhere along the walk.
-          </p>
         </header>
 
-        <div className="mx-auto mt-auto mb-12 max-w-5xl pt-20">
-          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-6">
-            Four destinations along the walk
-          </p>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            {DESTINATIONS.map((d) => (
-              <Link
-                key={d.href}
-                href={d.href}
-                className="rounded border border-gold/20 bg-midnight/50 px-4 py-3 text-center backdrop-blur transition-all hover:border-gold/60 hover:bg-gold/10"
+        {/* Mode toggle */}
+        <div className="mx-auto mt-10 flex items-center gap-1 rounded-full border border-gold/30 bg-midnight/60 p-1 backdrop-blur">
+          <button
+            onClick={() => setMode('guided')}
+            className={`rounded-full px-6 py-2 font-mono text-[0.6rem] uppercase tracking-[0.32em] transition-all ${
+              mode === 'guided'
+                ? 'bg-gold/20 text-gold'
+                : 'text-ivory/55 hover:text-ivory'
+            }`}
+          >
+            Guided Tour
+          </button>
+          <button
+            onClick={() => setMode('self')}
+            className={`rounded-full px-6 py-2 font-mono text-[0.6rem] uppercase tracking-[0.32em] transition-all ${
+              mode === 'self'
+                ? 'bg-gold/20 text-gold'
+                : 'text-ivory/55 hover:text-ivory'
+            }`}
+          >
+            Self-Guided
+          </button>
+        </div>
+
+        {/* GUIDED MODE */}
+        {mode === 'guided' && (
+          <section className="mx-auto mt-14 w-full max-w-4xl">
+            {/* Caption card */}
+            <div
+              className={`mx-auto max-w-2xl rounded border border-gold/20 bg-midnight/65 p-8 text-center backdrop-blur-md transition-opacity duration-700 ${
+                captionVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+                Chapter {active.eyebrow} &middot; Bernard narrates
+              </p>
+              <h2 className="mt-4 font-didot text-3xl uppercase tracking-[0.14em] text-ivory md:text-4xl">
+                {active.title}
+              </h2>
+              <div className="mx-auto mt-4 h-px w-12 bg-gold/40" />
+              <p
+                className="mt-5 font-body text-base italic leading-relaxed text-ivory/90"
+                dangerouslySetInnerHTML={{ __html: active.caption }}
+              />
+            </div>
+
+            {/* Transport controls */}
+            <div className="mx-auto mt-8 flex items-center justify-center gap-3">
+              <button
+                onClick={goPrev}
+                className="rounded border border-ivory/20 bg-midnight/50 px-4 py-2 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 backdrop-blur transition-all hover:border-gold/40 hover:text-gold"
               >
-                <p className="font-didot text-base tracking-wider text-ivory">{d.label}</p>
+                &larr; Prev
+              </button>
+              <button
+                onClick={() => setPlaying((p) => !p)}
+                className="rounded border border-gold/40 bg-gold/10 px-5 py-2 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold backdrop-blur transition-all hover:bg-gold/20"
+              >
+                {playing ? 'Pause' : 'Play'}
+              </button>
+              <button
+                onClick={goNext}
+                className="rounded border border-ivory/20 bg-midnight/50 px-4 py-2 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 backdrop-blur transition-all hover:border-gold/40 hover:text-gold"
+              >
+                Next &rarr;
+              </button>
+            </div>
+
+            {/* Chapter pips */}
+            <div className="mx-auto mt-6 flex max-w-2xl flex-wrap justify-center gap-2">
+              {CHAPTERS.map((c, i) => (
+                <button
+                  key={c.key}
+                  onClick={() => {
+                    setCaptionVisible(false);
+                    setTimeout(() => {
+                      setActiveIdx(i);
+                      setCaptionVisible(true);
+                    }, CROSSFADE_MS / 2);
+                  }}
+                  aria-label={`Chapter ${c.eyebrow} — ${c.title}`}
+                  className={`h-1.5 w-8 rounded-full transition-all ${
+                    i === activeIdx ? 'bg-gold' : 'bg-ivory/20 hover:bg-ivory/40'
+                  }`}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* SELF-GUIDED MODE */}
+        {mode === 'self' && (
+          <section className="mx-auto mt-14 w-full max-w-6xl">
+            <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+              Choose your own path
+            </p>
+            <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+              {TILES.map((t) => (
+                <button
+                  key={t.key}
+                  onClick={() => setActiveTile(t)}
+                  className="group relative aspect-[4/3] overflow-hidden rounded border border-gold/20 bg-midnight/40 transition-all hover:border-gold/60"
+                >
+                  <video
+                    src={t.video}
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    preload="metadata"
+                    className="absolute inset-0 h-full w-full object-cover opacity-60 transition-opacity duration-500 group-hover:opacity-90"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/40 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-end gap-1 p-4 text-center">
+                    <p className="font-didot text-lg uppercase tracking-[0.14em] text-ivory drop-shadow">
+                      {t.label}
+                    </p>
+                    <p className="font-mono text-[0.5rem] uppercase tracking-[0.28em] text-gold/80">
+                      {t.subtitle}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Artist wings — quiet secondary index */}
+        <div className="mx-auto mb-6 mt-auto w-full max-w-5xl pt-20">
+          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/65">
+            Or step into a wing along the walk
+          </p>
+          <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+            {ARTIST_WINGS.map((w) => (
+              <Link
+                key={w.href}
+                href={w.href}
+                className="rounded border border-ivory/15 bg-midnight/50 px-4 py-3 text-center backdrop-blur transition-all hover:border-gold/50 hover:bg-gold/10"
+              >
+                <p className="font-didot text-base tracking-wider text-ivory">{w.label}</p>
                 <p className="mt-1 font-mono text-[0.5rem] uppercase tracking-[0.28em] text-gold/65">
-                  {d.subtitle}
+                  {w.subtitle}
                 </p>
               </Link>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Self-guided focused viewer */}
+      {activeTile && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-midnight/90 backdrop-blur-sm"
+          onClick={() => setActiveTile(null)}
+        >
+          <div
+            className="relative w-full max-w-5xl px-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setActiveTile(null)}
+              className="absolute -top-10 right-6 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/70 hover:text-gold"
+            >
+              Close &times;
+            </button>
+            <div className="overflow-hidden rounded border border-gold/30">
+              <video
+                src={activeTile.video}
+                autoPlay
+                controls
+                playsInline
+                className="h-full w-full"
+              />
+            </div>
+            <div className="mt-5 text-center">
+              <h3 className="font-didot text-3xl uppercase tracking-[0.14em] text-ivory">
+                {activeTile.label}
+              </h3>
+              <p className="mt-2 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/75">
+                {activeTile.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
