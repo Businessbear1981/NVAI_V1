@@ -381,6 +381,7 @@ export const PAINTINGS: Painting[] = [
     dimensions: '60 × 92 cm',
     medium: 'Oil on canvas',
     signed: 'Signed upper right',
+    imageUrl: '/paintings/modigliani-nu-couche.jpg',
     viewingLocation: 'Private collection — disclosed under DDNDA',
     inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
     inspirationNote: 'The Kiki anchor. 107 years lost — the relationship discovery that drives the Kiki exposé.',
