@@ -15,29 +15,28 @@ import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
  * The artist-wing destinations live at the bottom of the page as a small,
  * unobtrusive index for visitors who already know where they want to land.
  */
-// Grounds tour rotation — follows the visitor's walk in narrative order.
-// Artist-studio videos are NOT included here; they live on their own pages.
-// Vineyards and wine-cave are not separate routes anymore — they will be
-// videos in this rotation once Higgsfield generates them.
-//
-// Pending Higgsfield generations (queued):
-//   - the orchard (sun-dappled walk between rows of fruit trees)
-//   - the vines (vineyard close-up — heavy clusters of cabernet at golden hour)
-//   - the caves (interior of the wine cave — vaulted stone, barrels, candlelight)
-const GROUNDS_LEAD_IN = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_aerial_drone_approach_5k.mp4';
+// Grounds tour rotation — visitor's walk through the estate in narrative order.
+// Now includes the three custom Higgsfield generations: vines (aerial vineyard),
+// orchard (apple + olive walk), and wine caves (period stone interior).
+const R2 = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev';
+const GROUNDS_LEAD_IN = `${R2}/nvai_aerial_drone_approach_5k.mp4`;
 const GROUNDS_ROTATION = [
   // 1. Path to the secret garden
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_to_patio_5k.mp4',
+  `${R2}/nvai_garden_path_to_patio_5k.mp4`,
   // 2. The secret garden itself
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_monet_secret_garden_5k.mp4',
-  // 3. Walk along the vineyard
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4',
-  // 4. Through the passage (closest fit to "orchard" until that's generated)
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4',
-  // 5. Garden party — the patio scene
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_party_5k.mp4',
-  // 6. Courtyard — at the back of the chateau, completing the loop
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
+  `${R2}/nvai_monet_secret_garden_5k.mp4`,
+  // 3. THE VINES — aerial over the vineyard at golden hour
+  `${R2}/nvai_vineyard_aerial_5k.mp4`,
+  // 4. THE ORCHARD — ground-level walk through apple + olive trees
+  `${R2}/nvai_orchard_walk_5k.mp4`,
+  // 5. THE WINE CAVES — period stone interior with oak barrels
+  `${R2}/nvai_wine_caves_5k.mp4`,
+  // 6. Walk along the lower path
+  `${R2}/nvai_garden_path_continuous_5k.mp4`,
+  // 7. Garden party — the patio scene
+  `${R2}/nvai_garden_party_5k.mp4`,
+  // 8. Courtyard — at the back of the chateau, completing the loop
+  `${R2}/nvai_courtyard_5k.mp4`,
 ];
 
 const DESTINATIONS = [

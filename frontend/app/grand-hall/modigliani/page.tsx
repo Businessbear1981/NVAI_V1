@@ -43,8 +43,12 @@ const CHAPTERS = [
     subtitle: '1914 – 1919 · Beatrice · Jeanne · Kiki',
     body:
       "Beatrice Hastings, the English poet, his lover 1914–1916. Jeanne Hébuterne, art student, becomes his common-law wife 1917 — they have a daughter. The first solo exhibition in 1917 is closed by the police on the opening day for indecency. He paints Kiki de Montparnasse — Alice Prin — in 1916; the Nu couché aux bras levés in our Cabinet is the one she sat for. Hers was the only nude he ever painted that he did not sell.",
-    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
-    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/african-masks.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/montmartre.mp4'],
+    // The portraits chapter — Modi at La Rotonde sketching, the working life
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_modi_rotonde_night_5k.mp4',
+    rotation: [
+      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_kiki_sitting_red_pillow_5k.mp4',
+      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_modi_garret_studio_5k.mp4',
+    ],
   },
   {
     key: 'death',
@@ -53,8 +57,12 @@ const CHAPTERS = [
     subtitle: 'January 1920',
     body:
       "Tubercular meningitis. He dies on the twenty-fourth of January, 1920, in the Charité hospital. Jeanne Hébuterne is nine months pregnant. She throws herself from a fifth-floor window the next morning. They are buried weeks apart in Père Lachaise. Their orphaned daughter is raised by his sister and will write the definitive biography sixty years later.",
-    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
-    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4'],
+    // The death chapter uses the new MODI immersive shots — funeral procession + grave
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_modi_funeral_procession_5k.mp4',
+    rotation: [
+      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_modi_pere_lachaise_grave_5k.mp4',
+      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_modi_garret_studio_5k.mp4',
+    ],
   },
 ];
 

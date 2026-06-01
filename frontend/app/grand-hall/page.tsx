@@ -5,17 +5,14 @@ import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
 const HALL_BACKDROP =
   'radial-gradient(ellipse at 50% 18%, rgba(232,200,122,0.32) 0%, transparent 50%), radial-gradient(ellipse at 50% 92%, rgba(60,30,15,0.85) 0%, transparent 70%), linear-gradient(180deg, #1a1006 0%, #2a1c0c 40%, #0a0605 100%)';
 
-// The piece-de-resistance Grand Ballroom video has not been generated yet.
-// Stand-in sequence below uses the closest existing interior architecture
-// (grand foyer interior, Vatican-Rome cathedral interior, courtyard at night)
-// to evoke a chateau ballroom. Higgsfield generation for the true ballroom
-// (period-French chateau, chandeliers, parquet de Versailles, candlelight)
-// is queued.
-const HALL_LEAD_IN = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_grand_foyer_5k.mp4';
+// Grand Hall rotation — now using the dedicated luxury auction-house interior
+// + the two ballroom variants (Renaissance dancing → 1920s Gatsby art party)
+// + the auction lobby (people waiting before the gavel).
+const HALL_LEAD_IN = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_great_hall_5k.mp4';
 const HALL_ROTATION = [
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
-  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_grand_ballroom_renaissance_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_grand_ballroom_gatsby_5k.mp4',
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_auction_lobby_5k.mp4',
 ];
 
 const DESTINATIONS = [
@@ -233,11 +230,6 @@ export default function GrandHallPage() {
           </div>
         </section>
 
-        <p className="mx-auto mt-16 max-w-2xl text-center font-body text-sm italic text-ivory/60">
-          Custom 5K Grand Hall ballroom video in production — period dancing dissolving
-          into a modern art party. Currently shown with the chateau interior approach as
-          placeholder backdrop.
-        </p>
       </div>
     </main>
   );

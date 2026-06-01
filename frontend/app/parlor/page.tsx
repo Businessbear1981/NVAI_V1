@@ -14,13 +14,11 @@ export default function ParlorPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden film-grain bg-midnight">
-      {/* Parlor backdrop — bohemian bar interior. Currently using the Chagall studio
-          video (peeling-wall, dim-light interior reads as the parlor bar) since the
-          dedicated parlor video has not been generated yet. Higgsfield generation
-          for a true 'La Ruche bohemian bar' video is queued. */}
+      {/* Parlor backdrop — the dedicated parlor video (bohemian Parisian bar
+          with Chagalls on the walls, oxidized copper bar, candlelight). */}
       <CinematicBackdrop
-        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_chagall_studio_5k.mp4"
-        overlay={0.65}
+        videoSrc="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_parlor_5k.mp4"
+        overlay={0.55}
         playbackRate={0.5}
       />
 

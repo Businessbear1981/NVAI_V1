@@ -33,8 +33,12 @@ const CHAPTERS = [
     subtitle: '1945 – 1950 · the drip-paint apex',
     body:
       "Converts the barn at Springs into a studio. Lays the canvas flat on the floor — the way the Navajo sand painters had — and drips and pours enamel directly. Lavender Mist, Autumn Rhythm, One: Number 31 — three years of canvases the size of city walls. Hans Namuth films him at work. The two pieces on offer here are from this period — the heavy-drip floor work he was on when Time magazine called him the greatest living painter.",
-    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/abstract-harmony.mp4',
-    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/studio-revolution.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nature-geometry.mp4'],
+    // SPRINGS chapter — the drip-paint apex. Uses the three new Pollock generations.
+    video: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_pollock_autumn_rhythm_canvas_5k.mp4',
+    rotation: [
+      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_pollock_action_5k.mp4',
+      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_pollock_springs_studio_5k.mp4',
+    ],
   },
   {
     key: 'the-end',
