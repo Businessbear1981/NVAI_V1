@@ -53,10 +53,105 @@ export default function GalleryPage() {
           </p>
         </header>
 
-        {/* The rotating featured display — suspended hanging-painting display under
-            museum picture lighting. Champagne-in-hand, stop-and-admire-for-5-seconds
-            cadence. The painting hangs at centre on a dark gallery wall, lit by a
-            picture-light cone from above, with a brass museum placard below. */}
+        {/* HERO — Circular orbital carousel — THE catalog, the centerpiece of the page.
+            All paintings orbit slowly around the gold medallion. Click any thumb to
+            promote it into the featured display below. This is the finale of the
+            guided tour ("THE CIRCLE"). */}
+        <section className="mx-auto mt-12 max-w-6xl">
+          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-2">
+            The circular catalog
+          </p>
+          <p className="text-center font-display text-sm italic tracking-wider text-gold/70 mb-8">
+            All {PAINTINGS.length} works orbit. Click any to bring it to centre.
+          </p>
+          <div
+            className="relative mx-auto"
+            style={{ width: '100%', maxWidth: '680px', aspectRatio: '1 / 1' }}
+          >
+            <div className="absolute inset-0">
+              {PAINTINGS.map((p, idx) => {
+                const angle = (360 / PAINTINGS.length) * idx;
+                const radius = 46;
+                return (
+                  <button
+                    key={p.slug}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveIdx(idx);
+                    }}
+                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 hover:z-20 ${
+                      activeIdx === idx ? 'z-30 scale-125' : 'hover:scale-110'
+                    }`}
+                    style={{
+                      transform: `translate(-50%, -50%) rotate(${angle}deg) translate(${radius}%) rotate(${-angle}deg) ${
+                        activeIdx === idx ? 'scale(1.25)' : ''
+                      }`,
+                      width: '13%',
+                      aspectRatio: '3 / 4',
+                    }}
+                    aria-label={`${p.artist} — ${p.title}`}
+                  >
+                    <div
+                      className={`relative h-full w-full overflow-hidden rounded-sm shadow-lg transition-all ${
+                        activeIdx === idx
+                          ? 'ring-2 ring-gold ring-offset-2 ring-offset-midnight shadow-[0_8px_28px_rgba(212,175,55,0.5)]'
+                          : 'ring-1 ring-gold/20 hover:ring-gold/60'
+                      }`}
+                      style={{
+                        background: 'linear-gradient(135deg, #b08832 0%, #6a4815 100%)',
+                        padding: '2px',
+                      }}
+                    >
+                      {p.imageUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={p.imageUrl} alt={p.title} className="h-full w-full object-cover" />
+                      ) : (
+                        <div
+                          className="flex h-full w-full flex-col items-center justify-center text-center"
+                          style={{ background: 'linear-gradient(160deg, #2a1c12 0%, #0a0605 100%)' }}
+                        >
+                          <p className="px-1 font-didot text-[0.55rem] leading-tight tracking-wider text-ivory/85">
+                            {p.title}
+                          </p>
+                          <p className="mt-1 font-mono text-[0.45rem] uppercase tracking-[0.18em] text-gold/65">
+                            {p.artist.split(' ').slice(-1)[0]}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <div
+                className="rounded-full"
+                style={{
+                  width: '18%',
+                  aspectRatio: '1',
+                  background: 'radial-gradient(circle, rgba(232,200,122,0.25) 0%, transparent 70%)',
+                  filter: 'blur(8px)',
+                }}
+              />
+            </div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+              <p className="font-mono text-[0.45rem] uppercase tracking-[0.4em] text-gold/55">
+                The Catalog
+              </p>
+              <p className="mt-1 font-didot text-2xl uppercase tracking-[0.18em] text-ivory/85">
+                {PAINTINGS.length}
+              </p>
+              <p className="font-mono text-[0.4rem] uppercase tracking-[0.32em] text-gold/45">
+                works
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 text-center font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/45">
+            Click any work above to bring it to the focal display below
+          </p>
+        </section>
+
+        {/* Featured display — the painting currently in focus from the orbit above */}
         <section className="mx-auto mt-16 max-w-6xl">
           <Link href={`/piece/${active.slug}`} className="block">
             <article
@@ -260,116 +355,6 @@ export default function GalleryPage() {
           )}
         </section>
 
-        {/* Circular orbital carousel — all paintings orbit slowly around an
-            invisible center. Click any thumb to bring it to the featured center
-            display above. Click-hold or hover pauses the rotation. */}
-        <section className="mx-auto mt-20 max-w-6xl">
-          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-2">
-            The circular catalog
-          </p>
-          <p className="text-center font-display text-sm italic tracking-wider text-gold/70 mb-10">
-            All {PAINTINGS.length} works orbit. Click any to view.
-          </p>
-          <div
-            className="relative mx-auto"
-            style={{ width: '100%', maxWidth: '760px', aspectRatio: '1 / 1' }}
-          >
-            <div className="absolute inset-0">
-              {PAINTINGS.map((p, idx) => {
-                const angle = (360 / PAINTINGS.length) * idx;
-                const radius = 46; // percent of container half-width
-                return (
-                  <button
-                    key={p.slug}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveIdx(idx);
-                    }}
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 hover:z-20 ${
-                      activeIdx === idx ? 'z-30 scale-125' : 'hover:scale-110'
-                    }`}
-                    style={{
-                      transform: `translate(-50%, -50%) rotate(${angle}deg) translate(${radius}%) rotate(${-angle}deg) ${
-                        activeIdx === idx ? 'scale(1.25)' : ''
-                      }`,
-                      width: '13%',
-                      aspectRatio: '3 / 4',
-                    }}
-                    aria-label={`${p.artist} — ${p.title}`}
-                  >
-                    <div
-                      className={`relative h-full w-full overflow-hidden rounded-sm shadow-lg transition-all ${
-                        activeIdx === idx
-                          ? 'ring-2 ring-gold ring-offset-2 ring-offset-midnight shadow-[0_8px_28px_rgba(212,175,55,0.5)]'
-                          : 'ring-1 ring-gold/20 hover:ring-gold/60'
-                      }`}
-                      style={{
-                        background:
-                          'linear-gradient(135deg, #b08832 0%, #6a4815 100%)',
-                        padding: '2px',
-                      }}
-                    >
-                      {p.imageUrl ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={p.imageUrl}
-                          alt={p.title}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div
-                          className="flex h-full w-full flex-col items-center justify-center text-center"
-                          style={{
-                            background:
-                              'linear-gradient(160deg, #2a1c12 0%, #0a0605 100%)',
-                          }}
-                        >
-                          <p className="px-1 font-didot text-[0.55rem] leading-tight tracking-wider text-ivory/85">
-                            {p.title}
-                          </p>
-                          <p className="mt-1 font-mono text-[0.45rem] uppercase tracking-[0.18em] text-gold/65">
-                            {p.artist.split(' ').slice(-1)[0]}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Center medallion — soft gold light suggesting the gallery's heart */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-              <div
-                className="rounded-full"
-                style={{
-                  width: '18%',
-                  aspectRatio: '1',
-                  background:
-                    'radial-gradient(circle, rgba(232,200,122,0.25) 0%, transparent 70%)',
-                  filter: 'blur(8px)',
-                }}
-              />
-            </div>
-
-            {/* Center label */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
-              <p className="font-mono text-[0.45rem] uppercase tracking-[0.4em] text-gold/55">
-                The Catalog
-              </p>
-              <p className="mt-1 font-didot text-2xl uppercase tracking-[0.18em] text-ivory/85">
-                {PAINTINGS.length}
-              </p>
-              <p className="font-mono text-[0.4rem] uppercase tracking-[0.32em] text-gold/45">
-                works
-              </p>
-            </div>
-          </div>
-
-          <p className="mt-6 text-center font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/45">
-            Click any work in the orbit to bring it to the centre display above
-          </p>
-        </section>
       </div>
 
       <style jsx>{`
