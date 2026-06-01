@@ -89,7 +89,10 @@ export default function HomePage() {
               <p className="font-mono text-[0.5rem] uppercase tracking-[0.5em] text-[#3a2a0a]/70">
                 The Marquee
               </p>
-              <h2 className="mt-2 font-didot text-4xl uppercase tracking-[0.22em] text-[#1a0e05] drop-shadow-sm md:text-5xl">
+              <h2
+                className="mt-2 font-didot text-4xl uppercase tracking-[0.22em] text-[#0a0605] md:text-5xl"
+                style={{ textShadow: '0 1px 2px rgba(255,245,220,0.45), 0 0 8px rgba(255,245,220,0.25)' }}
+              >
                 Kiki
               </h2>
               <p className="mt-1 font-display text-sm italic tracking-[0.18em] text-[#5a3a1a]">

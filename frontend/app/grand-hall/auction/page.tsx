@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import WingLayout from '@/components/layout/WingLayout';
 
 const AUCTION_BACKDROP =
@@ -5,19 +6,22 @@ const AUCTION_BACKDROP =
 
 const upcoming = [
   {
+    title: 'Modigliani · The Sitting Nude with Crossed Hands',
+    format: 'Auction date to be announced · register interest',
+    date: 'TBA',
+    inquireHref: '/inquire?painting=modigliani-sitting-nude-with-crossed-hands',
+  },
+  {
     title: 'Picasso · Bateau-Lavoir 1901',
     format: 'Private invite-only',
     date: 'Q3 2026',
+    inquireHref: '/inquire?wing=picasso-bateau-lavoir',
   },
   {
     title: 'Chagall · The Vitebsk Years',
     format: 'Full Christie\'s-scale live',
     date: 'Q4 2026',
-  },
-  {
-    title: 'Modigliani · The Kiki Discovery',
-    format: 'Private invite-only — Kiki super-fan list',
-    date: 'TBA · pending exposé launch',
+    inquireHref: '/inquire?wing=chagall',
   },
 ];
 
@@ -43,9 +47,12 @@ export default function AuctionHousePage() {
               <h3 className="font-display text-lg leading-tight text-ivory">{event.title}</h3>
               <div className="h-px w-8 bg-gold/30" />
               <p className="font-body text-sm italic text-ivory/60">{event.format}</p>
-              <button className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.32em] text-gold hover:text-gold-warm">
+              <Link
+                href={event.inquireHref}
+                className="mt-2 inline-block font-mono text-[0.65rem] uppercase tracking-[0.32em] text-gold hover:text-gold-warm"
+              >
                 Register interest →
-              </button>
+              </Link>
             </article>
           ))}
         </div>

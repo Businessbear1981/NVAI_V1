@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function BernardConcierge() {
@@ -42,27 +43,22 @@ export default function BernardConcierge() {
             </div>
             <div className="mt-4 h-px w-12 bg-gold/40" />
             <p className="mt-6 font-body italic text-sm text-ivory/80 leading-relaxed">
-              Good evening. I am Bernard. I can answer questions about any piece in the
-              collection, schedule a physical viewing at one of the storage locations,
-              connect you with Sean or Richard for sale terms, or simply walk the chateau
-              with you.
+              Good evening. I am Bernard. I walk the chateau with collectors —
+              every painting in the collection has its own story, told in my voice,
+              waiting at the foot of the staircase.
             </p>
-            <textarea
-              placeholder="Tell me what you are looking for…"
-              rows={3}
-              className="mt-6 w-full rounded border border-gold/20 bg-midnight/60 px-4 py-3 font-body text-sm text-ivory placeholder:text-ivory/40 focus:border-gold/60 focus:outline-none"
-            />
-            <div className="mt-4 flex items-center justify-between">
-              <button className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-ivory/70 hover:text-gold">
-                ◉ Voice
-              </button>
-              <button className="rounded-full border border-gold/50 bg-gold/10 px-6 py-2 font-mono text-[0.65rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/20">
-                Send →
-              </button>
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/foyer/staircase"
+                onClick={() => setOpen(false)}
+                className="rounded-full border border-gold/50 bg-gold/10 px-8 py-3 font-mono text-[0.65rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/20"
+              >
+                Find Bernard on any painting →
+              </Link>
             </div>
-            <p className="mt-4 text-center text-[0.6rem] italic text-ivory/50">
-              Claude + ElevenLabs wiring in progress. All material correspondence
-              routes to Sean or Richard for approval before sending.
+            <p className="mt-6 text-center text-[0.6rem] italic text-ivory/50">
+              Voice walkthroughs available on every painting page. For sale terms
+              or a physical viewing, reach Sean or Richard directly.
             </p>
           </aside>
         </div>
