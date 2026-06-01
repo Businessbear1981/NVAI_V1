@@ -10,7 +10,7 @@ export const revalidate = 0;
 
 export default function HomePage() {
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-midnight film-grain">
+    <main className="relative min-h-screen w-screen overflow-x-hidden bg-midnight film-grain md:h-screen md:overflow-hidden">
       {/* Home hero is a still image extracted from the last frame of the drone-approach
           video — chateau well-framed, zero motion, no video element. Reliable across
           all browsers, no race conditions, no buffering. */}
@@ -21,7 +21,7 @@ export default function HomePage() {
       />
 
       {/* Institute logo — top left, with Open Letter link beneath */}
-      <div className="absolute left-8 top-8 z-30 flex flex-col items-start gap-3">
+      <div className="absolute left-4 top-4 z-30 flex flex-col items-start gap-2 md:left-8 md:top-8 md:gap-3">
         <div className="flex items-center gap-4 pointer-events-none">
           <Image
             src="/brand/nvai-logo-transparent.png"
@@ -71,9 +71,10 @@ export default function HomePage() {
       </div>
 
       {/* Marquee trio — KIKI featured center (the front door, the WOW). MODI is the
-          DESTINATION at the end of Kiki's immersive, not a separate marquee tab. */}
-      <div className="absolute inset-x-0 bottom-16 z-20 flex justify-center px-8">
-        <div className="grid w-full max-w-3xl grid-cols-[1fr_1.5fr_1fr] items-stretch gap-4">
+          DESTINATION at the end of Kiki's immersive, not a separate marquee tab.
+          Mobile: in-flow with bottom padding to clear EssentialsBar; Desktop: absolute bottom-16 */}
+      <div className="relative z-20 mt-[60vh] flex justify-center px-4 pb-28 md:absolute md:inset-x-0 md:bottom-16 md:mt-0 md:px-8 md:pb-0">
+        <div className="grid w-full max-w-3xl grid-cols-1 items-stretch gap-4 md:grid-cols-[1fr_1.5fr_1fr]">
           <Link href="/grounds" aria-label="Walk the Grounds — Self-Guided" className="block h-full">
             <MarbleTombstone
               eyebrow="Left · The Grounds"
@@ -133,7 +134,7 @@ export default function HomePage() {
       </div>
 
       {/* Tagline */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-24 z-20 text-center">
+      <div className="pointer-events-none absolute inset-x-0 bottom-24 z-20 hidden text-center md:block">
         <p className="font-didot text-sm italic tracking-wider text-ivory/70 drop-shadow">
           Authenticated by the Prague Gallery. Available under non-disclosure.
         </p>

@@ -272,6 +272,29 @@ export default function KikiPage() {
           </div>
         </div>
 
+        {/* The Red Pillow — the sitting in Modi's studio, 1917 */}
+        <div className="space-y-4">
+          <div className="text-center space-y-2">
+            <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+              The Sitting · Modigliani&apos;s studio · 1917
+            </p>
+            <h2 className="font-display text-2xl tracking-wider text-gold">The Red Pillow</h2>
+          </div>
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-lg border border-gold/30 bg-midnight">
+            <video preload="none"
+              src={VIDEOS.kiki.theSitting}
+              controls
+              className="aspect-video w-full object-cover"
+            />
+            <p className="px-3 py-2 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/70">
+              The red velvet pillow · the painting-being-made moment
+            </p>
+          </div>
+          <p className="mx-auto max-w-2xl text-center font-body text-xs italic text-ivory/80">
+            The pose at the heart of the centrepiece — Kiki on a red velvet pillow, the painting Modigliani never sold.
+          </p>
+        </div>
+
         {/* The Private Scrapbook — hero offering from Richard's PDF */}
         <div className="space-y-6">
           <Link
