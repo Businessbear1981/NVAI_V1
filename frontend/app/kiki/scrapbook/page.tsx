@@ -163,16 +163,24 @@ export default function KikiScrapbookPage() {
           </div>
         </section>
 
-        {/* ============== THE SCULPTURE PEDESTAL ============== */}
+        {/* ============== THE SCULPTURE PEDESTAL — BONUS WITH SCRAPBOOK ============== */}
         <section className="mx-auto mt-24 max-w-4xl">
           <div className="text-center">
             <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
-              Bronze · Limited Edition · From Man Ray, Noire et Blanche, 1926
+              Bonus · Included with the Scrapbook
             </p>
             <h2 className="mt-4 font-didot text-3xl uppercase tracking-[0.14em] text-ivory md:text-4xl">
-              The Pedestal
+              The Bronze
             </h2>
+            <p className="mt-4 font-display italic tracking-wider text-gold/75">
+              Three-dimensional sculpture, after Man Ray
+            </p>
             <div className="mx-auto mt-6 h-px w-16 bg-gold/40" />
+            <p className="mx-auto mt-6 max-w-xl font-body italic leading-relaxed text-ivory/85">
+              Every numbered scrapbook ships with a hand-cast bronze relief of Kiki —
+              modeled directly from Noire et Blanche, 1926. Sculpted in the Paris studio.
+              Authenticated edition certificate enclosed.
+            </p>
           </div>
 
           {/* Pedestal — 3D Meshy sculpture (auto-rotating) */}
@@ -208,11 +216,8 @@ export default function KikiScrapbookPage() {
               />
             </div>
             <div className="mt-6 text-center">
-              <p className="font-display italic text-gold/80">
-                Three-dimensional study · After Man Ray, Noire et Blanche, 1926
-              </p>
-              <p className="mt-1 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/55">
-                Edition of 12 · Bronze cast forthcoming · Drag to rotate
+              <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/55">
+                Drag to rotate · Scroll to zoom · A scrapbook bonus
               </p>
             </div>
           </div>
