@@ -133,12 +133,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Tagline */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-24 z-20 hidden text-center md:block">
-        <p className="font-didot text-sm italic tracking-wider text-ivory/70 drop-shadow">
-          Authenticated by the Prague Gallery. Available under non-disclosure.
-        </p>
-      </div>
 
       {/* Essentials tabs */}
       <EssentialsBar />

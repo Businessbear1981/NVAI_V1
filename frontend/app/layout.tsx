@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
   description:
     'An ultra-luxury cinematic immersive digital gallery on the grounds of Villa Monticello. ' +
-    'Twenty-seven master works under exclusive contract from a Prague gallery. Private viewing under non-disclosure.',
+    'Twenty-eight master works from private collections. Available to qualified buyers.',
   openGraph: {
     title: 'Napa Valley Art Institut',
     description: 'An ultra-luxury cinematic immersive digital gallery.',
