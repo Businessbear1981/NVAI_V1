@@ -9,23 +9,55 @@ export interface WingVideos {
   rotation: string[];
 }
 
+const R2 = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev';
+
 export const VIDEOS = {
   // ---------------------------------------------------------------------------
   // Spatial nodes
   // ---------------------------------------------------------------------------
-  home: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_aerial_drone_approach_5k.mp4',
-  foyer: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_grand_foyer_5k.mp4',
-  foyerWelcome: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_landing_handshot_5k.mp4',
-  foyerAerialStatic: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4',
-  foyerAerialPan: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4',
-  staircase: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_foyer_aerial_static.mp4',
-  garden: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_party_5k.mp4',
-  gardenPassage: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4',
-  gardenPath: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4',
-  gardenPathToPatio: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_to_patio_5k.mp4',
-  courtyard: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
-  grandHall: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_grand_foyer_5k.mp4',
-  auction: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/foyer_aerial_pan_final.mp4',
+  home: `${R2}/nvai_aerial_drone_approach_5k.mp4`,
+  homeStill: `${R2}/nvai_last_frame.jpg`, // home page hero - chateau still
+  foyer: `${R2}/nvai_grand_foyer_5k.mp4`,
+  foyerWelcome: `${R2}/nvai_foyer_landing_handshot_5k.mp4`,
+  foyerAerialStatic: `${R2}/nvai_foyer_aerial_static.mp4`,
+  foyerAerialPan: `${R2}/foyer_aerial_pan_final.mp4`,
+  staircase: `${R2}/nvai_foyer_aerial_static.mp4`,
+  // Balcony at the top of the central staircase — Da Vinci contraption visible
+  // through open terrace doors. Launch point for the Da Vinci flight experience.
+  balcony: `${R2}/nvai_balcony_staircase_5k.mp4`,
+  garden: `${R2}/nvai_garden_party_5k.mp4`,
+  gardenPassage: `${R2}/nvai_garden_passage_5k.mp4`,
+  gardenPath: `${R2}/nvai_garden_path_continuous_5k.mp4`,
+  gardenPathToPatio: `${R2}/nvai_garden_path_to_patio_5k.mp4`,
+  courtyard: `${R2}/nvai_courtyard_5k.mp4`,
+  // Great Hall — ultra-luxury auction house interior (Christie's London grade)
+  grandHall: `${R2}/nvai_great_hall_5k.mp4`,
+  // Auction lobby — people waiting before the gavel
+  auctionLobby: `${R2}/nvai_auction_lobby_5k.mp4`,
+  // Grand Ballroom variations — Renaissance dancers OR 1920s Gatsby party
+  grandBallroomRenaissance: `${R2}/nvai_grand_ballroom_renaissance_5k.mp4`,
+  grandBallroomGatsby: `${R2}/nvai_grand_ballroom_gatsby_5k.mp4`,
+  // Legacy 'auction' kept for routes that still reference it
+  auction: `${R2}/nvai_auction_lobby_5k.mp4`,
+
+  // ---------------------------------------------------------------------------
+  // Grounds rotation — visitor's walk through the estate (narrative sequence)
+  // ---------------------------------------------------------------------------
+  vineyardAerial: `${R2}/nvai_vineyard_aerial_5k.mp4`,
+  orchardWalk: `${R2}/nvai_orchard_walk_5k.mp4`,
+  wineCaves: `${R2}/nvai_wine_caves_5k.mp4`,
+
+  // ---------------------------------------------------------------------------
+  // Da Vinci flight — 48s cinematic interlude (4 × 12s beats)
+  // Launched from the balcony, lands on the patio
+  // ---------------------------------------------------------------------------
+  davinciFlight: {
+    takeoff: `${R2}/nvai_davinci_flight_b1_takeoff_5k.mp4`,
+    // beat 2 soaring failed NSFW - regen pending
+    banking: `${R2}/nvai_davinci_flight_b3_banking_5k.mp4`,
+    descent: `${R2}/nvai_davinci_flight_b4_descent_5k.mp4`,
+    alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`, // bonus general flight - use as beat 2 substitute
+  },
 
   // ---------------------------------------------------------------------------
   // Artist wings — with rotation video lists
@@ -63,11 +95,10 @@ export const VIDEOS = {
     rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/antibes.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/war-violence.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/cote-azur.mp4'],
   } as WingVideos,
 
-  // The Parlor — bohemian bar atmosphere. Chagalls hang here as decor;
-  // the bar itself is the scene. Visitor goes into the Chagall sub-room for
-  // the individual painting experience.
+  // The Parlor — bohemian Parisian bar with Chagalls on the walls.
+  // Visitor goes into the Chagall sub-room for the individual painting experience.
   parlor: {
-    leadIn: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_courtyard_5k.mp4',
+    leadIn: `${R2}/nvai_parlor_5k.mp4`,
     rotation: [],
   } as WingVideos,
 
@@ -84,13 +115,16 @@ export const VIDEOS = {
     ],
   } as WingVideos,
 
+  // MODIGLIANI — the immersive (other half of Kiki, climax of the sale)
+  // The cafe leadIn opens the wing; the four cornerstone shots build the arc:
+  // garret studio (where he died) -> La Rotonde (working life) -> funeral procession -> grave.
   modigliani: {
-    leadIn: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_modigliani_cafe_5k.mp4',
+    leadIn: `${R2}/nvai_modigliani_cafe_5k.mp4`,
     rotation: [
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/african-masks.mp4',
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/montmartre.mp4',
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4',
+      `${R2}/nvai_modi_rotonde_night_5k.mp4`,
+      `${R2}/nvai_modi_garret_studio_5k.mp4`,
+      `${R2}/nvai_modi_funeral_procession_5k.mp4`,
+      `${R2}/nvai_modi_pere_lachaise_grave_5k.mp4`,
     ],
   } as WingVideos,
 
@@ -107,9 +141,14 @@ export const VIDEOS = {
     ],
   } as WingVideos,
 
+  // RAPHAEL — use the Raphael chapel as leadIn (was generic florence-workshop)
   raphael: {
-    leadIn: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/florence-workshop.mp4',
-    rotation: ['https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/rome-vatican.mp4', 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/milan-court.mp4'],
+    leadIn: `${R2}/nvai_raphael_chapel_5k.mp4`,
+    rotation: [
+      `${R2}/rome-vatican.mp4`,
+      `${R2}/florence-workshop.mp4`,
+      `${R2}/milan-court.mp4`,
+    ],
   } as WingVideos,
 
   davinci: {
@@ -127,10 +166,14 @@ export const VIDEOS = {
     ],
   } as WingVideos,
 
+  // MONET — Giverny + the three new generations (moonlit Nymphéas, rolling hills, late-life cataracts)
   monet: {
-    leadIn: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_monet_secret_garden_5k.mp4',
+    leadIn: `${R2}/nvai_monet_secret_garden_5k.mp4`,
     rotation: [
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_passage_5k.mp4',
+      `${R2}/nvai_monet_moonlit_nympheas_5k.mp4`,
+      `${R2}/nvai_monet_rolling_hills_5k.mp4`,
+      `${R2}/nvai_monet_failing_sight_5k.mp4`,
+      `${R2}/nvai_garden_passage_5k.mp4`,
     ],
   } as WingVideos,
 
@@ -159,19 +202,40 @@ export const VIDEOS = {
   } as WingVideos,
 
   // ---------------------------------------------------------------------------
-  // Kiki — multiple files, treated as named clips not rotation
+  // KIKI — the marquee immersive. Two halves: Kiki's rise + MODI's fall.
+  // The painting NVAI is selling is the seam between her half and his half.
   // ---------------------------------------------------------------------------
   kiki: {
-    leadIn: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_kiki_moulin_rouge_5k.mp4',
-    moulinRougeLive: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/moulin_rouge_live_45sec.mp4',
-    burlesqueFinal: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/kiki_burlesque_performance_final.mp4',
+    leadIn: `${R2}/nvai_kiki_moulin_rouge_5k.mp4`,
+    moulinRougeLive: `${R2}/moulin_rouge_live_45sec.mp4`,
+    burlesqueFinal: `${R2}/kiki_burlesque_performance_final.mp4`,
     burlesqueVariants: [
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/kiki_burlesque_performance_5k.mp4',
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/kiki_burlesque_performance_5k_v2.mp4',
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/kiki_burlesque_performance_5k_v3.mp4',
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/kiki_burlesque_performance_5k_v4.mp4',
-      'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/kiki_burlesque_performance_final.mp4',
+      `${R2}/kiki_burlesque_performance_5k.mp4`,
+      `${R2}/kiki_burlesque_performance_5k_v2.mp4`,
+      `${R2}/kiki_burlesque_performance_5k_v3.mp4`,
+      `${R2}/kiki_burlesque_performance_5k_v4.mp4`,
+      `${R2}/kiki_burlesque_performance_final.mp4`,
     ],
-    danceOneMinute: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/kiki_dance_performance_1min.mp4',
+    danceOneMinute: `${R2}/kiki_dance_performance_1min.mp4`,
+    // The Sitting — Modi's studio, 1917, red velvet pillow (the painting-being-made moment)
+    theSitting: `${R2}/nvai_kiki_sitting_red_pillow_5k.mp4`,
+    // Hotel Istria — Kiki's bohemian Montparnasse room
+    hotelIstria: `${R2}/nvai_kiki_hotel_istria_5k.mp4`,
+    // The cabaret dance sequence with Modi (3 beats; b1 NSFW-blocked twice)
+    cabaretDance: {
+      seeing: null, // b1 - blocked, regen pending
+      dancing: `${R2}/nvai_kiki_modi_b2_dance_5k.mp4`,
+      catching: `${R2}/nvai_kiki_modi_b3_catching_5k.mp4`,
+    },
+  },
+
+  // ---------------------------------------------------------------------------
+  // Pollock — generation in progress (3 shots: studio, action, canvas)
+  // ---------------------------------------------------------------------------
+  pollock: {
+    // Filled in once generations complete:
+    studio: `${R2}/nvai_pollock_springs_studio_5k.mp4`,
+    action: `${R2}/nvai_pollock_action_5k.mp4`,
+    canvas: `${R2}/nvai_pollock_autumn_rhythm_canvas_5k.mp4`,
   },
 } as const;
