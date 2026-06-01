@@ -53,10 +53,10 @@ export const VIDEOS = {
   // ---------------------------------------------------------------------------
   davinciFlight: {
     takeoff: `${R2}/nvai_davinci_flight_b1_takeoff_5k.mp4`,
-    // beat 2 soaring failed NSFW - regen pending
+    soaring: `${R2}/nvai_davinci_flight_b2_soaring_5k.mp4`,
     banking: `${R2}/nvai_davinci_flight_b3_banking_5k.mp4`,
     descent: `${R2}/nvai_davinci_flight_b4_descent_5k.mp4`,
-    alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`, // bonus general flight - use as beat 2 substitute
+    alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`, // bonus general flight - alternate take
   },
 
   // ---------------------------------------------------------------------------
@@ -227,9 +227,9 @@ export const VIDEOS = {
     theSitting: `${R2}/nvai_kiki_sitting_red_pillow_5k.mp4`,
     // Hotel Istria — Kiki's bohemian Montparnasse room
     hotelIstria: `${R2}/nvai_kiki_hotel_istria_5k.mp4`,
-    // The cabaret dance sequence with Modi (3 beats; b1 NSFW-blocked twice)
+    // The cabaret dance sequence with Modi - 3 beats (36s total when stitched)
     cabaretDance: {
-      seeing: null, // b1 - blocked, regen pending
+      seeing: `${R2}/nvai_kiki_modi_b1_seeing_5k.mp4`,
       dancing: `${R2}/nvai_kiki_modi_b2_dance_5k.mp4`,
       catching: `${R2}/nvai_kiki_modi_b3_catching_5k.mp4`,
     },
