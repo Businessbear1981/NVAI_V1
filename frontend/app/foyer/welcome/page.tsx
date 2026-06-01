@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import WingLayout from '@/components/layout/WingLayout';
 
 const WELCOME_BACKDROP =
@@ -46,6 +47,27 @@ export default function WelcomePage() {
               Sign the guestbook
             </button>
           </form>
+
+          {/* Begin the Guided Tour — appears after the guestbook so visitors
+              can either take the curated 18-chapter walk or wander on their own. */}
+          <div className="mt-10 rounded border border-gold/30 bg-midnight/40 p-6">
+            <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/80">
+              Now · the curated walk
+            </p>
+            <h3 className="mt-3 font-didot text-2xl uppercase tracking-[0.12em] text-ivory">
+              Begin the Guided Tour
+            </h3>
+            <p className="mt-3 font-body italic text-ivory/75 leading-relaxed">
+              Eighteen chapters, end-to-end — every wing of Villa Monticello with
+              Bernard's narration, in the order they were meant to be seen.
+            </p>
+            <Link
+              href="/tour"
+              className="mt-5 inline-flex items-center gap-3 rounded-full border border-gold/50 bg-gold/10 px-7 py-3 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold transition-all hover:border-gold hover:bg-gold/20"
+            >
+              Begin Guided Tour <span>→</span>
+            </Link>
+          </div>
         </section>
 
         <section className="space-y-6">

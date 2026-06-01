@@ -75,6 +75,20 @@ export default function FoyerPage() {
             </Link>
           </div>
 
+          {/* Begin Guided Tour — featured row above the secondary thresholds,
+              the locked 18-chapter walk through every wing. */}
+          <div className="mt-8 grid grid-cols-1 gap-6">
+            <Link href="/tour" aria-label="Begin the 18-chapter guided tour">
+              <MarbleTombstone
+                eyebrow="The Curated Walk · 18 Chapters"
+                title="Begin the Guided Tour"
+                subtitle="Bernard narrates · every wing · end-to-end"
+                caption="Eighteen chapters in the locked order — Grounds, Monet, Picasso, Frida, Da Vinci, the Ballroom, Pollock, Modi, the upstairs rooms, the Flight, Kiki, the Gallery."
+                featured
+              />
+            </Link>
+          </div>
+
           {/* Secondary thresholds — quieter side-rooms for visitors who want context
               before climbing the staircase. */}
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">

@@ -74,12 +74,12 @@ export default function HomePage() {
           DESTINATION at the end of Kiki's immersive, not a separate marquee tab. */}
       <div className="absolute inset-x-0 bottom-16 z-20 flex justify-center px-8">
         <div className="grid w-full max-w-3xl grid-cols-[1fr_1.5fr_1fr] items-stretch gap-4">
-          <Link href="/foyer" aria-label="Enter the Chateau" className="block h-full">
+          <Link href="/grounds" aria-label="Walk the Grounds — Self-Guided" className="block h-full">
             <MarbleTombstone
-              eyebrow="The Chateau"
-              title="Enter Foyer"
-              subtitle="Villa Monticello"
-              caption="The collection awaits inside."
+              eyebrow="Left · The Grounds"
+              title="Walk the Grounds"
+              subtitle="Self-Guided"
+              caption="The vineyard, the wine caves, the artist gardens. Your way."
             />
           </Link>
 
@@ -121,12 +121,12 @@ export default function HomePage() {
             </div>
           </Link>
 
-          <Link href="/garden" aria-label="Secret Garden" className="block h-full">
+          <Link href="/tour" aria-label="Take the Guided Tour of the Institute" className="block h-full">
             <MarbleTombstone
-              eyebrow="The Grounds"
-              title="Secret Garden"
-              subtitle="A garden party"
-              caption="Walk the vineyard pathway."
+              eyebrow="Right · The Tour"
+              title="Guided Tour"
+              subtitle="Bernard narrates"
+              caption="Eighteen chapters. Every room. The full Institute."
             />
           </Link>
         </div>
