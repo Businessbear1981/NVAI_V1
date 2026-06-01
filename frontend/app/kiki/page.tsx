@@ -10,42 +10,58 @@ import MarqueeLeadIn from '@/components/cinematic/MarqueeLeadIn';
 const KIKI_BACKDROP =
   'radial-gradient(ellipse at 30% 30%, rgba(220,40,80,0.35) 0%, transparent 50%), radial-gradient(ellipse at 70% 70%, rgba(120,20,60,0.5) 0%, transparent 60%), linear-gradient(180deg, #1a060c 0%, #2a0a14 40%, #0a0205 100%)';
 
+// Six-tier ladder calibrated for 1M Kiki super-fans + unit volume.
+// Locked 2026-06-01 with Sean. $2 admission catches impulse buyers via TikTok/IG;
+// each subsequent tier is a sensible upgrade with no $500 cliff.
+// Every checkout includes an optional charity tip — 60% IFAR / 20% di Rosa / 20% Kiki Paris legacy.
 const offerings = [
   {
+    label: 'Admission',
+    detail: 'Pay your respects · Kiki experience access · with optional charity tip at checkout',
+    price: '$2',
+    cta: 'Enter',
+    cover: undefined as string | undefined,
+    featured: false,
+  },
+  {
+    label: 'First Look',
+    detail: 'eBook teaser · 60 pages · the opening chapter of the exposé',
+    price: '$9',
+    cta: 'Read',
+    cover: undefined,
+    featured: false,
+  },
+  {
     label: 'The Exposé',
-    detail: '220-page eBook · by Jana Misho · 700+ research links · the 107-year-lost Modigliani discovery',
-    price: '$65',
+    detail: '220-page eBook · by Jana Misho · 700+ research links · the 109-year-lost Modigliani discovery',
+    price: '$29',
     cta: 'Order',
+    cover: '/kiki/photos/TheExtraordinaryLife&TimesoftheImmortalyetForgottenKIKI,QueenofMontparnasse-anExpose&GraphicNovel-CoverPage.jpg',
+    featured: true,
   },
   {
-    label: 'Audiobook + Picture Book',
+    label: 'The Audiobook',
     detail: 'ElevenLabs narration · period French-accented English · companion picture book to follow along',
-    price: '$45',
+    price: '$49',
     cta: 'Order',
+    cover: undefined,
+    featured: false,
   },
   {
-    label: 'KISP — Kiki Supplement Pages',
-    detail: 'Weekly subscription · newly-uncovered rare photos, archive film, anecdotes',
-    price: '$12 / month',
-    cta: 'Subscribe',
-  },
-  {
-    label: 'Modigliani Commemorative Poster',
-    detail: '36 × 24 in · first 10,000 copies · numbered',
-    price: '$95',
+    label: 'The Bundle',
+    detail: 'eBook + Audiobook + 63 Bonus Plates + Bernard chapter narrations + 3D bronze viewer',
+    price: '$79',
     cta: 'Order',
+    cover: undefined,
+    featured: false,
   },
   {
-    label: 'Private YouTube Channel',
-    detail: '24-hour streaming · rare film, animation, period interviews · sent with eBook',
-    price: 'Included',
-    cta: 'Access',
-  },
-  {
-    label: 'Lingerie collection',
-    detail: 'Curated reference to the existing Kiki de Montparnasse luxury brand',
-    price: 'From $185',
-    cta: 'Browse',
+    label: 'The Hand-Bound Edition',
+    detail: 'Cloth-bound · slipcased · signed · numbered (edition of 250) · made-to-order · 6-8 wks · includes complete digital',
+    price: '$295',
+    cta: 'Reserve',
+    cover: undefined,
+    featured: false,
   },
 ];
 
@@ -297,20 +313,47 @@ export default function KikiPage() {
           </Link>
         </div>
 
-        {/* The offerings */}
+        {/* The offerings — 6-tier ladder, $2 → $295 */}
         <div className="space-y-6">
-          <h2 className="font-display text-2xl text-center tracking-wider text-gold">The Offerings</h2>
+          <div className="text-center space-y-2">
+            <h2 className="font-display text-2xl tracking-wider text-gold">The Offerings</h2>
+            <p className="font-body text-xs italic text-ivory/65">
+              Six tiers, $2 to $295. Every checkout includes an optional tip — 60% to the
+              International Foundation for Art Research, 20% to di Rosa Center in Napa, 20%
+              to Kiki's Paris legacy.{' '}
+              <Link href="/supporting-arts" className="text-gold/85 hover:text-gold underline">
+                Read more →
+              </Link>
+            </p>
+          </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {offerings.map((o) => (
-              <article key={o.label} className="marble rounded-lg p-6 space-y-3 text-left">
-                <h3 className="font-display text-lg leading-tight text-ivory">{o.label}</h3>
-                <p className="font-body text-sm italic text-ivory/95 leading-relaxed">{o.detail}</p>
-                <div className="h-px w-8 bg-gold/30" />
-                <div className="flex items-center justify-between pt-2">
-                  <p className="font-mono text-[0.7rem] tracking-wider text-gold">{o.price}</p>
-                  <button className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/80 hover:text-gold">
-                    {o.cta} →
-                  </button>
+              <article
+                key={o.label}
+                className={`marble rounded-lg overflow-hidden text-left ${
+                  o.featured ? 'ring-1 ring-gold/40 md:col-span-2 lg:col-span-1 lg:row-span-1' : ''
+                }`}
+              >
+                {o.cover && (
+                  <div className="relative aspect-[4/5] overflow-hidden bg-midnight">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={o.cover}
+                      alt={`${o.label} cover`}
+                      className="absolute inset-0 h-full w-full object-cover object-top"
+                    />
+                  </div>
+                )}
+                <div className="p-6 space-y-3">
+                  <h3 className="font-display text-lg leading-tight text-ivory">{o.label}</h3>
+                  <p className="font-body text-sm italic text-ivory/95 leading-relaxed">{o.detail}</p>
+                  <div className="h-px w-8 bg-gold/30" />
+                  <div className="flex items-center justify-between pt-2">
+                    <p className="font-mono text-[0.7rem] tracking-wider text-gold">{o.price}</p>
+                    <button className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/80 hover:text-gold">
+                      {o.cta} →
+                    </button>
+                  </div>
                 </div>
               </article>
             ))}
