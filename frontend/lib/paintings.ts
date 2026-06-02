@@ -579,23 +579,23 @@ export const PAINTINGS: Painting[] = [
 
   // ---------------- Pollock (2 — newly added) ----------------
   {
-    slug: 'pollock-number-1-1950',
-    // imageUrl intentionally omitted — there is no genuine source image of Number 1 (Lavender Mist) in the dossier. The previous placeholder (pollock-number-2-1950-alt.jpg) was a duplicate photo of Number 2 and is misleading. Placeholder card will render until a real source is provided.
+    slug: 'pollock-d11',
+    imageUrl: '/paintings/pollock-d11.jpg',
     artist: 'Jackson Pollock',
-    title: 'Number 1 (Lavender Mist)',
-    year: '1950',
-    dimensions: 'TBD',
-    medium: 'Oil, enamel, and aluminium on canvas',
-    viewingLocation: 'Private collection — disclosed under DDNDA',
+    title: 'D-11',
+    year: 'c. 1950',
+    dimensions: '20 × 60 in (50.8 × 152 cm)',
+    medium: 'Oil on canvas',
+    viewingLocation: 'Private collection (David Cordy) — represented by DeLuca Fine Art, Clearwater, FL — disclosed under DDNDA',
     inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/studio-revolution.mp4',
-    inspirationNote: '1950 East Hampton — the drip-paint apex. Springs studio floor as canvas, choreography on the ground.',
+    inspirationNote: 'A horizontal drip composition from Pollock\'s apex year, 1950. Catalogued as D-11 in the private dossier maintained by DeLuca Fine Art; owned of record by David Cordy.',
     wing: { label: 'The Pollock Studio', href: '/grand-hall/pollock' },
+    provenanceDoc: 'Pollock D11 Appraisal DeLuca.pdf · Certification of Art Assets — David Cordy.pdf · Jackson Pollock D-11 (c. 1950) — David Cordy Purchase Letter.pdf',
     bernardStory:
-      "This is Number One, called Lavender Mist, painted by Jackson Pollock in the summer of nineteen fifty on the floor of the converted barn at Springs, on the eastern end of Long Island, where he had moved with the painter Lee Krasner five years earlier. He was thirty-eight. " +
-      "Krasner had married him in October nineteen forty-five and had effectively stopped painting her own work to manage his. She bought the Springs house with the help of a one-thousand-dollar loan from Peggy Guggenheim that summer. The barn studio was unheated. The canvases were unstretched, tacked to the floor, walked on, paint dripped from sticks and basting syringes, never the brush touching the canvas, the body of the painter circling the work in the choreography that Hans Namuth filmed that autumn. " +
-      "Nineteen fifty was the year Pollock did not drink. It was the only such year. " +
-      "The phrase Lavender Mist was applied to the canvas by the critic Clement Greenberg in nineteen fifty-four; the painting itself contains almost no lavender, only the optical mixture of pinks, whites, and umbers reading as that colour at a distance. The handprints in the upper register are the painter's own, pressed wet into the surface as the signature he could no longer trust himself to write straight. " +
-      "He drove his Oldsmobile off the road at Springs and was killed on the eleventh of August, nineteen fifty-six. He was forty-four.",
+      "This is D-Eleven, a horizontal drip composition catalogued in the private dossier maintained by DeLuca Fine Art of Clearwater, Florida, on behalf of the collector David Cordy. The canvas measures fifty by one hundred and fifty-two centimetres — a long, narrow band of poured paint that reads, on inspection, like a single sustained gesture broken into colour. " +
+      "Painted circa nineteen fifty, the year Pollock did not drink — the only such year of his life — and the year of the great drip canvases that the critic Clement Greenberg would later say put American painting at the centre of the world. The work was made on the floor of the converted barn at Springs, on the eastern end of Long Island, where Pollock had moved with Lee Krasner in nineteen forty-five. Krasner had effectively stopped painting her own work to manage his. The barn was unheated. The canvases were unstretched, tacked to plank floor, walked on, paint dripped from sticks and basting syringes, never the brush touching the canvas. " +
+      "D-Eleven is unusual in scale and in restraint — the long horizontal format, the deliberate field rather than the all-over apex of the larger nineteen-fifty canvases. It reads as a study in choreography rather than density. The black armatures hold the white field; the yellow and the cobalt and the brown and the cadmium orange enter as accents on the body of the gesture. There is, almost uniquely in Pollock, an architecture. " +
+      "Provenance is held in the DeLuca Fine Art appraisal of record. The painting comes to the Napa Valley Art Institute through a private representation arrangement with David Cordy and Pacific Arts. Pollock drove his Oldsmobile off the road at Springs and was killed on the eleventh of August, nineteen fifty-six. He was forty-four.",
   },
   {
     slug: 'pollock-number-2-1950',
