@@ -313,25 +313,32 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'chagall-wolf-becomes-shepherd',
+    imageUrl: '/paintings/chagall-wolf-becomes-shepherd.jpg',
     artist: 'Marc Chagall',
-    title: '"The Wolf becomes a Shepherd" — La Fontaine\'s Fable',
+    title: 'Le Loup devenu Berger (The Wolf becomes a Shepherd) — La Fontaine\'s Fable',
     year: 'c. 1927',
-    dimensions: '51 × 41.5 cm (83.5 × 73.5 cm with frame)',
+    dimensions: '51 × 41.5 cm (sight) · 83.5 × 73.5 cm with frame',
     medium: 'Gouache on paper',
     signed: 'Signed lower right',
-    viewingLocation: 'Private collection — disclosed under DDNDA',
+    viewingLocation: 'Private collection, Czech Republic — disclosed under DDNDA',
     inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4',
     inspirationNote:
-      'From the La Fontaine Fables series commissioned by Ambroise Vollard in 1925 — one hundred gouaches across three years. Chagall went to live in the French countryside to absorb the rural pastoral his Vitebsk childhood had primed him for. The Marc Chagall Committee certified this work in 2020.',
+      'From the La Fontaine Fables series commissioned by Ambroise Vollard in 1925. Certified by the Marc Chagall Committee, 30 January 2020. Provenance: Kunsthandel E.J. van Wisselingh & Co., Amsterdam (No. 7675) → Dr. Sydney Kobrinsky (1909–1970), Winnipeg → Private collection, Sweden → Private collection, Switzerland → Private collection, Czech Republic. Exhibited at Bernheim-Jeune Gallery Paris, Le Centaure Gallery Brussels, and Alfred Flechtheim Gallery Berlin (all 1930); Musée d\'Art Moderne de Céret (28 Oct 1995 – 8 Jan 1996); Musée National Message Biblique Marc Chagall, Nice (13 Jan – 25 Mar 1996). Documented in Franz Meyer, *Marc Chagall*, Harry N. Abrams, New York, 1961, illustration #434.',
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
-    literature: ['Certification — Marc Chagall Committee — 2020'],
+    literature: [
+      'Franz Meyer, *Marc Chagall*, Harry N. Abrams Publishers, New York, 1961 — illustration #434 (b&w)',
+      'Exhibition catalogue, *Marc Chagall, Les Fables de La Fontaine*, Musée d\'Art Moderne de Céret, 1995–1996, p. 59',
+      'Exhibition catalogue, *Marc Chagall, Les Fables de La Fontaine*, Musée National Message Biblique Marc Chagall, Nice, 1996, p. 59',
+      'Certification — Marc Chagall Committee — 30 January 2020',
+    ],
     provenanceDoc: '/provenance/chagall-wolf-shepherd-1927.pdf',
-    // imageUrl intentionally omitted — the file currently named chagall-wolf-becomes-shepherd.jpg is mislabeled (it actually shows "Sur la table" 1975). Authentic image source: C:\Users\sgill\Downloads\Marc Chagall - Wolf becomes a Shepherd - (c.) 1927 - Gouache on Paper - Signed Lower Right - Partial Provenance_Page_1.jpg — needs manual copy into public/paintings/ as chagall-wolf-becomes-shepherd.jpg (after deleting the wrong file).
     bernardStory:
-      "This is one of Marc Chagall's gouache illustrations for the Fables of Jean de La Fontaine, painted around nineteen twenty-seven. " +
-      "The dealer Ambroise Vollard had commissioned one hundred gouaches from him in nineteen twenty-five. Chagall — a Russian-Jewish painter who had never spent serious time in the French countryside — moved to a village in the Auvergne for two years to absorb the pastoral world his childhood in Vitebsk had primed him for. " +
-      "What you see here is the wolf, transformed into a shepherd, trying to creep among the sheep. La Fontaine's lesson is that the wolf cannot truly hide his nature; the dog in red, on the right, has already seen through him. " +
-      "The piece carries certification from the Marc Chagall Committee dated twenty twenty.",
+      "This is Le Loup devenu Berger — The Wolf becomes a Shepherd — a gouache on paper painted by Marc Chagall in nineteen twenty-seven, illustrating the third fable in the third book of Jean de La Fontaine\\u2019s seventeenth-century Fables. The painting measures fifty-one by forty-one and a half centimetres; framed, eighty-three and a half by seventy-three and a half. Signed lower right. Certified by the Marc Chagall Committee on the thirtieth of January two thousand twenty. " +
+      "The commission came from Ambroise Vollard, the Paris dealer who had also commissioned Chagall\\u2019s Bible cycle and Gogol\\u2019s Dead Souls. Vollard wanted La Fontaine illustrated by a painter whose imagination was as wide as the fabulist\\u2019s — and he picked Chagall, a Russian-Jewish painter who had just emerged from the Belorussian shtetl of Vitebsk, on the grounds that Chagall\\u2019s phantasmagorical universe fit La Fontaine\\u2019s world of talking animals and moral hypocrisy better than any French illustrator could. Vollard wrote as much in the daily paper L\\u2019Intransigeant on the eighth of January nineteen twenty-nine, under the title From La Fontaine to Chagall. " +
+      "Chagall produced one hundred gouaches between nineteen twenty-six and nineteen thirty. Due to the high cost of the first colour-printing tests, only a small number were ever engraved; the gouaches themselves were dispersed across three landmark exhibitions in Paris, Brussels, and Berlin in nineteen thirty. A complete trace of the cycle survived in Tériade\\u2019s nineteen fifty-two black-and-white reprint, but the gouaches themselves entered private hands and stayed there. " +
+      "The wolf in this painting wears the russet of the shepherd Guillot — the body is canine, the dress is human. Below him on the path: the flowers that mark the bend of the herd. On the green slope above: the sheep he hopes to steal, dreaming. La Fontaine\\u2019s lesson, drawn from Aesop, is that the wolf cannot truly hide his nature; his speech betrays him before the bite can. " +
+      "Provenance is documented. The work came out of Kunsthandel E.J. van Wisselingh & Company in Amsterdam, where it was catalogued as number seven thousand six hundred seventy-five. It passed into the Winnipeg collection of Dr. Sydney Kobrinsky between his birth in nineteen oh nine and his death in nineteen seventy, then to a Swedish private collection — acquired by the current owner\\u2019s father — then to Switzerland, then to the Czech Republic where it now resides. Exhibited four times at museum level: three of the Vollard-cycle Paris-Brussels-Berlin shows in nineteen thirty, then the Céret and Nice Chagall retrospectives of nineteen ninety-five through nineteen ninety-six. Illustrated in Franz Meyer\\u2019s definitive nineteen sixty-one Chagall monograph, number four hundred thirty-four. " +
+      "This is the rare gouache from the cycle that has remained in a single quiet line of European private collectors for ninety-eight years.",
   },
 
   // ---------------- Modigliani (4 active — the Pacific Arts canvas is the centrepiece) ----------------
