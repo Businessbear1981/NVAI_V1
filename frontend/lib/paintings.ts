@@ -401,6 +401,7 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'modigliani-ritratto-di-donna',
+    imageUrl: '/paintings/modigliani-ritratto-di-donna.jpg',
     artist: 'Amedeo Modigliani',
     title: 'Ritratto Di Donna',
     year: '1915',
@@ -419,9 +420,10 @@ export const PAINTINGS: Painting[] = [
   },
   {
     slug: 'modigliani-cheron',
+    imageUrl: '/paintings/modigliani-cheron.jpg',
     artist: 'Amedeo Modigliani',
     title: 'Portrait de Monsieur Chéron',
-    year: '1915?',
+    year: 'c. 1915',
     dimensions: '45.5 × 32.7 cm',
     medium: 'Oil on canvas',
     signed: 'Signed lower left',
