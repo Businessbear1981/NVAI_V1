@@ -70,65 +70,48 @@ export default function HomePage() {
         </a>
       </div>
 
-      {/* Marquee trio — KIKI featured center (the front door, the WOW). MODI is the
-          DESTINATION at the end of Kiki's immersive, not a separate marquee tab.
-          Mobile: in-flow with bottom padding to clear EssentialsBar; Desktop: absolute bottom-16 */}
-      <div className="relative z-20 mt-[60vh] flex justify-center px-4 pb-28 md:absolute md:inset-x-0 md:bottom-16 md:mt-0 md:px-8 md:pb-0">
-        <div className="grid w-full max-w-3xl grid-cols-1 items-stretch gap-4 md:grid-cols-[1fr_1.5fr_1fr]">
-          <Link href="/grounds" aria-label="Walk the Grounds — Self-Guided" className="block h-full">
-            <MarbleTombstone
-              eyebrow="Left · The Grounds"
-              title="Walk the Grounds"
-              subtitle="Self-Guided"
-              caption="The vineyard, the wine caves, the artist gardens. Your way."
+      {/* Brass silhouette strip — museum-placard energy at the bottom of the viewport.
+          Walk the Grounds (chateau) · Kiki (Noire et Blanche profile) · Guided Tour (velvet rope).
+          Quiet, recognisable, doesn't dominate. Paintings own the upper viewport. */}
+      <div className="relative z-20 mt-[55vh] flex justify-center px-4 pb-28 md:absolute md:inset-x-0 md:bottom-12 md:mt-0 md:px-8 md:pb-0">
+        <div className="flex flex-wrap items-end justify-center gap-12 md:gap-24">
+          <Link href="/grounds" aria-label="Walk the Grounds" className="group flex flex-col items-center transition-opacity duration-500 opacity-70 hover:opacity-100">
+            <Image
+              src="/brand/silhouettes/grounds-chateau.png"
+              alt=""
+              width={120}
+              height={120}
+              className="h-20 w-auto md:h-28"
             />
+            <p className="mt-2 font-didot text-xs uppercase tracking-[0.28em] text-gold/80 group-hover:text-gold">
+              Walk the Grounds
+            </p>
           </Link>
 
-          {/* KIKI — featured center marquee. The WOW. The front door of the immersive. */}
-          <Link href="/kiki" aria-label="Kiki de Montparnasse — the immersive" className="block h-full">
-            <div className="marble group relative flex h-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md px-4 py-5 text-center transition-all duration-500 hover:scale-[1.02]">
-              <p className="font-mono text-[0.5rem] uppercase tracking-[0.5em] text-[#3a2a0a]/70">
-                The Marquee
-              </p>
-              <h2
-                className="mt-2 font-didot text-4xl uppercase tracking-[0.22em] text-[#0a0605] md:text-5xl"
-                style={{ textShadow: '0 1px 2px rgba(255,245,220,0.45), 0 0 8px rgba(255,245,220,0.25)' }}
-              >
-                Kiki
-              </h2>
-              <p className="mt-1 font-display text-sm italic tracking-[0.18em] text-[#5a3a1a]">
-                Queen of Montparnasse
-              </p>
-              <div className="mx-auto my-3 h-px w-12 bg-[#5a3a1a]/70" />
-              {/* Handwritten "Kiki" — thick quill ink, diagonal */}
-              <div className="relative h-10 w-full">
-                <span
-                  className="absolute left-1/2 top-1/2 italic text-[#7c0a0a]"
-                  style={{
-                    fontFamily: 'Georgia, "Cormorant Garamond", "Times New Roman", serif',
-                    fontWeight: 700,
-                    fontSize: '1.5rem',
-                    transform: 'translate(-50%, -50%) rotate(-14deg)',
-                    letterSpacing: '0.04em',
-                  }}
-                  aria-hidden
-                >
-                  Kiki
-                </span>
-              </div>
-              <p className="mt-2 font-body text-[0.65rem] uppercase tracking-[0.32em] text-[#2a1a05]/85">
-                The 107-year story
-              </p>
-            </div>
+          <Link href="/kiki" aria-label="Kiki — Queen of Montparnasse" className="group flex flex-col items-center transition-opacity duration-500 opacity-70 hover:opacity-100">
+            <Image
+              src="/brand/silhouettes/kiki-profile.png"
+              alt=""
+              width={120}
+              height={120}
+              className="h-20 w-auto md:h-28"
+            />
+            <p className="mt-2 font-didot text-xs uppercase tracking-[0.28em] text-gold/80 group-hover:text-gold">
+              Kiki
+            </p>
           </Link>
 
-          <Link href="/tour" aria-label="Take the Guided Tour of the Institute" className="block h-full">
-            <MarbleTombstone
-              eyebrow="Right · The Tour"
-              title="Guided Tour"
-              subtitle="Bernard narrates"
-              caption="Eighteen chapters. Every room. The full Institute."
+          <Link href="/tour" aria-label="Take the Guided Tour" className="group flex flex-col items-center transition-opacity duration-500 opacity-70 hover:opacity-100">
+            <Image
+              src="/brand/silhouettes/tour-velvet-rope.png"
+              alt=""
+              width={120}
+              height={120}
+              className="h-20 w-auto md:h-28"
             />
+            <p className="mt-2 font-didot text-xs uppercase tracking-[0.28em] text-gold/80 group-hover:text-gold">
+              Guided Tour
+            </p>
           </Link>
         </div>
       </div>
