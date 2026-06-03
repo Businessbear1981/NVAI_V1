@@ -219,7 +219,8 @@ export const VIDEOS = {
   // ---------------------------------------------------------------------------
   kiki: {
     leadIn: `${R2}/nvai_kiki_moulin_rouge_5k.mp4`,
-    moulinRougeLive: `${R2}/moulin_rouge_live_45sec.mp4`,
+    // Local file — R2 was serving an 8s clip at this name; local is the real 45s cut
+    moulinRougeLive: `/videos/moulin_rouge_live_45sec.mp4`,
     burlesqueFinal: `${R2}/kiki_burlesque_performance_final.mp4`,
     burlesqueVariants: [
       `${R2}/kiki_burlesque_performance_5k.mp4`,
@@ -228,7 +229,8 @@ export const VIDEOS = {
       `${R2}/kiki_burlesque_performance_5k_v4.mp4`,
       `${R2}/kiki_burlesque_performance_final.mp4`,
     ],
-    danceOneMinute: `${R2}/kiki_dance_performance_1min.mp4`,
+    // Local file — R2 was returning the wrong (8s) cut at this name
+    danceOneMinute: `/videos/kiki_dance_performance_1min.mp4`,
     // The Sitting — Modi's studio, 1917, red velvet pillow (the painting-being-made moment)
     theSitting: `${R2}/nvai_kiki_sitting_red_pillow_5k.mp4`,
     // Hotel Istria — Kiki's bohemian Montparnasse room

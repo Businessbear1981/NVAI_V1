@@ -339,52 +339,8 @@ export default function KikiPage() {
           </Link>
         </div>
 
-        {/* The offerings — 6-tier ladder, $2 → $295 */}
-        <div className="space-y-6">
-          <div className="text-center space-y-2">
-            <h2 className="font-display text-2xl tracking-wider text-gold">The Offerings</h2>
-            <p className="font-body text-xs italic text-ivory/65">
-              Six tiers, $2 to $295. Every checkout includes an optional tip — 60% to the
-              International Foundation for Art Research, 20% to di Rosa Center in Napa, 20%
-              to Kiki's Paris legacy.{' '}
-              <Link href="/supporting-arts" className="text-gold/85 hover:text-gold underline">
-                Read more →
-              </Link>
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {offerings.map((o) => (
-              <article
-                key={o.label}
-                className={`marble rounded-lg overflow-hidden text-left ${
-                  o.featured ? 'ring-1 ring-gold/40 md:col-span-2 lg:col-span-1 lg:row-span-1' : ''
-                }`}
-              >
-                {o.cover && (
-                  <div className="relative aspect-[4/5] overflow-hidden bg-midnight">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={o.cover}
-                      alt={`${o.label} cover`}
-                      className="absolute inset-0 h-full w-full object-cover object-top"
-                    />
-                  </div>
-                )}
-                <div className="p-6 space-y-3">
-                  <h3 className="font-display text-lg leading-tight text-ivory">{o.label}</h3>
-                  <p className="font-body text-sm italic text-ivory/95 leading-relaxed">{o.detail}</p>
-                  <div className="h-px w-8 bg-gold/30" />
-                  <div className="flex items-center justify-between pt-2">
-                    <p className="font-mono text-[0.7rem] tracking-wider text-gold">{o.price}</p>
-                    <button className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-gold/80 hover:text-gold">
-                      {o.cta} →
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
+        {/* The Offerings ladder lives on /kiki/kickstarter until commerce is ready.
+            Removed from main /kiki per Sean 2026-06-03 — keep the wing pure gallery. */}
 
         {/* Kickstarter */}
         <div className="marble rounded-lg p-10 space-y-4 text-center">

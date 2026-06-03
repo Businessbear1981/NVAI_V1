@@ -20,6 +20,26 @@ export interface Painting {
   imageUrl?: string; // Full painting hero image — extracted from provenance dossier
   bernardStory?: string; // Longer narrative for Bernard's voice walkthrough
   comparisonImages?: { url: string; label: string; caption?: string }[]; // Secondary images shown as a grid below the hero — artist recreations, condition details, verso labels, etc.
+
+  // ============================================================
+  // GATED PROVENANCE FIELDS — only rendered on /provenance/[slug]
+  // after the visitor has signed the appropriate-tier DDNDA.
+  // Per the v2 access matrix:
+  //   Tier 0 (public): hero + Bernard narrative + museum exhibitions + certification body.
+  //   Tier 1 (any signed DDNDA): namedOwnerChain + authPdfs + conditionPhotos.
+  //   Tier 2 (role-specific): asking price (Buyer), appraisals (Lender), commission (Broker-Dealer).
+  // ============================================================
+  provenance?: {
+    namedOwnerChain?: string[];  // Tier 1 — the specific chain of previous owners with dates if known
+    authPdfs?: { url: string; label: string }[]; // Tier 1 — authentication documents (certificates, expert assessments, scientific reports)
+    conditionPhotos?: { url: string; label: string }[]; // Tier 1 — condition reports, radiographic scans, verso labels
+    appraisals?: { url: string; label: string; value?: string; year?: string }[]; // Tier 2 Lender — formal appraisals with FMV
+    askingPrice?: string; // Tier 2 Buyer — current asking price
+    floor?: string; // Tier 2 Broker-Dealer — pricing floor / negotiation latitude
+    commissionStructure?: string; // Tier 2 Broker-Dealer — split / referral terms
+    ownerOfRecord?: string; // Tier 2 Lender + Broker-Dealer — current owner identity
+    insuranceStatus?: string; // Tier 2 Lender — insurance + lien status
+  };
 }
 
 export const PAINTINGS: Painting[] = [
@@ -346,7 +366,22 @@ export const PAINTINGS: Painting[] = [
     viewingLocation: 'Private collection, Czech Republic — disclosed under DDNDA',
     inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/paris.mp4',
     inspirationNote:
-      'From the La Fontaine Fables series commissioned by Ambroise Vollard in 1925. Certified by the Marc Chagall Committee, 30 January 2020. Provenance: Kunsthandel E.J. van Wisselingh & Co., Amsterdam (No. 7675) → Dr. Sydney Kobrinsky (1909–1970), Winnipeg → Private collection, Sweden → Private collection, Switzerland → Private collection, Czech Republic. Exhibited at Bernheim-Jeune Gallery Paris, Le Centaure Gallery Brussels, and Alfred Flechtheim Gallery Berlin (all 1930); Musée d\'Art Moderne de Céret (28 Oct 1995 – 8 Jan 1996); Musée National Message Biblique Marc Chagall, Nice (13 Jan – 25 Mar 1996). Documented in Franz Meyer, *Marc Chagall*, Harry N. Abrams, New York, 1961, illustration #434.',
+      'From the La Fontaine Fables series commissioned by Ambroise Vollard in 1925. Certified by the Marc Chagall Committee, 30 January 2020. Exhibited at Bernheim-Jeune Gallery Paris, Le Centaure Gallery Brussels, and Alfred Flechtheim Gallery Berlin (all 1930); Musée d\'Art Moderne de Céret (28 Oct 1995 – 8 Jan 1996); Musée National Message Biblique Marc Chagall, Nice (13 Jan – 25 Mar 1996). Documented in Franz Meyer, *Marc Chagall*, Harry N. Abrams, New York, 1961, illustration #434. Specific provenance chain available under DDNDA.',
+    provenance: {
+      namedOwnerChain: [
+        'Kunsthandel E.J. van Wisselingh & Co., Amsterdam — catalogued as No. 7675',
+        'Dr. Sydney Kobrinsky (1909–1970), Winnipeg',
+        'Private collection, Sweden — acquired by the current owner\'s father',
+        'Private collection, Switzerland',
+        'Private collection, Czech Republic',
+      ],
+      authPdfs: [
+        { url: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/provenance/chagall-wolf-becomes-shepherd-marc-chagall-committee-cert-2020.pdf', label: 'Marc Chagall Committee — Certification, 30 January 2020' },
+      ],
+      conditionPhotos: [
+        { url: '/paintings/chagall-wolf-becomes-shepherd-provenance.jpg', label: 'Verso labels — Wisselingh Amsterdam dealer card + Céret exhibition label + La Fontaine book reference' },
+      ],
+    },
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
     literature: [
       'Franz Meyer, *Marc Chagall*, Harry N. Abrams Publishers, New York, 1961 — illustration #434 (b&w)',

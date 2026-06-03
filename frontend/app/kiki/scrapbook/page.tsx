@@ -8,8 +8,9 @@ import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import { KIKI_PHOTOS, KIKI_PHOTO_COUNT } from '@/lib/kikiScrapbook';
 
 const R2 = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev';
-const SCULPTURE_GLB = `${R2}/sculpture_kiki.glb`;
-const SCULPTURE_POSTER = `${R2}/sculpture_kiki_preview.png`;
+// Local-first — R2 sculpture path was not resolving. Local copy is in /public/sculptures.
+const SCULPTURE_GLB = `/sculptures/kiki.glb`;
+const SCULPTURE_POSTER = `/sculptures/kiki-preview.png`;
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

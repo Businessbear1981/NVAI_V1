@@ -219,14 +219,14 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
               </p>
             </Link>
             <Link
-              href={`/inquire?action=provenance&piece=${painting.slug}`}
+              href={`/provenance/${painting.slug}`}
               className="marble rounded-lg p-6 text-center space-y-3 transition-all hover:scale-[1.02]"
             >
               <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">iv</p>
               <h3 className="font-didot text-xl tracking-wider text-ivory">Full provenance</h3>
               <div className="mx-auto h-px w-8 bg-gold/30" />
               <p className="font-body text-xs italic text-ivory/70">
-                Chain of title, certificates, expert opinions — available upon request.
+                Chain of title, certificates, expert opinions — released by tier upon signed DDNDA.
               </p>
             </Link>
           </div>

@@ -29,6 +29,8 @@ export async function recordDDNDA(payload: {
   fullName: string;
   email: string;
   documentVersion: string;
+  role?: 'buyer' | 'lender' | 'broker-dealer';
+  organization?: string;
 }): Promise<DDNDARecordedSignature> {
   return apiPost<DDNDARecordedSignature>('/ddnda/sign', payload);
 }
