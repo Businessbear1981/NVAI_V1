@@ -46,3 +46,6 @@ tmp/
 # Local tools (large binaries)
 tools/
 frontend/public/videos-original-backup/
+
+# Massive uncompressed video backups — Vercel upload limit was being blown
+frontend/public/videos-original-backup/
