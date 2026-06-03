@@ -81,6 +81,66 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           </figcaption>
         </figure>
 
+        {/* Comparison images — artist recreations, condition details, verso labels. Renders only when comparisonImages is set. */}
+        {painting.comparisonImages && painting.comparisonImages.length > 0 && (
+          <section className="space-y-6">
+            <div className="text-center">
+              <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+                {painting.comparisonImages.length === 1 ? 'Side-by-side · Original + Recreation' : 'Detail Plates'}
+              </p>
+              <div className="mx-auto mt-4 h-px w-16 bg-gold/40" />
+            </div>
+            <div
+              className={
+                painting.comparisonImages.length === 1
+                  ? 'grid grid-cols-1 gap-6 md:grid-cols-2'
+                  : painting.comparisonImages.length === 2
+                  ? 'grid grid-cols-1 gap-6 md:grid-cols-2'
+                  : 'grid grid-cols-2 gap-4 md:grid-cols-4'
+              }
+            >
+              {/* When exactly 1 comparison image, ALSO show the hero on the left for true side-by-side */}
+              {painting.comparisonImages.length === 1 && painting.imageUrl && (
+                <figure className="space-y-2">
+                  <div className="overflow-hidden rounded-sm ring-1 ring-gold/20">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={painting.imageUrl}
+                      alt={`${painting.artist} — ${painting.title} (current condition)`}
+                      className="w-full"
+                    />
+                  </div>
+                  <figcaption className="text-center">
+                    <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
+                      Original — Current Condition
+                    </p>
+                    <p className="mt-2 font-body italic text-xs text-ivory/65">
+                      The painting as it sits today, awaiting cleaning at Institut Restellini Paris.
+                    </p>
+                  </figcaption>
+                </figure>
+              )}
+
+              {painting.comparisonImages.map((ci) => (
+                <figure key={ci.url} className="space-y-2">
+                  <div className="overflow-hidden rounded-sm ring-1 ring-gold/20">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={ci.url} alt={ci.label} className="w-full" />
+                  </div>
+                  <figcaption className="text-center">
+                    <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
+                      {ci.label}
+                    </p>
+                    {ci.caption && (
+                      <p className="mt-2 font-body italic text-xs text-ivory/65">{ci.caption}</p>
+                    )}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Bernard walkthrough */}
         <section className="space-y-3 text-center">
           <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">

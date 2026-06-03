@@ -19,6 +19,7 @@ export interface Painting {
   provenanceDoc?: string;
   imageUrl?: string; // Full painting hero image — extracted from provenance dossier
   bernardStory?: string; // Longer narrative for Bernard's voice walkthrough
+  comparisonImages?: { url: string; label: string; caption?: string }[]; // Secondary images shown as a grid below the hero — artist recreations, condition details, verso labels, etc.
 }
 
 export const PAINTINGS: Painting[] = [
@@ -305,6 +306,28 @@ export const PAINTINGS: Painting[] = [
     wing: { label: 'The Chagall Room', href: '/parlor/chagall' },
     literature: ['Authentication — Comité Marc Chagall'],
     provenanceDoc: '/provenance/chagall-sur-la-table-1975.pdf',
+    comparisonImages: [
+      {
+        url: '/paintings/chagall-sur-la-table-detail-signature.jpg',
+        label: 'Signature, lower left',
+        caption: 'Hand-signed Marc Chagall in cerulean blue.',
+      },
+      {
+        url: '/paintings/chagall-sur-la-table-detail-bouquet.jpg',
+        label: 'Bouquet detail',
+        caption: 'The cadmium orange and crimson bouquet at upper right.',
+      },
+      {
+        url: '/paintings/chagall-sur-la-table-detail-goat.jpg',
+        label: 'Goat figure, upper left',
+        caption: 'Recurring Vitebsk motif visible in the upper left corner.',
+      },
+      {
+        url: '/paintings/chagall-sur-la-table-detail-flowers.jpg',
+        label: 'Flower close-up',
+        caption: 'Close detail of the flower arrangement — visible impasto.',
+      },
+    ],
     bernardStory:
       "This is Marc Chagall's *Sur la Table*, painted around 1975 in Vence. " +
       "What you see is a still life in the classical Dutch tradition — a vase of flowers, a fruit bowl, the painter's table — rendered through Chagall's late, joyful palette of cerulean blues, vermillion, and warm gold. " +
@@ -370,6 +393,13 @@ export const PAINTINGS: Painting[] = [
     ],
     provenanceDoc: '/provenance/modigliani-sitting-nude-with-crossed-hands-dossier.pdf',
     imageUrl: '/paintings/modigliani-sitting-nude-with-crossed-hands.jpg',
+    comparisonImages: [
+      {
+        url: '/paintings/modigliani-sitting-nude-recreation.jpg',
+        label: 'Artist Recreation — Post-Restoration',
+        caption: 'How the painting will appear after gentle cleaning, restoration, and framing at Institut Restellini Paris. The canvas has not been cleaned in over eighty years.',
+      },
+    ],
     bernardStory:
       'This is Amedeo Modigliani\'s "Sitting Nude with Crossed Hands," painted around the autumn of nineteen seventeen. ' +
       'The sitter is Alice Ernestine Prin, sixteen years old, who within the decade would be known to the entire avant-garde of Paris as Kiki de Montparnasse. ' +
