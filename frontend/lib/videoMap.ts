@@ -202,14 +202,16 @@ export const VIDEOS = {
     ],
   } as WingVideos,
 
-  // ÉMILE BERNARD — Pont-Aven painter who later turned deeply religious.
-  // TEMPORARY STAND-IN: using the Modigliani cafe loop (bohemian Paris atmosphere
-  // — Bernard moved in the same Parisian artist circles in the 1880s-90s before
-  // his religious turn). A dedicated Bernard Pont-Aven backdrop (Breton coast +
-  // chapel interior) is queued for future generation. Previously mis-pointed at
-  // nvai_raphael_chapel_5k.mp4, which belongs to the Raphael wing.
+  // ÉMILE BERNARD — Pont-Aven painter whose late career turned deeply religious;
+  // he spent years in Italy painting altarpieces and church commissions.
+  // TEMPORARY STAND-IN: using the Rome/Vatican backdrop for the religious-period
+  // atmosphere (Italian church interiors fit Bernard's late altarpiece years
+  // better than the Pont-Aven coastal work, which still needs a dedicated
+  // generation). A dedicated Bernard Pont-Aven backdrop (Breton coast + chapel
+  // interior) is queued for future generation. Previously mis-pointed at the
+  // Modigliani cafe loop, which belongs to the Modigliani wing.
   bernard: {
-    leadIn: `${R2}/nvai_modigliani_cafe_5k.mp4`,
+    leadIn: `${R2}/rome-vatican.mp4`,
     rotation: [],
   } as WingVideos,
 

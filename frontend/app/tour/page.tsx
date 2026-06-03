@@ -41,7 +41,7 @@ const CHAPTERS: Chapter[] = [
     subtitle: 'You arrive',
     sources: [VIDEOS.foyerWelcome, VIDEOS.foyer],
     caption:
-      'Welcome to Villa Monticello. Every visitor signs the book — not as a gate, but as the first quiet courtesy of the house. Take your time. The tour will not begin without you.',
+      'Welcome to Napa Valley Art Institut. Every visitor signs the book — not as a gate, but as the first quiet courtesy of the house. Take your time. The tour will not begin without you.',
     enterRoom: { href: '/foyer/welcome', label: 'Sign the guestbook' },
   },
   {

@@ -41,7 +41,7 @@ export default function EntryPage() {
             Approaching
           </p>
           <h1 className="mt-6 font-didot text-5xl uppercase tracking-[0.18em] text-ivory drop-shadow-lg md:text-7xl">
-            Villa Monticello
+            Napa Valley Art Institut
           </h1>
           <div className="mx-auto mt-6 h-px w-32 bg-gold/40" />
           <p className="mt-6 font-display text-lg italic tracking-wider text-gold/85">

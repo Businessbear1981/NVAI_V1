@@ -58,7 +58,7 @@ export default function WelcomePage() {
               Begin the Guided Tour
             </h3>
             <p className="mt-3 font-body italic text-ivory/75 leading-relaxed">
-              Eighteen chapters, end-to-end — every wing of Villa Monticello with
+              Eighteen chapters, end-to-end — every wing of the Institut with
               Bernard's narration, in the order they were meant to be seen.
             </p>
             <Link

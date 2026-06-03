@@ -31,7 +31,7 @@ export default function FoyerPage() {
         <header className="mx-auto mt-16 max-w-4xl text-center">
           <p className="font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/80">Scene II · the foyer</p>
           <h1 className="mt-6 font-didot text-6xl uppercase tracking-[0.15em] text-ivory drop-shadow-lg md:text-7xl">
-            Villa Monticello
+            Napa Valley Art Institut
           </h1>
           <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
             Marble floor. Three thresholds.

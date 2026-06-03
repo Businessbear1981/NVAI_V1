@@ -34,8 +34,22 @@ export default function HomePage() {
           <div className="hidden border-l border-gold/30 pl-4 md:block">
             <p className="font-mono text-[0.5rem] uppercase tracking-[0.35em] text-gold/70">Napa Valley</p>
             <p className="font-didot text-lg tracking-[0.16em] text-ivory drop-shadow">Art Institut</p>
+            <p
+              className="font-didot text-xl tracking-[0.14em] drop-shadow mt-1"
+              style={{ color: '#E89A4C' }}
+            >
+              &amp; Virtual Gallery
+            </p>
           </div>
         </div>
+        <a
+          href="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_introduction.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
+        >
+          Introduction →
+        </a>
         <a
           href="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_open_letter.pdf"
           target="_blank"
@@ -45,12 +59,28 @@ export default function HomePage() {
           Open Letter →
         </a>
         <a
-          href="/about"
+          href="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_press_release_modigliani.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
         >
-          About the Institut →
+          Press Release · Modigliani Nude →
+        </a>
+        <a
+          href="https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_brokerage_agreements.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
+        >
+          Brokerage Agreements →
+        </a>
+        <a
+          href="/access"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
+        >
+          DDNDA →
         </a>
         <a
           href="/consign"
@@ -58,15 +88,7 @@ export default function HomePage() {
           rel="noopener noreferrer"
           className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
         >
-          Consignment Services →
-        </a>
-        <a
-          href="/about#leadership"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold"
-        >
-          Meet the Curators →
+          Representation →
         </a>
       </div>
 

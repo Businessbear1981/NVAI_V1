@@ -128,7 +128,7 @@ export default function ConsignPage() {
               </li>
               <li className="flex items-start gap-4">
                 <span className="mt-2 inline-block h-px w-6 flex-shrink-0 bg-gold/50" />
-                <span>Private viewing at Villa Monticello or arranged secure transport to the buyer&rsquo;s location.</span>
+                <span>Private viewing at the Institut or arranged secure transport to the buyer&rsquo;s location.</span>
               </li>
               <li className="flex items-start gap-4">
                 <span className="mt-2 inline-block h-px w-6 flex-shrink-0 bg-gold/50" />

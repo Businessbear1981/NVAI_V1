@@ -5,6 +5,8 @@ import Link from 'next/link';
 import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
 import { paintingsByWing } from '@/lib/paintings';
 import { VIDEOS } from '@/lib/videoMap';
+import ArtistSignature from '@/components/brand/ArtistSignature';
+import { getArtist } from '@/lib/artists';
 
 const CHAPTERS = [
   {
@@ -67,9 +69,9 @@ export default function PollockStudioPage() {
           <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
             Grand Hall · centre-right · the Pollock Studio
           </p>
-          <h1 className="mt-6 font-didot text-6xl uppercase tracking-[0.12em] text-ivory drop-shadow-lg md:text-7xl">
-            Pollock
-          </h1>
+          <div className="mt-6 flex justify-center">
+            <ArtistSignature artist={getArtist('pollock')!} size="lg" asLink={false} showCaption={false} />
+          </div>
           <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
             forty-four years · the floor as canvas · two pieces from 1950
           </p>
