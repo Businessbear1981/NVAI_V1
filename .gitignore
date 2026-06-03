@@ -49,3 +49,6 @@ frontend/public/videos-original-backup/
 
 # Massive uncompressed video backups — Vercel upload limit was being blown
 frontend/public/videos-original-backup/
+
+# Local mp4 videos — served from Cloudflare R2 (${R2}/...) in production
+frontend/public/videos/*.mp4
