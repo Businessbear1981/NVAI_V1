@@ -127,14 +127,17 @@ const ARTIST_META: Omit<Artist, 'pieceCount'>[] = [
     era: '1483–1520',
   },
   {
+    // Émile Bernard (1868–1941) — Cloisonnist, friend of Van Gogh and Gauguin,
+    // co-architect of Pont-Aven with Gauguin; spent 40+ years on the Passion
+    // cycle. The wing at /upstairs/bernard is HIS room, NOT Bernard Buffet's.
     slug: 'bernard',
-    name: 'Bernard Buffet',
-    shortName: 'Buffet',
+    name: 'Émile Bernard',
+    shortName: 'Bernard',
     signatureSrc: '/brand/signatures/bernard.png',
     hasSignature: false,
-    wingHref: '/supporting-arts',
-    wingLabel: 'Postwar Paris',
-    era: '1928–1999',
+    wingHref: '/upstairs/bernard',
+    wingLabel: 'Upstairs · Pont-Aven · the Passion cycle',
+    era: '1868–1941',
   },
 ];
 

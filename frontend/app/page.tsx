@@ -31,7 +31,7 @@ export default function HomePage() {
             priority
             className="h-24 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] md:h-32"
           />
-          <div className="hidden border-l border-gold/30 pl-4 md:block">
+          <div className="border-l border-gold/30 pl-4">
             <p className="font-mono text-[0.5rem] uppercase tracking-[0.35em] text-gold/70">Napa Valley</p>
             <p className="font-didot text-lg tracking-[0.16em] text-ivory drop-shadow">Art Institut</p>
             <p
