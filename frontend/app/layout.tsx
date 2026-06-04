@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: '%s · Napa Valley Art Institut',
   },
   description:
-    'An ultra-luxury cinematic immersive digital gallery on the grounds of Villa Monticello. ' +
+    'An ultra-luxury cinematic immersive digital gallery on the grounds of Chateau Magdalena. ' +
     'Twenty-eight master works from private collections. Available to qualified buyers.',
   openGraph: {
     title: 'Napa Valley Art Institut',

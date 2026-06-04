@@ -53,7 +53,7 @@ export default function AboutPage() {
               II &mdash; The Property
             </p>
             <h2 className="mb-8 font-didot text-3xl uppercase tracking-[0.1em] text-ivory">
-              Villa Monticello
+              Chateau Magdalena
             </h2>
             <p className="mb-4">
               Thirty-three acres in the heart of the Napa Valley, surrounded by vineyards and the rise of the Vaca Range. Built in the Tuscan tradition using castle stone &mdash; four decks, over 4,500 square feet of outdoor entertainment space, accommodation for up to two hundred guests at private events, sleeps ten.
@@ -148,7 +148,7 @@ export default function AboutPage() {
         </article>
 
         <footer className="mt-24 text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/40">
-          Napa Valley Art Institut &middot; Villa Monticello &middot; Napa, California
+          Napa Valley Art Institut &middot; Chateau Magdalena &middot; Napa, California
           <br />
           <span className="mt-2 inline-block text-ivory/30">inquires@NVAI.org</span>
         </footer>

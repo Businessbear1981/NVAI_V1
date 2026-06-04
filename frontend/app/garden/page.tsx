@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
+import ArtistTombstone from '@/components/tombstones/ArtistTombstone';
 
 export default function GardenPage() {
   const [revealed, setRevealed] = useState(false);
@@ -56,15 +57,12 @@ export default function GardenPage() {
               />
             </Link>
 
-            <Link href="/matisse" aria-label="Matisse Pavilion">
-              <MarbleTombstone
-                eyebrow="Centre patio"
-                title="Matisse"
-                subtitle="Mediterranean pavilion"
-                caption="The vineyard is the Riviera. Four chapters, late Nice years."
-                featured
-              />
-            </Link>
+            <ArtistTombstone
+              slug="matisse"
+              href="/matisse"
+              caption="Mediterranean Pavilion"
+              featured
+            />
 
             <Link href="/grounds" aria-label="The Grounds">
               <MarbleTombstone

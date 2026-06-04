@@ -58,7 +58,7 @@ export default function AuctionHousePage() {
         </div>
         <p className="mt-10 text-center text-xs italic text-ivory/50">
           Encrypted invitations, proof of liquidity (Plaid + Stripe), paddle numbers,
-          and the Auction Box (Villa Monticello wine delivery) wire in for Phase 2.
+          and the Auction Box (Chateau Magdalena wine delivery) wire in for Phase 2.
         </p>
       </section>
     </WingLayout>

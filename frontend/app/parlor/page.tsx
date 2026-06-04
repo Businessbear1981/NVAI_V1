@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
+import ArtistTombstone from '@/components/tombstones/ArtistTombstone';
 
 export default function ParlorPage() {
   const [revealed, setRevealed] = useState(false);
@@ -49,15 +50,12 @@ export default function ParlorPage() {
 
         <section className="mx-auto mt-20 max-w-5xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <Link href="/parlor/chagall">
-              <MarbleTombstone
-                eyebrow="Through the back"
-                title="Chagall"
-                subtitle="Six floating dreamscapes"
-                caption="The dedicated sub-room. Stained-glass light. Each piece its own period interior."
-                featured
-              />
-            </Link>
+            <ArtistTombstone
+              slug="chagall"
+              href="/parlor/chagall"
+              caption="Six floating dreamscapes · the dedicated sub-room"
+              featured
+            />
             <Link href="/grand-hall">
               <MarbleTombstone
                 eyebrow="Through to the interior"

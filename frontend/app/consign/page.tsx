@@ -128,7 +128,7 @@ export default function ConsignPage() {
               </li>
               <li className="flex items-start gap-4">
                 <span className="mt-2 inline-block h-px w-6 flex-shrink-0 bg-gold/50" />
-                <span>Private viewing at the Institut or arranged secure transport to the buyer&rsquo;s location.</span>
+                <span>Private viewing at Chateau Magdalena or arranged secure transport to the buyer&rsquo;s location.</span>
               </li>
               <li className="flex items-start gap-4">
                 <span className="mt-2 inline-block h-px w-6 flex-shrink-0 bg-gold/50" />
@@ -337,7 +337,7 @@ export default function ConsignPage() {
         </article>
 
         <footer className="mt-24 text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/40">
-          Napa Valley Art Institut &middot; Villa Monticello &middot; Napa, California
+          Napa Valley Art Institut &middot; Chateau Magdalena &middot; Napa, California
         </footer>
       </div>
     </main>

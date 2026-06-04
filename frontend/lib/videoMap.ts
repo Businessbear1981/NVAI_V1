@@ -48,14 +48,23 @@ export const VIDEOS = {
   wineCaves: `${R2}/nvai_wine_caves_5k.mp4`,
 
   // ---------------------------------------------------------------------------
-  // Da Vinci flight — 48s cinematic interlude (4 × 12s beats)
-  // Launched from the balcony, lands on the patio
+  // Da Vinci flight — extended cinematic interlude (9 × ~12s beats)
+  // Launched from the balcony, soars over Marin/Pacific/Sonoma, lands at the chateau
+  // NOTE: beats 5–9 (mountains, stinson, sonoma, napaReturn, landing) will 404
+  // until Sean generates and uploads the corresponding videos. Code ships ahead.
   // ---------------------------------------------------------------------------
   davinciFlight: {
     takeoff: `${R2}/nvai_davinci_flight_b1_takeoff_5k.mp4`,
     soaring: `${R2}/nvai_davinci_flight_b2_soaring_5k.mp4`,
     banking: `${R2}/nvai_davinci_flight_b3_banking_5k.mp4`,
     descent: `${R2}/nvai_davinci_flight_b4_descent_5k.mp4`,
+    // Beats 5–9 — extended flight path. Videos not yet generated (will 404
+    // until uploaded). Intentional: code ships ahead of media.
+    mountains: `${R2}/nvai_davinci_flight_b5_mountains_5k.mp4`,
+    stinson: `${R2}/nvai_davinci_flight_b6_stinson_5k.mp4`,
+    sonoma: `${R2}/nvai_davinci_flight_b7_sonoma_5k.mp4`,
+    napaReturn: `${R2}/nvai_davinci_flight_b8_napa_return_5k.mp4`,
+    landing: `${R2}/nvai_davinci_flight_b9_landing_5k.mp4`,
     // Alternate takeoff — Sean-curated bonus take. Used by /flight on the
     // second viewing (Fly again) so the loop is not literally identical.
     alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`,

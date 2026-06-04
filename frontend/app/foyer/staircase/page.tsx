@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
-import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
+import ArtistTombstone from '@/components/tombstones/ArtistTombstone';
 
 export default function StaircaseLandingPage() {
   const [revealed, setRevealed] = useState(false);
@@ -50,31 +50,22 @@ export default function StaircaseLandingPage() {
 
         <section className="mx-auto mt-20 max-w-6xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            <Link href="/upstairs/bernard">
-              <MarbleTombstone
-                eyebrow="Left"
-                title="Bernard"
-                subtitle="Russian Enchantment"
-                caption="La Passion de Jésus-Christ — the late altarpiece period."
-              />
-            </Link>
-            <Link href="/upstairs/kandinsky">
-              <MarbleTombstone
-                eyebrow="Centre"
-                title="Kandinsky"
-                subtitle="The Creepy Room"
-                caption="Two Compositions from the Bauhaus apex. The room vibrates."
-                featured
-              />
-            </Link>
-            <Link href="/upstairs/raphael">
-              <MarbleTombstone
-                eyebrow="Right"
-                title="Raphael"
-                subtitle="Renaissance Studiolo"
-                caption="Madonna with Child — the Florentine years."
-              />
-            </Link>
+            <ArtistTombstone
+              slug="bernard"
+              href="/upstairs/bernard"
+              caption="La Passion de Jésus-Christ — the late altarpiece period."
+            />
+            <ArtistTombstone
+              slug="kandinsky"
+              href="/upstairs/kandinsky"
+              caption="Two Compositions from the Bauhaus apex. The room vibrates."
+              featured
+            />
+            <ArtistTombstone
+              slug="raphael"
+              href="/upstairs/raphael"
+              caption="Madonna with Child — the Florentine years."
+            />
           </div>
 
           {/* The fourth door — the balcony. Launch the Da Vinci flight. */}

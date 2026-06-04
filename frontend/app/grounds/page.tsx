@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { VIDEOS } from '@/lib/videoMap';
+import ArtistTombstone from '@/components/tombstones/ArtistTombstone';
 
 /**
  * /grounds — "Walk the Grounds"
@@ -110,13 +111,6 @@ const TILES: Tile[] = [
   { key: 'path', label: 'Garden Path', subtitle: 'The lower allée', video: VIDEOS.gardenPath },
   { key: 'passage', label: 'Garden Passage', subtitle: 'Through the hedgerow', video: VIDEOS.gardenPassage },
   { key: 'topatio', label: 'Path to the Patio', subtitle: 'The return', video: VIDEOS.gardenPathToPatio },
-];
-
-const ARTIST_WINGS = [
-  { label: 'Monet', subtitle: 'Giverny garden', href: '/grounds/monet' },
-  { label: 'Picasso', subtitle: 'Three studio periods', href: '/grounds/picasso' },
-  { label: 'Da Vinci', subtitle: 'Renaissance workshop', href: '/grounds/davinci' },
-  { label: 'Frida', subtitle: 'Casa Azul', href: '/grounds/frida' },
 ];
 
 const CHAPTER_DURATION_MS = 10_000;
@@ -341,24 +335,32 @@ export default function GroundsPage() {
           </section>
         )}
 
-        {/* Artist wings — quiet secondary index */}
-        <div className="mx-auto mb-6 mt-auto w-full max-w-5xl pt-20">
+        {/* Painter Wings — full brass-signature tombstones */}
+        <div className="mx-auto mb-6 mt-auto w-full max-w-6xl pt-20">
           <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/65">
-            Or step into a wing along the walk
+            Or step into a painter&rsquo;s wing along the walk
           </p>
-          <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
-            {ARTIST_WINGS.map((w) => (
-              <Link
-                key={w.href}
-                href={w.href}
-                className="rounded border border-ivory/15 bg-midnight/50 px-4 py-3 text-center backdrop-blur transition-all hover:border-gold/50 hover:bg-gold/10"
-              >
-                <p className="font-didot text-base tracking-wider text-ivory">{w.label}</p>
-                <p className="mt-1 font-mono text-[0.5rem] uppercase tracking-[0.28em] text-gold/65">
-                  {w.subtitle}
-                </p>
-              </Link>
-            ))}
+          <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <ArtistTombstone
+              slug="picasso"
+              href="/grounds/picasso"
+              caption="Bateau-Lavoir · Boisgeloup · Mougins"
+            />
+            <ArtistTombstone
+              slug="monet"
+              href="/grounds/monet"
+              caption="Giverny · The Secret Garden"
+            />
+            <ArtistTombstone
+              slug="davinci"
+              href="/grounds/davinci"
+              caption="Da Vinci Workshop"
+            />
+            <ArtistTombstone
+              slug="kahlo"
+              href="/grounds/frida"
+              caption="Casa Azul"
+            />
           </div>
         </div>
       </div>

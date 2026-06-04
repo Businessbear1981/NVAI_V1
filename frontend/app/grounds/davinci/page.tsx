@@ -4,8 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import { paintingsByWing } from '@/lib/paintings';
-import ArtistSignature from '@/components/brand/ArtistSignature';
-import { getArtist } from '@/lib/artists';
 
 const CHAPTERS = [
   {
@@ -69,9 +67,9 @@ export default function DaVinciWingPage() {
         </Link>
         <header className="mx-auto mt-12 max-w-4xl text-center">
           <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">The Workshop</p>
-          <div className="mt-6 flex justify-center">
-            <ArtistSignature artist={getArtist('davinci')!} size="lg" asLink={false} showCaption={false} />
-          </div>
+          <h1 className="mt-6 font-didot text-6xl uppercase tracking-[0.12em] text-ivory drop-shadow-lg md:text-7xl">
+            Leonardo da Vinci
+          </h1>
           <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
             sixty-seven years · roughly fifteen surviving paintings · the polymath
           </p>

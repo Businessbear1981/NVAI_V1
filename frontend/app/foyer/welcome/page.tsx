@@ -8,7 +8,7 @@ const merch = [
   { name: 'Modigliani Commemorative Poster', detail: '36 × 24 in · first 10,000 copies', price: '$95' },
   { name: 'The Collection — Catalogue Raisonné', detail: 'Hand-bound, slipcased, signed by Sean & Josh', price: '$285' },
   { name: 'NVAI silk scarf', detail: 'Cyclamen on ivory · 36 in square · made in Como', price: '$320' },
-  { name: 'Villa Monticello cabernet', detail: '2024 vintage, single-vineyard, allocation lot', price: '$185' },
+  { name: 'Chateau Magdalena cabernet', detail: '2024 vintage, single-vineyard, allocation lot', price: '$185' },
 ];
 
 export default function WelcomePage() {
@@ -74,7 +74,7 @@ export default function WelcomePage() {
           <h2 className="font-display text-2xl tracking-wider text-gold">About the Institute</h2>
           <p className="font-body text-ivory/80 leading-relaxed">
             Napa Valley Art Institute is a private digital gallery built on the grounds of
-            Villa Monticello in St. Helena, California. We represent twenty-five master
+            Chateau Magdalena in St. Helena, California. We represent twenty-five master
             works under exclusive contract from a Prague gallery that handles authentication.
             Two principals. A small AI workforce. A long view.
           </p>

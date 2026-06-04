@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
+import ArtistTombstone from '@/components/tombstones/ArtistTombstone';
 
 const HALL_BACKDROP =
   'radial-gradient(ellipse at 50% 18%, rgba(232,200,122,0.32) 0%, transparent 50%), radial-gradient(ellipse at 50% 92%, rgba(60,30,15,0.85) 0%, transparent 70%), linear-gradient(180deg, #1a1006 0%, #2a1c0c 40%, #0a0605 100%)';
@@ -234,6 +235,29 @@ export default function GrandHallPage() {
                 </article>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* Painter Wings — full brass-signature tombstones */}
+        <section className="mx-auto mt-20 max-w-5xl">
+          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/70 mb-2">
+            Painter Wings · off the Grand Hall
+          </p>
+          <p className="text-center font-display text-base italic tracking-wider text-gold/80 mb-8">
+            two doors open onto private studios
+          </p>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <ArtistTombstone
+              slug="modigliani"
+              href="/grand-hall/modigliani"
+              caption="Cabinet de Curiosités · the Kiki feature"
+              featured
+            />
+            <ArtistTombstone
+              slug="pollock"
+              href="/grand-hall/pollock"
+              caption="The Springs Studio · East Hampton 1950"
+            />
           </div>
         </section>
 
