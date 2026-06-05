@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
-import GalleryHeroReel from '@/components/gallery/GalleryHeroReel';
 
 export default function FoyerPage() {
   const [revealed, setRevealed] = useState(false);
@@ -45,9 +44,6 @@ export default function FoyerPage() {
           </p>
         </header>
 
-        {/* Gallery hero reel — 4-chapter cinematic showcase of the full collection */}
-        <GalleryHeroReel />
-
         <section className="mx-auto mt-20 max-w-6xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <Link href="/foyer/staircase" aria-label="Up the staircase">
@@ -75,6 +71,19 @@ export default function FoyerPage() {
                 title="The Patio"
                 subtitle="Vineyard · Parlor · Matisse · Grounds"
                 caption="Out into the Tuscan light. The artist wings lie along the path."
+              />
+            </Link>
+          </div>
+
+          {/* Virtual Gallery — orbital carousel of all 24 works */}
+          <div className="mt-8 grid grid-cols-1 gap-6">
+            <Link href="/gallery" aria-label="Enter the virtual gallery">
+              <MarbleTombstone
+                eyebrow="The Collection · 24 Works"
+                title="Virtual Gallery"
+                subtitle="All paintings · orbital view"
+                caption="Every work in the collection arranged in the round — click any canvas to enter its dossier."
+                featured
               />
             </Link>
           </div>
