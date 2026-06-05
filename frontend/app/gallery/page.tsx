@@ -10,25 +10,33 @@ const GALLERY_BACKDROP =
 const WALKAROUND_VIDEO = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_gallery_walkaround_90s.mp4';
 const WALKAROUND_FALLBACK = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4';
 
-const ROTATION_INTERVAL_MS = 6500;
-const ORBIT_DURATION = 90; // seconds per full orbit
+const STEP_MS = 4000;         // ms between automatic belt advances
+const BELT_RADIUS = 520;      // px — depth of the oval track
+const STEP_DEG = 360 / PAINTINGS.length; // degrees between adjacent paintings
 
 export default function GalleryPage() {
   const [walkaroundOn, setWalkaroundOn] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [orbitPaused, setOrbitPaused] = useState(false);
+  const [beltPaused, setBeltPaused] = useState(false);
+  const [featured, setFeatured] = useState(PAINTINGS[0]);
 
+  // Auto-advance the belt
   useEffect(() => {
-    if (paused) return;
+    if (beltPaused) return;
     const t = setInterval(() => {
-      setActiveIdx((i) => (i + 1) % PAINTINGS.length);
-    }, ROTATION_INTERVAL_MS);
+      setActiveIdx((i) => {
+        const next = (i + 1) % PAINTINGS.length;
+        setFeatured(PAINTINGS[next]);
+        return next;
+      });
+    }, STEP_MS);
     return () => clearInterval(t);
-  }, [paused]);
+  }, [beltPaused]);
 
-  const active = PAINTINGS[activeIdx];
+  function pickPainting(idx: number) {
+    setActiveIdx(idx);
+    setFeatured(PAINTINGS[idx]);
+  }
 
   return (
     <main
@@ -37,139 +45,178 @@ export default function GalleryPage() {
     >
       <div className="absolute inset-0 bg-midnight/30 pointer-events-none" />
       <div className="relative z-10 px-8 py-10">
+
         <Link href="/" className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/60 hover:text-gold">
           ← Return
         </Link>
 
         <header className="mx-auto mt-12 max-w-4xl text-center">
           <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
-            The Catalog
+            The Collection
           </p>
           <h1 className="mt-4 font-didot text-5xl uppercase tracking-[0.12em] text-ivory">
             The Full Gallery
           </h1>
           <div className="mx-auto mt-6 h-px w-24 bg-gold/40" />
           <p className="mt-6 font-body italic tracking-wider text-ivory/75">
-            All {PAINTINGS.length} works. The display rotates one piece every six seconds.
+            All {PAINTINGS.length} works on the belt. Hover to pause — click any canvas to feature it.
           </p>
         </header>
 
-        {/* Orbital carousel */}
-        <section className="mx-auto mt-12 max-w-6xl">
-          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-2">
-            The circular catalog
-          </p>
-          <p className="text-center font-display text-sm italic tracking-wider text-gold/70 mb-8">
-            All {PAINTINGS.length} works orbit. Click any to bring it to centre.
-          </p>
-
+        {/* ── 3D DRY-CLEANER BELT ─────────────────────────────────────────── */}
+        <section className="mx-auto mt-14 max-w-5xl">
+          {/* Stage — perspective is set here */}
           <div
-            className="relative mx-auto"
+            className="relative overflow-hidden"
             style={{
-              width: 'min(92vw, 92vh, 880px)',
-              aspectRatio: '1 / 1',
+              height: '300px',
+              perspective: '1050px',
+              perspectiveOrigin: '50% 60%',
             }}
-            onMouseEnter={() => setOrbitPaused(true)}
-            onMouseLeave={() => setOrbitPaused(false)}
+            onMouseEnter={() => setBeltPaused(true)}
+            onMouseLeave={() => setBeltPaused(false)}
           >
-            {/* Rotating ring — holds all thumbnails */}
+
+            {/* Left/right fade-out gradient so items dissolve at the wings */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 z-10"
+              style={{ background: 'linear-gradient(to right, #0a0807 0%, transparent 100%)' }} />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 z-10"
+              style={{ background: 'linear-gradient(to left, #0a0807 0%, transparent 100%)' }} />
+
+            {/* 3D track — preserve-3d anchor at centre of stage */}
             <div
-              className={`orbit-ring absolute inset-0${orbitPaused ? ' orbit-paused' : ''}`}
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                width: 0,
+                height: 0,
+                transformStyle: 'preserve-3d',
+              }}
             >
               {PAINTINGS.map((p, idx) => {
-                const ORBIT_RADIUS = 38;
-                const angleDeg = (360 / PAINTINGS.length) * idx - 90;
+                const N = PAINTINGS.length;
+
+                // Offset from active painting: [-N/2 … +N/2]
+                let offset = ((idx - activeIdx) % N + N) % N;
+                if (offset > N / 2) offset -= N;
+                const angleDeg = offset * STEP_DEG;
                 const angleRad = (angleDeg * Math.PI) / 180;
-                const cx = 50 + ORBIT_RADIUS * Math.cos(angleRad);
-                const cy = 50 + ORBIT_RADIUS * Math.sin(angleRad);
-                const isActive = activeIdx === idx;
-                const isHovered = hoveredIdx === idx;
-                const scale = isActive ? 1.22 : isHovered ? 1.1 : 1;
+
+                // Depth cue: cosAngle = 1 (front) → -1 (back)
+                const cosAngle = Math.cos(angleRad);
+
+                // Only render items in the front ~160° arc; let back items
+                // teleport invisibly while opacity = 0.
+                const visible = cosAngle > -0.15;
+                const opacity = visible
+                  ? Math.max(0, Math.min(1, (cosAngle + 0.15) / 1.15))
+                  : 0;
+
+                const isActive = idx === activeIdx;
+                const W = 148; // item width px
+                const H = 185; // item height px
+
                 return (
                   <button
                     key={p.slug}
-                    onClick={() => setActiveIdx(idx)}
-                    onMouseEnter={() => setHoveredIdx(idx)}
-                    onMouseLeave={() => setHoveredIdx(null)}
-                    className={`orbit-thumb absolute${orbitPaused ? ' orbit-paused' : ''} ${isActive ? 'z-30' : 'z-10'}`}
-                    style={{
-                      left: `${cx}%`,
-                      top: `${cy}%`,
-                      width: '14%',
-                      aspectRatio: '3 / 4',
-                    }}
+                    onClick={() => pickPainting(idx)}
                     aria-label={`${p.artist} — ${p.title}`}
+                    style={{
+                      position: 'absolute',
+                      width: `${W}px`,
+                      height: `${H}px`,
+                      marginLeft: `${-W / 2}px`,
+                      marginTop: `${-H / 2}px`,
+                      // rotateY places item on oval; translateZ brings front items forward
+                      transform: `rotateY(${angleDeg}deg) translateZ(${BELT_RADIUS}px)`,
+                      // Only animate when the item is (or was) visible — prevents
+                      // invisible back-half items from animating through the stage.
+                      transition: visible ? 'transform 1.1s cubic-bezier(0.4,0,0.2,1), opacity 0.7s ease' : 'none',
+                      opacity,
+                      pointerEvents: cosAngle > 0.25 && visible ? 'auto' : 'none',
+                    }}
                   >
+                    {/* Gilt frame wrapper */}
                     <div
-                      className={`relative h-full w-full overflow-hidden rounded-sm shadow-lg ${
+                      className={`h-full w-full overflow-hidden rounded-sm ${
                         isActive
-                          ? 'ring-2 ring-gold ring-offset-2 ring-offset-midnight shadow-[0_8px_28px_rgba(212,175,55,0.5)]'
-                          : isHovered
-                          ? 'ring-1 ring-gold/60'
+                          ? 'ring-2 ring-gold shadow-[0_0_28px_rgba(212,175,55,0.55)]'
                           : 'ring-1 ring-gold/20'
                       }`}
                       style={{
-                        background: 'linear-gradient(135deg, #b08832 0%, #6a4815 100%)',
-                        padding: '2px',
-                        transform: `scale(${scale})`,
-                        transition: 'transform 0.3s',
+                        background: 'linear-gradient(135deg, #c4983a 0%, #7a5018 50%, #b08832 100%)',
+                        padding: '3px',
                       }}
                     >
                       {p.imageUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={p.imageUrl} alt={p.title} className="h-full w-full object-cover" />
+                        <img
+                          src={p.imageUrl}
+                          alt={p.title}
+                          className="h-full w-full object-cover"
+                        />
                       ) : (
                         <div
                           className="flex h-full w-full flex-col items-center justify-center text-center"
                           style={{ background: 'linear-gradient(160deg, #2a1c12 0%, #0a0605 100%)' }}
                         >
-                          <p className="px-1 font-didot text-[0.55rem] leading-tight tracking-wider text-ivory/85">
+                          <p className="px-2 font-didot text-[0.5rem] leading-tight tracking-wider text-ivory/85">
                             {p.title}
                           </p>
-                          <p className="mt-1 font-mono text-[0.45rem] uppercase tracking-[0.18em] text-gold/65">
+                          <p className="mt-1 font-mono text-[0.4rem] uppercase tracking-[0.18em] text-gold/65">
                             {p.artist.split(' ').slice(-1)[0]}
                           </p>
                         </div>
                       )}
                     </div>
+
+                    {/* Title label — only on active / near-front items */}
+                    {cosAngle > 0.7 && (
+                      <div className="absolute -bottom-7 left-0 right-0 text-center pointer-events-none">
+                        <p className="font-mono text-[0.45rem] uppercase tracking-[0.28em] text-gold/65 truncate px-1">
+                          {p.title}
+                        </p>
+                      </div>
+                    )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Gold glow at centre */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-              <div
-                className="rounded-full"
-                style={{
-                  width: '22%',
-                  aspectRatio: '1',
-                  background: 'radial-gradient(circle, rgba(232,200,122,0.30) 0%, transparent 70%)',
-                  filter: 'blur(10px)',
-                }}
-              />
-            </div>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
-              <p className="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-gold/70">
-                The Catalog
-              </p>
-              <p className="mt-2 font-didot text-4xl uppercase tracking-[0.18em] text-ivory">
-                {PAINTINGS.length}
-              </p>
-              <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/55">
-                works
-              </p>
-            </div>
+            {/* Floor shadow gradient */}
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-14"
+              style={{ background: 'linear-gradient(to top, rgba(10,8,7,0.9) 0%, transparent 100%)' }}
+            />
           </div>
 
-          <p className="mt-6 text-center font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/45">
-            Hover to pause the orbit · click any work to feature it below
-          </p>
+          {/* Belt controls */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={() => pickPainting((activeIdx - 1 + PAINTINGS.length) % PAINTINGS.length)}
+              className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
+            >
+              ← Prev
+            </button>
+            <button
+              onClick={() => setBeltPaused((p) => !p)}
+              className="rounded border border-gold/30 bg-midnight/40 px-4 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
+            >
+              {beltPaused ? 'Resume belt' : 'Pause belt'}
+            </button>
+            <button
+              onClick={() => pickPainting((activeIdx + 1) % PAINTINGS.length)}
+              className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
+            >
+              Next →
+            </button>
+          </div>
         </section>
 
-        {/* Featured display */}
+        {/* ── FEATURED DISPLAY ──────────────────────────────────────────────── */}
         <section className="mx-auto mt-16 max-w-6xl">
-          <Link href={`/piece/${active.slug}`} className="block">
+          <Link href={`/piece/${featured.slug}`} className="block">
             <article
               className="relative overflow-hidden rounded-lg"
               style={{
@@ -178,8 +225,6 @@ export default function GalleryPage() {
                   'radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.18) 0%, transparent 55%), radial-gradient(ellipse at 50% 100%, rgba(60,40,20,0.5) 0%, transparent 65%), linear-gradient(180deg, #0a0805 0%, #1a120a 40%, #0a0805 100%)',
                 boxShadow: 'inset 0 0 120px rgba(0,0,0,0.7)',
               }}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
             >
               {/* Wall texture */}
               <div
@@ -206,10 +251,8 @@ export default function GalleryPage() {
                   <div
                     className="h-3 w-28 rounded-full"
                     style={{
-                      background:
-                        'linear-gradient(180deg, #d4a64a 0%, #8a6020 60%, #4a3008 100%)',
-                      boxShadow:
-                        '0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,220,150,0.7)',
+                      background: 'linear-gradient(180deg, #d4a64a 0%, #8a6020 60%, #4a3008 100%)',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,220,150,0.7)',
                     }}
                   />
                   <div
@@ -240,12 +283,12 @@ export default function GalleryPage() {
                       boxShadow: 'inset 0 0 0 2px rgba(40,25,10,0.9), inset 0 0 12px rgba(0,0,0,0.4)',
                     }}
                   >
-                    {active.imageUrl ? (
+                    {featured.imageUrl ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        key={active.slug}
-                        src={active.imageUrl}
-                        alt={`${active.artist} — ${active.title}`}
+                        key={featured.slug}
+                        src={featured.imageUrl}
+                        alt={`${featured.artist} — ${featured.title}`}
                         className="block transition-opacity duration-700"
                         style={{ maxHeight: '22rem', maxWidth: '32rem', height: 'auto', width: 'auto' }}
                       />
@@ -255,8 +298,7 @@ export default function GalleryPage() {
                         style={{
                           width: '24rem',
                           height: '20rem',
-                          background:
-                            'linear-gradient(160deg, #2a1c12 0%, #1a1208 60%, #0a0605 100%)',
+                          background: 'linear-gradient(160deg, #2a1c12 0%, #1a1208 60%, #0a0605 100%)',
                         }}
                       >
                         <p className="font-mono text-[0.5rem] uppercase tracking-[0.4em] text-gold/55 px-6">
@@ -266,8 +308,8 @@ export default function GalleryPage() {
                           upon signed agreement
                         </p>
                         <div className="my-6 h-px w-16 bg-gold/30" />
-                        <p className="font-didot text-lg tracking-wider text-ivory px-6">{active.title}</p>
-                        <p className="mt-1 font-display italic text-xs text-gold/70">{active.artist}</p>
+                        <p className="font-didot text-lg tracking-wider text-ivory px-6">{featured.title}</p>
+                        <p className="mt-1 font-display italic text-xs text-gold/70">{featured.artist}</p>
                       </div>
                     )}
                   </div>
@@ -288,51 +330,18 @@ export default function GalleryPage() {
                     {activeIdx + 1} of {PAINTINGS.length} · Now on view
                   </p>
                   <h2 className="mt-1 font-didot text-lg tracking-wider text-ivory md:text-2xl">
-                    {active.title}
+                    {featured.title}
                   </h2>
                   <p className="mt-1 font-display italic text-sm text-gold/90">
-                    {active.artist} · {active.year} · {active.dimensions}
+                    {featured.artist} · {featured.year} · {featured.dimensions}
                   </p>
                 </div>
               </div>
-
-              {/* Progress bar */}
-              {!paused && (
-                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gold/15">
-                  <div
-                    key={active.slug}
-                    className="h-full bg-gold/70"
-                    style={{ animation: `gallery-progress ${ROTATION_INTERVAL_MS}ms linear forwards` }}
-                  />
-                </div>
-              )}
             </article>
           </Link>
-
-          {/* Manual controls */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-            <button
-              onClick={() => setActiveIdx((i) => (i - 1 + PAINTINGS.length) % PAINTINGS.length)}
-              className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
-            >
-              ← Prev
-            </button>
-            <button
-              onClick={() => setPaused((p) => !p)}
-              className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
-            >
-              {paused ? 'Resume rotation' : 'Pause rotation'}
-            </button>
-            <button
-              onClick={() => setActiveIdx((i) => (i + 1) % PAINTINGS.length)}
-              className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
-            >
-              Next →
-            </button>
-          </div>
         </section>
 
-        {/* 60-90 second walkaround */}
+        {/* ── 60-90s WALKAROUND ─────────────────────────────────────────────── */}
         <section className="mx-auto mt-12 max-w-5xl">
           <div className="flex items-center justify-center gap-4">
             <button
@@ -366,32 +375,8 @@ export default function GalleryPage() {
             </div>
           )}
         </section>
-      </div>
 
-      <style jsx>{`
-        .orbit-ring {
-          animation: orbit-rotate ${ORBIT_DURATION}s linear infinite;
-          transform-origin: 50% 50%;
-        }
-        .orbit-thumb {
-          animation: counter-rotate ${ORBIT_DURATION}s linear infinite;
-        }
-        .orbit-paused {
-          animation-play-state: paused !important;
-        }
-        @keyframes orbit-rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes counter-rotate {
-          from { transform: translate(-50%, -50%) rotate(0deg); }
-          to { transform: translate(-50%, -50%) rotate(-360deg); }
-        }
-        @keyframes gallery-progress {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-      `}</style>
+      </div>
     </main>
   );
 }
