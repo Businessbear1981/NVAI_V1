@@ -153,7 +153,7 @@ function countFor(slug: string): number {
     pollock: ['Jackson Pollock'],
     davinci: ['Leonardo da Vinci', 'Leonardo Da Vinci', 'Da Vinci'],
     raphael: ['Raphael', 'Raphael Sanzio'],
-    bernard: ['Bernard Buffet'],
+    bernard: ['Émile Bernard', 'Emile Bernard'],
   };
   const names = artistKey[slug] ?? [];
   return PAINTINGS.filter((p) => names.some((n) => p.artist === n)).length;
