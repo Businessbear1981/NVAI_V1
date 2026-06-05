@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
+import RotatingBackdrop from '@/components/cinematic/RotatingBackdrop';
+import ArtistSignature from '@/components/brand/ArtistSignature';
 import { paintingsByWing } from '@/lib/paintings';
+import { getArtist } from '@/lib/artists';
+import { VIDEOS } from '@/lib/videoMap';
 
 const CHAPTERS = [
   {
@@ -58,28 +61,44 @@ const CHAPTERS = [
   },
 ];
 
+const GILT_FRAME = {
+  padding: '1.4rem',
+  background: 'linear-gradient(135deg, #d4a64a 0%, #8a6020 35%, #b08832 65%, #6a4815 100%)',
+  boxShadow: '0 40px 80px -10px rgba(0,0,0,0.95), 0 0 100px -10px rgba(255,210,140,0.4), inset 0 1px 0 rgba(255,220,150,0.5), inset 0 -1px 0 rgba(40,20,5,0.6)',
+};
+
 export default function KandinskyWingPage() {
   const [activeKey, setActiveKey] = useState(CHAPTERS[1].key);
   const active = CHAPTERS.find((c) => c.key === activeKey) ?? CHAPTERS[1];
+  const artist = getArtist('kandinsky');
   const pieces = paintingsByWing('/upstairs/kandinsky');
+  const centerpiece = pieces.find((p) => p.imageUrl);
+  const supporting = pieces.filter((p) => p !== centerpiece);
 
   return (
     <main className="relative min-h-screen overflow-hidden film-grain">
-      <CinematicBackdrop videoSrc={active.video} overlay={0.55} />
+      <RotatingBackdrop leadIn={active.video} rotation={active.rotation} overlay={0.55} />
       <div className="relative z-10 px-8 py-10">
         <Link href="/foyer/staircase" className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-ivory/60 hover:text-gold">
           ← Back to the staircase
         </Link>
+
         <header className="mx-auto mt-12 max-w-4xl text-center">
-          <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">Upstairs Center · the creepy room</p>
+          <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">Upstairs Center · the strange room</p>
           <h1 className="mt-6 font-didot text-6xl uppercase tracking-[0.12em] text-ivory drop-shadow-lg md:text-7xl">
             Kandinsky
           </h1>
           <p className="mt-4 font-display text-xl italic tracking-wider text-gold/85">
             seventy-eight years · law to abstraction · the painted music
           </p>
+          {artist && (
+            <div className="mt-8 flex justify-center">
+              <ArtistSignature artist={artist} size="lg" asLink={false} showCaption={false} />
+            </div>
+          )}
           <div className="mx-auto mt-8 h-px w-24 bg-gold/40" />
         </header>
+
         <nav className="mx-auto mt-16 flex max-w-5xl flex-wrap justify-center gap-3">
           {CHAPTERS.map((c) => (
             <button key={c.key} onClick={() => setActiveKey(c.key)}
@@ -91,6 +110,7 @@ export default function KandinskyWingPage() {
             </button>
           ))}
         </nav>
+
         <article className="mx-auto mt-12 max-w-3xl text-center space-y-6">
           <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">Chapter {active.eyebrow}</p>
           <h2 className="font-didot text-4xl uppercase tracking-[0.12em] text-ivory drop-shadow">{active.title}</h2>
@@ -98,24 +118,77 @@ export default function KandinskyWingPage() {
           <div className="mx-auto h-px w-16 bg-gold/40" />
           <p className="font-body text-base leading-relaxed text-ivory/90 max-w-2xl mx-auto">{active.body}</p>
         </article>
-        <section className="mx-auto mt-20 max-w-3xl">
-          <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-6">
-            The two Compositions on offer
-          </p>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {pieces.map((p) => (
-              <Link key={p.slug} href={`/piece/${p.slug}`}>
-                <article className="marble rounded-lg p-6 space-y-3 h-full transition-all hover:scale-[1.02]">
-                  <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">{p.year}</p>
-                  <h3 className="font-display text-lg leading-tight text-ivory">{p.title}</h3>
-                  <div className="h-px w-8 bg-gold/30" />
-                  <p className="font-body text-xs italic text-ivory/65">{p.inspirationNote}</p>
-                  <p className="font-mono text-[0.55rem] uppercase tracking-[0.28em] text-gold/60 pt-2">Enter the piece →</p>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </section>
+
+        {/* Centerpiece painting — gilt frame + brass light */}
+        {centerpiece && (
+          <section className="mx-auto mt-20 max-w-6xl">
+            <div className="mb-6 text-center">
+              <p className="font-mono text-[0.55rem] uppercase tracking-[0.5em] text-gold/85">
+                The piece on offer · {centerpiece.year}
+              </p>
+            </div>
+            <Link href={`/piece/${centerpiece.slug}`} className="group block">
+              <article className="relative mx-auto" style={{ maxWidth: '46rem', background: 'radial-gradient(ellipse at 50% 0%, rgba(255,210,140,0.40) 0%, rgba(232,200,122,0.15) 30%, transparent 60%)', padding: '6rem 2rem 3rem' }}>
+                {/* Brass picture light */}
+                <div className="absolute left-1/2 top-6 z-20 -translate-x-1/2">
+                  <div className="h-3 w-40 rounded-full" style={{ background: 'linear-gradient(180deg, #d4a64a 0%, #8a6020 60%, #4a3008 100%)', boxShadow: '0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,220,150,0.7)' }} />
+                  <div className="absolute left-1/2 top-2 h-1.5 w-32 -translate-x-1/2 rounded-full" style={{ background: 'rgba(255,210,140,0.95)', boxShadow: '0 0 36px rgba(255,210,140,0.9)' }} />
+                </div>
+                {/* Gilt frame */}
+                <div className="relative mx-auto" style={{ maxWidth: '34rem', ...GILT_FRAME }}>
+                  <div className="overflow-hidden" style={{ boxShadow: 'inset 0 0 0 2px rgba(40,25,10,0.9), inset 0 0 12px rgba(0,0,0,0.4)' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={centerpiece.imageUrl} alt={`${centerpiece.artist} — ${centerpiece.title}`} className="block w-full" />
+                  </div>
+                </div>
+                {/* Brass placard */}
+                <div className="mt-8 text-center">
+                  <div className="inline-block rounded-sm px-8 py-3" style={{ background: 'linear-gradient(180deg, rgba(212,175,55,0.22) 0%, rgba(40,30,15,0.7) 100%)', border: '1px solid rgba(232,200,122,0.5)', boxShadow: '0 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,220,150,0.3)' }}>
+                    <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/85">Upstairs Center · The Strange Room</p>
+                    <h2 className="mt-2 font-didot text-2xl tracking-wider text-ivory md:text-3xl">
+                      {centerpiece.artist} · <em className="font-display italic">{centerpiece.title}</em>
+                    </h2>
+                    <p className="mt-1 font-display italic text-gold/90">{centerpiece.year} · {centerpiece.dimensions} · {centerpiece.medium}</p>
+                    <p className="mt-3 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/85 group-hover:underline underline-offset-4">Enter the piece →</p>
+                  </div>
+                </div>
+              </article>
+            </Link>
+          </section>
+        )}
+
+        {/* Supporting works */}
+        {supporting.length > 0 && (
+          <section className="mx-auto mt-16 max-w-5xl">
+            <p className="mb-6 text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+              Also on offer · {supporting.length} {supporting.length === 1 ? 'work' : 'works'}
+            </p>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {supporting.map((p) => (
+                <Link key={p.slug} href={`/piece/${p.slug}`} className="group">
+                  <article className="marble flex h-full flex-col space-y-3 rounded-lg p-6 transition-all hover:scale-[1.02]">
+                    {p.imageUrl ? (
+                      <div className="overflow-hidden rounded-sm" style={{ padding: '0.6rem', background: 'linear-gradient(135deg, #d4a64a 0%, #8a6020 50%, #6a4815 100%)', boxShadow: 'inset 0 0 0 1px rgba(40,25,10,0.7)' }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={p.imageUrl} alt={`${p.artist} — ${p.title}`} className="block aspect-square w-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="flex aspect-square w-full items-center justify-center rounded-sm" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(60,40,15,0.7) 0%, rgba(20,12,5,0.9) 80%)', border: '1px solid rgba(212,175,55,0.25)' }}>
+                        <p className="font-display text-xs italic tracking-wider text-gold/60">image under review</p>
+                      </div>
+                    )}
+                    <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-[#3a2a0a]">{p.year}</p>
+                    <h3 className="font-didot text-lg leading-tight tracking-wide text-[#1a0e05]">{p.title}</h3>
+                    <div className="h-px w-8 bg-[#5a3a1a]" />
+                    <p className="font-body text-xs italic leading-relaxed text-[#2a1a05]">{p.dimensions} · {p.medium}</p>
+                    <p className="font-body text-xs italic leading-relaxed text-[#3a2a0a]/85">{p.inspirationNote}</p>
+                    <p className="pt-1 font-mono text-[0.55rem] uppercase tracking-[0.28em] text-[#3a2a0a] group-hover:underline">Enter the piece →</p>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );
