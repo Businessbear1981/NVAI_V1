@@ -76,18 +76,19 @@ export const VIDEOS = {
   // Route: Chateau → Angel Island → Golden Gate → Presidio/Crissy Fields →
   //        Pier 39 → Alcatraz → Bay Bridge climb → Bay Bridge apex → drop to Powerplant Park
   //        (Point Richmond, between Bay Bridge and Richmond-San Rafael Bridge) → Carquinez home
+  // Serving from Higgsfield CloudFront; mirror to R2 when convenient.
   bayFlight: {
-    departure: `${R2}/nvai_bay_flight_b1_departure_5k.mp4`,
-    bayApproach: `${R2}/nvai_bay_flight_b2_bay_approach_5k.mp4`,
-    angelIsland: `${R2}/nvai_bay_flight_b3_angel_island_5k.mp4`,
-    goldenGate: `${R2}/nvai_bay_flight_b4_golden_gate_5k.mp4`,
-    straitDrop: `${R2}/nvai_bay_flight_b5_strait_drop_5k.mp4`,
-    crissyPier: `${R2}/nvai_bay_flight_b6_crissy_pier_5k.mp4`,
-    alcatraz: `${R2}/nvai_bay_flight_b7_alcatraz_5k.mp4`,
-    bridgeClimb: `${R2}/nvai_bay_flight_b8_bridge_climb_5k.mp4`,
-    bridgeApex: `${R2}/nvai_bay_flight_b9_bridge_apex_5k.mp4`,
-    powerparkFlyby: `${R2}/nvai_bay_flight_b10_powerpark_5k.mp4`,
-    carquinezHome: `${R2}/nvai_bay_flight_b11_carquinez_home_5k.mp4`,
+    departure:     'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155348_fc1dbdda-eab0-48e6-9824-2f7ef38553ef.mp4',
+    bayApproach:   'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155402_cc236b2f-c561-4d5f-9e48-6b5aba049ea8.mp4',
+    angelIsland:   'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155922_4ce5f52c-9961-469f-ab1c-faee1bf644ba.mp4',
+    goldenGate:    'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155416_751ffb0c-7851-4fef-accd-1fc5431b1021.mp4',
+    straitDrop:    'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155556_cc895963-781d-490a-a2e6-54b733cf4033.mp4',
+    crissyPier:    'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155606_7b393d4c-0362-426b-aa4d-11d81cf5e205.mp4',
+    alcatraz:      'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_160401_42af1424-df1b-4cb8-94fc-ad5ab32fba4a.mp4',
+    bridgeClimb:   'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_160016_98bf3b6a-8799-4ea1-8efe-e582d392cf74.mp4',
+    bridgeApex:    'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155813_7d40e951-6393-4d3b-b0d9-b51483a975fa.mp4',
+    powerparkFlyby:'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155822_b23c427c-dfc4-494a-b3b8-6b050d27a5bb.mp4',
+    carquinezHome: 'https://d8j0ntlcm91z4.cloudfront.net/user_3Cbg36qtUc1h4TpZOXMjaW8MD4h/hf_20260605_155829_f43b594a-115c-48cb-8d16-dc3754483e41.mp4',
   },
 
   // ---------------------------------------------------------------------------
