@@ -15,10 +15,10 @@ import { VIDEOS } from '@/lib/videoMap';
 
 // Napa Valley ornithopter — 4 working beats. Slow and contemplative.
 const BEATS = [
-  { key: ‘takeoff’, src: VIDEOS.davinciFlight.takeoff, caption: ‘Takeoff. The contraption lifts from the balcony.’ },
-  { key: ‘soaring’, src: VIDEOS.davinciFlight.soaring, caption: ‘Soaring. The valley opens beneath you.’ },
-  { key: ‘banking’, src: VIDEOS.davinciFlight.banking, caption: ‘Banking. The vines, the cypress, the chateau.’ },
-  { key: ‘descent’, src: VIDEOS.davinciFlight.descent, caption: ‘Descent. Back to earth. Back to the chateau.’ },
+  { key: 'takeoff', src: VIDEOS.davinciFlight.takeoff, caption: 'Takeoff. The contraption lifts from the balcony.' },
+  { key: 'soaring', src: VIDEOS.davinciFlight.soaring, caption: 'Soaring. The valley opens beneath you.' },
+  { key: 'banking', src: VIDEOS.davinciFlight.banking, caption: 'Banking. The vines, the cypress, the chateau.' },
+  { key: 'descent', src: VIDEOS.davinciFlight.descent, caption: 'Descent. Back to earth. Back to the chateau.' },
 ] as const;
 
 export default function FlightPage() {
