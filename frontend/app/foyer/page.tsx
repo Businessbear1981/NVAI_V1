@@ -45,7 +45,7 @@ export default function FoyerPage() {
         </header>
 
         <section className="mx-auto mt-20 max-w-6xl">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <Link href="/foyer/staircase" aria-label="Up the staircase">
               <MarbleTombstone
                 eyebrow="The Staircase"
@@ -62,15 +62,6 @@ export default function FoyerPage() {
                 subtitle="Ballroom · Cabinet · Auction"
                 caption="The chateau dissolves into a modern art party, then into the auction floor."
                 featured
-              />
-            </Link>
-
-            <Link href="/garden" aria-label="Out to the garden">
-              <MarbleTombstone
-                eyebrow="Garden Door"
-                title="The Patio"
-                subtitle="Vineyard · Parlor · Matisse · Grounds"
-                caption="Out into the Tuscan light. The artist wings lie along the path."
               />
             </Link>
           </div>
