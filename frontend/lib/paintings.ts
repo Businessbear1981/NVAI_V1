@@ -428,7 +428,7 @@ export const PAINTINGS: Painting[] = [
       'C. R. W. Nevinson — *An Artist Studio in Montparnasse* — Tate Gallery N04231, presented by H. G. Wells 1927 — Sisley Huddleston letter to New York *Herald Tribune* 24 February 1927 — the documentary trail of the shared studio',
     ],
     provenanceDoc: '/provenance/modigliani-sitting-nude-with-crossed-hands-dossier.pdf',
-    imageUrl: '/paintings/modigliani-sitting-nude-with-crossed-hands.jpg',
+    imageUrl: '/paintings/modigliani-sitting-nude-crossed-hands.jpg',
     heroCaption: {
       label: 'Original Painting — Sitting Nude with Crossed Hands, (c.) 1917 — Model/Muse — Alice Prin, age 16',
       caption: 'Amedeo Modigliani who died three years later would never know that his vivacious favorite Muse would go on to become the interlocutor of two generations of his peers. Known as Kiki de Montparnasse in 1922 after falling in love with Man Ray, Hemingway wrote the foreword to her memoirs in 1928, one of two in his life. They were rumored to have had a brief affair. Soon after the release of Kiki\'s Memoirs, she received the second half of her title — Crowned KIKI, "Queen of Montparnasse" in a lavish ceremony that was the talk of Paris. Hemingway wrote: "she dominated the Era of Montparnasse more than Queen Victoria ever dominated the Victorian Era."',

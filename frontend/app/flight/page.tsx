@@ -13,19 +13,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { VIDEOS } from '@/lib/videoMap';
 
-// NOTE: beats 5–9 (mountains → landing) point at videos that will 404
-// until Sean generates and uploads them. Code ships ahead of media — the
-// onEnded chain + pip counter scale automatically off BEATS.length.
+// Napa Valley ornithopter — 4 working beats. Slow and contemplative.
 const BEATS = [
-  { key: 'takeoff', src: VIDEOS.davinciFlight.takeoff, caption: 'Takeoff. The contraption lifts from the balcony.' },
-  { key: 'soaring', src: VIDEOS.davinciFlight.soaring, caption: 'Soaring. The valley opens beneath you.' },
-  { key: 'banking', src: VIDEOS.davinciFlight.banking, caption: 'Banking. The vines, the cypress, the chateau.' },
-  { key: 'descent', src: VIDEOS.davinciFlight.descent, caption: 'Descent. Back to earth. Back to the chateau.' },
-  { key: 'mountains', src: VIDEOS.davinciFlight.mountains, caption: 'Over the coastal range. Mt Tamalpais below.' },
-  { key: 'stinson', src: VIDEOS.davinciFlight.stinson, caption: 'The long Pacific strand. Stinson Beach white against blue.' },
-  { key: 'sonoma', src: VIDEOS.davinciFlight.sonoma, caption: 'Inland again. Sonoma’s vineyard hills. The plaza.' },
-  { key: 'napaReturn', src: VIDEOS.davinciFlight.napaReturn, caption: 'Napa Valley unfolds. The chateau lights ahead.' },
-  { key: 'landing', src: VIDEOS.davinciFlight.landing, caption: 'Wings tip back. Approaching the front door.' },
+  { key: ‘takeoff’, src: VIDEOS.davinciFlight.takeoff, caption: ‘Takeoff. The contraption lifts from the balcony.’ },
+  { key: ‘soaring’, src: VIDEOS.davinciFlight.soaring, caption: ‘Soaring. The valley opens beneath you.’ },
+  { key: ‘banking’, src: VIDEOS.davinciFlight.banking, caption: ‘Banking. The vines, the cypress, the chateau.’ },
+  { key: ‘descent’, src: VIDEOS.davinciFlight.descent, caption: ‘Descent. Back to earth. Back to the chateau.’ },
 ] as const;
 
 export default function FlightPage() {

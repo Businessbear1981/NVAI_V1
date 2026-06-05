@@ -68,24 +68,52 @@ export default function StaircaseLandingPage() {
             />
           </div>
 
-          {/* The fourth door — the balcony. Launch the Da Vinci flight. */}
-          <div className="mx-auto mt-16 max-w-2xl">
+          {/* The fourth door — the balcony. Two flights. */}
+          <div className="mx-auto mt-16 max-w-4xl grid grid-cols-1 gap-6 md:grid-cols-2">
             <Link href="/flight" className="block group">
-              <article className="marble rounded-lg p-8 text-center transition-all hover:ring-1 hover:ring-gold/60 hover:shadow-2xl">
+              <article className="marble rounded-lg p-8 text-center transition-all hover:ring-1 hover:ring-gold/60 hover:shadow-2xl h-full">
                 <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
                   Beyond · the balcony
                 </p>
                 <h3 className="mt-3 font-didot text-3xl uppercase tracking-[0.14em] text-ivory">
-                  The Flight
+                  Napa Valley
                 </h3>
+                <p className="mt-1 font-mono text-[0.45rem] uppercase tracking-[0.32em] text-gold/50">
+                  The Ornithopter · Daylight
+                </p>
                 <p className="mt-3 font-display italic tracking-wider text-gold/80">
-                  Step onto the terrace. Da Vinci's contraption is waiting.
+                  Leonardo's contraption, finally airborne.
                 </p>
                 <div className="mx-auto mt-4 h-px w-12 bg-gold/40" />
                 <p className="mt-4 font-body italic text-sm text-ivory/75">
-                  Forty-eight seconds over Napa Valley. Takeoff, the vines, the
-                  banking turn above the chateau, the descent. Leonardo&apos;s
-                  contraption — finally airborne.
+                  Slow. Contemplative. Takeoff, the vines, the banking turn,
+                  the descent. Leonardo&apos;s dream — finally airborne.
+                </p>
+                <p className="mt-4 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/85 group-hover:text-gold">
+                  Launch →
+                </p>
+              </article>
+            </Link>
+
+            <Link href="/bay-flight" className="block group">
+              <article className="marble rounded-lg p-8 text-center transition-all hover:ring-1 hover:ring-gold/60 hover:shadow-2xl h-full border border-gold/10">
+                <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
+                  Bay Grand Circuit · Night
+                </p>
+                <h3 className="mt-3 font-didot text-3xl uppercase tracking-[0.14em] text-ivory">
+                  The Bay
+                </h3>
+                <p className="mt-1 font-mono text-[0.45rem] uppercase tracking-[0.32em] text-gold/50">
+                  The Wingsuit · Dark
+                </p>
+                <p className="mt-3 font-display italic tracking-wider text-gold/80">
+                  Angel Island. The Gate. Alcatraz. The Bridge apex.
+                </p>
+                <div className="mx-auto mt-4 h-px w-12 bg-gold/40" />
+                <p className="mt-4 font-body italic text-sm text-ivory/75">
+                  Fast. A roller coaster over ten thousand lights.
+                  Ends at Powerplant Park — Point Richmond — electric green
+                  and violet. Then home.
                 </p>
                 <p className="mt-4 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/85 group-hover:text-gold">
                   Launch →

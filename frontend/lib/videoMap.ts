@@ -53,21 +53,36 @@ export const VIDEOS = {
   // NOTE: beats 5–9 (mountains, stinson, sonoma, napaReturn, landing) will 404
   // until Sean generates and uploads the corresponding videos. Code ships ahead.
   // ---------------------------------------------------------------------------
+  // Napa Valley ornithopter — slow, contemplative, 9 beats × 15s ≈ 2.25 min
   davinciFlight: {
     takeoff: `${R2}/nvai_davinci_flight_b1_takeoff_5k.mp4`,
     soaring: `${R2}/nvai_davinci_flight_b2_soaring_5k.mp4`,
     banking: `${R2}/nvai_davinci_flight_b3_banking_5k.mp4`,
     descent: `${R2}/nvai_davinci_flight_b4_descent_5k.mp4`,
-    // Beats 5–9 — extended flight path. Videos not yet generated (will 404
-    // until uploaded). Intentional: code ships ahead of media.
-    mountains: `${R2}/nvai_davinci_flight_b5_mountains_5k.mp4`,
-    stinson: `${R2}/nvai_davinci_flight_b6_stinson_5k.mp4`,
-    sonoma: `${R2}/nvai_davinci_flight_b7_sonoma_5k.mp4`,
-    napaReturn: `${R2}/nvai_davinci_flight_b8_napa_return_5k.mp4`,
+    stHelenaHighway: `${R2}/nvai_davinci_flight_b5_st_helena_5k.mp4`,
+    wineTrain: `${R2}/nvai_davinci_flight_b6_winetrain_5k.mp4`,
+    yountville: `${R2}/nvai_davinci_flight_b7_yountville_5k.mp4`,
+    vineyardWide: `${R2}/nvai_davinci_flight_b8_vineyard_wide_5k.mp4`,
     landing: `${R2}/nvai_davinci_flight_b9_landing_5k.mp4`,
-    // Alternate takeoff — Sean-curated bonus take. Used by /flight on the
-    // second viewing (Fly again) so the loop is not literally identical.
     alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`,
+  },
+
+  // Bay Grand Circuit — Da Vinci wingsuit, night, roller-coaster rhythm, 11 beats × 15s ≈ 2.75 min
+  // Route: Chateau → Angel Island → Golden Gate → Presidio/Crissy Fields →
+  //        Pier 39 → Alcatraz → Bay Bridge climb → Bay Bridge apex → drop to Powerplant Park
+  //        (Point Richmond, between Bay Bridge and Richmond-San Rafael Bridge) → Carquinez home
+  bayFlight: {
+    departure: `${R2}/nvai_bay_flight_b1_departure_5k.mp4`,
+    bayApproach: `${R2}/nvai_bay_flight_b2_bay_approach_5k.mp4`,
+    angelIsland: `${R2}/nvai_bay_flight_b3_angel_island_5k.mp4`,
+    goldenGate: `${R2}/nvai_bay_flight_b4_golden_gate_5k.mp4`,
+    straitDrop: `${R2}/nvai_bay_flight_b5_strait_drop_5k.mp4`,
+    crissyPier: `${R2}/nvai_bay_flight_b6_crissy_pier_5k.mp4`,
+    alcatraz: `${R2}/nvai_bay_flight_b7_alcatraz_5k.mp4`,
+    bridgeClimb: `${R2}/nvai_bay_flight_b8_bridge_climb_5k.mp4`,
+    bridgeApex: `${R2}/nvai_bay_flight_b9_bridge_apex_5k.mp4`,
+    powerparkFlyby: `${R2}/nvai_bay_flight_b10_powerpark_5k.mp4`,
+    carquinezHome: `${R2}/nvai_bay_flight_b11_carquinez_home_5k.mp4`,
   },
 
   // ---------------------------------------------------------------------------
