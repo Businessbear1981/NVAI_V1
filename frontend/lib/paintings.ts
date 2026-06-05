@@ -520,12 +520,12 @@ export const PAINTINGS: Painting[] = [
     artist: 'Amedeo Modigliani',
     title: 'Femme à la Perruque Rousse',
     year: 'c. 1917',
-    dimensions: '55 × 38 cm',
+    dimensions: 'Dimensions disclosed under DDNDA',
     medium: 'Oil on canvas',
     signed: 'Signed upper right: modigliani',
     viewingLocation: 'Private collection — disclosed under DDNDA',
     inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
-    inspirationNote: "The red-wig portrait. The sitter — a Montparnasse model from the Zborowski years — sits in the three-quarter pose that was Modigliani's characteristic frame for the women of that last period.",
+    inspirationNote: "The red-wig portrait, c.1917. The sitter — a Montparnasse model from the final Zborowski years — rendered in the three-quarter pose that was Modigliani's definitive frame for the women of that last period.",
     wing: { label: 'Cabinet de Curiosités', href: '/grand-hall/modigliani' },
     bernardStory:
       "This is Femme à la Perruque Rousse, painted by Amedeo Modigliani around nineteen seventeen. He was thirty-three years old and working at the pace his dealer Léopold Zborowski required — canvas after canvas, often one a day, the models drawn from the quiet orbit of women who passed through the studios on the rue Joseph-Bara and the rue de la Grande Chaumière. " +
