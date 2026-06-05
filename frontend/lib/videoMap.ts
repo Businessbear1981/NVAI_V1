@@ -67,6 +67,11 @@ export const VIDEOS = {
     alt: `${R2}/nvai_davinci_flight_alt_5k.mp4`,
   },
 
+  // Da Vinci workshop portal — candlelit workshop, Da Vinci + apprentice over schematics.
+  // Plays as intro before the Day / Night flight selection.
+  // File pending Higgsfield generation; falls back to davinci.leadIn until uploaded.
+  davinciWorkshopPortal: `${R2}/nvai_davinci_workshop_apprentice_5k.mp4`,
+
   // Bay Grand Circuit — Da Vinci wingsuit, night, roller-coaster rhythm, 11 beats × 15s ≈ 2.75 min
   // Route: Chateau → Angel Island → Golden Gate → Presidio/Crissy Fields →
   //        Pier 39 → Alcatraz → Bay Bridge climb → Bay Bridge apex → drop to Powerplant Park

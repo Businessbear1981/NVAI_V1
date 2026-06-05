@@ -72,19 +72,17 @@ export default function HomePage() {
         <a href="/consign" target="_blank" rel="noopener noreferrer" className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gold/75 transition-colors hover:text-gold">Representation →</a>
       </div>
 
-      {/* Three glass entry panels — sit above EssentialsBar (~56px).
-          Mobile: pb-32 clears the fixed bar. Desktop: bottom-20 = 80px clearance. */}
-      <div className="relative z-20 flex items-end justify-center px-4 pb-32 mt-[44vh] md:absolute md:inset-x-0 md:bottom-20 md:mt-0 md:px-12 md:pb-0">
-        <div className="flex flex-col items-center gap-3 w-full max-w-5xl md:flex-row md:items-end md:gap-6">
+      {/* Three floating brass icons — no boxes, no text, no panels.
+          Sit above EssentialsBar (~56px). */}
+      <div className="relative z-20 flex items-end justify-center px-8 pb-32 mt-[44vh] md:absolute md:inset-x-0 md:bottom-20 md:mt-0 md:px-16 md:pb-0">
+        <div className="flex w-full max-w-4xl items-end justify-between">
 
           {/* LEFT — Guided Tour */}
-          <Link href="/tour" className="group w-full md:flex-1" aria-label="Guided Tour">
+          <Link href="/tour" className="group flex flex-col items-center" aria-label="Guided Tour">
             <div
-              className="rounded-sm border border-gold/20 px-5 py-4 text-center transition-all duration-500 group-hover:border-gold/50 group-hover:bg-white/5"
+              className="transition-all duration-500 group-hover:-translate-y-2"
               style={{
-                background: 'rgba(10, 8, 4, 0.18)',
-                backdropFilter: 'blur(6px)',
-                WebkitBackdropFilter: 'blur(6px)',
+                filter: 'drop-shadow(0 4px 16px rgba(201,168,76,0.25)) drop-shadow(0 8px 32px rgba(0,0,0,0.7))',
               }}
             >
               <Image
@@ -92,78 +90,53 @@ export default function HomePage() {
                 alt=""
                 width={80}
                 height={80}
-                className="mx-auto h-14 w-auto opacity-70 group-hover:opacity-100 transition-opacity"
+                className="h-16 w-auto opacity-75 transition-opacity duration-500 group-hover:opacity-100 md:h-20"
+                style={{ filter: 'drop-shadow(0 2px 6px rgba(201,168,76,0.4))' }}
               />
-              <p className="mt-4 font-mono text-[0.5rem] uppercase tracking-[0.42em] text-gold/55 group-hover:text-gold/80">
-                Guided Tour
-              </p>
-              <p className="mt-2 font-didot text-xl uppercase tracking-[0.18em] text-ivory/80 group-hover:text-ivory">
-                The Tour
-              </p>
-              <p className="mt-2 font-body text-xs italic text-ivory/50 group-hover:text-ivory/70">
-                Every room. Every artist. Every story.
-              </p>
             </div>
           </Link>
 
-          {/* CENTER — Enter (featured, taller) */}
-          <Link href="/foyer" className="group w-full md:flex-[1.5]" aria-label="Enter the Chateau">
+          {/* CENTER — Enter */}
+          <Link href="/foyer" className="group flex flex-col items-center" aria-label="Enter the Chateau">
+            {/* Kiki silhouette — 3D raised */}
             <div
-              className="rounded-sm border border-gold/30 px-8 py-8 text-center transition-all duration-500 group-hover:border-gold/70 group-hover:bg-white/5 md:pb-10 md:pt-10"
+              className="mb-2 transition-transform duration-500 group-hover:-translate-y-2"
+              style={{ filter: 'drop-shadow(0 8px 24px rgba(201,168,76,0.45)) drop-shadow(0 0 40px rgba(201,168,76,0.15))' }}
+            >
+              <Image
+                src="/brand/silhouettes/kiki-profile.png"
+                alt=""
+                width={80}
+                height={80}
+                className="mx-auto h-20 w-auto opacity-90 transition-opacity duration-500 group-hover:opacity-100 md:h-24"
+              />
+            </div>
+
+            {/* Da Vinci wing icon */}
+            <div className="mb-3 opacity-65 transition-opacity duration-500 group-hover:opacity-95">
+              <WingIcon />
+            </div>
+
+            {/* Brass 3D ENTER */}
+            <p
+              className="font-didot text-5xl uppercase transition-all duration-500 md:text-6xl"
               style={{
-                background: 'rgba(10, 8, 4, 0.15)',
-                backdropFilter: 'blur(6px)',
-                WebkitBackdropFilter: 'blur(6px)',
+                color: '#C9A84C',
+                letterSpacing: '0.22em',
+                textShadow:
+                  '0 1px 0 #b8860c, 0 2px 0 #a07a0a, 0 3px 0 #8a6808, 0 4px 0 #725806, 0 5px 0 #5c4504, 0 6px 8px rgba(0,0,0,0.6)',
               }}
             >
-              {/* Kiki silhouette — 3D raised */}
-              <div
-                className="relative mx-auto mb-3 w-fit transition-transform duration-500 group-hover:-translate-y-1"
-                style={{ filter: 'drop-shadow(0 6px 18px rgba(201,168,76,0.35))' }}
-              >
-                <Image
-                  src="/brand/silhouettes/kiki-profile.png"
-                  alt=""
-                  width={80}
-                  height={80}
-                  className="mx-auto h-16 w-auto opacity-85 group-hover:opacity-100 transition-opacity md:h-20"
-                />
-              </div>
-
-              {/* Da Vinci wing icon */}
-              <div className="mx-auto mb-4 flex justify-center opacity-60 group-hover:opacity-90 transition-opacity">
-                <WingIcon />
-              </div>
-
-              {/* Brass 3D ENTER lettering */}
-              <p
-                className="font-didot text-5xl uppercase md:text-6xl"
-                style={{
-                  color: '#C9A84C',
-                  letterSpacing: '0.22em',
-                  textShadow:
-                    '0 1px 0 #b8860c, 0 2px 0 #a07a0a, 0 3px 0 #8a6808, 0 4px 0 #725806, 0 5px 0 #5c4504, 0 6px 8px rgba(0,0,0,0.6)',
-                }}
-              >
-                Enter
-              </p>
-
-              <div className="mx-auto mt-4 h-px w-10 bg-gold/30 group-hover:w-20 transition-all duration-500" />
-
-              <p className="mt-3 font-mono text-[0.48rem] uppercase tracking-[0.42em] text-gold/50 group-hover:text-gold/75">
-                Foyer · Gallery · Auction · Upstairs
-              </p>
-            </div>
+              Enter
+            </p>
           </Link>
 
           {/* RIGHT — Walk the Grounds */}
-          <Link href="/grounds" className="group w-full md:flex-1" aria-label="Walk the Grounds">
+          <Link href="/grounds" className="group flex flex-col items-center" aria-label="Walk the Grounds">
             <div
-              className="rounded-sm border border-gold/20 px-5 py-4 text-center transition-all duration-500 group-hover:border-gold/50 group-hover:bg-white/5"
+              className="transition-all duration-500 group-hover:-translate-y-2"
               style={{
-                background: 'rgba(10, 8, 4, 0.18)',
-                backdropFilter: 'blur(6px)',
-                WebkitBackdropFilter: 'blur(6px)',
+                filter: 'drop-shadow(0 4px 16px rgba(201,168,76,0.25)) drop-shadow(0 8px 32px rgba(0,0,0,0.7))',
               }}
             >
               <Image
@@ -171,17 +144,9 @@ export default function HomePage() {
                 alt=""
                 width={80}
                 height={80}
-                className="mx-auto h-14 w-auto opacity-70 group-hover:opacity-100 transition-opacity"
+                className="h-16 w-auto opacity-75 transition-opacity duration-500 group-hover:opacity-100 md:h-20"
+                style={{ filter: 'drop-shadow(0 2px 6px rgba(201,168,76,0.4))' }}
               />
-              <p className="mt-4 font-mono text-[0.5rem] uppercase tracking-[0.42em] text-gold/55 group-hover:text-gold/80">
-                The Estate
-              </p>
-              <p className="mt-2 font-didot text-xl uppercase tracking-[0.18em] text-ivory/80 group-hover:text-ivory">
-                The Grounds
-              </p>
-              <p className="mt-2 font-body text-xs italic text-ivory/50 group-hover:text-ivory/70">
-                Eleven artists. The vineyard. The patio.
-              </p>
             </div>
           </Link>
 
