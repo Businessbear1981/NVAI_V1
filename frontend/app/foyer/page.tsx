@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CinematicBackdrop from '@/components/cinematic/CinematicBackdrop';
 import MarbleTombstone from '@/components/tombstones/MarbleTombstone';
+import GalleryHeroReel from '@/components/gallery/GalleryHeroReel';
 
 export default function FoyerPage() {
   const [revealed, setRevealed] = useState(false);
@@ -43,6 +44,9 @@ export default function FoyerPage() {
             grand hall, or out the garden door to the patio.
           </p>
         </header>
+
+        {/* Gallery hero reel — 4-chapter cinematic showcase of the full collection */}
+        <GalleryHeroReel />
 
         <section className="mx-auto mt-20 max-w-6xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
