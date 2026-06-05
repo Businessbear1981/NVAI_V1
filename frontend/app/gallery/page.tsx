@@ -17,6 +17,7 @@ export default function GalleryPage() {
   const [walkaroundOn, setWalkaroundOn] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   // Auto-rotate through the catalogue every 6.5 seconds unless paused
   useEffect(() => {
@@ -74,34 +75,42 @@ export default function GalleryPage() {
           >
             <div className="absolute inset-0">
               {PAINTINGS.map((p, idx) => {
-                const angle = (360 / PAINTINGS.length) * idx;
-                const radius = 44; // pulled in slightly so the bigger thumbs don't clip the edge
+                // Trig positioning: place each thumbnail at a point on the orbit circle.
+                // angleDeg starts at -90 so the first painting sits at the top.
+                // ORBIT_RADIUS is as a percentage of the container's half-width, so
+                // thumbnails stay fully inside the square container (14% wide thumbs
+                // need ~7% clearance each side → max safe radius ≈ 43%).
+                const ORBIT_RADIUS = 38;
+                const angleDeg = (360 / PAINTINGS.length) * idx - 90;
+                const angleRad = (angleDeg * Math.PI) / 180;
+                const cx = 50 + ORBIT_RADIUS * Math.cos(angleRad); // % left
+                const cy = 50 + ORBIT_RADIUS * Math.sin(angleRad); // % top
+                const isActive = activeIdx === idx;
+                const isHovered = hoveredIdx === idx;
+                const scale = isActive ? 1.22 : isHovered ? 1.1 : 1;
                 return (
                   <button
                     key={p.slug}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveIdx(idx);
-                    }}
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 hover:z-20 ${
-                      activeIdx === idx ? 'z-30 scale-125' : 'hover:scale-110'
-                    }`}
+                    onClick={() => setActiveIdx(idx)}
+                    onMouseEnter={() => setHoveredIdx(idx)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                    className={`absolute transition-all duration-300 ${isActive ? 'z-30' : 'z-10'}`}
                     style={{
-                      transform: `translate(-50%, -50%) rotate(${angle}deg) translate(${radius}%) rotate(${-angle}deg) ${
-                        activeIdx === idx ? 'scale(1.25)' : ''
-                      }`,
-                      // Thumbs are bigger now — 18% on mobile up to 16% on desktop
-                      // (paintings are easier to recognise + tappable on a touch target)
-                      width: '17%',
+                      left: `${cx}%`,
+                      top: `${cy}%`,
+                      width: '14%',
                       aspectRatio: '3 / 4',
+                      transform: `translate(-50%, -50%) scale(${scale})`,
                     }}
                     aria-label={`${p.artist} — ${p.title}`}
                   >
                     <div
-                      className={`relative h-full w-full overflow-hidden rounded-sm shadow-lg transition-all ${
-                        activeIdx === idx
+                      className={`relative h-full w-full overflow-hidden rounded-sm shadow-lg transition-all duration-300 ${
+                        isActive
                           ? 'ring-2 ring-gold ring-offset-2 ring-offset-midnight shadow-[0_8px_28px_rgba(212,175,55,0.5)]'
-                          : 'ring-1 ring-gold/20 hover:ring-gold/60'
+                          : isHovered
+                          ? 'ring-1 ring-gold/60'
+                          : 'ring-1 ring-gold/20'
                       }`}
                       style={{
                         background: 'linear-gradient(135deg, #b08832 0%, #6a4815 100%)',
