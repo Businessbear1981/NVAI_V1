@@ -391,7 +391,7 @@ export default function ExperiencePage() {
           </h1>
           <div className="mx-auto mt-8 h-px w-20 bg-gold/35" />
           <p className="mx-auto mt-6 max-w-md font-body italic leading-relaxed text-ivory/70">
-            Ten rooms. Twenty-four paintings. Every canvas in private hands for
+            Ten rooms. Thirty-one paintings. Every canvas in private hands for
             seventy years or longer. Each one available under the terms of the DDNDA.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
