@@ -68,32 +68,6 @@ export default function StaircaseLandingPage() {
             />
           </div>
 
-          {/* The fourth door — the balcony. Da Vinci flight experience. */}
-          <div className="mx-auto mt-16 max-w-sm">
-            <Link href="/flight-portal" className="block group">
-              <article className="marble rounded-lg p-8 text-center transition-all hover:ring-1 hover:ring-gold/60 hover:shadow-2xl">
-                <p className="font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70">
-                  Beyond · the balcony
-                </p>
-                <h3 className="mt-3 font-didot text-3xl uppercase tracking-[0.14em] text-ivory">
-                  Da Vinci
-                </h3>
-                <p className="mt-1 font-mono text-[0.45rem] uppercase tracking-[0.32em] text-gold/50">
-                  Flight Experiences
-                </p>
-                <p className="mt-3 font-display italic tracking-wider text-gold/80">
-                  Day or night. You choose.
-                </p>
-                <div className="mx-auto mt-4 h-px w-12 bg-gold/40" />
-                <p className="mt-4 font-body italic text-sm text-ivory/75">
-                  Leonardo&apos;s workshop awaits. Then the valley — or the Bay.
-                </p>
-                <p className="mt-4 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/85 group-hover:text-gold">
-                  Enter →
-                </p>
-              </article>
-            </Link>
-          </div>
         </section>
       </div>
     </main>

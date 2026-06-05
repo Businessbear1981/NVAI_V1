@@ -213,10 +213,10 @@ export default function GrandBallroomPage() {
             />
             <OnwardTile
               eyebrow="III"
-              title="The Garden Party"
-              subtitle="Out the terrace doors"
-              caption="A second room — under the chateau lanterns, on the lawn."
-              href="/garden"
+              title="The Parlor"
+              subtitle="Through the back corridor"
+              caption="Chagall on the walls. The bohemian room before the Grand Hall."
+              href="/parlor"
             />
           </div>
         </section>

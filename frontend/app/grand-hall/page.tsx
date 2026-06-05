@@ -161,7 +161,7 @@ export default function GrandHallPage() {
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/paintings/modigliani-sitting-nude-with-crossed-hands.jpg"
+                    src="/paintings/modigliani-sitting-nude-crossed-hands.jpg"
                     alt="Modigliani — Sitting Nude with Crossed Hands"
                     className="block w-full"
                   />
