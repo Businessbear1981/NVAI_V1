@@ -7,19 +7,19 @@ import { PAINTINGS } from '@/lib/paintings';
 const GALLERY_BACKDROP =
   'radial-gradient(ellipse at 50% 30%, rgba(232,200,122,0.18) 0%, transparent 55%), linear-gradient(180deg, #0a0807 0%, #14100a 50%, #0a0605 100%)';
 
-// The 60-90 second walkaround video — Higgsfield production pending
 const WALKAROUND_VIDEO = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_gallery_walkaround_90s.mp4';
 const WALKAROUND_FALLBACK = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4';
 
-const ROTATION_INTERVAL_MS = 6500; // ~6.5 seconds per piece, Met-display cadence
+const ROTATION_INTERVAL_MS = 6500;
+const ORBIT_DURATION = 90; // seconds per full orbit
 
 export default function GalleryPage() {
   const [walkaroundOn, setWalkaroundOn] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [paused, setPaused] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [orbitPaused, setOrbitPaused] = useState(false);
 
-  // Auto-rotate through the catalogue every 6.5 seconds unless paused
   useEffect(() => {
     if (paused) return;
     const t = setInterval(() => {
@@ -54,10 +54,7 @@ export default function GalleryPage() {
           </p>
         </header>
 
-        {/* HERO — Circular orbital carousel — THE catalog, the centerpiece of the page.
-            All paintings orbit slowly around the gold medallion. Click any thumb to
-            promote it into the featured display below. This is the finale of the
-            guided tour ("THE CIRCLE"). */}
+        {/* Orbital carousel */}
         <section className="mx-auto mt-12 max-w-6xl">
           <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.4em] text-gold/70 mb-2">
             The circular catalog
@@ -65,26 +62,26 @@ export default function GalleryPage() {
           <p className="text-center font-display text-sm italic tracking-wider text-gold/70 mb-8">
             All {PAINTINGS.length} works orbit. Click any to bring it to centre.
           </p>
+
           <div
             className="relative mx-auto"
             style={{
-              // Mobile: fill viewport. Desktop: cap at 880px so it stays elegant on huge screens.
               width: 'min(92vw, 92vh, 880px)',
               aspectRatio: '1 / 1',
             }}
+            onMouseEnter={() => setOrbitPaused(true)}
+            onMouseLeave={() => setOrbitPaused(false)}
           >
-            <div className="absolute inset-0">
+            {/* Rotating ring — holds all thumbnails */}
+            <div
+              className={`orbit-ring absolute inset-0${orbitPaused ? ' orbit-paused' : ''}`}
+            >
               {PAINTINGS.map((p, idx) => {
-                // Trig positioning: place each thumbnail at a point on the orbit circle.
-                // angleDeg starts at -90 so the first painting sits at the top.
-                // ORBIT_RADIUS is as a percentage of the container's half-width, so
-                // thumbnails stay fully inside the square container (14% wide thumbs
-                // need ~7% clearance each side → max safe radius ≈ 43%).
                 const ORBIT_RADIUS = 38;
                 const angleDeg = (360 / PAINTINGS.length) * idx - 90;
                 const angleRad = (angleDeg * Math.PI) / 180;
-                const cx = 50 + ORBIT_RADIUS * Math.cos(angleRad); // % left
-                const cy = 50 + ORBIT_RADIUS * Math.sin(angleRad); // % top
+                const cx = 50 + ORBIT_RADIUS * Math.cos(angleRad);
+                const cy = 50 + ORBIT_RADIUS * Math.sin(angleRad);
                 const isActive = activeIdx === idx;
                 const isHovered = hoveredIdx === idx;
                 const scale = isActive ? 1.22 : isHovered ? 1.1 : 1;
@@ -94,18 +91,17 @@ export default function GalleryPage() {
                     onClick={() => setActiveIdx(idx)}
                     onMouseEnter={() => setHoveredIdx(idx)}
                     onMouseLeave={() => setHoveredIdx(null)}
-                    className={`absolute transition-all duration-300 ${isActive ? 'z-30' : 'z-10'}`}
+                    className={`orbit-thumb absolute${orbitPaused ? ' orbit-paused' : ''} ${isActive ? 'z-30' : 'z-10'}`}
                     style={{
                       left: `${cx}%`,
                       top: `${cy}%`,
                       width: '14%',
                       aspectRatio: '3 / 4',
-                      transform: `translate(-50%, -50%) scale(${scale})`,
                     }}
                     aria-label={`${p.artist} — ${p.title}`}
                   >
                     <div
-                      className={`relative h-full w-full overflow-hidden rounded-sm shadow-lg transition-all duration-300 ${
+                      className={`relative h-full w-full overflow-hidden rounded-sm shadow-lg ${
                         isActive
                           ? 'ring-2 ring-gold ring-offset-2 ring-offset-midnight shadow-[0_8px_28px_rgba(212,175,55,0.5)]'
                           : isHovered
@@ -115,6 +111,8 @@ export default function GalleryPage() {
                       style={{
                         background: 'linear-gradient(135deg, #b08832 0%, #6a4815 100%)',
                         padding: '2px',
+                        transform: `scale(${scale})`,
+                        transition: 'transform 0.3s',
                       }}
                     >
                       {p.imageUrl ? (
@@ -138,6 +136,8 @@ export default function GalleryPage() {
                 );
               })}
             </div>
+
+            {/* Gold glow at centre */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <div
                 className="rounded-full"
@@ -161,20 +161,19 @@ export default function GalleryPage() {
               </p>
             </div>
           </div>
+
           <p className="mt-6 text-center font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/45">
-            Click any work above to bring it to the focal display below
+            Hover to pause the orbit · click any work to feature it below
           </p>
         </section>
 
-        {/* Featured display — the painting currently in focus from the orbit above */}
+        {/* Featured display */}
         <section className="mx-auto mt-16 max-w-6xl">
           <Link href={`/piece/${active.slug}`} className="block">
             <article
               className="relative overflow-hidden rounded-lg"
               style={{
                 aspectRatio: '16 / 9',
-                // Dark gallery wall — warm walnut over deep midnight, with a vertical
-                // edge gradient to suggest depth and reflected wood
                 background:
                   'radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.18) 0%, transparent 55%), radial-gradient(ellipse at 50% 100%, rgba(60,40,20,0.5) 0%, transparent 65%), linear-gradient(180deg, #0a0805 0%, #1a120a 40%, #0a0805 100%)',
                 boxShadow: 'inset 0 0 120px rgba(0,0,0,0.7)',
@@ -182,7 +181,7 @@ export default function GalleryPage() {
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
-              {/* Wall texture — subtle warm wood-grain panelling effect */}
+              {/* Wall texture */}
               <div
                 className="absolute inset-0 opacity-30 mix-blend-soft-light pointer-events-none"
                 style={{
@@ -191,7 +190,7 @@ export default function GalleryPage() {
                 }}
               />
 
-              {/* The picture-light cone from above — warm tungsten spill */}
+              {/* Picture-light cone */}
               <div
                 className="absolute left-1/2 top-0 -translate-x-1/2 h-1/2 w-2/3 pointer-events-none"
                 style={{
@@ -201,10 +200,9 @@ export default function GalleryPage() {
                 }}
               />
 
-              {/* The brass picture light fixture at the top */}
+              {/* Brass picture-light fixture */}
               <div className="absolute left-1/2 top-4 -translate-x-1/2 z-20">
                 <div className="relative">
-                  {/* The lamp head */}
                   <div
                     className="h-3 w-28 rounded-full"
                     style={{
@@ -214,7 +212,6 @@ export default function GalleryPage() {
                         '0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,220,150,0.7)',
                     }}
                   />
-                  {/* The bulb glow underneath */}
                   <div
                     className="absolute left-1/2 top-2 -translate-x-1/2 h-1.5 w-20 rounded-full"
                     style={{
@@ -225,12 +222,11 @@ export default function GalleryPage() {
                 </div>
               </div>
 
-              {/* The hanging painting — centred under the light, in a gilt frame */}
+              {/* Hanging painting in gilt frame */}
               <div className="absolute left-1/2 top-[16%] -translate-x-1/2 z-10">
                 <div
                   className="relative"
                   style={{
-                    // The gilt frame
                     padding: '1.2rem',
                     background:
                       'linear-gradient(135deg, #d4a64a 0%, #8a6020 35%, #b08832 65%, #6a4815 100%)',
@@ -238,7 +234,6 @@ export default function GalleryPage() {
                       '0 30px 60px -10px rgba(0,0,0,0.95), 0 0 80px -10px rgba(255,210,140,0.35), inset 0 1px 0 rgba(255,220,150,0.5), inset 0 -1px 0 rgba(40,20,5,0.6)',
                   }}
                 >
-                  {/* Inner mat / liner */}
                   <div
                     className="overflow-hidden"
                     style={{
@@ -255,7 +250,6 @@ export default function GalleryPage() {
                         style={{ maxHeight: '22rem', maxWidth: '32rem', height: 'auto', width: 'auto' }}
                       />
                     ) : (
-                      // Placeholder canvas — same gallery hang but no image yet
                       <div
                         className="flex flex-col items-center justify-center text-center"
                         style={{
@@ -280,7 +274,7 @@ export default function GalleryPage() {
                 </div>
               </div>
 
-              {/* The brass museum placard underneath */}
+              {/* Museum placard */}
               <div className="absolute left-1/2 bottom-6 -translate-x-1/2 z-10 text-center">
                 <div
                   className="inline-block px-6 py-2 rounded-sm"
@@ -302,7 +296,7 @@ export default function GalleryPage() {
                 </div>
               </div>
 
-              {/* Progress bar at the bottom edge of the wall */}
+              {/* Progress bar */}
               {!paused && (
                 <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gold/15">
                   <div
@@ -353,7 +347,8 @@ export default function GalleryPage() {
           </div>
           {walkaroundOn && (
             <div className="mt-6 overflow-hidden rounded-lg border border-gold/30 bg-midnight">
-              <video preload="metadata"
+              <video
+                preload="metadata"
                 src={WALKAROUND_VIDEO}
                 onError={(e) => {
                   const t = e.currentTarget;
@@ -371,17 +366,30 @@ export default function GalleryPage() {
             </div>
           )}
         </section>
-
       </div>
 
       <style jsx>{`
-        @keyframes gallery-progress {
-          from { width: 0%; }
-          to { width: 100%; }
+        .orbit-ring {
+          animation: orbit-rotate ${ORBIT_DURATION}s linear infinite;
+          transform-origin: 50% 50%;
+        }
+        .orbit-thumb {
+          animation: counter-rotate ${ORBIT_DURATION}s linear infinite;
+        }
+        .orbit-paused {
+          animation-play-state: paused !important;
         }
         @keyframes orbit-rotate {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @keyframes counter-rotate {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to { transform: translate(-50%, -50%) rotate(-360deg); }
+        }
+        @keyframes gallery-progress {
+          from { width: 0%; }
+          to { width: 100%; }
         }
       `}</style>
     </main>
