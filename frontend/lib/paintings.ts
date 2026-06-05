@@ -459,6 +459,13 @@ export const PAINTINGS: Painting[] = [
     medium: 'Oil on canvas',
     signed: 'Signed upper right',
     imageUrl: '/paintings/modigliani-nu-couche.jpg',
+    comparisonImages: [
+      {
+        url: '/paintings/modigliani-nu-couche-framed.jpg',
+        label: 'As Displayed — Original Gilt Frame',
+        caption: 'The canvas in its period gilt frame. The ornate carved frame is consistent with the Zborowski-era presentation of the Montparnasse nudes.',
+      },
+    ],
     viewingLocation: 'Private collection — disclosed under DDNDA',
     inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
     inspirationNote: 'The Kiki anchor. 107 years lost — the relationship discovery that drives the Kiki exposé.',
@@ -506,6 +513,25 @@ export const PAINTINGS: Painting[] = [
       "The arrangement, as the painter André Salmon later described it, was wretched. Chéron, who paid the rent on a cellar studio in the gallery basement, would lock Modigliani in each morning with a bottle of brandy, a model, and a stretched canvas, and let him out at night with a few francs and the finished painting. Modigliani was thirty-one. He had been in Paris for nine years. " +
       "He repaid the indignity by painting his dealer, in this canvas, with the same Cycladic abstraction he reserved for the demimondaines and the children. The long oval head, the unfocused eyes, the suit reduced to two flat planes — Chéron treated as no more or less of a subject than the women who had passed through the same basement studio that summer. " +
       "The signature lower left dates to the early Modigliani hand. The installation history is documented in the Restellini and Parisot files. Chéron sold the painting within a year of completion and never spoke publicly of the painter who had made him.",
+  },
+  {
+    slug: 'modigliani-femme-perruque',
+    imageUrl: '/paintings/modigliani-femme-perruque.jpg',
+    artist: 'Amedeo Modigliani',
+    title: 'Femme à la Perruque Rousse',
+    year: 'c. 1917',
+    dimensions: '55 × 38 cm',
+    medium: 'Oil on canvas',
+    signed: 'Signed upper right: modigliani',
+    viewingLocation: 'Private collection — disclosed under DDNDA',
+    inspirationVideo: 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/muses-lovers.mp4',
+    inspirationNote: "The red-wig portrait. The sitter — a Montparnasse model from the Zborowski years — sits in the three-quarter pose that was Modigliani's characteristic frame for the women of that last period.",
+    wing: { label: 'Cabinet de Curiosités', href: '/grand-hall/modigliani' },
+    bernardStory:
+      "This is Femme à la Perruque Rousse, painted by Amedeo Modigliani around nineteen seventeen. He was thirty-three years old and working at the pace his dealer Léopold Zborowski required — canvas after canvas, often one a day, the models drawn from the quiet orbit of women who passed through the studios on the rue Joseph-Bara and the rue de la Grande Chaumière. " +
+      "The sitter is unidentified, which is itself a small historical fact. In the last years of his life Modigliani painted named friends and named lovers — Jeanne Hébuterne, Lunia Czechowska, the sitter who became Kiki — but also a series of anonymous women, the ones the Zborowski machine required and the catalogues later struggled to place. The red wig — or vivid auburn hair; the question is open — is the organising fact of the canvas. It gave it its name. " +
+      "What the painting does, in the manner of all of these late portraits, is reduce the subject to essentials: the long oval skull derived from the carved limestone heads, the almond eyes that carry no pupil until they are deliberately given one, the three-quarter turn of the head that puts the sitter slightly away from you, as if caught in the middle of a thought. The dark jacket, the dark dress, the chair just visible behind — everything is suppressed so the face and the extraordinary hair can hold the picture. " +
+      "The signature upper right is the confident late-period hand. By nineteen seventeen Modigliani was signing his work with less ceremony than in the Chéron years — the name placed quickly, as if the picture itself were the argument. He had three years left to live.",
   },
 
   // ---------------- Da Vinci (1) ----------------
