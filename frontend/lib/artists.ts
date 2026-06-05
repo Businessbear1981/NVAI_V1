@@ -81,7 +81,7 @@ const ARTIST_META: Omit<Artist, 'pieceCount'>[] = [
     name: 'Wassily Kandinsky',
     shortName: 'Kandinsky',
     signatureSrc: '/brand/signatures/kandinsky.png',
-    hasSignature: true,
+    hasSignature: true,  // Kandinsky_autograph.png — Wikimedia Commons, brass-treated
     wingHref: '/foyer/staircase',
     wingLabel: 'Upstairs · The Strange Room',
     era: '1866–1944',
@@ -121,7 +121,7 @@ const ARTIST_META: Omit<Artist, 'pieceCount'>[] = [
     name: 'Raphael Sanzio',
     shortName: 'Raphael',
     signatureSrc: '/brand/signatures/raphael.png',
-    hasSignature: false,
+    hasSignature: true,  // Raffaello_Sanzio_da_Urbino_Signature.svg — Wikimedia Commons, brass-treated
     wingHref: '/foyer/staircase',
     wingLabel: 'Upstairs · Renaissance Studiolo',
     era: '1483–1520',
@@ -134,7 +134,7 @@ const ARTIST_META: Omit<Artist, 'pieceCount'>[] = [
     name: 'Émile Bernard',
     shortName: 'Bernard',
     signatureSrc: '/brand/signatures/bernard.png',
-    hasSignature: false,
+    hasSignature: false,  // no clean public-domain source; text fallback renders fine
     wingHref: '/upstairs/bernard',
     wingLabel: 'Upstairs · Pont-Aven · the Passion cycle',
     era: '1868–1941',

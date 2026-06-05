@@ -3,22 +3,12 @@ import ArtistSignature from '@/components/brand/ArtistSignature';
 import { getArtist } from '@/lib/artists';
 
 interface ArtistTombstoneProps {
-  /** Artist slug — e.g. 'picasso', 'monet', 'davinci'. */
   slug: string;
-  /** Where the tile links to (usually the artist's wing). */
   href: string;
-  /** Optional italic caption rendered beneath the signature. */
   caption?: string;
-  /** Lifts the tile slightly + adds emphasis to mark it as primary. */
   featured?: boolean;
 }
 
-/**
- * Tombstone variant that uses the brass ArtistSignature PNG as its visual
- * centerpiece — same marble + ring + gold treatment as MarbleTombstone, sized
- * to match. Falls back to a plain marble tile with the slug as title if no
- * matching artist record exists in lib/artists.
- */
 export default function ArtistTombstone({
   slug,
   href,
@@ -27,24 +17,22 @@ export default function ArtistTombstone({
 }: ArtistTombstoneProps) {
   const artist = getArtist(slug);
 
-  const tileClass = `marble group flex h-full cursor-pointer flex-col items-center justify-center rounded-md px-4 py-5 text-center transition-all duration-500 hover:ring-1 hover:ring-gold/60 hover:shadow-2xl ${
-    featured ? 'scale-105 ring-1 ring-gold/40' : ''
+  // No box, no marble, no border — just the signature and block lettering floating.
+  const wrapClass = `group flex flex-col items-center justify-center py-6 text-center transition-all duration-500 cursor-pointer ${
+    featured ? 'scale-105' : ''
   }`;
 
   if (!artist) {
     return (
-      <Link href={href} className="block h-full">
-        <div className={tileClass}>
-          <h2 className="font-didot text-base uppercase tracking-[0.12em] text-[#1a0e05] md:text-lg">
+      <Link href={href} className="block">
+        <div className={wrapClass}>
+          <p className="font-didot text-lg uppercase tracking-[0.18em] text-gold/80 group-hover:text-gold">
             {slug}
-          </h2>
+          </p>
           {caption && (
-            <>
-              <div className="mx-auto my-2 h-px w-6 bg-[#5a3a1a]" />
-              <p className="font-body text-[0.7rem] italic tracking-wider text-[#2a1a05]">
-                {caption}
-              </p>
-            </>
+            <p className="mt-2 font-body text-[0.7rem] italic tracking-wider text-ivory/60">
+              {caption}
+            </p>
           )}
         </div>
       </Link>
@@ -52,21 +40,21 @@ export default function ArtistTombstone({
   }
 
   return (
-    <Link href={href} className="block h-full" aria-label={`${artist.name} — enter the wing`}>
-      <div className={tileClass}>
-        <ArtistSignature
-          artist={artist}
-          size="lg"
-          asLink={false}
-          showCaption={false}
-        />
+    <Link href={href} className="block" aria-label={`${artist.name} — enter the wing`}>
+      <div className={wrapClass}>
+        <div className="transition-all duration-500 group-hover:-translate-y-1"
+             style={{ filter: 'drop-shadow(0 4px 16px rgba(201,168,76,0.3))' }}>
+          <ArtistSignature
+            artist={artist}
+            size="lg"
+            asLink={false}
+            showCaption={false}
+          />
+        </div>
         {caption && (
-          <>
-            <div className="mx-auto my-3 h-px w-8 bg-[#5a3a1a]" />
-            <p className="font-body text-[0.7rem] italic tracking-wider text-[#2a1a05]">
-              {caption}
-            </p>
-          </>
+          <p className="mt-4 font-body text-[0.7rem] italic tracking-wider text-ivory/65 group-hover:text-ivory/85">
+            {caption}
+          </p>
         )}
       </div>
     </Link>
