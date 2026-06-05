@@ -7,70 +7,65 @@ import { PAINTINGS } from '@/lib/paintings';
 const GALLERY_BACKDROP =
   'radial-gradient(ellipse at 50% 30%, rgba(232,200,122,0.18) 0%, transparent 55%), linear-gradient(180deg, #0a0807 0%, #14100a 50%, #0a0605 100%)';
 
-const WALKAROUND_VIDEO = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_gallery_walkaround_90s.mp4';
-const WALKAROUND_FALLBACK = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4';
+const WALKAROUND_VIDEO =
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_gallery_walkaround_90s.mp4';
+const WALKAROUND_FALLBACK =
+  'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4';
 
-const N = PAINTINGS.length;
-const STEP_MS = 4200;
-const CARD_W = 155;
-const CARD_H = 196;
-// Coverflow geometry
-const SIDE_ANGLE = 58;   // deg — how far flanking cards are rotated
-const SIDE_STEP  = 145;  // px — horizontal gap between each flanking card
-const CENTER_POP = 170;  // px — how far the front card pops toward viewer
-const VISIBLE    = 4;    // cards shown each side of center (so 9 total)
+const N        = PAINTINGS.length;
+const STEP_DEG = 360 / N;
+const STEP_MS  = 4200;
+const CARD_W   = 152;
+const CARD_H   = 192;
 
-/** Compute transform + style for a card at `offset` positions from active */
-function coverStyle(offset: number): React.CSSProperties {
-  const abs = Math.abs(offset);
-  if (abs > VISIBLE) return { opacity: 0, pointerEvents: 'none' };
-
-  if (offset === 0) {
-    return {
-      transform: `translateX(-50%) translateY(-50%) translateZ(${CENTER_POP}px) rotateY(0deg)`,
-      opacity: 1,
-      zIndex: 100,
-      pointerEvents: 'auto',
-    };
-  }
-
-  const sign  = offset > 0 ? 1 : -1;
-  const tx    = sign * (SIDE_STEP * abs + 30); // first flanker closer, then spread
-  const ry    = sign * -SIDE_ANGLE;            // right cards lean left, left lean right
-  const tz    = -(abs * 35);                   // each step recedes a little more
-  const scale = Math.max(0.72, 1 - abs * 0.06);
-  const op    = Math.max(0, 1 - abs * 0.21);
-
-  return {
-    transform: `translateX(calc(-50% + ${tx}px)) translateY(-50%) translateZ(${tz}px) rotateY(${ry}deg) scale(${scale})`,
-    opacity: op,
-    zIndex: 100 - abs * 10,
-    pointerEvents: op > 0.35 ? 'auto' : 'none',
-  };
-}
+// Ellipse semi-axes: RAD_X = left/right spread, RAD_Z = front/back depth.
+// FACE = fraction of the arc angle used to rotate each item toward the viewer.
+//   0 = all face forward (flat, no 3D)
+//   1 = full rotateY (goes edge-on at 90° — the "vertical plane" problem)
+//   ~0.6 = items visibly turn as they travel but never fully disappear
+const RAD_X = 640;
+const RAD_Z = 390;
+const FACE  = 0.62;
 
 export default function GalleryPage() {
   const [walkaroundOn, setWalkaroundOn] = useState(false);
+  const [rotAngle,     setRotAngle    ] = useState(0);   // continuous belt angle
   const [activeIdx,    setActiveIdx   ] = useState(0);
   const [beltPaused,   setBeltPaused  ] = useState(false);
   const [featured,     setFeatured    ] = useState(PAINTINGS[0]);
 
-  function go(delta: number) {
+  // Advance belt one step forward
+  function advance() {
+    setRotAngle((a) => a - STEP_DEG);
     setActiveIdx((i) => {
-      const next = ((i + delta) % N + N) % N;
+      const next = (i + 1) % N;
       setFeatured(PAINTINGS[next]);
       return next;
     });
   }
 
+  // Retreat belt one step backward
+  function retreat() {
+    setRotAngle((a) => a + STEP_DEG);
+    setActiveIdx((i) => {
+      const prev = (i - 1 + N) % N;
+      setFeatured(PAINTINGS[prev]);
+      return prev;
+    });
+  }
+
+  // Click any visible canvas — rotate shortest path to bring it front
   function pickPainting(idx: number) {
+    let delta = ((idx - activeIdx) % N + N) % N;
+    if (delta > N / 2) delta -= N;          // take the short arc
+    setRotAngle((a) => a - delta * STEP_DEG);
     setActiveIdx(idx);
     setFeatured(PAINTINGS[idx]);
   }
 
   useEffect(() => {
     if (beltPaused) return;
-    const t = setInterval(() => go(1), STEP_MS);
+    const t = setInterval(advance, STEP_MS);
     return () => clearInterval(t);
   }, [beltPaused]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -91,33 +86,42 @@ export default function GalleryPage() {
           <h1 className="mt-4 font-didot text-5xl uppercase tracking-[0.12em] text-ivory">The Full Gallery</h1>
           <div className="mx-auto mt-6 h-px w-24 bg-gold/40" />
           <p className="mt-6 font-body italic tracking-wider text-ivory/75">
-            All {N} works. Center canvas pops forward — flanking works show their 3D edge.
+            All {N} works on the carousel. Hover to pause — click any visible canvas to bring it forward.
           </p>
         </header>
 
-        {/* ── COVERFLOW BELT ──────────────────────────────────────────────── */}
+        {/* ── CAROUSEL ────────────────────────────────────────────────────── */}
+        {/*
+          Each painting is positioned on a horizontal ellipse (XZ plane):
+            x = sin(offset_angle) * RAD_X   — left/right
+            z = cos(offset_angle) * RAD_Z   — front/back depth
+          AND partially rotated toward the viewer:
+            rotateY = -offset_angle * FACE
+          So at offset=0 the painting faces you square-on (large, close).
+          As it moves to the sides it gradually turns — you see it at a
+          diagonal angle like a carousel horse mid-revolution, not edge-on.
+          Back items are behind center (z < 0) and fade to invisible.
+          When activeIdx changes, each item recomputes its x/z/rotY and
+          the CSS transition traces the arc smoothly.
+        */}
         <section className="mx-auto mt-14 max-w-5xl">
-
-          {/* Stage: single perspective on the container so every card
-              shares the same vanishing point — this is what creates the
-              negative space / depth gap between center and flankers. */}
           <div
             className="relative overflow-hidden"
             style={{
-              height: '360px',
-              perspective: '950px',
-              perspectiveOrigin: '50% 52%',
+              height: '340px',
+              perspective: '920px',
+              perspectiveOrigin: '50% 50%',
             }}
             onMouseEnter={() => setBeltPaused(true)}
             onMouseLeave={() => setBeltPaused(false)}
           >
             {/* Wing fades */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-20"
-              style={{ background: 'linear-gradient(to right, #0a0807 0%, transparent 100%)' }} />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-20"
-              style={{ background: 'linear-gradient(to left, #0a0807 0%, transparent 100%)' }} />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-28 z-20"
+              style={{ background: 'linear-gradient(to right, #0a0807, transparent)' }} />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-28 z-20"
+              style={{ background: 'linear-gradient(to left, #0a0807, transparent)' }} />
 
-            {/* 3D card field — preserve-3d so cards share depth space */}
+            {/* preserve-3d anchor — no rotation here, items position themselves */}
             <div
               style={{
                 position: 'absolute',
@@ -129,11 +133,22 @@ export default function GalleryPage() {
               }}
             >
               {PAINTINGS.map((p, idx) => {
+                // Offset from active: -N/2 … +N/2
                 let offset = ((idx - activeIdx) % N + N) % N;
-                if (offset > N / 2) offset -= N; // [-N/2, N/2]
+                if (offset > N / 2) offset -= N;
 
-                const cs = coverStyle(offset);
-                if (!cs.transform) return null;
+                const angleRad = (offset * STEP_DEG * Math.PI) / 180;
+                const x  =  Math.sin(angleRad) * RAD_X;  // left/right
+                const z  =  Math.cos(angleRad) * RAD_Z;  // front/back
+                // Partial face-rotation: items turn toward viewer as they travel
+                const ry = -offset * STEP_DEG * FACE;
+
+                // Fade: full opacity in front arc, disappear as they pass to rear
+                const cosA = Math.cos(angleRad);
+                const opacity =
+                  cosA >  0.15 ? 1 :
+                  cosA > -0.15 ? (cosA + 0.15) / 0.30 :
+                  0;
 
                 const isActive = idx === activeIdx;
 
@@ -146,8 +161,13 @@ export default function GalleryPage() {
                       position: 'absolute',
                       width:  `${CARD_W}px`,
                       height: `${CARD_H}px`,
-                      transition: 'transform 0.95s cubic-bezier(0.4,0,0.2,1), opacity 0.75s ease',
-                      ...cs,
+                      marginLeft: `${-CARD_W / 2}px`,
+                      marginTop:  `${-CARD_H / 2}px`,
+                      transform: `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg)`,
+                      transition: 'transform 0.95s cubic-bezier(0.4,0,0.2,1), opacity 0.7s ease',
+                      opacity,
+                      pointerEvents: opacity > 0.35 ? 'auto' : 'none',
+                      zIndex: Math.round(z + RAD_Z + 10),
                     }}
                   >
                     {/* Gilt frame */}
@@ -155,7 +175,7 @@ export default function GalleryPage() {
                       className={`h-full w-full overflow-hidden rounded-sm ${
                         isActive
                           ? 'ring-2 ring-gold shadow-[0_0_36px_rgba(212,175,55,0.7)]'
-                          : 'ring-1 ring-gold/25'
+                          : 'ring-1 ring-gold/20'
                       }`}
                       style={{
                         background: 'linear-gradient(135deg, #c4983a 0%, #7a5018 50%, #b08832 100%)',
@@ -164,7 +184,11 @@ export default function GalleryPage() {
                     >
                       {p.imageUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={p.imageUrl} alt={p.title} className="h-full w-full object-cover" />
+                        <img
+                          src={p.imageUrl}
+                          alt={p.title}
+                          className="h-full w-full object-cover"
+                        />
                       ) : (
                         <div
                           className="flex h-full w-full flex-col items-center justify-center text-center"
@@ -185,13 +209,13 @@ export default function GalleryPage() {
             </div>
 
             {/* Floor fade */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 z-10"
-              style={{ background: 'linear-gradient(to top, rgba(10,8,7,0.92), transparent)' }} />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 z-10"
+              style={{ background: 'linear-gradient(to top, rgba(10,8,7,0.9), transparent)' }} />
           </div>
 
           {/* Controls */}
           <div className="mt-7 flex items-center justify-center gap-3">
-            <button onClick={() => go(-1)}
+            <button onClick={retreat}
               className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold">
               ← Prev
             </button>
@@ -199,7 +223,7 @@ export default function GalleryPage() {
               className="rounded border border-gold/30 bg-midnight/40 px-4 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold">
               {beltPaused ? 'Resume' : 'Pause'}
             </button>
-            <button onClick={() => go(1)}
+            <button onClick={advance}
               className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold">
               Next →
             </button>
