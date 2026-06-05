@@ -88,47 +88,14 @@ export default function FoyerPage() {
             </Link>
           </div>
 
-          {/* Begin Guided Tour — featured row above the secondary thresholds,
-              the locked 18-chapter walk through every wing. */}
+          {/* Welcome alcove */}
           <div className="mt-8 grid grid-cols-1 gap-6">
-            <Link href="/tour" aria-label="Begin the 18-chapter guided tour">
-              <MarbleTombstone
-                eyebrow="The Curated Walk · 18 Chapters"
-                title="Begin the Guided Tour"
-                subtitle="Bernard narrates · every wing · end-to-end"
-                caption="Eighteen chapters in the locked order — Grounds, Monet, Picasso, Frida, Da Vinci, the Ballroom, Pollock, Modi, the upstairs rooms, the Flight, Kiki, the Gallery."
-                featured
-              />
-            </Link>
-          </div>
-
-          {/* Secondary thresholds — quieter side-rooms for visitors who want context
-              before climbing the staircase. */}
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             <Link href="/foyer/welcome" aria-label="First step — welcome, guestbook, about">
               <MarbleTombstone
                 eyebrow="First Step"
                 title="Welcome"
                 subtitle="Guestbook · About · Merch"
                 caption="A quiet alcove just inside the door — sign the guestbook, read who we are."
-              />
-            </Link>
-
-            <Link href="/parlor" aria-label="The parlor">
-              <MarbleTombstone
-                eyebrow="Off the Foyer"
-                title="The Parlor"
-                subtitle="Chagall · bohemian Paris"
-                caption="A small sitting room with Chagalls on the walls."
-              />
-            </Link>
-
-            <Link href="/grounds" aria-label="The grounds">
-              <MarbleTombstone
-                eyebrow="Past the Garden"
-                title="The Grounds"
-                subtitle="Vineyard · Orchard · Wine Caves"
-                caption="The full estate walk — vineyard, orchard, caves, and the artist wings."
               />
             </Link>
           </div>
