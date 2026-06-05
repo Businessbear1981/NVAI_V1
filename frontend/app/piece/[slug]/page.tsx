@@ -101,38 +101,38 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
             >
               {/* When exactly 1 comparison image, ALSO show the hero on the left for true side-by-side */}
               {painting.comparisonImages.length === 1 && painting.imageUrl && (
-                <figure className="space-y-2">
+                <figure className="space-y-3">
                   <div className="overflow-hidden rounded-sm ring-1 ring-gold/20">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={painting.imageUrl}
-                      alt={`${painting.artist} — ${painting.title} (current condition)`}
+                      alt={`${painting.artist} — ${painting.title} (original)`}
                       className="w-full"
                     />
                   </div>
-                  <figcaption className="text-center">
+                  <figcaption className="text-center space-y-2 px-2">
                     <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
-                      Original — Current Condition
+                      {painting.heroCaption?.label ?? 'Original — Current Condition'}
                     </p>
-                    <p className="mt-2 font-body italic text-xs text-ivory/65">
-                      The painting as it sits today, awaiting cleaning at Institut Restellini Paris.
+                    <p className="font-body italic text-xs text-ivory/65 leading-relaxed">
+                      {painting.heroCaption?.caption ?? 'The painting as it sits today, awaiting cleaning at Institut Restellini Paris.'}
                     </p>
                   </figcaption>
                 </figure>
               )}
 
               {painting.comparisonImages.map((ci) => (
-                <figure key={ci.url} className="space-y-2">
+                <figure key={ci.url} className="space-y-3">
                   <div className="overflow-hidden rounded-sm ring-1 ring-gold/20">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={ci.url} alt={ci.label} className="w-full" />
                   </div>
-                  <figcaption className="text-center">
+                  <figcaption className="text-center space-y-2 px-2">
                     <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/70">
                       {ci.label}
                     </p>
                     {ci.caption && (
-                      <p className="mt-2 font-body italic text-xs text-ivory/65">{ci.caption}</p>
+                      <p className="font-body italic text-xs text-ivory/65 leading-relaxed">{ci.caption}</p>
                     )}
                   </figcaption>
                 </figure>

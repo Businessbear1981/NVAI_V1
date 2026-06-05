@@ -20,6 +20,7 @@ export interface Painting {
   imageUrl?: string; // Full painting hero image — extracted from provenance dossier
   bernardStory?: string; // Longer narrative for Bernard's voice walkthrough
   comparisonImages?: { url: string; label: string; caption?: string }[]; // Secondary images shown as a grid below the hero — artist recreations, condition details, verso labels, etc.
+  heroCaption?: { label: string; caption: string }; // Override for the original-painting caption in the side-by-side comparison (when comparisonImages.length === 1)
 
   // ============================================================
   // GATED PROVENANCE FIELDS — only rendered on /provenance/[slug]
@@ -428,11 +429,15 @@ export const PAINTINGS: Painting[] = [
     ],
     provenanceDoc: '/provenance/modigliani-sitting-nude-with-crossed-hands-dossier.pdf',
     imageUrl: '/paintings/modigliani-sitting-nude-with-crossed-hands.jpg',
+    heroCaption: {
+      label: 'Original Painting — Sitting Nude with Crossed Hands, (c.) 1917 — Model/Muse — Alice Prin, age 16',
+      caption: 'Amedeo Modigliani who died three years later would never know that his vivacious favorite Muse would go on to become the interlocutor of two generations of his peers. Known as Kiki de Montparnasse in 1922 after falling in love with Man Ray, Hemingway wrote the foreword to her memoirs in 1928, one of two in his life. They were rumored to have had a brief affair. Soon after the release of Kiki\'s Memoirs, she received the second half of her title — Crowned KIKI, "Queen of Montparnasse" in a lavish ceremony that was the talk of Paris. Hemingway wrote: "she dominated the Era of Montparnasse more than Queen Victoria ever dominated the Victorian Era."',
+    },
     comparisonImages: [
       {
         url: '/paintings/modigliani-sitting-nude-recreation.jpg',
-        label: 'Artist Recreation — Post-Restoration',
-        caption: 'How the painting will appear after gentle cleaning, restoration, and framing at Institut Restellini Paris. The canvas has not been cleaned in over eighty years.',
+        label: 'Artist Recreation',
+        caption: 'Above is an oil on canvas recreation of the painting depicting a resemblance of how it will appear after cleaning and minor restoration. The painting (oil on canvas) was painted using the same color palette as Modigliani.',
       },
     ],
     bernardStory:
