@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import BernardConcierge from '@/components/bernard/BernardConcierge';
+import BuildStamp from '@/components/BuildStamp';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://napavalleyartinstitut.com'),
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-midnight text-ivory">
         {children}
         <BernardConcierge />
+        <BuildStamp />
       </body>
     </html>
   );
