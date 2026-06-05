@@ -10,33 +10,51 @@ const GALLERY_BACKDROP =
 const WALKAROUND_VIDEO = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_gallery_walkaround_90s.mp4';
 const WALKAROUND_FALLBACK = 'https://pub-f768e8b3f85442fab7c98be1d34826d3.r2.dev/nvai_garden_path_continuous_5k.mp4';
 
-const STEP_MS = 4000;         // ms between automatic belt advances
-const BELT_RADIUS = 520;      // px — depth of the oval track
-const STEP_DEG = 360 / PAINTINGS.length; // degrees between adjacent paintings
+const N = PAINTINGS.length;
+const STEP_DEG = 360 / N;
+const STEP_MS = 4200;
+const RADIUS = 500; // px — belt depth radius
 
 export default function GalleryPage() {
   const [walkaroundOn, setWalkaroundOn] = useState(false);
+  // rotAngle is the continuous belt rotation angle (negative = clockwise advance)
+  const [rotAngle, setRotAngle] = useState(0);
   const [activeIdx, setActiveIdx] = useState(0);
   const [beltPaused, setBeltPaused] = useState(false);
   const [featured, setFeatured] = useState(PAINTINGS[0]);
 
-  // Auto-advance the belt
-  useEffect(() => {
-    if (beltPaused) return;
-    const t = setInterval(() => {
-      setActiveIdx((i) => {
-        const next = (i + 1) % PAINTINGS.length;
-        setFeatured(PAINTINGS[next]);
-        return next;
-      });
-    }, STEP_MS);
-    return () => clearInterval(t);
-  }, [beltPaused]);
+  function advance() {
+    setRotAngle((a) => a - STEP_DEG);
+    setActiveIdx((i) => {
+      const next = (i + 1) % N;
+      setFeatured(PAINTINGS[next]);
+      return next;
+    });
+  }
+
+  function retreat() {
+    setRotAngle((a) => a + STEP_DEG);
+    setActiveIdx((i) => {
+      const prev = (i - 1 + N) % N;
+      setFeatured(PAINTINGS[prev]);
+      return prev;
+    });
+  }
 
   function pickPainting(idx: number) {
+    // Calculate shortest rotation path to bring idx to front
+    let delta = ((idx - activeIdx) % N + N) % N;
+    if (delta > N / 2) delta -= N; // take the short way around
+    setRotAngle((a) => a - delta * STEP_DEG);
     setActiveIdx(idx);
     setFeatured(PAINTINGS[idx]);
   }
+
+  useEffect(() => {
+    if (beltPaused) return;
+    const t = setInterval(advance, STEP_MS);
+    return () => clearInterval(t);
+  }, [beltPaused]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <main
@@ -59,31 +77,36 @@ export default function GalleryPage() {
           </h1>
           <div className="mx-auto mt-6 h-px w-24 bg-gold/40" />
           <p className="mt-6 font-body italic tracking-wider text-ivory/75">
-            All {PAINTINGS.length} works on the belt. Hover to pause — click any canvas to feature it.
+            All {N} works on the belt. Hover to pause — click any canvas to feature it below.
           </p>
         </header>
 
-        {/* ── 3D DRY-CLEANER BELT ─────────────────────────────────────────── */}
+        {/* ── 3D CAROUSEL BELT ────────────────────────────────────────────── */}
         <section className="mx-auto mt-14 max-w-5xl">
-          {/* Stage — perspective is set here */}
+
+          {/* Stage: perspective-origin sits slightly above centre so the
+              horizontal oval reads as a flat track, not a vertical wheel. */}
           <div
             className="relative overflow-hidden"
             style={{
-              height: '300px',
+              height: '380px',
               perspective: '1050px',
-              perspectiveOrigin: '50% 60%',
+              perspectiveOrigin: '50% 30%',
             }}
             onMouseEnter={() => setBeltPaused(true)}
             onMouseLeave={() => setBeltPaused(false)}
           >
+            {/* Edge fades so items dissolve at the wings */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-28 z-10"
+              style={{ background: 'linear-gradient(to right, #0a0807, transparent)' }} />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-28 z-10"
+              style={{ background: 'linear-gradient(to left, #0a0807, transparent)' }} />
 
-            {/* Left/right fade-out gradient so items dissolve at the wings */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 z-10"
-              style={{ background: 'linear-gradient(to right, #0a0807 0%, transparent 100%)' }} />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 z-10"
-              style={{ background: 'linear-gradient(to left, #0a0807 0%, transparent 100%)' }} />
-
-            {/* 3D track — preserve-3d anchor at centre of stage */}
+            {/* The rotating track.
+                rotateY(rotAngle) spins the entire belt.
+                Each painting is fixed on the track at rotateY(idx*STEP_DEG) translateZ(RADIUS).
+                As the track turns, paintings physically swing around showing their
+                3D edge profiles — exactly like a dry-cleaner conveyor or Kodak carousel. */}
             <div
               style={{
                 position: 'absolute',
@@ -92,30 +115,27 @@ export default function GalleryPage() {
                 width: 0,
                 height: 0,
                 transformStyle: 'preserve-3d',
+                transform: `rotateY(${rotAngle}deg)`,
+                transition: `transform 1.05s cubic-bezier(0.4, 0, 0.2, 1)`,
               }}
             >
               {PAINTINGS.map((p, idx) => {
-                const N = PAINTINGS.length;
+                // Each painting's fixed angle on the belt track
+                const itemAngleDeg = idx * STEP_DEG;
 
-                // Offset from active painting: [-N/2 … +N/2]
-                let offset = ((idx - activeIdx) % N + N) % N;
-                if (offset > N / 2) offset -= N;
-                const angleDeg = offset * STEP_DEG;
-                const angleRad = (angleDeg * Math.PI) / 180;
-
-                // Depth cue: cosAngle = 1 (front) → -1 (back)
-                const cosAngle = Math.cos(angleRad);
-
-                // Only render items in the front ~160° arc; let back items
-                // teleport invisibly while opacity = 0.
-                const visible = cosAngle > -0.15;
-                const opacity = visible
-                  ? Math.max(0, Math.min(1, (cosAngle + 0.15) / 1.15))
+                // Effective angle from front (after belt rotation) — for opacity
+                const effectiveDeg = (((itemAngleDeg + rotAngle) % 360) + 360) % 360;
+                const fromFront = effectiveDeg > 180 ? 360 - effectiveDeg : effectiveDeg;
+                // Fade items past ~75° from front; hide at 90°+
+                const opacity = fromFront < 75
+                  ? 1
+                  : fromFront < 95
+                  ? 1 - (fromFront - 75) / 20
                   : 0;
 
                 const isActive = idx === activeIdx;
-                const W = 148; // item width px
-                const H = 185; // item height px
+                const W = 150;
+                const H = 190;
 
                 return (
                   <button
@@ -128,20 +148,16 @@ export default function GalleryPage() {
                       height: `${H}px`,
                       marginLeft: `${-W / 2}px`,
                       marginTop: `${-H / 2}px`,
-                      // rotateY places item on oval; translateZ brings front items forward
-                      transform: `rotateY(${angleDeg}deg) translateZ(${BELT_RADIUS}px)`,
-                      // Only animate when the item is (or was) visible — prevents
-                      // invisible back-half items from animating through the stage.
-                      transition: visible ? 'transform 1.1s cubic-bezier(0.4,0,0.2,1), opacity 0.7s ease' : 'none',
+                      // Fixed position on the belt ring
+                      transform: `rotateY(${itemAngleDeg}deg) translateZ(${RADIUS}px)`,
                       opacity,
-                      pointerEvents: cosAngle > 0.25 && visible ? 'auto' : 'none',
+                      pointerEvents: opacity > 0.4 ? 'auto' : 'none',
                     }}
                   >
-                    {/* Gilt frame wrapper */}
                     <div
                       className={`h-full w-full overflow-hidden rounded-sm ${
                         isActive
-                          ? 'ring-2 ring-gold shadow-[0_0_28px_rgba(212,175,55,0.55)]'
+                          ? 'ring-2 ring-gold shadow-[0_0_32px_rgba(212,175,55,0.65)]'
                           : 'ring-1 ring-gold/20'
                       }`}
                       style={{
@@ -170,31 +186,20 @@ export default function GalleryPage() {
                         </div>
                       )}
                     </div>
-
-                    {/* Title label — only on active / near-front items */}
-                    {cosAngle > 0.7 && (
-                      <div className="absolute -bottom-7 left-0 right-0 text-center pointer-events-none">
-                        <p className="font-mono text-[0.45rem] uppercase tracking-[0.28em] text-gold/65 truncate px-1">
-                          {p.title}
-                        </p>
-                      </div>
-                    )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Floor shadow gradient */}
-            <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-14"
-              style={{ background: 'linear-gradient(to top, rgba(10,8,7,0.9) 0%, transparent 100%)' }}
-            />
+            {/* Floor fade */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16"
+              style={{ background: 'linear-gradient(to top, rgba(10,8,7,0.9), transparent)' }} />
           </div>
 
-          {/* Belt controls */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          {/* Controls */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <button
-              onClick={() => pickPainting((activeIdx - 1 + PAINTINGS.length) % PAINTINGS.length)}
+              onClick={retreat}
               className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
             >
               ← Prev
@@ -206,7 +211,7 @@ export default function GalleryPage() {
               {beltPaused ? 'Resume belt' : 'Pause belt'}
             </button>
             <button
-              onClick={() => pickPainting((activeIdx + 1) % PAINTINGS.length)}
+              onClick={advance}
               className="rounded border border-gold/30 bg-midnight/40 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.32em] text-ivory/70 hover:border-gold/60 hover:text-gold"
             >
               Next →
@@ -226,7 +231,6 @@ export default function GalleryPage() {
                 boxShadow: 'inset 0 0 120px rgba(0,0,0,0.7)',
               }}
             >
-              {/* Wall texture */}
               <div
                 className="absolute inset-0 opacity-30 mix-blend-soft-light pointer-events-none"
                 style={{
@@ -234,8 +238,6 @@ export default function GalleryPage() {
                     'repeating-linear-gradient(90deg, rgba(212,175,55,0.04) 0px, transparent 4px, rgba(0,0,0,0.04) 8px)',
                 }}
               />
-
-              {/* Picture-light cone */}
               <div
                 className="absolute left-1/2 top-0 -translate-x-1/2 h-1/2 w-2/3 pointer-events-none"
                 style={{
@@ -244,8 +246,6 @@ export default function GalleryPage() {
                   filter: 'blur(2px)',
                 }}
               />
-
-              {/* Brass picture-light fixture */}
               <div className="absolute left-1/2 top-4 -translate-x-1/2 z-20">
                 <div className="relative">
                   <div
@@ -264,8 +264,6 @@ export default function GalleryPage() {
                   />
                 </div>
               </div>
-
-              {/* Hanging painting in gilt frame */}
               <div className="absolute left-1/2 top-[16%] -translate-x-1/2 z-10">
                 <div
                   className="relative"
@@ -315,8 +313,6 @@ export default function GalleryPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Museum placard */}
               <div className="absolute left-1/2 bottom-6 -translate-x-1/2 z-10 text-center">
                 <div
                   className="inline-block px-6 py-2 rounded-sm"
@@ -327,7 +323,7 @@ export default function GalleryPage() {
                   }}
                 >
                   <p className="font-mono text-[0.5rem] uppercase tracking-[0.4em] text-gold/85">
-                    {activeIdx + 1} of {PAINTINGS.length} · Now on view
+                    {activeIdx + 1} of {N} · Now on view
                   </p>
                   <h2 className="mt-1 font-didot text-lg tracking-wider text-ivory md:text-2xl">
                     {featured.title}
@@ -341,7 +337,7 @@ export default function GalleryPage() {
           </Link>
         </section>
 
-        {/* ── 60-90s WALKAROUND ─────────────────────────────────────────────── */}
+        {/* ── WALKAROUND ────────────────────────────────────────────────────── */}
         <section className="mx-auto mt-12 max-w-5xl">
           <div className="flex items-center justify-center gap-4">
             <button
@@ -351,7 +347,7 @@ export default function GalleryPage() {
               {walkaroundOn ? 'Stop the walkaround' : 'Play the 60-90s walkaround'}
             </button>
             <p className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/60">
-              Fast walk through all {PAINTINGS.length} pieces
+              Fast walk through all {N} pieces
             </p>
           </div>
           {walkaroundOn && (
@@ -363,14 +359,11 @@ export default function GalleryPage() {
                   const t = e.currentTarget;
                   if (t.src !== window.location.origin + WALKAROUND_FALLBACK) t.src = WALKAROUND_FALLBACK;
                 }}
-                controls
-                autoPlay
-                muted
-                playsInline
+                controls autoPlay muted playsInline
                 className="aspect-video w-full object-cover"
               />
               <p className="px-3 py-2 font-mono text-[0.55rem] uppercase tracking-[0.28em] text-gold/70">
-                60-90 second fast walkaround · Higgsfield production pending · shown with placeholder
+                60-90 second fast walkaround · Higgsfield production pending
               </p>
             </div>
           )}
