@@ -41,7 +41,7 @@ const ARTIST_META: Omit<Artist, 'pieceCount'>[] = [
     name: 'Marc Chagall',
     shortName: 'Chagall',
     signatureSrc: '/brand/signatures/chagall.png',
-    hasSignature: false,
+    hasSignature: true,
     wingHref: '/parlor/chagall',
     wingLabel: 'The Parlor · La Ruche',
     era: '1887–1985',

@@ -90,8 +90,12 @@ export default function GalleryHeroReel() {
     if (nextClip < SECTIONS[sectionIdx].clips.length) {
       setClipIdx(nextClip);
     } else {
-      setSectionIdx((si) => (si + 1) % SECTIONS.length);
-      setClipIdx(0);
+      const nextSection = sectionIdx + 1;
+      if (nextSection < SECTIONS.length) {
+        setSectionIdx(nextSection);
+        setClipIdx(0);
+      }
+      // last clip of last section — hold, don't loop
     }
   }, [clipIdx, sectionIdx]);
 
